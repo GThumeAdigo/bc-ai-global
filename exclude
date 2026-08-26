@@ -1,0 +1,16 @@
+# Local OpenCode runtime files for the BC repository.
+# Copy this file to .git/info/exclude in the BC repository (see README.md).
+# .git/info/exclude behaves like .gitignore but is local to the clone and is
+# not committed.
+
+AGENTS.md
+CLAUDE.md
+opencode.json
+specs/
+.opencode
+*.xsd
+prompt.md
+verification.md
+*/DOCS/*
+*.png
+.serena/

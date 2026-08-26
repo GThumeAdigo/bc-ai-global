@@ -1,0 +1,1220 @@
+- generic [ref=f194e1]:
+  - banner [ref=f194e9]:
+    - button "App launcher" [ref=f194e12] [cursor=pointer]: 
+    - generic [ref=f194e18]:
+      - generic [ref=f194e19]: Dynamics 365 Business Central
+      - generic [ref=f194e24]:
+        - 'button "ADIGO GmbH Mitte Ost, Environment: GTHU" [ref=f194e28] [cursor=pointer]':
+          - generic [ref=f194e30]:
+            - generic [ref=f194e32]:
+              - generic [ref=f194e33]: GO
+              - generic [ref=f194e34]: OST
+            - generic [ref=f194e35]:
+              - generic [ref=f194e36]: "Environment:"
+              - generic [ref=f194e37]: GTHU
+        - button "Copilot" [ref=f194e40] [cursor=pointer]:
+          - generic [ref=f194e41]: 
+        - button "Search" [ref=f194e44] [cursor=pointer]:
+          - generic [ref=f194e45]: 
+        - button "Notifications" [ref=f194e48] [cursor=pointer]:
+          - generic [ref=f194e49]: 
+        - button "Settings" [ref=f194e52] [cursor=pointer]:
+          - generic [ref=f194e53]: 
+        - button "Help" [ref=f194e56] [cursor=pointer]:
+          - generic [ref=f194e57]: 
+    - generic [ref=f194e58]:
+      - button "Account manager for Gregor Thume" [ref=f194e60] [cursor=pointer]:
+        - generic [ref=f194e61]: GT
+      - generic: 
+  - iframe [active] [ref=f194e76]:
+    - generic [ref=f195e1]:
+      - generic [ref=f195e2]:
+        - generic:
+          - form "GAEB File":
+            - main:
+              - generic:
+                - button "Go to the previous document of the same type":
+                  - generic: 
+              - generic [ref=f195e7]:
+                - generic [ref=f195e10]:
+                  - button "Back" [ref=f195e13] [cursor=pointer]:
+                    - generic [ref=f195e14]: 
+                  - generic [ref=f195e16]:
+                    - heading "GAEB File" [level=1] [ref=f195e17]
+                    - generic [ref=f195e22]:
+                      - button "Make changes on the page" [disabled] [ref=f195e23]:
+                        - generic [ref=f195e24]: 
+                      - button "Share this page with other users or apps" [ref=f195e26] [cursor=pointer]:
+                        - generic [ref=f195e27]: 
+                      - button "Create a new entry." [disabled] [ref=f195e29]:
+                        - generic [ref=f195e30]: 
+                      - button "Delete the information" [disabled] [ref=f195e32]:
+                        - generic [ref=f195e33]: 
+                    - generic [ref=f195e35]:
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f195e38] [cursor=pointer]:
+                        - generic [ref=f195e39]: 
+                      - button "Toggle wide layout" [ref=f195e43] [cursor=pointer]:
+                        - generic [ref=f195e44]: 
+                    - heading "GAEB0137" [level=2] [ref=f195e47]
+                - menubar [ref=f195e57]:
+                  - generic [ref=f195e67]:
+                    - generic [ref=f195e71]:
+                      - menuitem "Show Project and Award Texts" [ref=f195e1633] [cursor=pointer]
+                      - menuitem "Show Coverage Gaps" [ref=f195e1640] [cursor=pointer]
+                      - menuitem "Populate Typed Data" [ref=f195e1647] [cursor=pointer]
+                      - menuitem "GAEB Schema" [ref=f195e1654] [cursor=pointer]
+                      - menuitem "GAEB Source Entries" [ref=f195e1661] [cursor=pointer]
+                      - menuitem "Download Source XML" [ref=f195e1668] [cursor=pointer]
+                      - menuitem "Show the rest" [ref=f195e1675] [cursor=pointer]:
+                        - generic [ref=f195e1676]: 
+                    - menuitemcheckbox "Toggle FactBox" [checked] [ref=f195e147] [cursor=pointer]:
+                      - generic [ref=f195e148]: 
+                - generic [ref=f195e153]:
+                  - generic [ref=f195e156]:
+                    - generic [ref=f195e157]:
+                      - generic [ref=f195e158]:
+                        - button [expanded] [ref=f195e160] [cursor=pointer]:
+                          - heading "General" [level=3] [ref=f195e161]
+                        - button "General, Show less" [ref=f195e162] [cursor=pointer]: Show less
+                      - generic [ref=f195e165]:
+                        - generic [ref=f195e166]:
+                          - button "Source Document No." [ref=f195e167] [cursor=pointer]
+                          - textbox "Source Document No. GAEB0137" [ref=f195e169]
+                        - generic [ref=f195e170]:
+                          - button "File Name" [ref=f195e171] [cursor=pointer]
+                          - textbox "File Name x83bsp.X83" [ref=f195e173]
+                        - generic [ref=f195e174]:
+                          - button "Created At" [ref=f195e175] [cursor=pointer]
+                          - textbox "Created At 23.08.2026 18:08" [ref=f195e177]
+                        - generic [ref=f195e178]:
+                          - button "Source Size" [ref=f195e179] [cursor=pointer]
+                          - textbox "Source Size 101515" [ref=f195e181]
+                        - generic [ref=f195e182]:
+                          - button "Entry Count" [ref=f195e183] [cursor=pointer]
+                          - textbox "Entry Count 1362" [ref=f195e185]
+                        - generic [ref=f195e186]:
+                          - button "Exchange Phase" [ref=f195e187] [cursor=pointer]
+                          - textbox "Exchange Phase 83" [ref=f195e189]
+                        - generic [ref=f195e190]:
+                          - button "Project Name" [ref=f195e191] [cursor=pointer]
+                          - textbox "Project Name BVBS GAEB Muster" [ref=f195e193]
+                        - generic [ref=f195e194]:
+                          - button "GAEB Project ID" [ref=f195e195] [cursor=pointer]
+                          - textbox "GAEB Project ID 5AD845D80A0546FBAFA14110EC00F3EC" [ref=f195e197]
+                        - generic [ref=f195e198]:
+                          - button "Derived From" [ref=f195e199] [cursor=pointer]
+                          - button "Derived From (Blank)" [ref=f195e201] [cursor=pointer]
+                        - generic [ref=f195e202]:
+                          - button "Archived" [ref=f195e203] [cursor=pointer]
+                          - checkbox "Archived" [disabled] [ref=f195e205]
+                        - generic [ref=f195e207]:
+                          - button "Superseded By" [ref=f195e208] [cursor=pointer]
+                          - button "Superseded By (Blank)" [ref=f195e210] [cursor=pointer]
+                        - generic [ref=f195e211]:
+                          - button "Correlation ID" [ref=f195e212] [cursor=pointer]
+                          - 'textbox "Correlation ID {88965723-c24b-4ada-b102-d3597d964acb}" [ref=f195e214]'
+                        - generic [ref=f195e215]:
+                          - button "Status" [ref=f195e216] [cursor=pointer]
+                          - textbox "Status Stored" [ref=f195e218]
+                        - generic [ref=f195e219]:
+                          - button "Created By" [ref=f195e220] [cursor=pointer]
+                          - 'textbox "Created By {57a6e36d-1702-482f-98c1-67afe3bd4dce}" [ref=f195e222]'
+                        - generic [ref=f195e223]:
+                          - button "Source Stored At" [ref=f195e224] [cursor=pointer]
+                          - textbox "Source Stored At 23.08.2026 18:08" [ref=f195e226]
+                        - generic [ref=f195e227]:
+                          - button "Project ID Backfilled" [ref=f195e228] [cursor=pointer]
+                          - checkbox "Project ID Backfilled" [checked] [disabled] [ref=f195e230]
+                        - generic [ref=f195e232]:
+                          - button "Project Diagnostic" [ref=f195e233] [cursor=pointer]
+                          - textbox "Project Diagnostic (Blank)" [ref=f195e235]
+                    - generic [ref=f195e236]:
+                      - generic [ref=f195e237]:
+                        - button [expanded] [ref=f195e239] [cursor=pointer]:
+                          - heading "Import" [level=3] [ref=f195e240]
+                        - button "Import, Show more" [ref=f195e241] [cursor=pointer]: Show more
+                      - generic [ref=f195e244]:
+                        - generic [ref=f195e245]:
+                          - button "Import State" [ref=f195e246] [cursor=pointer]
+                          - textbox "Import State Completed" [ref=f195e248]
+                        - generic [ref=f195e249]:
+                          - button "Import Stage" [ref=f195e250] [cursor=pointer]
+                          - textbox "Import Stage" [ref=f195e252]
+                        - generic [ref=f195e253]:
+                          - button "Import Progress %" [ref=f195e254] [cursor=pointer]
+                          - textbox "Import Progress % 100" [ref=f195e256]
+                        - generic [ref=f195e257]:
+                          - button "Failure Reason" [ref=f195e258] [cursor=pointer]
+                          - textbox "Failure Reason (Blank)" [ref=f195e260]
+                    - generic [ref=f195e261]:
+                      - generic [ref=f195e262]:
+                        - button [expanded] [ref=f195e264] [cursor=pointer]:
+                          - heading "Typed Population" [level=3] [ref=f195e265]
+                        - button "Typed Population, Show less" [ref=f195e266] [cursor=pointer]: Show less
+                      - generic [ref=f195e269]:
+                        - generic [ref=f195e270]:
+                          - button "PopulationStatus" [ref=f195e271] [cursor=pointer]
+                          - textbox "PopulationStatus Populated" [ref=f195e273]
+                        - generic [ref=f195e274]:
+                          - button "PopulatedAt" [ref=f195e275] [cursor=pointer]
+                          - textbox "PopulatedAt 23.08.2026 18:08" [ref=f195e277]
+                        - generic [ref=f195e278]:
+                          - button "UnconvertedValueCount" [ref=f195e279] [cursor=pointer]
+                          - button "UnconvertedValueCount 0" [ref=f195e281] [cursor=pointer]: "0"
+                        - generic [ref=f195e282]:
+                          - button "UnreachedElementCount" [ref=f195e283] [cursor=pointer]
+                          - button "UnreachedElementCount 0" [ref=f195e285] [cursor=pointer]: "0"
+                        - generic [ref=f195e286]:
+                          - button "PopulationDiagnosticCategory" [ref=f195e287] [cursor=pointer]
+                          - textbox "PopulationDiagnosticCategory (Blank)" [ref=f195e289]
+                        - generic [ref=f195e290]:
+                          - button "PopulationDiagnosticMessage" [ref=f195e291] [cursor=pointer]
+                          - textbox "PopulationDiagnosticMessage (Blank)" [ref=f195e293]
+                    - generic [ref=f195e294]:
+                      - menubar [ref=f195e304]:
+                        - heading [level=3] [ref=f195e309]:
+                          - button [ref=f195e310] [cursor=pointer]: Exchange Info
+                      - heading [level=3] [ref=f195e311]:
+                        - button "Exchange Info" [ref=f195e313] [cursor=pointer]
+                    - generic [ref=f195e314]:
+                      - menubar [ref=f195e324]:
+                        - heading [level=3] [ref=f195e329]:
+                          - button "Project Info" [ref=f195e330] [cursor=pointer]
+                      - generic [ref=f195e336]:
+                        - generic [ref=f195e337]:
+                          - button "NamePrj" [ref=f195e338] [cursor=pointer]
+                          - textbox "NamePrj BVBS GAEB Muster" [ref=f195e340]
+                        - generic [ref=f195e341]:
+                          - button "PrjID" [ref=f195e342] [cursor=pointer]
+                          - textbox "PrjID 5AD845D80A0546FBAFA14110EC00F3EC" [ref=f195e344]
+                        - generic [ref=f195e345]:
+                          - button "LblPrj" [ref=f195e346] [cursor=pointer]
+                          - textbox "LblPrj BVBS GAEB Musterdatei 3.3" [ref=f195e348]
+                        - generic [ref=f195e349]:
+                          - button "Cur" [ref=f195e350] [cursor=pointer]
+                          - textbox "Cur EUR" [ref=f195e352]
+                        - generic [ref=f195e353]:
+                          - button "CurLbl" [ref=f195e354] [cursor=pointer]
+                          - textbox "CurLbl (Blank)" [ref=f195e356]
+                        - generic [ref=f195e357]:
+                          - button "UPFracDig" [ref=f195e358] [cursor=pointer]
+                          - textbox "UPFracDig (Blank)" [ref=f195e360]
+                        - generic [ref=f195e361]:
+                          - button "BidCommPerm" [ref=f195e362] [cursor=pointer]
+                          - textbox "BidCommPerm No" [ref=f195e364]
+                        - generic [ref=f195e365]:
+                          - button "AlterBidPerm" [ref=f195e366] [cursor=pointer]
+                          - textbox "AlterBidPerm" [ref=f195e368]
+                    - generic [ref=f195e369]:
+                      - menubar [ref=f195e379]:
+                        - heading [level=3] [ref=f195e384]:
+                          - button [ref=f195e385] [cursor=pointer]: Award Info
+                      - heading [level=3] [ref=f195e386]:
+                        - button "Award Info" [ref=f195e388] [cursor=pointer]
+                    - generic [ref=f195e389]:
+                      - menubar [ref=f195e399]:
+                        - heading [level=3] [ref=f195e404]:
+                          - button [ref=f195e405] [cursor=pointer]: Parties and Sites
+                        - generic [ref=f195e416]:
+                          - menuitem [ref=f195e419] [cursor=pointer]:
+                            - generic [ref=f195e420]: 
+                          - menuitemcheckbox [ref=f195e424] [cursor=pointer]:
+                            - generic [ref=f195e425]: 
+                      - heading [level=3] [ref=f195e427]:
+                        - button "Parties and Sites" [ref=f195e429] [cursor=pointer]
+                    - generic [ref=f195e430]:
+                      - menubar [ref=f195e440]:
+                        - heading [level=3] [ref=f195e445]:
+                          - button [ref=f195e446] [cursor=pointer]: Additional Texts
+                        - generic [ref=f195e458]:
+                          - generic [ref=f195e462]:
+                            - menuitem [disabled] [ref=f195e467]:
+                              - generic [ref=f195e468]: Show Outline Text
+                            - menuitem [ref=f195e478] [cursor=pointer]:
+                              - generic [ref=f195e479]: Show Detail Text
+                            - menuitem [ref=f195e489] [cursor=pointer]:
+                              - generic [ref=f195e490]: Open with Texts
+                          - generic [ref=f195e496]:
+                            - menuitem [ref=f195e499] [cursor=pointer]:
+                              - generic [ref=f195e500]: 
+                            - menuitemcheckbox [ref=f195e504] [cursor=pointer]:
+                              - generic [ref=f195e505]: 
+                      - heading [level=3] [ref=f195e507]:
+                        - button "Additional Texts" [ref=f195e509] [cursor=pointer]
+                    - generic [ref=f195e510]:
+                      - menubar [ref=f195e520]:
+                        - heading [level=3] [ref=f195e525]:
+                          - button "Bill of Quantities" [ref=f195e526] [cursor=pointer]
+                        - generic [ref=f195e538]:
+                          - generic [ref=f195e542]:
+                            - menuitem "Show Outline Text" [ref=f195e547] [cursor=pointer]
+                            - menuitem "Show Detail Text" [ref=f195e558] [cursor=pointer]
+                            - menuitem "Show Category Label" [disabled] [ref=f195e569]
+                            - menuitem "Show the rest" [ref=f195e1679] [cursor=pointer]:
+                              - generic [ref=f195e1680]: 
+                          - generic [ref=f195e582]:
+                            - menuitem "Share" [ref=f195e585] [cursor=pointer]:
+                              - generic [ref=f195e586]: 
+                            - menuitemcheckbox "Toggle focus mode" [ref=f195e590] [cursor=pointer]:
+                              - generic [ref=f195e591]: 
+                      - generic [ref=f195e594]:
+                        - treegrid "Bill of Quantities" [ref=f195e596]:
+                          - rowgroup [ref=f195e598]:
+                            - row [ref=f195e599]:
+                              - columnheader "Error" [ref=f195e600]
+                              - columnheader "Ordinal No. Open menu for Ordinal No." [ref=f195e601]:
+                                - generic [ref=f195e602]: Ordinal No.
+                                - button "Open menu for Ordinal No." [ref=f195e603] [cursor=pointer]
+                                - button [ref=f195e604]
+                              - columnheader "More Options" [ref=f195e607]
+                              - columnheader "Node Kind Open menu for Node Kind" [ref=f195e609]:
+                                - generic [ref=f195e610]: Node Kind
+                                - button "Open menu for Node Kind" [ref=f195e611] [cursor=pointer]
+                                - button [ref=f195e612]
+                              - columnheader "Outline Text Open menu for Outline Text" [ref=f195e615]:
+                                - generic [ref=f195e616]: Outline Text
+                                - button "Open menu for Outline Text" [ref=f195e617] [cursor=pointer]
+                                - button [ref=f195e618]
+                              - columnheader "Quantity Open menu for Quantity" [ref=f195e621]:
+                                - generic [ref=f195e622]: Quantity
+                                - button "Open menu for Quantity" [ref=f195e623] [cursor=pointer]
+                                - button [ref=f195e624]
+                              - columnheader "Unit Open menu for Unit" [ref=f195e627]:
+                                - generic [ref=f195e628]: Unit
+                                - button "Open menu for Unit" [ref=f195e629] [cursor=pointer]
+                                - button [ref=f195e630]
+                              - columnheader "Mapped Unit Open menu for Mapped Unit" [ref=f195e633]:
+                                - generic [ref=f195e634]: Mapped Unit
+                                - button "Open menu for Mapped Unit" [ref=f195e635] [cursor=pointer]
+                                - button [ref=f195e636]
+                              - columnheader "Unit Price Open menu for Unit Price" [ref=f195e639]:
+                                - generic [ref=f195e640]: Unit Price
+                                - button "Open menu for Unit Price" [ref=f195e641] [cursor=pointer]
+                                - button [ref=f195e642]
+                              - columnheader "Item Total Open menu for Item Total" [ref=f195e645]:
+                                - generic [ref=f195e646]: Item Total
+                                - button "Open menu for Item Total" [ref=f195e647] [cursor=pointer]
+                                - button [ref=f195e648]
+                              - columnheader "Texts Open menu for Texts" [ref=f195e651]:
+                                - generic [ref=f195e652]: Texts
+                                - button "Open menu for Texts" [ref=f195e653] [cursor=pointer]
+                                - button [ref=f195e654]
+                          - generic [ref=f195e657]:
+                            - rowgroup [ref=f195e658]:
+                              - row [ref=f195e659]:
+                                - columnheader [ref=f195e660]
+                                - columnheader [ref=f195e661]
+                                - columnheader [ref=f195e662]
+                                - columnheader [ref=f195e664]
+                                - columnheader [ref=f195e665]
+                                - columnheader [ref=f195e666]
+                                - columnheader [ref=f195e667]
+                                - columnheader [ref=f195e668]
+                                - columnheader [ref=f195e669]
+                                - columnheader [ref=f195e670]
+                                - columnheader [ref=f195e671]
+                            - row [level=3] [ref=f195e672]:
+                              - rowheader [ref=f195e673]
+                              - gridcell [ref=f195e674]:
+                                - button "Ordinal No. 001.002.0030" [ref=f195e675] [cursor=pointer]: 001.002.0030
+                              - gridcell [ref=f195e676]:
+                                - button "Show more options" [ref=f195e677] [cursor=pointer]
+                              - gridcell [ref=f195e678]:
+                                - textbox "Node Kind Item" [ref=f195e679]
+                              - gridcell [ref=f195e680]:
+                                - textbox "Oberboden abtragen, lagern d= 30 cm Bodengruppe 4" [ref=f195e682]
+                              - gridcell [ref=f195e683]:
+                                - textbox "Quantity 12.345.678,012" [ref=f195e684]
+                              - gridcell [ref=f195e685]:
+                                - textbox "Unit m2" [ref=f195e686]
+                              - gridcell [ref=f195e687]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e688]
+                              - gridcell [ref=f195e689]:
+                                - textbox "Unit Price (Blank)" [ref=f195e690]
+                              - gridcell [ref=f195e691]:
+                                - textbox "Item Total (Blank)" [ref=f195e692]
+                              - gridcell [ref=f195e693]:
+                                - button "Texts 📋📝" [ref=f195e694] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e695]:
+                              - rowheader [ref=f195e696]
+                              - gridcell [ref=f195e697]:
+                                - button "Ordinal No. 001.002.0040" [ref=f195e698] [cursor=pointer]: 001.002.0040
+                              - gridcell [ref=f195e699]:
+                                - button "Show more options" [ref=f195e700] [cursor=pointer]
+                              - gridcell [ref=f195e701]:
+                                - textbox "Node Kind Item" [ref=f195e702]
+                              - gridcell [ref=f195e703]:
+                                - textbox "Betonpflaster L/B 100/100 mm H 80 mm grau" [ref=f195e705]
+                              - gridcell [ref=f195e706]:
+                                - textbox "Quantity 1.245,000" [ref=f195e707]
+                              - gridcell [ref=f195e708]:
+                                - textbox "Unit m2" [ref=f195e709]
+                              - gridcell [ref=f195e710]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e711]
+                              - gridcell [ref=f195e712]:
+                                - textbox "Unit Price (Blank)" [ref=f195e713]
+                              - gridcell [ref=f195e714]:
+                                - textbox "Item Total (Blank)" [ref=f195e715]
+                              - gridcell [ref=f195e716]:
+                                - button "Texts 📋📝" [ref=f195e717] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e718]:
+                              - rowheader [ref=f195e719]
+                              - gridcell [ref=f195e720]:
+                                - button "Ordinal No. 001.002.0050" [ref=f195e721] [cursor=pointer]: 001.002.0050
+                              - gridcell [ref=f195e722]:
+                                - button "Show more options" [ref=f195e723] [cursor=pointer]
+                              - gridcell [ref=f195e724]:
+                                - textbox "Node Kind Item" [ref=f195e725]
+                              - gridcell [ref=f195e726]:
+                                - textbox "Betonpflaster L/B 100/100 mm H 80 mm in BVBS-blau" [ref=f195e728]
+                              - gridcell [ref=f195e729]:
+                                - textbox "Quantity 1.245,000" [ref=f195e730]
+                              - gridcell [ref=f195e731]:
+                                - textbox "Unit m2" [ref=f195e732]
+                              - gridcell [ref=f195e733]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e734]
+                              - gridcell [ref=f195e735]:
+                                - textbox "Unit Price (Blank)" [ref=f195e736]
+                              - gridcell [ref=f195e737]:
+                                - textbox "Item Total (Blank)" [ref=f195e738]
+                              - gridcell [ref=f195e739]:
+                                - button "Texts 📋📝" [ref=f195e740] [cursor=pointer]: 📋📝
+                            - row [level=2] [ref=f195e741]:
+                              - rowheader [ref=f195e742]
+                              - gridcell [ref=f195e743]:
+                                - button "Ordinal No. 001.003" [ref=f195e744] [cursor=pointer]: "001.003"
+                              - gridcell [ref=f195e745]:
+                                - button "Show more options" [ref=f195e746] [cursor=pointer]
+                              - gridcell [ref=f195e747]:
+                                - textbox "Node Kind Category" [ref=f195e748]
+                              - gridcell [ref=f195e749]:
+                                - textbox "Maurerarbeiten" [ref=f195e751]
+                              - gridcell [ref=f195e752]:
+                                - textbox "Quantity (Blank)" [ref=f195e753]
+                              - gridcell [ref=f195e754]:
+                                - textbox "Unit (Blank)" [ref=f195e755]
+                              - gridcell [ref=f195e756]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e757]
+                              - gridcell [ref=f195e758]:
+                                - textbox "Unit Price (Blank)" [ref=f195e759]
+                              - gridcell [ref=f195e760]:
+                                - textbox "Item Total (Blank)" [ref=f195e761]
+                              - gridcell [ref=f195e762]:
+                                - button "Texts 💭" [ref=f195e763] [cursor=pointer]: 💭
+                            - row [level=3] [ref=f195e764]:
+                              - rowheader [ref=f195e765]
+                              - gridcell [ref=f195e766]:
+                                - button "Ordinal No. 001.003.0010" [ref=f195e767] [cursor=pointer]: 001.003.0010
+                              - gridcell [ref=f195e768]:
+                                - button "Show more options" [ref=f195e769] [cursor=pointer]
+                              - gridcell [ref=f195e770]:
+                                - textbox "Node Kind Item" [ref=f195e771]
+                              - gridcell [ref=f195e772]:
+                                - textbox "Kalksandstein-Innenwand KS-R SFK 20 RDK 1,8 D 11,5cm" [ref=f195e774]
+                              - gridcell [ref=f195e775]:
+                                - textbox "Quantity 440,000" [ref=f195e776]
+                              - gridcell [ref=f195e777]:
+                                - textbox "Unit m2" [ref=f195e778]
+                              - gridcell [ref=f195e779]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e780]
+                              - gridcell [ref=f195e781]:
+                                - textbox "Unit Price (Blank)" [ref=f195e782]
+                              - gridcell [ref=f195e783]:
+                                - textbox "Item Total (Blank)" [ref=f195e784]
+                              - gridcell [ref=f195e785]:
+                                - button "Texts 📋📝" [ref=f195e786] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e787]:
+                              - rowheader [ref=f195e788]
+                              - gridcell [ref=f195e789]:
+                                - button "Ordinal No. 001.003.0020" [ref=f195e790] [cursor=pointer]: 001.003.0020
+                              - gridcell [ref=f195e791]:
+                                - button "Show more options" [ref=f195e792] [cursor=pointer]
+                              - gridcell [ref=f195e793]:
+                                - textbox "Node Kind Item" [ref=f195e794]
+                              - gridcell [ref=f195e795]:
+                                - textbox "Kalksandstein-Innenwand KS-R SFK 20 RDK 1,8 D 17,5cm" [ref=f195e797]
+                              - gridcell [ref=f195e798]:
+                                - textbox "Quantity 350,000" [ref=f195e799]
+                              - gridcell [ref=f195e800]:
+                                - textbox "Unit m2" [ref=f195e801]
+                              - gridcell [ref=f195e802]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e803]
+                              - gridcell [ref=f195e804]:
+                                - textbox "Unit Price (Blank)" [ref=f195e805]
+                              - gridcell [ref=f195e806]:
+                                - textbox "Item Total (Blank)" [ref=f195e807]
+                              - gridcell [ref=f195e808]:
+                                - button "Texts 📋📝" [ref=f195e809] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e810]:
+                              - rowheader [ref=f195e811]
+                              - gridcell [ref=f195e812]:
+                                - button "Ordinal No. 001.003.0030" [ref=f195e813] [cursor=pointer]: 001.003.0030
+                              - gridcell [ref=f195e814]:
+                                - button "Show more options" [ref=f195e815] [cursor=pointer]
+                              - gridcell [ref=f195e816]:
+                                - textbox "Node Kind Item" [ref=f195e817]
+                              - gridcell [ref=f195e818]:
+                                - textbox "Außenwand Porenbeton-Planelement SFK 4 D 36,5cm 0,15W/(mK)" [ref=f195e820]
+                              - gridcell [ref=f195e821]:
+                                - textbox "Quantity 750,000" [ref=f195e822]
+                              - gridcell [ref=f195e823]:
+                                - textbox "Unit m3" [ref=f195e824]
+                              - gridcell [ref=f195e825]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e826]
+                              - gridcell [ref=f195e827]:
+                                - textbox "Unit Price (Blank)" [ref=f195e828]
+                              - gridcell [ref=f195e829]:
+                                - textbox "Item Total (Blank)" [ref=f195e830]
+                              - gridcell [ref=f195e831]:
+                                - button "Texts 📋📝" [ref=f195e832] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e833]:
+                              - rowheader [ref=f195e834]
+                              - gridcell [ref=f195e835]:
+                                - button "Ordinal No. 001.003.0040" [ref=f195e836] [cursor=pointer]: 001.003.0040
+                              - gridcell [ref=f195e837]:
+                                - button "Show more options" [ref=f195e838] [cursor=pointer]
+                              - gridcell [ref=f195e839]:
+                                - textbox "Node Kind Item" [ref=f195e840]
+                              - gridcell [ref=f195e841]:
+                                - textbox "Außenwand VHLz SFK 28 RDK 1,6 D 36,5cm" [ref=f195e843]
+                              - gridcell [ref=f195e844]:
+                                - textbox "Quantity 783,030" [ref=f195e845]
+                              - gridcell [ref=f195e846]:
+                                - textbox "Unit m3" [ref=f195e847]
+                              - gridcell [ref=f195e848]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e849]
+                              - gridcell [ref=f195e850]:
+                                - textbox "Unit Price (Blank)" [ref=f195e851]
+                              - gridcell [ref=f195e852]:
+                                - textbox "Item Total (Blank)" [ref=f195e853]
+                              - gridcell [ref=f195e854]:
+                                - button "Texts 📋📝" [ref=f195e855] [cursor=pointer]: 📋📝
+                            - row [level=2] [ref=f195e856]:
+                              - rowheader [ref=f195e857]
+                              - gridcell [ref=f195e858]:
+                                - button "Ordinal No. 001.004" [ref=f195e859] [cursor=pointer]: "001.004"
+                              - gridcell [ref=f195e860]:
+                                - button "Show more options" [ref=f195e861] [cursor=pointer]
+                              - gridcell [ref=f195e862]:
+                                - textbox "Node Kind Category" [ref=f195e863]
+                              - gridcell [ref=f195e864]:
+                                - textbox "Betonarbeiten" [ref=f195e866]
+                              - gridcell [ref=f195e867]:
+                                - textbox "Quantity (Blank)" [ref=f195e868]
+                              - gridcell [ref=f195e869]:
+                                - textbox "Unit (Blank)" [ref=f195e870]
+                              - gridcell [ref=f195e871]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e872]
+                              - gridcell [ref=f195e873]:
+                                - textbox "Unit Price (Blank)" [ref=f195e874]
+                              - gridcell [ref=f195e875]:
+                                - textbox "Item Total (Blank)" [ref=f195e876]
+                              - gridcell [ref=f195e877]:
+                                - button "Texts 💭" [ref=f195e878] [cursor=pointer]: 💭
+                            - row [level=3] [ref=f195e879]:
+                              - rowheader [ref=f195e880]
+                              - gridcell [ref=f195e881]:
+                                - button "Ordinal No. 001.004.0010" [ref=f195e882] [cursor=pointer]: 001.004.0010
+                              - gridcell [ref=f195e883]:
+                                - button "Show more options" [ref=f195e884] [cursor=pointer]
+                              - gridcell [ref=f195e885]:
+                                - textbox "Node Kind Item" [ref=f195e886]
+                              - gridcell [ref=f195e887]:
+                                - textbox "Schalung Deckenplatte GF-Schalungsplatten H 2-3m" [ref=f195e889]
+                              - gridcell [ref=f195e890]:
+                                - textbox "Quantity 500,000" [ref=f195e891]
+                              - gridcell [ref=f195e892]:
+                                - textbox "Unit m2" [ref=f195e893]
+                              - gridcell [ref=f195e894]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e895]
+                              - gridcell [ref=f195e896]:
+                                - textbox "Unit Price (Blank)" [ref=f195e897]
+                              - gridcell [ref=f195e898]:
+                                - textbox "Item Total (Blank)" [ref=f195e899]
+                              - gridcell [ref=f195e900]:
+                                - button "Texts 📋📝" [ref=f195e901] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e902]:
+                              - rowheader [ref=f195e903]
+                              - gridcell [ref=f195e904]:
+                                - button "Ordinal No. 001.004.0020" [ref=f195e905] [cursor=pointer]: 001.004.0020
+                              - gridcell [ref=f195e906]:
+                                - button "Show more options" [ref=f195e907] [cursor=pointer]
+                              - gridcell [ref=f195e908]:
+                                - textbox "Node Kind Item" [ref=f195e909]
+                              - gridcell [ref=f195e910]:
+                                - textbox "Ortbeton Deckenplatte Stahlbeton C20/25 D 20cm" [ref=f195e912]
+                              - gridcell [ref=f195e913]:
+                                - textbox "Quantity 500,000" [ref=f195e914]
+                              - gridcell [ref=f195e915]:
+                                - textbox "Unit m2" [ref=f195e916]
+                              - gridcell [ref=f195e917]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e918]
+                              - gridcell [ref=f195e919]:
+                                - textbox "Unit Price (Blank)" [ref=f195e920]
+                              - gridcell [ref=f195e921]:
+                                - textbox "Item Total (Blank)" [ref=f195e922]
+                              - gridcell [ref=f195e923]:
+                                - button "Texts 📋📝" [ref=f195e924] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e925]:
+                              - rowheader [ref=f195e926]
+                              - gridcell [ref=f195e927]:
+                                - button "Ordinal No. 001.004.0030" [ref=f195e928] [cursor=pointer]: 001.004.0030
+                              - gridcell [ref=f195e929]:
+                                - button "Show more options" [ref=f195e930] [cursor=pointer]
+                              - gridcell [ref=f195e931]:
+                                - textbox "Node Kind Item" [ref=f195e932]
+                              - gridcell [ref=f195e933]:
+                                - textbox "Ortbeton Außenwand D 24cm Stahlbeton C35/45" [ref=f195e935]
+                              - gridcell [ref=f195e936]:
+                                - textbox "Quantity 267,000" [ref=f195e937]
+                              - gridcell [ref=f195e938]:
+                                - textbox "Unit m3" [ref=f195e939]
+                              - gridcell [ref=f195e940]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e941]
+                              - gridcell [ref=f195e942]:
+                                - textbox "Unit Price (Blank)" [ref=f195e943]
+                              - gridcell [ref=f195e944]:
+                                - textbox "Item Total (Blank)" [ref=f195e945]
+                              - gridcell [ref=f195e946]:
+                                - button "Texts 📋📝" [ref=f195e947] [cursor=pointer]: 📋📝
+                            - row [level=1] [ref=f195e948]:
+                              - rowheader [ref=f195e949]
+                              - gridcell [ref=f195e950]:
+                                - button "Ordinal No. 002" [ref=f195e951] [cursor=pointer]: "002"
+                              - gridcell [ref=f195e952]:
+                                - button "Show more options" [ref=f195e953] [cursor=pointer]
+                              - gridcell [ref=f195e954]:
+                                - textbox "Node Kind Category" [ref=f195e955]
+                              - gridcell [ref=f195e956]:
+                                - textbox "Baunebengewerke" [ref=f195e958]
+                              - gridcell [ref=f195e959]:
+                                - textbox "Quantity (Blank)" [ref=f195e960]
+                              - gridcell [ref=f195e961]:
+                                - textbox "Unit (Blank)" [ref=f195e962]
+                              - gridcell [ref=f195e963]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e964]
+                              - gridcell [ref=f195e965]:
+                                - textbox "Unit Price (Blank)" [ref=f195e966]
+                              - gridcell [ref=f195e967]:
+                                - textbox "Item Total (Blank)" [ref=f195e968]
+                              - gridcell [ref=f195e969]:
+                                - button "Texts 💭" [ref=f195e970] [cursor=pointer]: 💭
+                            - row [level=2] [ref=f195e971]:
+                              - rowheader [ref=f195e972]
+                              - gridcell [ref=f195e973]:
+                                - button "Ordinal No. 002.000" [ref=f195e974] [cursor=pointer]: "002.000"
+                              - gridcell [ref=f195e975]:
+                                - button "Show more options" [ref=f195e976] [cursor=pointer]
+                              - gridcell [ref=f195e977]:
+                                - textbox "Node Kind Category" [ref=f195e978]
+                              - gridcell [ref=f195e979]:
+                                - textbox "Baunebengewerk Titel 0" [ref=f195e981]
+                              - gridcell [ref=f195e982]:
+                                - textbox "Quantity (Blank)" [ref=f195e983]
+                              - gridcell [ref=f195e984]:
+                                - textbox "Unit (Blank)" [ref=f195e985]
+                              - gridcell [ref=f195e986]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e987]
+                              - gridcell [ref=f195e988]:
+                                - textbox "Unit Price (Blank)" [ref=f195e989]
+                              - gridcell [ref=f195e990]:
+                                - textbox "Item Total (Blank)" [ref=f195e991]
+                              - gridcell [ref=f195e992]:
+                                - button "Texts 💭" [ref=f195e993] [cursor=pointer]: 💭
+                            - row [level=3] [ref=f195e994]:
+                              - rowheader [ref=f195e995]
+                              - gridcell [ref=f195e996]:
+                                - button "Ordinal No. 002.000.0000" [ref=f195e997] [cursor=pointer]: 002.000.0000
+                              - gridcell [ref=f195e998]:
+                                - button "Show more options" [ref=f195e999] [cursor=pointer]
+                              - gridcell [ref=f195e1000]:
+                                - textbox "Node Kind Item" [ref=f195e1001]
+                              - gridcell [ref=f195e1002]:
+                                - textbox "Baunebengewerk Position 0" [ref=f195e1004]
+                              - gridcell [ref=f195e1005]:
+                                - textbox "Quantity 1,000" [ref=f195e1006]
+                              - gridcell [ref=f195e1007]:
+                                - textbox "Unit Stck" [ref=f195e1008]
+                              - gridcell [ref=f195e1009]:
+                                - textbox "Mapped Unit STK" [ref=f195e1010]
+                              - gridcell [ref=f195e1011]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1012]
+                              - gridcell [ref=f195e1013]:
+                                - textbox "Item Total (Blank)" [ref=f195e1014]
+                              - gridcell [ref=f195e1015]:
+                                - button "Texts 📋📝" [ref=f195e1016] [cursor=pointer]: 📋📝
+                            - row [level=2] [ref=f195e1017]:
+                              - rowheader [ref=f195e1018]
+                              - gridcell [ref=f195e1019]:
+                                - button "Ordinal No. 002.001" [ref=f195e1020] [cursor=pointer]: "002.001"
+                              - gridcell [ref=f195e1021]:
+                                - button "Show more options" [ref=f195e1022] [cursor=pointer]
+                              - gridcell [ref=f195e1023]:
+                                - textbox "Node Kind Category" [ref=f195e1024]
+                              - gridcell [ref=f195e1025]:
+                                - textbox "Elektroarbeiten" [ref=f195e1027]
+                              - gridcell [ref=f195e1028]:
+                                - textbox "Quantity (Blank)" [ref=f195e1029]
+                              - gridcell [ref=f195e1030]:
+                                - textbox "Unit (Blank)" [ref=f195e1031]
+                              - gridcell [ref=f195e1032]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e1033]
+                              - gridcell [ref=f195e1034]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1035]
+                              - gridcell [ref=f195e1036]:
+                                - textbox "Item Total (Blank)" [ref=f195e1037]
+                              - gridcell [ref=f195e1038]:
+                                - button "Texts 💭" [ref=f195e1039] [cursor=pointer]: 💭
+                            - row [level=3] [ref=f195e1040]:
+                              - rowheader [ref=f195e1041]
+                              - gridcell [ref=f195e1042]:
+                                - button "Ordinal No. 002.001" [ref=f195e1043] [cursor=pointer]: "002.001"
+                              - gridcell [ref=f195e1044]:
+                                - button "Show more options" [ref=f195e1045] [cursor=pointer]
+                              - gridcell [ref=f195e1046]:
+                                - textbox "Node Kind Remark" [ref=f195e1047]
+                              - gridcell [ref=f195e1048]:
+                                - textbox "Hinweistext" [ref=f195e1050]
+                              - gridcell [ref=f195e1051]:
+                                - textbox "Quantity (Blank)" [ref=f195e1052]
+                              - gridcell [ref=f195e1053]:
+                                - textbox "Unit (Blank)" [ref=f195e1054]
+                              - gridcell [ref=f195e1055]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e1056]
+                              - gridcell [ref=f195e1057]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1058]
+                              - gridcell [ref=f195e1059]:
+                                - textbox "Item Total (Blank)" [ref=f195e1060]
+                              - gridcell [ref=f195e1061]:
+                                - button "Texts 📋📝" [ref=f195e1062] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e1063]:
+                              - rowheader [ref=f195e1064]
+                              - gridcell [ref=f195e1065]:
+                                - button "Ordinal No. 002.001.0010" [ref=f195e1066] [cursor=pointer]: 002.001.0010
+                              - gridcell [ref=f195e1067]:
+                                - button "Show more options" [ref=f195e1068] [cursor=pointer]
+                              - gridcell [ref=f195e1069]:
+                                - textbox "Node Kind Item" [ref=f195e1070]
+                              - gridcell [ref=f195e1071]:
+                                - textbox "Kabel 0.6/1 kV einziehen NYY 3x1.5" [ref=f195e1073]
+                              - gridcell [ref=f195e1074]:
+                                - textbox "Quantity 450.000,000" [ref=f195e1075]
+                              - gridcell [ref=f195e1076]:
+                                - textbox "Unit m" [ref=f195e1077]
+                              - gridcell [ref=f195e1078]:
+                                - textbox "Mapped Unit M" [ref=f195e1079]
+                              - gridcell [ref=f195e1080]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1081]
+                              - gridcell [ref=f195e1082]:
+                                - textbox "Item Total (Blank)" [ref=f195e1083]
+                              - gridcell [ref=f195e1084]:
+                                - button "Texts 📋📝" [ref=f195e1085] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e1086]:
+                              - rowheader [ref=f195e1087]
+                              - gridcell [ref=f195e1088]:
+                                - button "Ordinal No. 002.001.0020" [ref=f195e1089] [cursor=pointer]: 002.001.0020
+                              - gridcell [ref=f195e1090]:
+                                - button "Show more options" [ref=f195e1091] [cursor=pointer]
+                              - gridcell [ref=f195e1092]:
+                                - textbox "Node Kind Item" [ref=f195e1093]
+                              - gridcell [ref=f195e1094]:
+                                - textbox "Kabel 0.6/1 kV einziehen NYY 4x1.5" [ref=f195e1096]
+                              - gridcell [ref=f195e1097]:
+                                - textbox "Quantity 200.000,000" [ref=f195e1098]
+                              - gridcell [ref=f195e1099]:
+                                - textbox "Unit m" [ref=f195e1100]
+                              - gridcell [ref=f195e1101]:
+                                - textbox "Mapped Unit M" [ref=f195e1102]
+                              - gridcell [ref=f195e1103]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1104]
+                              - gridcell [ref=f195e1105]:
+                                - textbox "Item Total (Blank)" [ref=f195e1106]
+                              - gridcell [ref=f195e1107]:
+                                - button "Texts 📋📝" [ref=f195e1108] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e1109]:
+                              - rowheader [ref=f195e1110]
+                              - gridcell [ref=f195e1111]:
+                                - button "Ordinal No. 002.001.0040" [ref=f195e1112] [cursor=pointer]: 002.001.0040
+                              - gridcell [ref=f195e1113]:
+                                - button "Show more options" [ref=f195e1114] [cursor=pointer]
+                              - gridcell [ref=f195e1115]:
+                                - textbox "Node Kind Item" [ref=f195e1116]
+                              - gridcell [ref=f195e1117]:
+                                - 'textbox "Hohlliegenden Putz abschlagen, mit Putz MG PI c beiarbeiten. Die Arbeiten sind wie folgt durchzuführen: Hohlliegenden Putz abschlagen, defekte Fugen auskratzen, einen tragfähigen Unter- grund herstellen. Angefallenen Schutt entsorgen." [ref=f195e1119]'
+                              - gridcell [ref=f195e1120]:
+                                - textbox "Quantity 100,000" [ref=f195e1121]
+                              - gridcell [ref=f195e1122]:
+                                - textbox "Unit Stck" [ref=f195e1123]
+                              - gridcell [ref=f195e1124]:
+                                - textbox "Mapped Unit STK" [ref=f195e1125]
+                              - gridcell [ref=f195e1126]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1127]
+                              - gridcell [ref=f195e1128]:
+                                - textbox "Item Total (Blank)" [ref=f195e1129]
+                              - gridcell [ref=f195e1130]:
+                                - button "Texts 📋📝" [ref=f195e1131] [cursor=pointer]: 📋📝
+                            - row [level=2] [ref=f195e1132]:
+                              - rowheader [ref=f195e1133]
+                              - gridcell [ref=f195e1134]:
+                                - button "Ordinal No. 002.002" [ref=f195e1135] [cursor=pointer]: "002.002"
+                              - gridcell [ref=f195e1136]:
+                                - button "Show more options" [ref=f195e1137] [cursor=pointer]
+                              - gridcell [ref=f195e1138]:
+                                - textbox "Node Kind Category" [ref=f195e1139]
+                              - gridcell [ref=f195e1140]:
+                                - textbox "Maler- und Fensterarbeiten" [ref=f195e1142]
+                              - gridcell [ref=f195e1143]:
+                                - textbox "Quantity (Blank)" [ref=f195e1144]
+                              - gridcell [ref=f195e1145]:
+                                - textbox "Unit (Blank)" [ref=f195e1146]
+                              - gridcell [ref=f195e1147]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e1148]
+                              - gridcell [ref=f195e1149]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1150]
+                              - gridcell [ref=f195e1151]:
+                                - textbox "Item Total (Blank)" [ref=f195e1152]
+                              - gridcell [ref=f195e1153]:
+                                - button "Texts 💭" [ref=f195e1154] [cursor=pointer]: 💭
+                            - row [level=3] [ref=f195e1155]:
+                              - rowheader [ref=f195e1156]
+                              - gridcell [ref=f195e1157]:
+                                - button "Ordinal No. 002.002.0010" [ref=f195e1158] [cursor=pointer]: 002.002.0010
+                              - gridcell [ref=f195e1159]:
+                                - button "Show more options" [ref=f195e1160] [cursor=pointer]
+                              - gridcell [ref=f195e1161]:
+                                - textbox "Node Kind Item" [ref=f195e1162]
+                              - gridcell [ref=f195e1163]:
+                                - textbox "Kunststoffkippfenster mit Doppel-Verglasung 1000 x 800 mm" [ref=f195e1165]
+                              - gridcell [ref=f195e1166]:
+                                - textbox "Quantity 5,000" [ref=f195e1167]
+                              - gridcell [ref=f195e1168]:
+                                - textbox "Unit Stck" [ref=f195e1169]
+                              - gridcell [ref=f195e1170]:
+                                - textbox "Mapped Unit STK" [ref=f195e1171]
+                              - gridcell [ref=f195e1172]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1173]
+                              - gridcell [ref=f195e1174]:
+                                - textbox "Item Total (Blank)" [ref=f195e1175]
+                              - gridcell [ref=f195e1176]:
+                                - button "Texts 📋📝" [ref=f195e1177] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e1178]:
+                              - rowheader [ref=f195e1179]
+                              - gridcell [ref=f195e1180]:
+                                - button "Ordinal No. 002.002.0020" [ref=f195e1181] [cursor=pointer]: 002.002.0020
+                              - gridcell [ref=f195e1182]:
+                                - button "Show more options" [ref=f195e1183] [cursor=pointer]
+                              - gridcell [ref=f195e1184]:
+                                - textbox "Node Kind Item" [ref=f195e1185]
+                              - gridcell [ref=f195e1186]:
+                                - textbox "Fensterarbeiten (Textergänzungen des Bieters)" [ref=f195e1188]
+                              - gridcell [ref=f195e1189]:
+                                - textbox "Quantity 8,000" [ref=f195e1190]
+                              - gridcell [ref=f195e1191]:
+                                - textbox "Unit Stck" [ref=f195e1192]
+                              - gridcell [ref=f195e1193]:
+                                - textbox "Mapped Unit STK" [ref=f195e1194]
+                              - gridcell [ref=f195e1195]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1196]
+                              - gridcell [ref=f195e1197]:
+                                - textbox "Item Total (Blank)" [ref=f195e1198]
+                              - gridcell [ref=f195e1199]:
+                                - button "Texts 📋📝➕" [ref=f195e1200] [cursor=pointer]: 📋📝➕
+                            - row [level=3] [ref=f195e1201]:
+                              - rowheader [ref=f195e1202]
+                              - gridcell [ref=f195e1203]:
+                                - button "Ordinal No. 002.002.0030" [ref=f195e1204] [cursor=pointer]: 002.002.0030
+                              - gridcell [ref=f195e1205]:
+                                - button "Show more options" [ref=f195e1206] [cursor=pointer]
+                              - gridcell [ref=f195e1207]:
+                                - textbox "Node Kind Item" [ref=f195e1208]
+                              - gridcell [ref=f195e1209]:
+                                - textbox "Kunststoffkippfenster mit Doppel-Verglasung 800 x 600 mm" [ref=f195e1211]
+                              - gridcell [ref=f195e1212]:
+                                - textbox "Quantity 3,000" [ref=f195e1213]
+                              - gridcell [ref=f195e1214]:
+                                - textbox "Unit Stck" [ref=f195e1215]
+                              - gridcell [ref=f195e1216]:
+                                - textbox "Mapped Unit STK" [ref=f195e1217]
+                              - gridcell [ref=f195e1218]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1219]
+                              - gridcell [ref=f195e1220]:
+                                - textbox "Item Total (Blank)" [ref=f195e1221]
+                              - gridcell [ref=f195e1222]:
+                                - button "Texts 📋📝" [ref=f195e1223] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e1224]:
+                              - rowheader [ref=f195e1225]
+                              - gridcell [ref=f195e1226]:
+                                - button "Ordinal No. 002.002.0050" [ref=f195e1227] [cursor=pointer]: 002.002.0050
+                              - gridcell [ref=f195e1228]:
+                                - button "Show more options" [ref=f195e1229] [cursor=pointer]
+                              - gridcell [ref=f195e1230]:
+                                - textbox "Node Kind Item" [ref=f195e1231]
+                              - gridcell [ref=f195e1232]:
+                                - textbox "Hohlliegenden Putz abschlagen, mit Putz MG PI c beiarbeiten" [ref=f195e1234]
+                              - gridcell [ref=f195e1235]:
+                                - textbox "Quantity 100,000" [ref=f195e1236]
+                              - gridcell [ref=f195e1237]:
+                                - textbox "Unit m2" [ref=f195e1238]
+                              - gridcell [ref=f195e1239]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e1240]
+                              - gridcell [ref=f195e1241]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1242]
+                              - gridcell [ref=f195e1243]:
+                                - textbox "Item Total (Blank)" [ref=f195e1244]
+                              - gridcell [ref=f195e1245]:
+                                - button "Texts 📋📝" [ref=f195e1246] [cursor=pointer]: 📋📝
+                            - row [level=2] [ref=f195e1247]:
+                              - rowheader [ref=f195e1248]
+                              - gridcell [ref=f195e1249]:
+                                - button "Ordinal No. 002.003" [ref=f195e1250] [cursor=pointer]: "002.003"
+                              - gridcell [ref=f195e1251]:
+                                - button "Show more options" [ref=f195e1252] [cursor=pointer]
+                              - gridcell [ref=f195e1253]:
+                                - textbox "Node Kind Category" [ref=f195e1254]
+                              - gridcell [ref=f195e1255]:
+                                - textbox "Heizung" [ref=f195e1257]
+                              - gridcell [ref=f195e1258]:
+                                - textbox "Quantity (Blank)" [ref=f195e1259]
+                              - gridcell [ref=f195e1260]:
+                                - textbox "Unit (Blank)" [ref=f195e1261]
+                              - gridcell [ref=f195e1262]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e1263]
+                              - gridcell [ref=f195e1264]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1265]
+                              - gridcell [ref=f195e1266]:
+                                - textbox "Item Total (Blank)" [ref=f195e1267]
+                              - gridcell [ref=f195e1268]:
+                                - button "Texts 💭" [ref=f195e1269] [cursor=pointer]: 💭
+                            - row [level=3] [ref=f195e1270]:
+                              - rowheader [ref=f195e1271]
+                              - gridcell [ref=f195e1272]:
+                                - button "Ordinal No. 002.003.0010" [ref=f195e1273] [cursor=pointer]: 002.003.0010
+                              - gridcell [ref=f195e1274]:
+                                - button "Show more options" [ref=f195e1275] [cursor=pointer]
+                              - gridcell [ref=f195e1276]:
+                                - textbox "Node Kind Item" [ref=f195e1277]
+                              - gridcell [ref=f195e1278]:
+                                - textbox "Gas-Kombi-Wasserheizer Wassererwärmer bis 5kW bis 5l bis 85l" [ref=f195e1280]
+                              - gridcell [ref=f195e1281]:
+                                - textbox "Quantity 1,000" [ref=f195e1282]
+                              - gridcell [ref=f195e1283]:
+                                - textbox "Unit Stck" [ref=f195e1284]
+                              - gridcell [ref=f195e1285]:
+                                - textbox "Mapped Unit STK" [ref=f195e1286]
+                              - gridcell [ref=f195e1287]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1288]
+                              - gridcell [ref=f195e1289]:
+                                - textbox "Item Total (Blank)" [ref=f195e1290]
+                              - gridcell [ref=f195e1291]:
+                                - button "Texts 📋📝" [ref=f195e1292] [cursor=pointer]: 📋📝
+                            - row [level=4] [selected] [ref=f195e1564]:
+                              - rowheader [ref=f195e1478]
+                              - gridcell [ref=f195e1565]:
+                                - button "Ordinal No. 002.003.0010" [ref=f195e1566] [cursor=pointer]: 002.003.0010
+                              - gridcell [ref=f195e1481]:
+                                - button "Show more options" [ref=f195e1482] [cursor=pointer]
+                              - gridcell "Node Kind" [ref=f195e1483]:
+                                - textbox "Node Kind" [ref=f195e1484]
+                              - gridcell "Outline Text" [ref=f195e1485]:
+                                - textbox "Outline Text" [ref=f195e1486]
+                              - gridcell [ref=f195e1567]:
+                                - textbox "Quantity 2,000" [ref=f195e1568]
+                              - gridcell [ref=f195e1569]:
+                                - textbox "Unit Stck" [ref=f195e1570]
+                              - gridcell [ref=f195e1571]:
+                                - textbox "Mapped Unit STK" [ref=f195e1572]
+                              - gridcell [ref=f195e1493]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1494]
+                              - gridcell [ref=f195e1495]:
+                                - textbox "Item Total (Blank)" [ref=f195e1496]
+                              - gridcell [ref=f195e1497]:
+                                - button "Texts 📋📝" [ref=f195e1498] [cursor=pointer]: 📋📝
+                            - row [level=4] [ref=f195e1316]:
+                              - rowheader [ref=f195e1317]
+                              - gridcell [ref=f195e1318]:
+                                - button "Ordinal No. 002.003.0010" [ref=f195e1319] [cursor=pointer]: 002.003.0010
+                              - gridcell [ref=f195e1320]:
+                                - button "Show more options" [ref=f195e1321] [cursor=pointer]
+                              - gridcell [ref=f195e1322]:
+                                - textbox "Node Kind Sub-Description" [ref=f195e1323]
+                              - gridcell [ref=f195e1324]:
+                                - 'textbox "2: Membran-Druckausdehnungsgefäß" [ref=f195e1326]'
+                              - gridcell [ref=f195e1327]:
+                                - textbox "Quantity 3,000" [ref=f195e1328]
+                              - gridcell [ref=f195e1329]:
+                                - textbox "Unit Stck" [ref=f195e1330]
+                              - gridcell [ref=f195e1331]:
+                                - textbox "Mapped Unit STK" [ref=f195e1332]
+                              - gridcell [ref=f195e1333]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1334]
+                              - gridcell [ref=f195e1335]:
+                                - textbox "Item Total (Blank)" [ref=f195e1336]
+                              - gridcell [ref=f195e1337]:
+                                - button "Texts 📋📝" [ref=f195e1338] [cursor=pointer]: 📋📝
+                            - row [level=1] [ref=f195e1339]:
+                              - rowheader [ref=f195e1340]
+                              - gridcell [ref=f195e1341]:
+                                - button "Ordinal No. 999" [ref=f195e1342] [cursor=pointer]: "999"
+                              - gridcell [ref=f195e1343]:
+                                - button "Show more options" [ref=f195e1344] [cursor=pointer]
+                              - gridcell [ref=f195e1345]:
+                                - textbox "Node Kind Category" [ref=f195e1346]
+                              - gridcell [ref=f195e1347]:
+                                - textbox "Stundenlohnarbeiten" [ref=f195e1349]
+                              - gridcell [ref=f195e1350]:
+                                - textbox "Quantity (Blank)" [ref=f195e1351]
+                              - gridcell [ref=f195e1352]:
+                                - textbox "Unit (Blank)" [ref=f195e1353]
+                              - gridcell [ref=f195e1354]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e1355]
+                              - gridcell [ref=f195e1356]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1357]
+                              - gridcell [ref=f195e1358]:
+                                - textbox "Item Total (Blank)" [ref=f195e1359]
+                              - gridcell [ref=f195e1360]:
+                                - button "Texts 💭" [ref=f195e1361] [cursor=pointer]: 💭
+                            - row [level=2] [ref=f195e1362]:
+                              - rowheader [ref=f195e1363]
+                              - gridcell [ref=f195e1364]:
+                                - button "Ordinal No. 999.999" [ref=f195e1365] [cursor=pointer]: "999.999"
+                              - gridcell [ref=f195e1366]:
+                                - button "Show more options" [ref=f195e1367] [cursor=pointer]
+                              - gridcell [ref=f195e1368]:
+                                - textbox "Node Kind Category" [ref=f195e1369]
+                              - gridcell [ref=f195e1370]:
+                                - textbox "Stundenlohnarbeiten auf Nachweis" [ref=f195e1372]
+                              - gridcell [ref=f195e1373]:
+                                - textbox "Quantity (Blank)" [ref=f195e1374]
+                              - gridcell [ref=f195e1375]:
+                                - textbox "Unit (Blank)" [ref=f195e1376]
+                              - gridcell [ref=f195e1377]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e1378]
+                              - gridcell [ref=f195e1379]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1380]
+                              - gridcell [ref=f195e1381]:
+                                - textbox "Item Total (Blank)" [ref=f195e1382]
+                              - gridcell [ref=f195e1383]:
+                                - button "Texts 💭" [ref=f195e1384] [cursor=pointer]: 💭
+                            - row [level=3] [ref=f195e1385]:
+                              - rowheader [ref=f195e1386]
+                              - gridcell [ref=f195e1387]:
+                                - button "Ordinal No. 999.999" [ref=f195e1388] [cursor=pointer]: "999.999"
+                              - gridcell [ref=f195e1389]:
+                                - button "Show more options" [ref=f195e1390] [cursor=pointer]
+                              - gridcell [ref=f195e1391]:
+                                - textbox "Node Kind Remark" [ref=f195e1392]
+                              - gridcell [ref=f195e1393]:
+                                - textbox "Hinweistexte Stundenlohnarbeiten" [ref=f195e1395]
+                              - gridcell [ref=f195e1396]:
+                                - textbox "Quantity (Blank)" [ref=f195e1397]
+                              - gridcell [ref=f195e1398]:
+                                - textbox "Unit (Blank)" [ref=f195e1399]
+                              - gridcell [ref=f195e1400]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e1401]
+                              - gridcell [ref=f195e1402]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1403]
+                              - gridcell [ref=f195e1404]:
+                                - textbox "Item Total (Blank)" [ref=f195e1405]
+                              - gridcell [ref=f195e1406]:
+                                - button "Texts 📋📝" [ref=f195e1407] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e1408]:
+                              - rowheader [ref=f195e1409]
+                              - gridcell [ref=f195e1410]:
+                                - button "Ordinal No. 999.999.9999" [ref=f195e1411] [cursor=pointer]: 999.999.9999
+                              - gridcell [ref=f195e1412]:
+                                - button "Show more options" [ref=f195e1413] [cursor=pointer]
+                              - gridcell [ref=f195e1414]:
+                                - textbox "Node Kind Item" [ref=f195e1415]
+                              - gridcell [ref=f195e1416]:
+                                - textbox "Ingenieurstunde" [ref=f195e1418]
+                              - gridcell [ref=f195e1419]:
+                                - textbox "Quantity 1,000" [ref=f195e1420]
+                              - gridcell [ref=f195e1421]:
+                                - textbox "Unit Std" [ref=f195e1422]
+                              - gridcell [ref=f195e1423]:
+                                - textbox "Mapped Unit STD" [ref=f195e1424]
+                              - gridcell [ref=f195e1425]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1426]
+                              - gridcell [ref=f195e1427]:
+                                - textbox "Item Total (Blank)" [ref=f195e1428]
+                              - gridcell [ref=f195e1429]:
+                                - button "Texts 📋📝" [ref=f195e1430] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e1431]:
+                              - rowheader [ref=f195e1432]
+                              - gridcell [ref=f195e1433]:
+                                - button "Ordinal No. 999.999.9999.y" [ref=f195e1434] [cursor=pointer]: 999.999.9999.y
+                              - gridcell [ref=f195e1435]:
+                                - button "Show more options" [ref=f195e1436] [cursor=pointer]
+                              - gridcell [ref=f195e1437]:
+                                - textbox "Node Kind Item" [ref=f195e1438]
+                              - gridcell [ref=f195e1439]:
+                                - textbox "Meisterstunden" [ref=f195e1441]
+                              - gridcell [ref=f195e1442]:
+                                - textbox "Quantity 10,000" [ref=f195e1443]
+                              - gridcell [ref=f195e1444]:
+                                - textbox "Unit Std" [ref=f195e1445]
+                              - gridcell [ref=f195e1446]:
+                                - textbox "Mapped Unit STD" [ref=f195e1447]
+                              - gridcell [ref=f195e1448]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1449]
+                              - gridcell [ref=f195e1450]:
+                                - textbox "Item Total (Blank)" [ref=f195e1451]
+                              - gridcell [ref=f195e1452]:
+                                - button "Texts 📋📝" [ref=f195e1453] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e1454]:
+                              - rowheader [ref=f195e1455]
+                              - gridcell [ref=f195e1456]:
+                                - button "Ordinal No. 999.999.9999.z" [ref=f195e1457] [cursor=pointer]: 999.999.9999.z
+                              - gridcell [ref=f195e1458]:
+                                - button "Show more options" [ref=f195e1459] [cursor=pointer]
+                              - gridcell [ref=f195e1460]:
+                                - textbox "Node Kind Item" [ref=f195e1461]
+                              - gridcell [ref=f195e1462]:
+                                - textbox "Helferstunden" [ref=f195e1464]
+                              - gridcell [ref=f195e1465]:
+                                - textbox "Quantity 10,000" [ref=f195e1466]
+                              - gridcell [ref=f195e1467]:
+                                - textbox "Unit Std" [ref=f195e1468]
+                              - gridcell [ref=f195e1469]:
+                                - textbox "Mapped Unit STD" [ref=f195e1470]
+                              - gridcell [ref=f195e1471]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1472]
+                              - gridcell [ref=f195e1473]:
+                                - textbox "Item Total (Blank)" [ref=f195e1474]
+                              - gridcell [ref=f195e1475]:
+                                - button "Texts 📋📝" [ref=f195e1476] [cursor=pointer]: 📋📝
+                            - row [level=3] [ref=f195e1573]:
+                              - rowheader [ref=f195e1574]
+                              - gridcell [ref=f195e1575]:
+                                - button "Ordinal No. 999.999" [ref=f195e1576] [cursor=pointer]: "999.999"
+                              - gridcell [ref=f195e1577]:
+                                - button "Show more options" [ref=f195e1578] [cursor=pointer]
+                              - gridcell [ref=f195e1579]:
+                                - textbox "Node Kind Remark" [ref=f195e1580]
+                              - gridcell [ref=f195e1581]:
+                                - textbox "Hinweistext" [ref=f195e1583]
+                              - gridcell [ref=f195e1584]:
+                                - textbox "Quantity (Blank)" [ref=f195e1585]
+                              - gridcell [ref=f195e1586]:
+                                - textbox "Unit (Blank)" [ref=f195e1587]
+                              - gridcell [ref=f195e1588]:
+                                - textbox "Mapped Unit (Blank)" [ref=f195e1589]
+                              - gridcell [ref=f195e1590]:
+                                - textbox "Unit Price (Blank)" [ref=f195e1591]
+                              - gridcell [ref=f195e1592]:
+                                - textbox "Item Total (Blank)" [ref=f195e1593]
+                              - gridcell [ref=f195e1594]:
+                                - button "Texts 📋📝" [ref=f195e1595] [cursor=pointer]: 📋📝
+                        - generic [ref=f195e1503]:
+                          - button "Total" [ref=f195e1504] [cursor=pointer]
+                          - textbox "Total 0,00" [ref=f195e1506]
+                  - generic [ref=f195e1507]:
+                    - button "Resize the factbox area." [ref=f195e1508]
+                    - generic [ref=f195e1511]:
+                      - generic [ref=f195e1521]:
+                        - generic "Expand summary" [ref=f195e1522] [cursor=pointer]:
+                          - heading "Copilot generated page summary, preview feature." [level=3] [ref=f195e1526]: Summary
+                          - generic "Preview" [ref=f195e1527]
+                        - button "Expand summary" [ref=f195e1530] [cursor=pointer]
+                      - tabpanel [ref=f195e1536]:
+                        - generic [ref=f195e1537]:
+                          - heading "Project and Award Texts" [level=3] [ref=f195e1539]
+                          - iframe [ref=f195e1544]:
+                            - generic [ref=f196e2]:
+                              - text: Für die Zertifizierung von GAEB DA XML Schnittstellen hat der BVBS Prüfkriterien herausgegeben.
+                              - generic [ref=f196e3]: "Version: GAEB DA XML 3.3 Ausgabedatum: 2021-05 Die hier abgebildete GAEB-Datei ist für den Bereich Bauausführung für ausführende Firmen im Bereich Bauhauptgewerbe und Handwerk geeignet. Weitere Informationen erhalten Sie beim BVBS: BVBS Bundesverband Software und Digitalisierung im Bauwesen e.V. 10787 Berlin Tel.: 03025757750 e-mail: info@bvbs.de www.bvbs.de"
+              - generic:
+                - button "Go to the next document of the same type":
+                  - generic: 
+        - generic:
+          - form "GAEB Sub-Description":
+            - main:
+              - button "Go to the previous document of the same type" [ref=f195e1683] [cursor=pointer]:
+                - generic [ref=f195e1684]: 
+              - generic [ref=f195e1686]:
+                - generic [ref=f195e1689]:
+                  - button "Back" [ref=f195e1692] [cursor=pointer]:
+                    - generic [ref=f195e1693]: 
+                  - generic [ref=f195e1695]:
+                    - heading "GAEB Sub-Description" [level=1] [ref=f195e1696]
+                    - generic [ref=f195e1701]:
+                      - button "Make changes on the page" [disabled] [ref=f195e1702]:
+                        - generic [ref=f195e1703]: 
+                      - button "Share this page with other users or apps" [ref=f195e1705] [cursor=pointer]:
+                        - generic [ref=f195e1706]: 
+                      - button "Create a new entry." [disabled] [ref=f195e1708]:
+                        - generic [ref=f195e1709]: 
+                      - button "Delete the information" [disabled] [ref=f195e1711]:
+                        - generic [ref=f195e1712]: 
+                    - generic [ref=f195e1714]:
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f195e1717] [cursor=pointer]:
+                        - generic [ref=f195e1718]: 
+                      - button "Toggle wide layout" [ref=f195e1722] [cursor=pointer]:
+                        - generic [ref=f195e1723]: 
+                    - heading "002.003.0010 Heizgerät für raumluftunabhängigen Betrieb" [level=2] [ref=f195e1726]
+                - menubar [ref=f195e1736]:
+                  - generic [ref=f195e1750]:
+                    - menuitem "Parent Row" [ref=f195e1755] [cursor=pointer]
+                    - menuitem "GAEB File Card" [ref=f195e1766] [cursor=pointer]
+                    - menuitem "GAEB Schema" [ref=f195e1777] [cursor=pointer]
+                    - menuitem "GAEB Source Entry" [ref=f195e1788] [cursor=pointer]
+                    - menuitem "More options" [ref=f195e1799] [cursor=pointer]
+                - generic [ref=f195e1810]:
+                  - button [expanded] [ref=f195e1813] [cursor=pointer]:
+                    - heading "General" [level=3] [ref=f195e1814]
+                  - generic [ref=f195e1817]:
+                    - generic [ref=f195e1818]:
+                      - button "SubDNo" [ref=f195e1819] [cursor=pointer]
+                      - textbox "SubDNo 1" [ref=f195e1821]
+                    - generic [ref=f195e1822]:
+                      - button "QtySpec" [ref=f195e1823] [cursor=pointer]
+                      - textbox "QtySpec Yes" [ref=f195e1825]
+                    - generic [ref=f195e1826]:
+                      - button "QtyTBD" [ref=f195e1827] [cursor=pointer]
+                      - textbox "QtyTBD" [ref=f195e1829]
+                    - generic [ref=f195e1830]:
+                      - button "Qty" [ref=f195e1831] [cursor=pointer]
+                      - textbox "Qty 2,000" [ref=f195e1833]
+                    - generic [ref=f195e1834]:
+                      - button "QU" [ref=f195e1835] [cursor=pointer]
+                      - textbox "QU Stck" [ref=f195e1837]
+                    - generic [ref=f195e1838]:
+                      - button "UPSpec" [ref=f195e1839] [cursor=pointer]
+                      - textbox "UPSpec" [ref=f195e1841]
+                    - generic [ref=f195e1842]:
+                      - button "UPBkdn" [ref=f195e1843] [cursor=pointer]
+                      - textbox "UPBkdn" [ref=f195e1845]
+                    - generic [ref=f195e1846]:
+                      - button "UP" [ref=f195e1847] [cursor=pointer]
+                      - textbox "UP (Blank)" [ref=f195e1849]
+                    - generic [ref=f195e1850]:
+                      - button "UPComp1" [ref=f195e1851] [cursor=pointer]
+                      - textbox "UPComp1 (Blank)" [ref=f195e1853]
+                    - generic [ref=f195e1854]:
+                      - button "UPComp2" [ref=f195e1855] [cursor=pointer]
+                      - textbox "UPComp2 (Blank)" [ref=f195e1857]
+                    - generic [ref=f195e1858]:
+                      - button "UPComp3" [ref=f195e1859] [cursor=pointer]
+                      - textbox "UPComp3 (Blank)" [ref=f195e1861]
+                    - generic [ref=f195e1862]:
+                      - button "UPComp4" [ref=f195e1863] [cursor=pointer]
+                      - textbox "UPComp4 (Blank)" [ref=f195e1865]
+                    - generic [ref=f195e1866]:
+                      - button "UPComp5" [ref=f195e1867] [cursor=pointer]
+                      - textbox "UPComp5 (Blank)" [ref=f195e1869]
+                    - generic [ref=f195e1870]:
+                      - button "UPComp6" [ref=f195e1871] [cursor=pointer]
+                      - textbox "UPComp6 (Blank)" [ref=f195e1873]
+                    - generic [ref=f195e1874]:
+                      - button "Text Organisations" [ref=f195e1875] [cursor=pointer]
+                      - button "Text Organisations 002.003.0010 Heizgerät für raumluftunabhängigen Betrieb" [active] [ref=f195e1877] [cursor=pointer]: 002.003.0010 Heizgerät für raumluftunabhängigen Betrieb
+                    - generic [ref=f195e1878]:
+                      - button "Catalogue Assignments" [ref=f195e1879] [cursor=pointer]
+                      - button "Catalogue Assignments (Blank)" [ref=f195e1881] [cursor=pointer]
+              - button "Go to the next document of the same type" [ref=f195e1883] [cursor=pointer]:
+                - generic [ref=f195e1884]: 
+      - text: Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.
+      - paragraph [ref=f195e1559]: GAEB0137. GAEB File
+      - paragraph [ref=f195e1561]: List with title "GAEB Bill of Quantities" now has 45 items
+      - paragraph [ref=f195e1563]: List with title "GAEB Additional Texts" now has one item
+      - paragraph [ref=f195e1889]: 002.003.0010 Heizgerät für raumluftunabhängigen Betrieb. GAEB Sub-Description

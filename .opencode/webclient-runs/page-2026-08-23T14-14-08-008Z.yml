@@ -1,0 +1,1598 @@
+- generic [ref=f7e1]:
+  - banner [ref=f7e16]:
+    - button "App launcher" [ref=f7e19] [cursor=pointer]: 
+    - generic [ref=f7e25]:
+      - generic [ref=f7e26]: Dynamics 365 Business Central
+      - generic [ref=f7e31]:
+        - 'button "ADIGO GmbH Mitte Ost, Environment: GTHU" [ref=f7e35] [cursor=pointer]':
+          - generic [ref=f7e37]:
+            - generic [ref=f7e39]:
+              - generic [ref=f7e40]: GO
+              - generic [ref=f7e41]: OST
+            - generic [ref=f7e42]:
+              - generic [ref=f7e43]: "Environment:"
+              - generic [ref=f7e44]: GTHU
+        - button "Copilot" [ref=f7e47] [cursor=pointer]:
+          - generic [ref=f7e48]: 
+        - button "Search" [ref=f7e51] [cursor=pointer]:
+          - generic [ref=f7e52]: 
+        - button "Notifications" [ref=f7e55] [cursor=pointer]:
+          - generic [ref=f7e56]: 
+        - button "Settings. Press tab to enter expanded region." [expanded] [ref=f7e77] [cursor=pointer]:
+          - generic [ref=f7e60]: 
+        - button "Help" [ref=f7e63] [cursor=pointer]:
+          - generic [ref=f7e64]: 
+    - generic [ref=f7e65]:
+      - button "Account manager for Gregor Thume" [ref=f7e67] [cursor=pointer]:
+        - generic [ref=f7e68]: GT
+      - generic: 
+  - iframe [ref=f7e15]:
+    - generic [ref=f8e1]:
+      - generic [ref=f8e2]:
+        - generic:
+          - form "Extension Management":
+            - generic [ref=f8e5]:
+              - generic [ref=f8e8]:
+                - button "Skip to main content" [ref=f8e9] [cursor=pointer]
+                - navigation "Main navigation" [ref=f8e10]:
+                  - menubar [ref=f8e19]:
+                    - generic [ref=f8e22]:
+                      - menuitem [ref=f8e1816] [cursor=pointer]:
+                        - heading "ADIGO GmbH Mitte Ost" [level=1] [ref=f8e1818]
+                      - menuitem "APP" [ref=f8e1821] [cursor=pointer]
+                      - menuitem "All Reports" [ref=f8e1826] [cursor=pointer]
+                      - menuitem "Explore all business features for my role in Business Central" [ref=f8e1830] [cursor=pointer]:
+                        - generic [ref=f8e1831]: 
+                      - generic [ref=f8e55]:
+                        - menuitem "Agent" [ref=f8e56] [cursor=pointer]:
+                          - generic [ref=f8e57]:
+                            - generic [ref=f8e58]: Agent
+                            - generic [ref=f8e64]: A
+                            - img "Not configured" [ref=f8e66]
+                        - menuitem "Payables Agent" [ref=f8e70] [cursor=pointer]:
+                          - generic [ref=f8e71]:
+                            - generic [ref=f8e72]: Payables Agent
+                            - generic [ref=f8e78]: PA
+                            - img "Not configured" [ref=f8e80]
+                        - menuitem "Sales Order Agent" [ref=f8e84] [cursor=pointer]:
+                          - generic [ref=f8e85]:
+                            - generic [ref=f8e86]: Sales Order Agent
+                            - generic [ref=f8e92]: SO
+                            - img "Not configured" [ref=f8e94]
+              - menubar [ref=f8e108]:
+                - generic [ref=f8e111]:
+                  - heading "Extension Management:" [level=2] [ref=f8e113]
+                  - 'button "Extension Management: All" [ref=f8e115] [cursor=pointer]':
+                    - generic [ref=f8e116]:
+                      - generic [ref=f8e117]: All
+                      - generic [ref=f8e119]: 
+                - generic [ref=f8e122]:
+                  - menuitem "Here's what Copilot can do on this page" [ref=f8e129] [cursor=pointer]:
+                    - generic [ref=f8e130]: 
+                  - menuitem [ref=f8e139] [cursor=pointer]:
+                    - generic [ref=f8e140]:
+                      - generic [ref=f8e141]: 
+                      - searchbox "Search Extension Management"
+                - generic [ref=f8e143]:
+                  - menuitem "Enter analysis mode" [ref=f8e1833] [cursor=pointer]
+                  - generic [ref=f8e158]:
+                    - generic [ref=f8e162]:
+                      - menuitem "AppSource Gallery" [ref=f8e1838] [cursor=pointer]
+                      - menuitem "Manage" [ref=f8e1845] [cursor=pointer]:
+                        - generic [ref=f8e1846]:
+                          - generic [ref=f8e1847]: Manage
+                          - generic [ref=f8e1849]: 
+                      - menuitem "Develop in VS Code" [ref=f8e1850] [cursor=pointer]:
+                        - generic [ref=f8e1851]:
+                          - generic [ref=f8e1852]: Develop in VS Code
+                          - generic [ref=f8e1854]: 
+                      - menuitem "More options" [ref=f8e1855] [cursor=pointer]
+                    - generic [ref=f8e200]:
+                      - menuitem "Share" [ref=f8e203] [cursor=pointer]:
+                        - generic [ref=f8e204]: 
+                      - menuitemcheckbox "Toggle filter" [ref=f8e208] [cursor=pointer]:
+                        - generic [ref=f8e209]: 
+                      - menuitem "List layout selected" [ref=f8e1097] [cursor=pointer]
+                      - menuitemcheckbox "Toggle wide layout" [ref=f8e217] [cursor=pointer]:
+                        - generic [ref=f8e218]: 
+                      - menuitemcheckbox "Not bookmarked" [ref=f8e222] [cursor=pointer]:
+                        - generic [ref=f8e223]: 
+              - generic [ref=f8e233]:
+                - button "Dismiss" [ref=f8e234] [cursor=pointer]
+                - generic [ref=f8e235]: There's orphaned data from uninstalled extensions. Use the Delete Orphaned Extension Data page to review it.
+                - generic [ref=f8e236]:
+                  - button "Show Data" [ref=f8e237] [cursor=pointer]
+                  - generic [ref=f8e238]: "|"
+                  - button "Mark All as Reviewed" [ref=f8e239] [cursor=pointer]
+                - button "Expand notification message" [ref=f8e241] [cursor=pointer]
+              - main [ref=f8e243]:
+                - grid "Extension Management" [ref=f8e1099]:
+                  - rowgroup [ref=f8e1101]:
+                    - row [ref=f8e1102]:
+                      - columnheader [ref=f8e1103]:
+                        - generic [ref=f8e1104]:
+                          - button "Name, sorted in Ascending order" [ref=f8e1105] [cursor=pointer]: Name
+                          - img "Ascending" [ref=f8e1107]
+                        - button "Open menu for Name" [ref=f8e1108] [cursor=pointer]
+                        - button [ref=f8e1109]
+                      - columnheader "More Options" [ref=f8e1112]
+                      - columnheader [ref=f8e1114]:
+                        - button "Publisher" [ref=f8e1116] [cursor=pointer]
+                        - button "Open menu for Publisher" [ref=f8e1117] [cursor=pointer]
+                        - button [ref=f8e1118]
+                      - columnheader "Version Open menu for Version" [ref=f8e1121]:
+                        - generic [ref=f8e1122]: Version
+                        - button "Open menu for Version" [ref=f8e1123] [cursor=pointer]
+                        - button [ref=f8e1124]
+                      - columnheader "Is Installed Open menu for Is Installed" [ref=f8e1127]:
+                        - generic [ref=f8e1128]: Is Installed
+                        - button "Open menu for Is Installed" [ref=f8e1129] [cursor=pointer]
+                        - button [ref=f8e1130]
+                      - columnheader "Source Open menu for Source" [ref=f8e1133]:
+                        - generic [ref=f8e1134]: Source
+                        - button "Open menu for Source" [ref=f8e1135] [cursor=pointer]
+                        - button [ref=f8e1136]
+                      - columnheader [ref=f8e1139]:
+                        - button "Published As" [ref=f8e1141] [cursor=pointer]
+                        - button "Open menu for Published As" [ref=f8e1142] [cursor=pointer]
+                        - button [ref=f8e1143]
+                      - columnheader [ref=f8e1146]:
+                        - button "Open menu for" [ref=f8e1147] [cursor=pointer]
+                        - button [ref=f8e1148]
+                  - generic [ref=f8e1152]:
+                    - rowgroup [ref=f8e1153]:
+                      - row [ref=f8e1154]:
+                        - columnheader [ref=f8e1155]
+                        - columnheader [ref=f8e1156]
+                        - columnheader [ref=f8e1158]
+                        - columnheader [ref=f8e1159]
+                        - columnheader [ref=f8e1160]
+                        - columnheader [ref=f8e1161]
+                        - columnheader [ref=f8e1162]
+                        - columnheader [ref=f8e1163]
+                    - row [selected] [ref=f8e1164]:
+                      - gridcell [ref=f8e1165]:
+                        - button "Name, sorted in Ascending order ADIGO.BAU.Interfaces.GAEB" [ref=f8e1166] [cursor=pointer]: ADIGO.BAU.Interfaces.GAEB
+                      - gridcell [ref=f8e1167]:
+                        - button "Show more options" [ref=f8e1168] [cursor=pointer]
+                      - gridcell [ref=f8e1169]:
+                        - textbox "Publisher" [ref=f8e1170]
+                      - gridcell "Version" [ref=f8e1171]:
+                        - textbox "Version" [ref=f8e1172]
+                      - gridcell "Is Installed" [ref=f8e1173]:
+                        - checkbox "Is Installed" [checked] [disabled] [ref=f8e1174]:
+                          - checkbox [checked] [disabled] [ref=f8e1175]
+                      - gridcell "Source" [ref=f8e1176]:
+                        - textbox "Source" [ref=f8e1177]
+                      - gridcell [ref=f8e1178]:
+                        - textbox "Published As" [ref=f8e1179]
+                      - gridcell [ref=f8e1180]:
+                        - paragraph [ref=f8e1181]
+                    - row [ref=f8e1182]:
+                      - gridcell [ref=f8e1183]:
+                        - button "Name, sorted in Ascending order ADIGO.ITS.Basics.Foundation" [ref=f8e1184] [cursor=pointer]: ADIGO.ITS.Basics.Foundation
+                      - gridcell [ref=f8e1185]:
+                        - button "Show more options" [ref=f8e1186] [cursor=pointer]
+                      - gridcell [ref=f8e1187]:
+                        - textbox "Publisher ADIGO GmbH" [ref=f8e1188]
+                      - gridcell [ref=f8e1189]:
+                        - textbox "Version 28.2.0.0" [ref=f8e1190]
+                      - gridcell [ref=f8e1191]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1192]:
+                          - checkbox [checked] [disabled] [ref=f8e1193]
+                      - gridcell [ref=f8e1194]:
+                        - textbox "Source No" [ref=f8e1195]
+                      - gridcell [ref=f8e1196]:
+                        - textbox "Published As Dev" [ref=f8e1197]
+                      - gridcell [ref=f8e1198]:
+                        - paragraph [ref=f8e1199]
+                    - row [ref=f8e1200]:
+                      - gridcell [ref=f8e1201]:
+                        - button "Name, sorted in Ascending order Agent Design Experience" [ref=f8e1202] [cursor=pointer]: Agent Design Experience
+                      - gridcell [ref=f8e1203]:
+                        - button "Show more options" [ref=f8e1204] [cursor=pointer]
+                      - gridcell [ref=f8e1205]:
+                        - textbox "Publisher Microsoft" [ref=f8e1206]
+                      - gridcell [ref=f8e1207]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1208]
+                      - gridcell [ref=f8e1209]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1210]:
+                          - checkbox [checked] [disabled] [ref=f8e1211]
+                      - gridcell [ref=f8e1212]:
+                        - textbox "Source" [ref=f8e1213]
+                      - gridcell [ref=f8e1214]:
+                        - textbox "Published As Global" [ref=f8e1215]
+                      - gridcell [ref=f8e1216]:
+                        - paragraph [ref=f8e1217]
+                    - row [ref=f8e1218]:
+                      - gridcell [ref=f8e1219]:
+                        - button "Name, sorted in Ascending order Agent Samples" [ref=f8e1220] [cursor=pointer]: Agent Samples
+                      - gridcell [ref=f8e1221]:
+                        - button "Show more options" [ref=f8e1222] [cursor=pointer]
+                      - gridcell [ref=f8e1223]:
+                        - textbox "Publisher Microsoft" [ref=f8e1224]
+                      - gridcell [ref=f8e1225]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1226]
+                      - gridcell [ref=f8e1227]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1228]:
+                          - checkbox [checked] [disabled] [ref=f8e1229]
+                      - gridcell [ref=f8e1230]:
+                        - textbox "Source" [ref=f8e1231]
+                      - gridcell [ref=f8e1232]:
+                        - textbox "Published As Global" [ref=f8e1233]
+                      - gridcell [ref=f8e1234]:
+                        - paragraph [ref=f8e1235]
+                    - row [ref=f8e1236]:
+                      - gridcell [ref=f8e1237]:
+                        - button "Name, sorted in Ascending order Agent Samples Tests" [ref=f8e1238] [cursor=pointer]: Agent Samples Tests
+                      - gridcell [ref=f8e1239]:
+                        - button "Show more options" [ref=f8e1240] [cursor=pointer]
+                      - gridcell [ref=f8e1241]:
+                        - textbox "Publisher Microsoft" [ref=f8e1242]
+                      - gridcell [ref=f8e1243]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1244]
+                      - gridcell [ref=f8e1245]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1246]:
+                          - checkbox [checked] [disabled] [ref=f8e1247]
+                      - gridcell [ref=f8e1248]:
+                        - textbox "Source" [ref=f8e1249]
+                      - gridcell [ref=f8e1250]:
+                        - textbox "Published As Global" [ref=f8e1251]
+                      - gridcell [ref=f8e1252]:
+                        - paragraph [ref=f8e1253]
+                    - row [ref=f8e1254]:
+                      - gridcell [ref=f8e1255]:
+                        - button "Name, sorted in Ascending order Agent Test Library" [ref=f8e1256] [cursor=pointer]: Agent Test Library
+                      - gridcell [ref=f8e1257]:
+                        - button "Show more options" [ref=f8e1258] [cursor=pointer]
+                      - gridcell [ref=f8e1259]:
+                        - textbox "Publisher Microsoft" [ref=f8e1260]
+                      - gridcell [ref=f8e1261]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1262]
+                      - gridcell [ref=f8e1263]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1264]:
+                          - checkbox [checked] [disabled] [ref=f8e1265]
+                      - gridcell [ref=f8e1266]:
+                        - textbox "Source" [ref=f8e1267]
+                      - gridcell [ref=f8e1268]:
+                        - textbox "Published As Global" [ref=f8e1269]
+                      - gridcell [ref=f8e1270]:
+                        - paragraph [ref=f8e1271]
+                    - row [ref=f8e1272]:
+                      - gridcell [ref=f8e1273]:
+                        - button "Name, sorted in Ascending order AI Development Toolkit - Design" [ref=f8e1274] [cursor=pointer]: AI Development Toolkit - Design
+                      - gridcell [ref=f8e1275]:
+                        - button "Show more options" [ref=f8e1276] [cursor=pointer]
+                      - gridcell [ref=f8e1277]:
+                        - textbox "Publisher Microsoft" [ref=f8e1278]
+                      - gridcell [ref=f8e1279]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1280]
+                      - gridcell [ref=f8e1281]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1282]:
+                          - checkbox [checked] [disabled] [ref=f8e1283]
+                      - gridcell [ref=f8e1284]:
+                        - textbox "Source" [ref=f8e1285]
+                      - gridcell [ref=f8e1286]:
+                        - textbox "Published As Global" [ref=f8e1287]
+                      - gridcell [ref=f8e1288]:
+                        - paragraph [ref=f8e1289]
+                    - row [ref=f8e1290]:
+                      - gridcell [ref=f8e1291]:
+                        - button "Name, sorted in Ascending order AI Development Toolkit - Evaluation" [ref=f8e1292] [cursor=pointer]: AI Development Toolkit - Evaluation
+                      - gridcell [ref=f8e1293]:
+                        - button "Show more options" [ref=f8e1294] [cursor=pointer]
+                      - gridcell [ref=f8e1295]:
+                        - textbox "Publisher Microsoft" [ref=f8e1296]
+                      - gridcell [ref=f8e1297]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1298]
+                      - gridcell [ref=f8e1299]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1300]:
+                          - checkbox [checked] [disabled] [ref=f8e1301]
+                      - gridcell [ref=f8e1302]:
+                        - textbox "Source" [ref=f8e1303]
+                      - gridcell [ref=f8e1304]:
+                        - textbox "Published As Global" [ref=f8e1305]
+                      - gridcell [ref=f8e1306]:
+                        - paragraph [ref=f8e1307]
+                    - row [ref=f8e1308]:
+                      - gridcell [ref=f8e1309]:
+                        - button "Name, sorted in Ascending order AI Test Toolkit" [ref=f8e1310] [cursor=pointer]: AI Test Toolkit
+                      - gridcell [ref=f8e1311]:
+                        - button "Show more options" [ref=f8e1312] [cursor=pointer]
+                      - gridcell [ref=f8e1313]:
+                        - textbox "Publisher Microsoft" [ref=f8e1314]
+                      - gridcell [ref=f8e1315]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1316]
+                      - gridcell [ref=f8e1317]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1318]:
+                          - checkbox [checked] [disabled] [ref=f8e1319]
+                      - gridcell [ref=f8e1320]:
+                        - textbox "Source" [ref=f8e1321]
+                      - gridcell [ref=f8e1322]:
+                        - textbox "Published As Global" [ref=f8e1323]
+                      - gridcell [ref=f8e1324]:
+                        - paragraph [ref=f8e1325]
+                    - row [ref=f8e1326]:
+                      - gridcell [ref=f8e1327]:
+                        - button "Name, sorted in Ascending order AMC Banking 365 Fundamentals" [ref=f8e1328] [cursor=pointer]: AMC Banking 365 Fundamentals
+                      - gridcell [ref=f8e1329]:
+                        - button "Show more options" [ref=f8e1330] [cursor=pointer]
+                      - gridcell [ref=f8e1331]:
+                        - textbox "Publisher Microsoft" [ref=f8e1332]
+                      - gridcell [ref=f8e1333]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1334]
+                      - gridcell [ref=f8e1335]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1336]:
+                          - checkbox [checked] [disabled] [ref=f8e1337]
+                      - gridcell [ref=f8e1338]:
+                        - textbox "Source" [ref=f8e1339]
+                      - gridcell [ref=f8e1340]:
+                        - textbox "Published As Global" [ref=f8e1341]
+                      - gridcell [ref=f8e1342]:
+                        - paragraph [ref=f8e1343]
+                    - row [ref=f8e1344]:
+                      - gridcell [ref=f8e1345]:
+                        - button "Name, sorted in Ascending order Any" [ref=f8e1346] [cursor=pointer]: Any
+                      - gridcell [ref=f8e1347]:
+                        - button "Show more options" [ref=f8e1348] [cursor=pointer]
+                      - gridcell [ref=f8e1349]:
+                        - textbox "Publisher Microsoft" [ref=f8e1350]
+                      - gridcell [ref=f8e1351]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1352]
+                      - gridcell [ref=f8e1353]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1354]:
+                          - checkbox [checked] [disabled] [ref=f8e1355]
+                      - gridcell [ref=f8e1356]:
+                        - textbox "Source" [ref=f8e1357]
+                      - gridcell [ref=f8e1358]:
+                        - textbox "Published As Global" [ref=f8e1359]
+                      - gridcell [ref=f8e1360]:
+                        - paragraph [ref=f8e1361]
+                    - row [ref=f8e1362]:
+                      - gridcell [ref=f8e1363]:
+                        - button "Name, sorted in Ascending order API - Cross Environment Intercompany" [ref=f8e1364] [cursor=pointer]: API - Cross Environment Intercompany
+                      - gridcell [ref=f8e1365]:
+                        - button "Show more options" [ref=f8e1366] [cursor=pointer]
+                      - gridcell [ref=f8e1367]:
+                        - textbox "Publisher Microsoft" [ref=f8e1368]
+                      - gridcell [ref=f8e1369]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1370]
+                      - gridcell [ref=f8e1371]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1372]:
+                          - checkbox [checked] [disabled] [ref=f8e1373]
+                      - gridcell [ref=f8e1374]:
+                        - textbox "Source" [ref=f8e1375]
+                      - gridcell [ref=f8e1376]:
+                        - textbox "Published As Global" [ref=f8e1377]
+                      - gridcell [ref=f8e1378]:
+                        - paragraph [ref=f8e1379]
+                    - row [ref=f8e1380]:
+                      - gridcell [ref=f8e1381]:
+                        - button "Name, sorted in Ascending order API Reports - Finance" [ref=f8e1382] [cursor=pointer]: API Reports - Finance
+                      - gridcell [ref=f8e1383]:
+                        - button "Show more options" [ref=f8e1384] [cursor=pointer]
+                      - gridcell [ref=f8e1385]:
+                        - textbox "Publisher Microsoft" [ref=f8e1386]
+                      - gridcell [ref=f8e1387]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1388]
+                      - gridcell [ref=f8e1389]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1390]:
+                          - checkbox [checked] [disabled] [ref=f8e1391]
+                      - gridcell [ref=f8e1392]:
+                        - textbox "Source" [ref=f8e1393]
+                      - gridcell [ref=f8e1394]:
+                        - textbox "Published As Global" [ref=f8e1395]
+                      - gridcell [ref=f8e1396]:
+                        - paragraph [ref=f8e1397]
+                    - row [ref=f8e1398]:
+                      - gridcell [ref=f8e1399]:
+                        - button "Name, sorted in Ascending order Application" [ref=f8e1400] [cursor=pointer]: Application
+                      - gridcell [ref=f8e1401]:
+                        - button "Show more options" [ref=f8e1402] [cursor=pointer]
+                      - gridcell [ref=f8e1403]:
+                        - textbox "Publisher Microsoft" [ref=f8e1404]
+                      - gridcell [ref=f8e1405]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1406]
+                      - gridcell [ref=f8e1407]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1408]:
+                          - checkbox [checked] [disabled] [ref=f8e1409]
+                      - gridcell [ref=f8e1410]:
+                        - textbox "Source" [ref=f8e1411]
+                      - gridcell [ref=f8e1412]:
+                        - textbox "Published As Global" [ref=f8e1413]
+                      - gridcell [ref=f8e1414]:
+                        - paragraph [ref=f8e1415]
+                    - row [ref=f8e1416]:
+                      - gridcell [ref=f8e1417]:
+                        - button "Name, sorted in Ascending order Application Test Library" [ref=f8e1418] [cursor=pointer]: Application Test Library
+                      - gridcell [ref=f8e1419]:
+                        - button "Show more options" [ref=f8e1420] [cursor=pointer]
+                      - gridcell [ref=f8e1421]:
+                        - textbox "Publisher Microsoft" [ref=f8e1422]
+                      - gridcell [ref=f8e1423]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1424]
+                      - gridcell [ref=f8e1425]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1426]:
+                          - checkbox [checked] [disabled] [ref=f8e1427]
+                      - gridcell [ref=f8e1428]:
+                        - textbox "Source" [ref=f8e1429]
+                      - gridcell [ref=f8e1430]:
+                        - textbox "Published As Global" [ref=f8e1431]
+                      - gridcell [ref=f8e1432]:
+                        - paragraph [ref=f8e1433]
+                    - row [ref=f8e1434]:
+                      - gridcell [ref=f8e1435]:
+                        - button "Name, sorted in Ascending order Audit File Export" [ref=f8e1436] [cursor=pointer]: Audit File Export
+                      - gridcell [ref=f8e1437]:
+                        - button "Show more options" [ref=f8e1438] [cursor=pointer]
+                      - gridcell [ref=f8e1439]:
+                        - textbox "Publisher Microsoft" [ref=f8e1440]
+                      - gridcell [ref=f8e1441]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1442]
+                      - gridcell [ref=f8e1443]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1444]:
+                          - checkbox [checked] [disabled] [ref=f8e1445]
+                      - gridcell [ref=f8e1446]:
+                        - textbox "Source" [ref=f8e1447]
+                      - gridcell [ref=f8e1448]:
+                        - textbox "Published As Global" [ref=f8e1449]
+                      - gridcell [ref=f8e1450]:
+                        - paragraph [ref=f8e1451]
+                    - row [ref=f8e1452]:
+                      - gridcell [ref=f8e1453]:
+                        - button "Name, sorted in Ascending order Bank Account Reconciliation With AI" [ref=f8e1454] [cursor=pointer]: Bank Account Reconciliation With AI
+                      - gridcell [ref=f8e1455]:
+                        - button "Show more options" [ref=f8e1456] [cursor=pointer]
+                      - gridcell [ref=f8e1457]:
+                        - textbox "Publisher Microsoft" [ref=f8e1458]
+                      - gridcell [ref=f8e1459]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1460]
+                      - gridcell [ref=f8e1461]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1462]:
+                          - checkbox [checked] [disabled] [ref=f8e1463]
+                      - gridcell [ref=f8e1464]:
+                        - textbox "Source" [ref=f8e1465]
+                      - gridcell [ref=f8e1466]:
+                        - textbox "Published As Global" [ref=f8e1467]
+                      - gridcell [ref=f8e1468]:
+                        - paragraph [ref=f8e1469]
+                    - row [ref=f8e1470]:
+                      - gridcell [ref=f8e1471]:
+                        - button "Name, sorted in Ascending order Base Application" [ref=f8e1472] [cursor=pointer]: Base Application
+                      - gridcell [ref=f8e1473]:
+                        - button "Show more options" [ref=f8e1474] [cursor=pointer]
+                      - gridcell [ref=f8e1475]:
+                        - textbox "Publisher Microsoft" [ref=f8e1476]
+                      - gridcell [ref=f8e1477]:
+                        - textbox "Version 28.4.53241.53758" [ref=f8e1478]
+                      - gridcell [ref=f8e1479]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1480]:
+                          - checkbox [checked] [disabled] [ref=f8e1481]
+                      - gridcell [ref=f8e1482]:
+                        - textbox "Source" [ref=f8e1483]
+                      - gridcell [ref=f8e1484]:
+                        - textbox "Published As Global" [ref=f8e1485]
+                      - gridcell [ref=f8e1486]:
+                        - paragraph [ref=f8e1487]
+                    - row [ref=f8e1488]:
+                      - gridcell [ref=f8e1489]:
+                        - button "Name, sorted in Ascending order Business Central Cloud Migration - Previous Release" [ref=f8e1490] [cursor=pointer]: Business Central Cloud Migration - Previous Release
+                      - gridcell [ref=f8e1491]:
+                        - button "Show more options" [ref=f8e1492] [cursor=pointer]
+                      - gridcell [ref=f8e1493]:
+                        - textbox "Publisher Microsoft" [ref=f8e1494]
+                      - gridcell [ref=f8e1495]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1496]
+                      - gridcell [ref=f8e1497]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1498]:
+                          - checkbox [checked] [disabled] [ref=f8e1499]
+                      - gridcell [ref=f8e1500]:
+                        - textbox "Source" [ref=f8e1501]
+                      - gridcell [ref=f8e1502]:
+                        - textbox "Published As Global" [ref=f8e1503]
+                      - gridcell [ref=f8e1504]:
+                        - paragraph [ref=f8e1505]
+                    - row [ref=f8e1506]:
+                      - gridcell [ref=f8e1507]:
+                        - button "Name, sorted in Ascending order Business Central Cloud Migration API" [ref=f8e1508] [cursor=pointer]: Business Central Cloud Migration API
+                      - gridcell [ref=f8e1509]:
+                        - button "Show more options" [ref=f8e1510] [cursor=pointer]
+                      - gridcell [ref=f8e1511]:
+                        - textbox "Publisher Microsoft" [ref=f8e1512]
+                      - gridcell [ref=f8e1513]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1514]
+                      - gridcell [ref=f8e1515]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1516]:
+                          - checkbox [checked] [disabled] [ref=f8e1517]
+                      - gridcell [ref=f8e1518]:
+                        - textbox "Source" [ref=f8e1519]
+                      - gridcell [ref=f8e1520]:
+                        - textbox "Published As Global" [ref=f8e1521]
+                      - gridcell [ref=f8e1522]:
+                        - paragraph [ref=f8e1523]
+                    - row [ref=f8e1524]:
+                      - gridcell [ref=f8e1525]:
+                        - button "Name, sorted in Ascending order Business Central Intelligent Cloud" [ref=f8e1526] [cursor=pointer]: Business Central Intelligent Cloud
+                      - gridcell [ref=f8e1527]:
+                        - button "Show more options" [ref=f8e1528] [cursor=pointer]
+                      - gridcell [ref=f8e1529]:
+                        - textbox "Publisher Microsoft" [ref=f8e1530]
+                      - gridcell [ref=f8e1531]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1532]
+                      - gridcell [ref=f8e1533]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1534]:
+                          - checkbox [checked] [disabled] [ref=f8e1535]
+                      - gridcell [ref=f8e1536]:
+                        - textbox "Source" [ref=f8e1537]
+                      - gridcell [ref=f8e1538]:
+                        - textbox "Published As Global" [ref=f8e1539]
+                      - gridcell [ref=f8e1540]:
+                        - paragraph [ref=f8e1541]
+                    - row [ref=f8e1542]:
+                      - gridcell [ref=f8e1543]:
+                        - button "Name, sorted in Ascending order Business Foundation" [ref=f8e1544] [cursor=pointer]: Business Foundation
+                      - gridcell [ref=f8e1545]:
+                        - button "Show more options" [ref=f8e1546] [cursor=pointer]
+                      - gridcell [ref=f8e1547]:
+                        - textbox "Publisher Microsoft" [ref=f8e1548]
+                      - gridcell [ref=f8e1549]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1550]
+                      - gridcell [ref=f8e1551]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1552]:
+                          - checkbox [checked] [disabled] [ref=f8e1553]
+                      - gridcell [ref=f8e1554]:
+                        - textbox "Source" [ref=f8e1555]
+                      - gridcell [ref=f8e1556]:
+                        - textbox "Published As Global" [ref=f8e1557]
+                      - gridcell [ref=f8e1558]:
+                        - paragraph [ref=f8e1559]
+                    - row [ref=f8e1560]:
+                      - gridcell [ref=f8e1561]:
+                        - button "Name, sorted in Ascending order Business Foundation Test Libraries" [ref=f8e1562] [cursor=pointer]: Business Foundation Test Libraries
+                      - gridcell [ref=f8e1563]:
+                        - button "Show more options" [ref=f8e1564] [cursor=pointer]
+                      - gridcell [ref=f8e1565]:
+                        - textbox "Publisher Microsoft" [ref=f8e1566]
+                      - gridcell [ref=f8e1567]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1568]
+                      - gridcell [ref=f8e1569]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1570]:
+                          - checkbox [checked] [disabled] [ref=f8e1571]
+                      - gridcell [ref=f8e1572]:
+                        - textbox "Source" [ref=f8e1573]
+                      - gridcell [ref=f8e1574]:
+                        - textbox "Published As Global" [ref=f8e1575]
+                      - gridcell [ref=f8e1576]:
+                        - paragraph [ref=f8e1577]
+                    - row [ref=f8e1578]:
+                      - gridcell [ref=f8e1579]:
+                        - button "Name, sorted in Ascending order Calculate Sustainability Emission with Copilot" [ref=f8e1580] [cursor=pointer]: Calculate Sustainability Emission with Copilot
+                      - gridcell [ref=f8e1581]:
+                        - button "Show more options" [ref=f8e1582] [cursor=pointer]
+                      - gridcell [ref=f8e1583]:
+                        - textbox "Publisher Microsoft" [ref=f8e1584]
+                      - gridcell [ref=f8e1585]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1586]
+                      - gridcell [ref=f8e1587]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1588]:
+                          - checkbox [checked] [disabled] [ref=f8e1589]
+                      - gridcell [ref=f8e1590]:
+                        - textbox "Source" [ref=f8e1591]
+                      - gridcell [ref=f8e1592]:
+                        - textbox "Published As Global" [ref=f8e1593]
+                      - gridcell [ref=f8e1594]:
+                        - paragraph [ref=f8e1595]
+                    - row [ref=f8e1596]:
+                      - gridcell [ref=f8e1597]:
+                        - button "Name, sorted in Ascending order Company Hub" [ref=f8e1598] [cursor=pointer]: Company Hub
+                      - gridcell [ref=f8e1599]:
+                        - button "Show more options" [ref=f8e1600] [cursor=pointer]
+                      - gridcell [ref=f8e1601]:
+                        - textbox "Publisher Microsoft" [ref=f8e1602]
+                      - gridcell [ref=f8e1603]:
+                        - textbox "Version 28.4.53241.53312" [ref=f8e1604]
+                      - gridcell [ref=f8e1605]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1606]:
+                          - checkbox [checked] [disabled] [ref=f8e1607]
+                      - gridcell [ref=f8e1608]:
+                        - textbox "Source" [ref=f8e1609]
+                      - gridcell [ref=f8e1610]:
+                        - textbox "Published As Global" [ref=f8e1611]
+                      - gridcell [ref=f8e1612]:
+                        - paragraph [ref=f8e1613]
+                    - row [ref=f8e1614]:
+                      - gridcell [ref=f8e1615]:
+                        - button "Name, sorted in Ascending order Continia Approvals" [ref=f8e1616] [cursor=pointer]: Continia Approvals
+                      - gridcell [ref=f8e1617]:
+                        - button "Show more options" [ref=f8e1618] [cursor=pointer]
+                      - gridcell [ref=f8e1619]:
+                        - textbox "Publisher Continia Software" [ref=f8e1620]
+                      - gridcell [ref=f8e1621]:
+                        - textbox "Version 28.0.0.218332" [ref=f8e1622]
+                      - gridcell [ref=f8e1623]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1624]:
+                          - checkbox [checked] [disabled] [ref=f8e1625]
+                      - gridcell [ref=f8e1626]:
+                        - textbox "Source" [ref=f8e1627]
+                      - gridcell [ref=f8e1628]:
+                        - textbox "Published As Global" [ref=f8e1629]
+                      - gridcell [ref=f8e1630]:
+                        - paragraph [ref=f8e1631]
+                    - row [ref=f8e1632]:
+                      - gridcell [ref=f8e1633]:
+                        - button "Name, sorted in Ascending order Continia Business Foundation" [ref=f8e1634] [cursor=pointer]: Continia Business Foundation
+                      - gridcell [ref=f8e1635]:
+                        - button "Show more options" [ref=f8e1636] [cursor=pointer]
+                      - gridcell [ref=f8e1637]:
+                        - textbox "Publisher Continia Software" [ref=f8e1638]
+                      - gridcell [ref=f8e1639]:
+                        - textbox "Version 28.0.0.218332" [ref=f8e1640]
+                      - gridcell [ref=f8e1641]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1642]:
+                          - checkbox [checked] [disabled] [ref=f8e1643]
+                      - gridcell [ref=f8e1644]:
+                        - textbox "Source" [ref=f8e1645]
+                      - gridcell [ref=f8e1646]:
+                        - textbox "Published As Global" [ref=f8e1647]
+                      - gridcell [ref=f8e1648]:
+                        - paragraph [ref=f8e1649]
+                    - row [ref=f8e1650]:
+                      - gridcell [ref=f8e1651]:
+                        - button "Name, sorted in Ascending order Continia Connector App" [ref=f8e1652] [cursor=pointer]: Continia Connector App
+                      - gridcell [ref=f8e1653]:
+                        - button "Show more options" [ref=f8e1654] [cursor=pointer]
+                      - gridcell [ref=f8e1655]:
+                        - textbox "Publisher Continia Software" [ref=f8e1656]
+                      - gridcell [ref=f8e1657]:
+                        - textbox "Version 28.0.0.218332" [ref=f8e1658]
+                      - gridcell [ref=f8e1659]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1660]:
+                          - checkbox [checked] [disabled] [ref=f8e1661]
+                      - gridcell [ref=f8e1662]:
+                        - textbox "Source" [ref=f8e1663]
+                      - gridcell [ref=f8e1664]:
+                        - textbox "Published As Global" [ref=f8e1665]
+                      - gridcell [ref=f8e1666]:
+                        - paragraph [ref=f8e1667]
+                    - row [ref=f8e1668]:
+                      - gridcell [ref=f8e1669]:
+                        - button "Name, sorted in Ascending order Continia Core" [ref=f8e1670] [cursor=pointer]: Continia Core
+                      - gridcell [ref=f8e1671]:
+                        - button "Show more options" [ref=f8e1672] [cursor=pointer]
+                      - gridcell [ref=f8e1673]:
+                        - textbox "Publisher Continia Software" [ref=f8e1674]
+                      - gridcell [ref=f8e1675]:
+                        - textbox "Version 28.0.0.232363" [ref=f8e1676]
+                      - gridcell [ref=f8e1677]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1678]:
+                          - checkbox [checked] [disabled] [ref=f8e1679]
+                      - gridcell [ref=f8e1680]:
+                        - textbox "Source" [ref=f8e1681]
+                      - gridcell [ref=f8e1682]:
+                        - textbox "Published As Global" [ref=f8e1683]
+                      - gridcell [ref=f8e1684]:
+                        - paragraph [ref=f8e1685]
+                    - row [ref=f8e1686]:
+                      - gridcell [ref=f8e1687]:
+                        - button "Name, sorted in Ascending order Continia Delivery Network" [ref=f8e1688] [cursor=pointer]: Continia Delivery Network
+                      - gridcell [ref=f8e1689]:
+                        - button "Show more options" [ref=f8e1690] [cursor=pointer]
+                      - gridcell [ref=f8e1691]:
+                        - textbox "Publisher Continia Software" [ref=f8e1692]
+                      - gridcell [ref=f8e1693]:
+                        - textbox "Version 28.0.0.212568" [ref=f8e1694]
+                      - gridcell [ref=f8e1695]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1696]:
+                          - checkbox [checked] [disabled] [ref=f8e1697]
+                      - gridcell [ref=f8e1698]:
+                        - textbox "Source" [ref=f8e1699]
+                      - gridcell [ref=f8e1700]:
+                        - textbox "Published As Global" [ref=f8e1701]
+                      - gridcell [ref=f8e1702]:
+                        - paragraph [ref=f8e1703]
+                    - row [ref=f8e1704]:
+                      - gridcell [ref=f8e1705]:
+                        - button "Name, sorted in Ascending order Continia Document Capture" [ref=f8e1706] [cursor=pointer]: Continia Document Capture
+                      - gridcell [ref=f8e1707]:
+                        - button "Show more options" [ref=f8e1708] [cursor=pointer]
+                      - gridcell [ref=f8e1709]:
+                        - textbox "Publisher Continia Software" [ref=f8e1710]
+                      - gridcell [ref=f8e1711]:
+                        - textbox "Version 28.0.1.233955" [ref=f8e1712]
+                      - gridcell [ref=f8e1713]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1714]:
+                          - checkbox [checked] [disabled] [ref=f8e1715]
+                      - gridcell [ref=f8e1716]:
+                        - textbox "Source" [ref=f8e1717]
+                      - gridcell [ref=f8e1718]:
+                        - textbox "Published As Global" [ref=f8e1719]
+                      - gridcell [ref=f8e1720]:
+                        - paragraph [ref=f8e1721]
+                    - row [ref=f8e1722]:
+                      - gridcell [ref=f8e1723]:
+                        - button "Name, sorted in Ascending order Continia Document Output" [ref=f8e1724] [cursor=pointer]: Continia Document Output
+                      - gridcell [ref=f8e1725]:
+                        - button "Show more options" [ref=f8e1726] [cursor=pointer]
+                      - gridcell [ref=f8e1727]:
+                        - textbox "Publisher Continia Software" [ref=f8e1728]
+                      - gridcell [ref=f8e1729]:
+                        - textbox "Version 28.0.1.233473" [ref=f8e1730]
+                      - gridcell [ref=f8e1731]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1732]:
+                          - checkbox [checked] [disabled] [ref=f8e1733]
+                      - gridcell [ref=f8e1734]:
+                        - textbox "Source" [ref=f8e1735]
+                      - gridcell [ref=f8e1736]:
+                        - textbox "Published As Global" [ref=f8e1737]
+                      - gridcell [ref=f8e1738]:
+                        - paragraph [ref=f8e1739]
+                    - row [ref=f8e1740]:
+                      - gridcell [ref=f8e1741]:
+                        - button "Name, sorted in Ascending order Continia Expense Management" [ref=f8e1742] [cursor=pointer]: Continia Expense Management
+                      - gridcell [ref=f8e1743]:
+                        - button "Show more options" [ref=f8e1744] [cursor=pointer]
+                      - gridcell [ref=f8e1745]:
+                        - textbox "Publisher Continia Software" [ref=f8e1746]
+                      - gridcell [ref=f8e1747]:
+                        - textbox "Version 28.0.2.234530" [ref=f8e1748]
+                      - gridcell [ref=f8e1749]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1750]:
+                          - checkbox [checked] [disabled] [ref=f8e1751]
+                      - gridcell [ref=f8e1752]:
+                        - textbox "Source" [ref=f8e1753]
+                      - gridcell [ref=f8e1754]:
+                        - textbox "Published As Global" [ref=f8e1755]
+                      - gridcell [ref=f8e1756]:
+                        - paragraph [ref=f8e1757]
+                    - row [ref=f8e1758]:
+                      - gridcell [ref=f8e1759]:
+                        - button "Name, sorted in Ascending order Continia Online Connector" [ref=f8e1760] [cursor=pointer]: Continia Online Connector
+                      - gridcell [ref=f8e1761]:
+                        - button "Show more options" [ref=f8e1762] [cursor=pointer]
+                      - gridcell [ref=f8e1763]:
+                        - textbox "Publisher Continia Software" [ref=f8e1764]
+                      - gridcell [ref=f8e1765]:
+                        - textbox "Version 28.0.0.218332" [ref=f8e1766]
+                      - gridcell [ref=f8e1767]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1768]:
+                          - checkbox [checked] [disabled] [ref=f8e1769]
+                      - gridcell [ref=f8e1770]:
+                        - textbox "Source" [ref=f8e1771]
+                      - gridcell [ref=f8e1772]:
+                        - textbox "Published As Global" [ref=f8e1773]
+                      - gridcell [ref=f8e1774]:
+                        - paragraph [ref=f8e1775]
+                    - row [ref=f8e1776]:
+                      - gridcell [ref=f8e1777]:
+                        - button "Name, sorted in Ascending order Continia OPplus" [ref=f8e1778] [cursor=pointer]: Continia OPplus
+                      - gridcell [ref=f8e1779]:
+                        - button "Show more options" [ref=f8e1780] [cursor=pointer]
+                      - gridcell [ref=f8e1781]:
+                        - textbox "Publisher Continia Software" [ref=f8e1782]
+                      - gridcell [ref=f8e1783]:
+                        - textbox "Version 28.0.0.211416" [ref=f8e1784]
+                      - gridcell [ref=f8e1785]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1786]:
+                          - checkbox [checked] [disabled] [ref=f8e1787]
+                      - gridcell [ref=f8e1788]:
+                        - textbox "Source" [ref=f8e1789]
+                      - gridcell [ref=f8e1790]:
+                        - textbox "Published As Global" [ref=f8e1791]
+                      - gridcell [ref=f8e1792]:
+                        - paragraph [ref=f8e1793]
+                    - row [ref=f8e1794]:
+                      - gridcell [ref=f8e1795]:
+                        - button "Name, sorted in Ascending order Continia OPplus Trial Balance and VAT DACH" [ref=f8e1796] [cursor=pointer]: Continia OPplus Trial Balance and VAT DACH
+                      - gridcell [ref=f8e1797]:
+                        - button "Show more options" [ref=f8e1798] [cursor=pointer]
+                      - gridcell [ref=f8e1799]:
+                        - textbox "Publisher Continia Software" [ref=f8e1800]
+                      - gridcell [ref=f8e1801]:
+                        - textbox "Version 27.0.0.224270" [ref=f8e1802]
+                      - gridcell [ref=f8e1803]:
+                        - checkbox "Is Installed (Blank)" [checked] [ref=f8e1804]:
+                          - checkbox [checked] [disabled] [ref=f8e1805]
+                      - gridcell [ref=f8e1806]:
+                        - textbox "Source" [ref=f8e1807]
+                      - gridcell [ref=f8e1808]:
+                        - textbox "Published As Global" [ref=f8e1809]
+                      - gridcell [ref=f8e1810]:
+                        - paragraph [ref=f8e1811]
+        - generic:
+          - form "GAEB Files":
+            - main:
+              - generic [ref=f8e1966]:
+                - generic [ref=f8e1969]:
+                  - button "Back" [ref=f8e1972] [cursor=pointer]:
+                    - generic [ref=f8e1973]: 
+                  - generic [ref=f8e1975]:
+                    - heading "GAEB Files" [level=1] [ref=f8e1976]
+                    - generic [ref=f8e1981]:
+                      - button "Not bookmarked" [ref=f8e1984] [cursor=pointer]:
+                        - generic [ref=f8e1985]: 
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f8e1989] [cursor=pointer]:
+                        - generic [ref=f8e1990]: 
+                      - button "Toggle wide layout" [ref=f8e1994] [cursor=pointer]:
+                        - generic [ref=f8e1995]: 
+                - menubar [ref=f8e2007]:
+                  - generic [ref=f8e2008]:
+                    - menuitem "Here's what Copilot can do on this page" [ref=f8e2015] [cursor=pointer]:
+                      - generic [ref=f8e2016]: 
+                    - menuitem [ref=f8e2025] [cursor=pointer]:
+                      - generic [ref=f8e2026]:
+                        - generic [ref=f8e2027]: 
+                        - searchbox "Search GAEB Files"
+                  - generic [ref=f8e2029]:
+                    - menuitem "Enter analysis mode" [ref=f8e3645] [cursor=pointer]
+                    - generic [ref=f8e2049]:
+                      - generic [ref=f8e2053]:
+                        - menuitem "Manage" [ref=f8e3650] [cursor=pointer]
+                        - menuitem "Import" [ref=f8e3654] [cursor=pointer]
+                        - menuitem "Retry Import" [disabled] [ref=f8e3661]
+                        - menuitem "Cancel Import" [disabled] [ref=f8e3668]
+                        - menuitem "Refresh" [ref=f8e3675] [cursor=pointer]
+                        - menuitem "Show Coverage Gaps" [ref=f8e3682] [cursor=pointer]
+                        - menuitem "Show the rest" [ref=f8e3689] [cursor=pointer]:
+                          - generic [ref=f8e3690]: 
+                      - generic [ref=f8e2123]:
+                        - menuitem "Share" [ref=f8e2126] [cursor=pointer]:
+                          - generic [ref=f8e2127]: 
+                        - menuitemcheckbox "Toggle filter" [ref=f8e2131] [cursor=pointer]:
+                          - generic [ref=f8e2132]: 
+                        - menuitem "List layout selected" [ref=f8e2135] [cursor=pointer]
+                - grid "GOXGAE GAEB Files" [ref=f8e2146]:
+                  - rowgroup [ref=f8e2148]:
+                    - row [ref=f8e2149]:
+                      - columnheader [ref=f8e2150]:
+                        - generic [ref=f8e2151]:
+                          - button "Source Document No., sorted in Descending order" [ref=f8e2152] [cursor=pointer]: Source Document No.
+                          - img "Descending" [ref=f8e2154]
+                        - button "Open menu for Source Document No." [ref=f8e2155] [cursor=pointer]
+                        - button [ref=f8e2156]
+                      - columnheader "More Options" [ref=f8e2159]
+                      - columnheader [ref=f8e2161]:
+                        - button "File Name" [ref=f8e2163] [cursor=pointer]
+                        - button "Open menu for File Name" [ref=f8e2164] [cursor=pointer]
+                        - button [ref=f8e2165]
+                      - columnheader [ref=f8e2168]:
+                        - button "Project Name" [ref=f8e2170] [cursor=pointer]
+                        - button "Open menu for Project Name" [ref=f8e2171] [cursor=pointer]
+                        - button [ref=f8e2172]
+                      - columnheader [ref=f8e2175]:
+                        - button "GAEB Project ID" [ref=f8e2177] [cursor=pointer]
+                        - button "Open menu for GAEB Project ID" [ref=f8e2178] [cursor=pointer]
+                        - button [ref=f8e2179]
+                      - columnheader [ref=f8e2182]:
+                        - button "Exchange Phase" [ref=f8e2184] [cursor=pointer]
+                        - button "Open menu for Exchange Phase" [ref=f8e2185] [cursor=pointer]
+                        - button [ref=f8e2186]
+                      - columnheader [ref=f8e2189]:
+                        - button "Created At" [ref=f8e2191] [cursor=pointer]
+                        - button "Open menu for Created At" [ref=f8e2192] [cursor=pointer]
+                        - button [ref=f8e2193]
+                      - columnheader [ref=f8e2196]:
+                        - button "Source Size" [ref=f8e2198] [cursor=pointer]
+                        - button "Open menu for Source Size" [ref=f8e2199] [cursor=pointer]
+                        - button [ref=f8e2200]
+                      - columnheader [ref=f8e2203]:
+                        - button "Entry Count" [ref=f8e2205] [cursor=pointer]
+                        - button "Open menu for Entry Count" [ref=f8e2206] [cursor=pointer]
+                        - button [ref=f8e2207]
+                      - columnheader [ref=f8e2210]:
+                        - button "Import State" [ref=f8e2212] [cursor=pointer]
+                        - button "Open menu for Import State" [ref=f8e2213] [cursor=pointer]
+                        - button [ref=f8e2214]
+                      - columnheader [ref=f8e2217]:
+                        - button "Import Stage" [ref=f8e2219] [cursor=pointer]
+                        - button "Open menu for Import Stage" [ref=f8e2220] [cursor=pointer]
+                        - button [ref=f8e2221]
+                      - columnheader [ref=f8e2224]:
+                        - button "Import Progress %" [ref=f8e2226] [cursor=pointer]
+                        - button "Open menu for Import Progress %" [ref=f8e2227] [cursor=pointer]
+                        - button [ref=f8e2228]
+                      - columnheader [ref=f8e2231]:
+                        - button "Failure Reason" [ref=f8e2233] [cursor=pointer]
+                        - button "Open menu for Failure Reason" [ref=f8e2234] [cursor=pointer]
+                        - button [ref=f8e2235]
+                      - columnheader [ref=f8e2238]:
+                        - button "Population Status" [ref=f8e2240] [cursor=pointer]
+                        - button "Open menu for Population Status" [ref=f8e2241] [cursor=pointer]
+                        - button [ref=f8e2242]
+                      - columnheader [ref=f8e2245]:
+                        - button "Unconverted Value Count" [ref=f8e2247] [cursor=pointer]
+                        - button "Open menu for Unconverted Value Count" [ref=f8e2248] [cursor=pointer]
+                        - button [ref=f8e2249]
+                  - generic [ref=f8e2252]:
+                    - rowgroup [ref=f8e2253]:
+                      - row [ref=f8e2254]:
+                        - columnheader [ref=f8e2255]
+                        - columnheader [ref=f8e2256]
+                        - columnheader [ref=f8e2258]
+                        - columnheader [ref=f8e2259]
+                        - columnheader [ref=f8e2260]
+                        - columnheader [ref=f8e2261]
+                        - columnheader [ref=f8e2262]
+                        - columnheader [ref=f8e2263]
+                        - columnheader [ref=f8e2264]
+                        - columnheader [ref=f8e2265]
+                        - columnheader [ref=f8e2266]
+                        - columnheader [ref=f8e2267]
+                        - columnheader [ref=f8e2268]
+                        - columnheader [ref=f8e2269]
+                        - columnheader [ref=f8e2270]
+                    - row [selected] [ref=f8e2271]:
+                      - gridcell [ref=f8e2272]:
+                        - button "Source Document No., sorted in Descending order GAEB0134" [ref=f8e2273] [cursor=pointer]: GAEB0134
+                      - gridcell [ref=f8e2274]:
+                        - button "Show more options" [ref=f8e2275] [cursor=pointer]
+                      - gridcell [ref=f8e2276]:
+                        - textbox "File Name" [ref=f8e2277]
+                      - gridcell [ref=f8e2278]:
+                        - textbox "Project Name" [ref=f8e2279]
+                      - gridcell [ref=f8e2280]:
+                        - textbox "GAEB Project ID" [ref=f8e2281]
+                      - gridcell [ref=f8e2282]:
+                        - textbox "Exchange Phase" [ref=f8e2283]
+                      - gridcell [ref=f8e2284]:
+                        - textbox "Created At" [ref=f8e2285]
+                      - gridcell [ref=f8e2286]:
+                        - textbox "Source Size" [ref=f8e2287]
+                      - gridcell [ref=f8e2288]:
+                        - textbox "Entry Count" [ref=f8e2289]
+                      - gridcell [ref=f8e2290]:
+                        - textbox "Import State" [ref=f8e2291]
+                      - gridcell [ref=f8e2292]:
+                        - textbox "Import Stage" [ref=f8e2293]
+                      - gridcell [ref=f8e2294]:
+                        - textbox "Import Progress %" [ref=f8e2295]
+                      - gridcell [ref=f8e2296]:
+                        - textbox "Failure Reason (Blank)" [ref=f8e2297]
+                      - gridcell [ref=f8e2298]:
+                        - textbox "Population Status" [ref=f8e2299]
+                      - gridcell [ref=f8e2300]:
+                        - textbox "Unconverted Value Count" [ref=f8e2301]
+                    - row [ref=f8e2302]:
+                      - gridcell [ref=f8e2303]:
+                        - button "Source Document No., sorted in Descending order GAEB0133" [ref=f8e2304] [cursor=pointer]: GAEB0133
+                      - gridcell [ref=f8e2305]:
+                        - button "Show more options" [ref=f8e2306] [cursor=pointer]
+                      - gridcell [ref=f8e2307]:
+                        - textbox "File Name 017-prjid-X83_Bonner_Wasserwerk.X83" [ref=f8e2308]
+                      - gridcell [ref=f8e2309]:
+                        - textbox "Project Name Bonner Wasserwerk" [ref=f8e2310]
+                      - gridcell [ref=f8e2311]:
+                        - textbox "GAEB Project ID 4F2C1A9B7D3E48F0A1B2C3D4E5F60717" [ref=f8e2312]
+                      - gridcell [ref=f8e2313]:
+                        - textbox "Exchange Phase 83" [ref=f8e2314]
+                      - gridcell [ref=f8e2315]:
+                        - textbox "Created At 22.08.2026 10:24" [ref=f8e2316]
+                      - gridcell [ref=f8e2317]:
+                        - textbox "Source Size 19721" [ref=f8e2318]
+                      - gridcell [ref=f8e2319]:
+                        - textbox "Entry Count 700" [ref=f8e2320]
+                      - gridcell [ref=f8e2321]:
+                        - textbox "Import State Completed" [ref=f8e2322]
+                      - gridcell [ref=f8e2323]:
+                        - textbox "Import Stage" [ref=f8e2324]
+                      - gridcell [ref=f8e2325]:
+                        - textbox "Import Progress % 100" [ref=f8e2326]
+                      - gridcell [ref=f8e2327]:
+                        - textbox "Failure Reason (Blank)" [ref=f8e2328]
+                      - gridcell [ref=f8e2329]:
+                        - textbox "Population Status Populated" [ref=f8e2330]
+                      - gridcell [ref=f8e2331]:
+                        - textbox "Unconverted Value Count 0" [ref=f8e2332]
+                    - row [ref=f8e2333]:
+                      - gridcell [ref=f8e2334]:
+                        - button "Source Document No., sorted in Descending order GAEB0132" [ref=f8e2335] [cursor=pointer]: GAEB0132
+                      - gridcell [ref=f8e2336]:
+                        - button "Show more options" [ref=f8e2337] [cursor=pointer]
+                      - gridcell [ref=f8e2338]:
+                        - textbox "File Name EInfra-Zolldirektion_LV-7.53.11 PV-Anlagen inkl. Carport.X83" [ref=f8e2339]
+                      - gridcell [ref=f8e2340]:
+                        - textbox "Project Name 2300037764-TJEF" [ref=f8e2341]
+                      - gridcell [ref=f8e2342]:
+                        - textbox "GAEB Project ID 325B154BE89F45AC8C6CACF4879D759E" [ref=f8e2343]
+                      - gridcell [ref=f8e2344]:
+                        - textbox "Exchange Phase 83" [ref=f8e2345]
+                      - gridcell [ref=f8e2346]:
+                        - textbox "Created At 22.08.2026 10:24" [ref=f8e2347]
+                      - gridcell [ref=f8e2348]:
+                        - textbox "Source Size 2449544" [ref=f8e2349]
+                      - gridcell [ref=f8e2350]:
+                        - textbox "Entry Count 22983" [ref=f8e2351]
+                      - gridcell [ref=f8e2352]:
+                        - textbox "Import State Completed" [ref=f8e2353]
+                      - gridcell [ref=f8e2354]:
+                        - textbox "Import Stage" [ref=f8e2355]
+                      - gridcell [ref=f8e2356]:
+                        - textbox "Import Progress % 100" [ref=f8e2357]
+                      - gridcell [ref=f8e2358]:
+                        - textbox "Failure Reason (Blank)" [ref=f8e2359]
+                      - gridcell [ref=f8e2360]:
+                        - textbox "Population Status Populated" [ref=f8e2361]
+                      - gridcell [ref=f8e2362]:
+                        - textbox "Unconverted Value Count 0" [ref=f8e2363]
+                    - row [ref=f8e2364]:
+                      - gridcell [ref=f8e2365]:
+                        - button "Source Document No., sorted in Descending order GAEB0131" [ref=f8e2366] [cursor=pointer]: GAEB0131
+                      - gridcell [ref=f8e2367]:
+                        - button "Show more options" [ref=f8e2368] [cursor=pointer]
+                      - gridcell [ref=f8e2369]:
+                        - textbox "File Name EInfra-Infineon_230616_J136_KG440_450_LV-unverpreist.X83" [ref=f8e2370]
+                      - gridcell [ref=f8e2371]:
+                        - textbox "Project Name 2221024" [ref=f8e2372]
+                      - gridcell [ref=f8e2373]:
+                        - textbox "GAEB Project ID D92A4629194143659B114C973795D99E" [ref=f8e2374]
+                      - gridcell [ref=f8e2375]:
+                        - textbox "Exchange Phase 83" [ref=f8e2376]
+                      - gridcell [ref=f8e2377]:
+                        - textbox "Created At 22.08.2026 10:21" [ref=f8e2378]
+                      - gridcell [ref=f8e2379]:
+                        - textbox "Source Size 995674" [ref=f8e2380]
+                      - gridcell [ref=f8e2381]:
+                        - textbox "Entry Count 32744" [ref=f8e2382]
+                      - gridcell [ref=f8e2383]:
+                        - textbox "Import State Completed" [ref=f8e2384]
+                      - gridcell [ref=f8e2385]:
+                        - textbox "Import Stage" [ref=f8e2386]
+                      - gridcell [ref=f8e2387]:
+                        - textbox "Import Progress % 100" [ref=f8e2388]
+                      - gridcell [ref=f8e2389]:
+                        - textbox "Failure Reason (Blank)" [ref=f8e2390]
+                      - gridcell [ref=f8e2391]:
+                        - textbox "Population Status Populated" [ref=f8e2392]
+                      - gridcell [ref=f8e2393]:
+                        - textbox "Unconverted Value Count 0" [ref=f8e2394]
+                    - row [ref=f8e2395]:
+                      - gridcell [ref=f8e2396]:
+                        - button "Source Document No., sorted in Descending order GAEB0128" [ref=f8e2397] [cursor=pointer]: GAEB0128
+                      - gridcell [ref=f8e2398]:
+                        - button "Show more options" [ref=f8e2399] [cursor=pointer]
+                      - gridcell [ref=f8e2400]:
+                        - textbox "File Name Pruefdatei GAEB DA XML 3.3 - Bauausfuehrung - V 04 04 2024.x83" [ref=f8e2401]
+                      - gridcell [ref=f8e2402]:
+                        - textbox "Project Name BVBS GAEB Muster" [ref=f8e2403]
+                      - gridcell [ref=f8e2404]:
+                        - textbox "GAEB Project ID 5AD845D80A0546FBAFA14110EC00F3EC" [ref=f8e2405]
+                      - gridcell [ref=f8e2406]:
+                        - textbox "Exchange Phase 83" [ref=f8e2407]
+                      - gridcell [ref=f8e2408]:
+                        - textbox "Created At 22.08.2026 09:44" [ref=f8e2409]
+                      - gridcell [ref=f8e2410]:
+                        - textbox "Source Size 101515" [ref=f8e2411]
+                      - gridcell [ref=f8e2412]:
+                        - textbox "Entry Count 1362" [ref=f8e2413]
+                      - gridcell [ref=f8e2414]:
+                        - textbox "Import State Completed" [ref=f8e2415]
+                      - gridcell [ref=f8e2416]:
+                        - textbox "Import Stage" [ref=f8e2417]
+                      - gridcell [ref=f8e2418]:
+                        - textbox "Import Progress % 100" [ref=f8e2419]
+                      - gridcell [ref=f8e2420]:
+                        - textbox "Failure Reason (Blank)" [ref=f8e2421]
+                      - gridcell [ref=f8e2422]:
+                        - textbox "Population Status Populated" [ref=f8e2423]
+                      - gridcell [ref=f8e2424]:
+                        - textbox "Unconverted Value Count 0" [ref=f8e2425]
+                    - row [ref=f8e2426]:
+                      - gridcell [ref=f8e2427]:
+                        - button "Source Document No., sorted in Descending order GAEB0127" [ref=f8e2428] [cursor=pointer]: GAEB0127
+                      - gridcell [ref=f8e2429]:
+                        - button "Show more options" [ref=f8e2430] [cursor=pointer]
+                      - gridcell [ref=f8e2431]:
+                        - textbox "File Name gaeb.x83" [ref=f8e2432]
+                      - gridcell [ref=f8e2433]:
+                        - textbox "Project Name Beispielprojekt" [ref=f8e2434]
+                      - gridcell [ref=f8e2435]:
+                        - textbox "GAEB Project ID 3E8D929551C948D6AEA24775954C8181" [ref=f8e2436]
+                      - gridcell [ref=f8e2437]:
+                        - textbox "Exchange Phase 83" [ref=f8e2438]
+                      - gridcell [ref=f8e2439]:
+                        - textbox "Created At 22.08.2026 09:43" [ref=f8e2440]
+                      - gridcell [ref=f8e2441]:
+                        - textbox "Source Size 54129" [ref=f8e2442]
+                      - gridcell [ref=f8e2443]:
+                        - textbox "Entry Count 1363" [ref=f8e2444]
+                      - gridcell [ref=f8e2445]:
+                        - textbox "Import State Completed" [ref=f8e2446]
+                      - gridcell [ref=f8e2447]:
+                        - textbox "Import Stage" [ref=f8e2448]
+                      - gridcell [ref=f8e2449]:
+                        - textbox "Import Progress % 100" [ref=f8e2450]
+                      - gridcell [ref=f8e2451]:
+                        - textbox "Failure Reason (Blank)" [ref=f8e2452]
+                      - gridcell [ref=f8e2453]:
+                        - textbox "Population Status Populated" [ref=f8e2454]
+                      - gridcell [ref=f8e2455]:
+                        - textbox "Unconverted Value Count 0" [ref=f8e2456]
+        - generic:
+          - form "GAEB File":
+            - main:
+              - generic:
+                - button "Go to the previous document of the same type":
+                  - generic: 
+              - generic [ref=f8e3696]:
+                - generic [ref=f8e3699]:
+                  - button "Back" [ref=f8e3702] [cursor=pointer]:
+                    - generic [ref=f8e3703]: 
+                  - generic [ref=f8e3705]:
+                    - heading "GAEB File" [level=1] [ref=f8e3706]
+                    - generic [ref=f8e3711]:
+                      - button "Make changes on the page" [disabled] [ref=f8e3712]:
+                        - generic [ref=f8e3713]: 
+                      - button "Share this page with other users or apps" [ref=f8e3715] [cursor=pointer]:
+                        - generic [ref=f8e3716]: 
+                      - button "Create a new entry." [disabled] [ref=f8e3718]:
+                        - generic [ref=f8e3719]: 
+                      - button "Delete the information" [disabled] [ref=f8e3721]:
+                        - generic [ref=f8e3722]: 
+                    - generic [ref=f8e3724]:
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f8e3727] [cursor=pointer]:
+                        - generic [ref=f8e3728]: 
+                      - button "Toggle wide layout" [ref=f8e3732] [cursor=pointer]:
+                        - generic [ref=f8e3733]: 
+                    - heading "GAEB0131" [level=2] [ref=f8e4293]
+                - menubar [ref=f8e3746]:
+                  - generic [ref=f8e3756]:
+                    - generic [ref=f8e3760]:
+                      - menuitem "Show Project and Award Texts" [ref=f8e4309] [cursor=pointer]
+                      - menuitem "Show Coverage Gaps" [ref=f8e4316] [cursor=pointer]
+                      - menuitem "Populate Typed Data" [ref=f8e4323] [cursor=pointer]
+                      - menuitem "GAEB Schema" [ref=f8e4330] [cursor=pointer]
+                      - menuitem "GAEB Source Entries" [ref=f8e4337] [cursor=pointer]
+                      - menuitem "Download Source XML" [ref=f8e4344] [cursor=pointer]
+                      - menuitem "Show the rest" [ref=f8e4351] [cursor=pointer]:
+                        - generic [ref=f8e4352]: 
+                    - menuitemcheckbox "Toggle FactBox" [checked] [ref=f8e3836] [cursor=pointer]:
+                      - generic [ref=f8e3837]: 
+                - generic [ref=f8e3842]:
+                  - generic [ref=f8e3845]:
+                    - generic [ref=f8e3846]:
+                      - generic [ref=f8e3847]:
+                        - button [expanded] [ref=f8e3849] [cursor=pointer]:
+                          - heading "General" [level=3] [ref=f8e3850]
+                        - button "General, Show less" [ref=f8e3851] [cursor=pointer]: Show less
+                      - generic [ref=f8e3854]:
+                        - generic [ref=f8e3855]:
+                          - button "Source Document No." [ref=f8e3856] [cursor=pointer]
+                          - textbox "Source Document No. GAEB0131" [ref=f8e4294]
+                        - generic [ref=f8e3859]:
+                          - button "File Name" [ref=f8e3860] [cursor=pointer]
+                          - textbox "File Name EInfra-Infineon_230616_J136_KG440_450_LV-unverpreist.X83" [ref=f8e4295]
+                        - generic [ref=f8e3863]:
+                          - button "Created At" [ref=f8e3864] [cursor=pointer]
+                          - textbox "Created At 22.08.2026 10:21" [ref=f8e4296]
+                        - generic [ref=f8e3867]:
+                          - button "Source Size" [ref=f8e3868] [cursor=pointer]
+                          - textbox "Source Size 995674" [ref=f8e4297]
+                        - generic [ref=f8e3871]:
+                          - button "Entry Count" [ref=f8e3872] [cursor=pointer]
+                          - textbox "Entry Count 32744" [ref=f8e4298]
+                        - generic [ref=f8e3875]:
+                          - button "Exchange Phase" [ref=f8e3876] [cursor=pointer]
+                          - textbox "Exchange Phase 83" [ref=f8e3878]
+                        - generic [ref=f8e3879]:
+                          - button "Project Name" [ref=f8e3880] [cursor=pointer]
+                          - textbox "Project Name 2221024" [ref=f8e4299]
+                        - generic [ref=f8e3883]:
+                          - button "GAEB Project ID" [ref=f8e3884] [cursor=pointer]
+                          - textbox "GAEB Project ID D92A4629194143659B114C973795D99E" [ref=f8e4300]
+                        - generic [ref=f8e3887]:
+                          - button "Derived From" [ref=f8e3888] [cursor=pointer]
+                          - button "Derived From (Blank)" [ref=f8e3890] [cursor=pointer]
+                        - generic [ref=f8e3891]:
+                          - button "Archived" [ref=f8e3892] [cursor=pointer]
+                          - checkbox "Archived" [disabled] [ref=f8e3894]
+                        - generic [ref=f8e3896]:
+                          - button "Superseded By" [ref=f8e3897] [cursor=pointer]
+                          - button "Superseded By (Blank)" [ref=f8e3899] [cursor=pointer]
+                        - generic [ref=f8e3900]:
+                          - button "Correlation ID" [ref=f8e3901] [cursor=pointer]
+                          - 'textbox "Correlation ID {405d1af5-34f9-4bdf-ac9d-e9d2e360a29d}" [ref=f8e4301]'
+                        - generic [ref=f8e3904]:
+                          - button "Status" [ref=f8e3905] [cursor=pointer]
+                          - textbox "Status Stored" [ref=f8e3907]
+                        - generic [ref=f8e3908]:
+                          - button "Created By" [ref=f8e3909] [cursor=pointer]
+                          - 'textbox "Created By {57a6e36d-1702-482f-98c1-67afe3bd4dce}" [ref=f8e3911]'
+                        - generic [ref=f8e3912]:
+                          - button "Source Stored At" [ref=f8e3913] [cursor=pointer]
+                          - textbox "Source Stored At 22.08.2026 10:21" [ref=f8e4302]
+                        - generic [ref=f8e3916]:
+                          - button "Project ID Backfilled" [ref=f8e3917] [cursor=pointer]
+                          - checkbox "Project ID Backfilled" [checked] [disabled] [ref=f8e3919]
+                        - generic [ref=f8e3921]:
+                          - button "Project Diagnostic" [ref=f8e3922] [cursor=pointer]
+                          - textbox "Project Diagnostic (Blank)" [ref=f8e3924]
+                    - generic [ref=f8e3925]:
+                      - generic [ref=f8e3926]:
+                        - button [expanded] [ref=f8e3928] [cursor=pointer]:
+                          - heading "Import" [level=3] [ref=f8e3929]
+                        - button "Import, Show more" [ref=f8e3930] [cursor=pointer]: Show more
+                      - generic [ref=f8e3933]:
+                        - generic [ref=f8e3934]:
+                          - button "Import State" [ref=f8e3935] [cursor=pointer]
+                          - textbox "Import State Completed" [ref=f8e3937]
+                        - generic [ref=f8e3938]:
+                          - button "Import Stage" [ref=f8e3939] [cursor=pointer]
+                          - textbox "Import Stage" [ref=f8e3941]
+                        - generic [ref=f8e3942]:
+                          - button "Import Progress %" [ref=f8e3943] [cursor=pointer]
+                          - textbox "Import Progress % 100" [ref=f8e3945]
+                        - generic [ref=f8e3946]:
+                          - button "Failure Reason" [ref=f8e3947] [cursor=pointer]
+                          - textbox "Failure Reason (Blank)" [ref=f8e3949]
+                    - generic [ref=f8e3950]:
+                      - generic [ref=f8e3951]:
+                        - button [expanded] [ref=f8e3953] [cursor=pointer]:
+                          - heading "Typed Population" [level=3] [ref=f8e3954]
+                        - button "Typed Population, Show less" [ref=f8e3955] [cursor=pointer]: Show less
+                      - generic [ref=f8e3958]:
+                        - generic [ref=f8e3959]:
+                          - button "PopulationStatus" [ref=f8e3960] [cursor=pointer]
+                          - textbox "PopulationStatus Populated" [ref=f8e3962]
+                        - generic [ref=f8e3963]:
+                          - button "PopulatedAt" [ref=f8e3964] [cursor=pointer]
+                          - textbox "PopulatedAt 22.08.2026 10:24" [ref=f8e4303]
+                        - generic [ref=f8e3967]:
+                          - button "UnconvertedValueCount" [ref=f8e3968] [cursor=pointer]
+                          - button "UnconvertedValueCount 0" [ref=f8e3970] [cursor=pointer]: "0"
+                        - generic [ref=f8e3971]:
+                          - button "UnreachedElementCount" [ref=f8e3972] [cursor=pointer]
+                          - button "UnreachedElementCount 0" [ref=f8e3974] [cursor=pointer]: "0"
+                        - generic [ref=f8e3975]:
+                          - button "PopulationDiagnosticCategory" [ref=f8e3976] [cursor=pointer]
+                          - textbox "PopulationDiagnosticCategory (Blank)" [ref=f8e3978]
+                        - generic [ref=f8e3979]:
+                          - button "PopulationDiagnosticMessage" [ref=f8e3980] [cursor=pointer]
+                          - textbox "PopulationDiagnosticMessage (Blank)" [ref=f8e3982]
+                    - generic [ref=f8e3983]:
+                      - menubar [ref=f8e3993]:
+                        - heading [level=3] [ref=f8e3998]:
+                          - button [ref=f8e3999] [cursor=pointer]: Exchange Info
+                      - heading [level=3] [ref=f8e4000]:
+                        - button "Exchange Info" [ref=f8e4002] [cursor=pointer]
+                    - generic [ref=f8e4003]:
+                      - menubar [ref=f8e4013]:
+                        - heading [level=3] [ref=f8e4018]:
+                          - button [ref=f8e4019] [cursor=pointer]: Project Info
+                      - heading [level=3] [ref=f8e4020]:
+                        - button "Project Info" [ref=f8e4022] [cursor=pointer]
+                    - generic [ref=f8e4023]:
+                      - menubar [ref=f8e4033]:
+                        - heading [level=3] [ref=f8e4038]:
+                          - button [ref=f8e4039] [cursor=pointer]: Award Info
+                      - heading [level=3] [ref=f8e4040]:
+                        - button "Award Info" [ref=f8e4042] [cursor=pointer]
+                    - generic [ref=f8e4043]:
+                      - menubar [ref=f8e4053]:
+                        - heading [level=3] [ref=f8e4058]:
+                          - button [ref=f8e4059] [cursor=pointer]: Parties and Sites
+                        - generic [ref=f8e4070]:
+                          - menuitem [ref=f8e4073] [cursor=pointer]:
+                            - generic [ref=f8e4074]: 
+                          - menuitemcheckbox [ref=f8e4078] [cursor=pointer]:
+                            - generic [ref=f8e4079]: 
+                      - heading [level=3] [ref=f8e4081]:
+                        - button "Parties and Sites" [ref=f8e4083] [cursor=pointer]
+                    - generic [ref=f8e4084]:
+                      - menubar [ref=f8e4094]:
+                        - heading [level=3] [ref=f8e4099]:
+                          - button [ref=f8e4100] [cursor=pointer]: Additional Texts
+                        - generic [ref=f8e4112]:
+                          - generic [ref=f8e4116]:
+                            - menuitem [disabled] [ref=f8e4121]:
+                              - generic [ref=f8e4122]: Show Outline Text
+                            - menuitem [disabled] [ref=f8e4132]:
+                              - generic [ref=f8e4133]: Show Detail Text
+                            - menuitem [ref=f8e4698] [cursor=pointer]:
+                              - generic [ref=f8e4699]: 
+                          - generic [ref=f8e4150]:
+                            - menuitem [ref=f8e4153] [cursor=pointer]:
+                              - generic [ref=f8e4154]: 
+                            - menuitemcheckbox [ref=f8e4158] [cursor=pointer]:
+                              - generic [ref=f8e4159]: 
+                      - heading [level=3] [ref=f8e4161]:
+                        - button "Additional Texts" [ref=f8e4163] [cursor=pointer]
+                    - generic [ref=f8e4164]:
+                      - menubar [ref=f8e4174]:
+                        - heading [level=3] [ref=f8e4179]:
+                          - button [ref=f8e4180] [cursor=pointer]: Bill of Quantities
+                        - generic [ref=f8e4192]:
+                          - generic [ref=f8e4196]:
+                            - menuitem [ref=f8e4201] [cursor=pointer]:
+                              - generic [ref=f8e4202]: Show Outline Text
+                            - menuitem [ref=f8e4212] [cursor=pointer]:
+                              - generic [ref=f8e4213]: Show Detail Text
+                            - menuitem [ref=f8e4355] [cursor=pointer]:
+                              - generic [ref=f8e4356]: 
+                          - generic [ref=f8e4236]:
+                            - menuitem [ref=f8e4239] [cursor=pointer]:
+                              - generic [ref=f8e4240]: 
+                            - menuitemcheckbox [ref=f8e4244] [cursor=pointer]:
+                              - generic [ref=f8e4245]: 
+                      - heading [level=3] [ref=f8e4247]:
+                        - button "Bill of Quantities" [ref=f8e4249] [cursor=pointer]
+                  - generic [ref=f8e4250]:
+                    - button "Resize the factbox area." [ref=f8e4251]
+                    - generic [ref=f8e4254]:
+                      - button "Show more options for the factbox pane." [ref=f8e4260] [cursor=pointer]
+                      - tabpanel [ref=f8e4265]:
+                        - generic [ref=f8e4266]:
+                          - heading "Project and Award Texts" [level=3] [ref=f8e4268]
+                          - iframe [ref=f8e4273]:
+                            
+              - generic:
+                - button "Go to the next document of the same type":
+                  - generic: 
+        - generic:
+          - form "GAEB Schema":
+            - main:
+              - generic:
+                - button "Go to the previous document of the same type":
+                  - generic: 
+              - generic [ref=f8e4362]:
+                - generic [ref=f8e4365]:
+                  - button "Back" [ref=f8e4368] [cursor=pointer]:
+                    - generic [ref=f8e4369]: 
+                  - generic [ref=f8e4371]:
+                    - heading "GAEB Schema" [level=1] [ref=f8e4372]
+                    - generic [ref=f8e4377]:
+                      - button "Make changes on the page" [disabled] [ref=f8e4378]:
+                        - generic [ref=f8e4379]: 
+                      - button "Share this page with other users or apps" [ref=f8e4381] [cursor=pointer]:
+                        - generic [ref=f8e4382]: 
+                      - button "Create a new entry." [disabled] [ref=f8e4384]:
+                        - generic [ref=f8e4385]: 
+                      - button "Delete the information" [disabled] [ref=f8e4387]:
+                        - generic [ref=f8e4388]: 
+                    - generic [ref=f8e4390]:
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f8e4393] [cursor=pointer]:
+                        - generic [ref=f8e4394]: 
+                      - button "Toggle wide layout" [ref=f8e4398] [cursor=pointer]:
+                        - generic [ref=f8e4399]: 
+                    - heading "GAEB0131" [level=2] [ref=f8e4402]
+                - menubar [ref=f8e4412]:
+                  - generic [ref=f8e4426]:
+                    - menuitem "All Typed Tables" [ref=f8e5183] [cursor=pointer]
+                    - menuitem "Text Overlays" [ref=f8e5190] [cursor=pointer]
+                    - menuitem "GAEB File Card" [ref=f8e5197] [cursor=pointer]
+                    - menuitem "GAEB Source Entries" [ref=f8e5204] [cursor=pointer]
+                    - menuitem "More options" [ref=f8e5211] [cursor=pointer]
+                - generic [ref=f8e4485]:
+                  - generic [ref=f8e4486]:
+                    - generic [ref=f8e4487]:
+                      - button [expanded] [ref=f8e4489] [cursor=pointer]:
+                        - heading "Document" [level=3] [ref=f8e4490]
+                      - button "Document, Show more" [ref=f8e4491] [cursor=pointer]: Show more
+                    - generic [ref=f8e4494]:
+                      - generic [ref=f8e4495]:
+                        - button "Source Document No." [ref=f8e4496] [cursor=pointer]
+                        - textbox "Source Document No. GAEB0131" [ref=f8e4498]
+                      - generic [ref=f8e4499]:
+                        - button "File Name" [ref=f8e4500] [cursor=pointer]
+                        - textbox "File Name EInfra-Infineon_230616_J136_KG440_450_LV-unverpreist.X83" [ref=f8e4502]
+                      - generic [ref=f8e4503]:
+                        - button "Project Name" [ref=f8e4504] [cursor=pointer]
+                        - textbox "Project Name 2221024" [ref=f8e4506]
+                      - generic [ref=f8e4507]:
+                        - button "Exchange Phase" [ref=f8e4508] [cursor=pointer]
+                        - textbox "Exchange Phase 83" [ref=f8e4510]
+                      - generic [ref=f8e4511]:
+                        - button "Population Status" [ref=f8e4512] [cursor=pointer]
+                        - textbox "Population Status Populated" [ref=f8e4514]
+                  - generic [ref=f8e4515]:
+                    - menubar [ref=f8e4525]:
+                      - heading [level=3] [ref=f8e4530]:
+                        - button "Document Constructs" [ref=f8e4531] [cursor=pointer]
+                      - generic [ref=f8e4543]:
+                        - generic [ref=f8e4547]:
+                          - menuitem "Open" [ref=f8e4552] [cursor=pointer]
+                          - menuitem "Show Empty Relations" [ref=f8e4563] [cursor=pointer]
+                        - generic [ref=f8e4570]:
+                          - menuitem "Share" [ref=f8e4573] [cursor=pointer]:
+                            - generic [ref=f8e4574]: 
+                          - menuitemcheckbox "Toggle focus mode" [ref=f8e4578] [cursor=pointer]:
+                            - generic [ref=f8e4579]: 
+                    - grid "Document Constructs" [ref=f8e4584]:
+                      - rowgroup [ref=f8e4586]:
+                        - row [ref=f8e4587]:
+                          - columnheader "Error" [ref=f8e4588]
+                          - columnheader [ref=f8e4589]:
+                            - generic [ref=f8e4590]:
+                              - button "Related Table, sorted in Ascending order" [ref=f8e4591] [cursor=pointer]: Related Table
+                              - img "Ascending" [ref=f8e4593]
+                            - button "Open menu for Related Table" [ref=f8e4594] [cursor=pointer]
+                            - button [ref=f8e4595]
+                          - columnheader "More Options" [ref=f8e4598]
+                          - columnheader [ref=f8e4600]:
+                            - button "Description" [ref=f8e4602] [cursor=pointer]
+                            - button "Open menu for Description" [ref=f8e4603] [cursor=pointer]
+                            - button [ref=f8e4604]
+                          - columnheader [ref=f8e4607]:
+                            - button "Via Elements" [ref=f8e4609] [cursor=pointer]
+                            - button "Open menu for Via Elements" [ref=f8e4610] [cursor=pointer]
+                            - button [ref=f8e4611]
+                          - columnheader [ref=f8e4614]:
+                            - button "Relation" [ref=f8e4616] [cursor=pointer]
+                            - button "Open menu for Relation" [ref=f8e4617] [cursor=pointer]
+                            - button [ref=f8e4618]
+                          - columnheader [ref=f8e4621]:
+                            - generic [ref=f8e4622]:
+                              - button "Links" [ref=f8e4623] [cursor=pointer]
+                              - img "Filtered" [ref=f8e4625]
+                            - button "Open menu for Links" [ref=f8e4626] [cursor=pointer]
+                            - button [ref=f8e4627]
+                      - generic [ref=f8e4630]:
+                        - rowgroup [ref=f8e4631]:
+                          - row [ref=f8e4632]:
+                            - columnheader [ref=f8e4633]
+                            - columnheader [ref=f8e4634]
+                            - columnheader [ref=f8e4635]
+                            - columnheader [ref=f8e4637]
+                            - columnheader [ref=f8e4638]
+                            - columnheader [ref=f8e4639]
+                            - columnheader [ref=f8e4640]
+                        - row [selected] [ref=f8e4669]:
+                          - rowheader [ref=f8e4670]
+                          - gridcell [ref=f8e4671]:
+                            - textbox "Related Table, sorted in Ascending order" [ref=f8e4672]
+                          - gridcell [ref=f8e4673]:
+                            - button "Show more options" [ref=f8e4674] [cursor=pointer]
+                          - gridcell [ref=f8e4675]:
+                            - textbox "Description" [ref=f8e4676]
+                          - gridcell [ref=f8e4677]:
+                            - textbox "Via Elements" [ref=f8e4678]
+                          - gridcell [ref=f8e4679]:
+                            - textbox "Relation" [ref=f8e4680]
+                          - gridcell [ref=f8e4681]:
+                            - button "Links 1" [ref=f8e4682] [cursor=pointer]: "1"
+                        - row [ref=f8e4655]:
+                          - rowheader [ref=f8e4656]
+                          - gridcell [ref=f8e4657]:
+                            - textbox "Related Table, sorted in Ascending order GAEB Exchange Info" [ref=f8e4658]
+                          - gridcell [ref=f8e4659]:
+                            - button "Show more options" [ref=f8e4660] [cursor=pointer]
+                          - gridcell [ref=f8e4661]:
+                            - textbox "Description ORCA AVA 24.1.3 - Enterprise Edition 24.01.03, 16.06.23" [ref=f8e4662]
+                          - gridcell [ref=f8e4663]:
+                            - textbox "Via Elements GAEBInfo" [ref=f8e4664]
+                          - gridcell [ref=f8e4665]:
+                            - textbox "Relation Single" [ref=f8e4666]
+                          - gridcell [ref=f8e4667]:
+                            - button "Links 1" [ref=f8e4668] [cursor=pointer]: "1"
+                        - row [ref=f8e5169]:
+                          - rowheader [ref=f8e5170]
+                          - gridcell [ref=f8e5171]:
+                            - textbox "Related Table, sorted in Ascending order GAEB Project Info" [ref=f8e5172]
+                          - gridcell [ref=f8e5173]:
+                            - button "Show more options" [ref=f8e5174] [cursor=pointer]
+                          - gridcell [ref=f8e5175]:
+                            - textbox "Description 2221024, D92A4629194143659B114C973795D99E" [ref=f8e5176]
+                          - gridcell [ref=f8e5177]:
+                            - textbox "Via Elements PrjInfo" [ref=f8e5178]
+                          - gridcell [ref=f8e5179]:
+                            - textbox "Relation Single" [ref=f8e5180]
+                          - gridcell [ref=f8e5181]:
+                            - button "Links 1" [ref=f8e5182] [cursor=pointer]: "1"
+              - generic:
+                - button "Go to the next document of the same type":
+                  - generic: 
+        - generic:
+          - form "GAEB Award":
+            - main:
+              - button "Go to the previous document of the same type" [ref=f8e5215] [cursor=pointer]:
+                - generic [ref=f8e5216]: 
+              - generic [ref=f8e5218]:
+                - generic [ref=f8e5221]:
+                  - button "Back" [ref=f8e5224] [cursor=pointer]:
+                    - generic [ref=f8e5225]: 
+                  - generic [ref=f8e5227]:
+                    - heading "GAEB Award" [level=1] [ref=f8e5228]
+                    - generic [ref=f8e5233]:
+                      - button "Make changes on the page" [disabled] [ref=f8e5234]:
+                        - generic [ref=f8e5235]: 
+                      - button "Share this page with other users or apps" [ref=f8e5237] [cursor=pointer]:
+                        - generic [ref=f8e5238]: 
+                      - button "Create a new entry." [disabled] [ref=f8e5240]:
+                        - generic [ref=f8e5241]: 
+                      - button "Delete the information" [disabled] [ref=f8e5243]:
+                        - generic [ref=f8e5244]: 
+                    - generic [ref=f8e5246]:
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f8e5249] [cursor=pointer]:
+                        - generic [ref=f8e5250]: 
+                      - button "Toggle wide layout" [ref=f8e5254] [cursor=pointer]:
+                        - generic [ref=f8e5255]: 
+                    - heading "83" [level=2] [ref=f8e5258]
+                - menubar [ref=f8e5268]:
+                  - generic [ref=f8e5282]:
+                    - menuitem "Parent Row" [ref=f8e5771] [cursor=pointer]
+                    - menuitem "GAEB File Card" [ref=f8e5778] [cursor=pointer]
+                    - menuitem "GAEB Schema" [ref=f8e5785] [cursor=pointer]
+                    - menuitem "GAEB Source Entry" [ref=f8e5792] [cursor=pointer]
+                    - menuitem "More options" [ref=f8e5799] [cursor=pointer]
+                - generic [ref=f8e5342]:
+                  - button [expanded] [ref=f8e5345] [cursor=pointer]:
+                    - heading "General" [level=3] [ref=f8e5346]
+                  - generic [ref=f8e5349]:
+                    - generic [ref=f8e5350]:
+                      - button "DP" [ref=f8e5351] [cursor=pointer]
+                      - textbox "DP 83" [ref=f8e5353]
+                    - generic [ref=f8e5354]:
+                      - button "Award Details" [ref=f8e5355] [cursor=pointer]
+                      - button "Award Details Award Info" [ref=f8e5357] [cursor=pointer]: Award Info
+                    - generic [ref=f8e5358]:
+                      - button "Individual Agreement Details" [ref=f8e5359] [cursor=pointer]
+                      - button "Individual Agreement Details (Blank)" [ref=f8e5361] [cursor=pointer]
+                    - generic [ref=f8e5362]:
+                      - button "Owners" [ref=f8e5363] [cursor=pointer]
+                      - button "Owners (Blank)" [ref=f8e5365] [cursor=pointer]
+                    - generic [ref=f8e5366]:
+                      - button "Requesters" [ref=f8e5367] [cursor=pointer]
+                      - button "Requesters (Blank)" [ref=f8e5369] [cursor=pointer]
+                    - generic [ref=f8e5370]:
+                      - button "Contractors" [ref=f8e5371] [cursor=pointer]
+                      - button "Contractors (Blank)" [ref=f8e5373] [cursor=pointer]
+                    - generic [ref=f8e5374]:
+                      - button "Additional Texts" [ref=f8e5375] [cursor=pointer]
+                      - button "Additional Texts (Blank)" [ref=f8e5377] [cursor=pointer]
+                    - generic [ref=f8e5378]:
+                      - button "Wage Changes" [ref=f8e5379] [cursor=pointer]
+                      - button "Wage Changes (Blank)" [ref=f8e5381] [cursor=pointer]
+                    - generic [ref=f8e5382]:
+                      - button "Construction Sites" [ref=f8e5383] [cursor=pointer]
+                      - button "Construction Sites (Blank)" [ref=f8e5385] [cursor=pointer]
+                    - generic [ref=f8e5386]:
+                      - button "Notification Sites" [ref=f8e5387] [cursor=pointer]
+                      - button "Notification Sites (Blank)" [ref=f8e5389] [cursor=pointer]
+                    - generic [ref=f8e5390]:
+                      - button "Bills of Quantities" [ref=f8e5391] [cursor=pointer]
+                      - button "Bills of Quantities id4405" [ref=f8e5393] [cursor=pointer]: id4405
+              - button "Go to the next document of the same type" [ref=f8e5395] [cursor=pointer]:
+                - generic [ref=f8e5396]: 
+      - text: Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.
+      - paragraph [ref=f8e2481]: List with title "GAEB Files" now has 6 items
+      - paragraph [ref=f8e4304]: GAEB0131. GAEB File
+      - paragraph [ref=f8e4305]: List with title "GAEB Bill of Quantities" now has 163 items
+      - paragraph [ref=f8e4306]: List with title "GAEB Parties and Sites" now has 0 items
+      - paragraph [ref=f8e4308]: List with title "GAEB Additional Texts" now has 0 items
+      - paragraph [ref=f8e4691]: GAEB0131. GAEB Schema
+      - paragraph [ref=f8e4693]: List with title "Related Rows" now has 3 items
+      - paragraph [ref=f8e5401]: 83. GAEB Award
+  - region:
+    - region
+    - region [ref=f7e78]:
+      - region [ref=f7e79]:
+        - generic [ref=f7e81]:
+          - heading "Settings" [level=2] [ref=f7e82]
+          - generic [ref=f7e84]:
+            - generic [ref=f7e86]:
+              - heading "Dynamics 365 Business Central" [level=3] [ref=f7e88]
+              - generic "Dynamics 365 Business Central" [ref=f7e89]:
+                - list [ref=f7e90]:
+                  - listitem [ref=f7e91]:
+                    - link "Personalize" [active] [ref=f7e92] [cursor=pointer]
+                  - listitem [ref=f7e93]:
+                    - link "Design" [ref=f7e94] [cursor=pointer]
+                  - listitem [ref=f7e95]:
+                    - link "My Settings" [ref=f7e96] [cursor=pointer]
+                  - listitem [ref=f7e97]:
+                    - link "Company information" [ref=f7e98] [cursor=pointer]
+                  - listitem [ref=f7e99]:
+                    - link "Assisted setup" [ref=f7e100] [cursor=pointer]
+                  - listitem [ref=f7e101]:
+                    - link "Advanced settings" [ref=f7e102] [cursor=pointer]
+                  - listitem [ref=f7e103]:
+                    - link "Feature management" [ref=f7e104] [cursor=pointer]
+                  - listitem [ref=f7e105]:
+                    - link "Page scripting (Preview)" [ref=f7e106] [cursor=pointer]
+                  - listitem [ref=f7e107]:
+                    - link "Admin Center" [ref=f7e108] [cursor=pointer]
+            - generic [ref=f7e109]:
+              - heading "Microsoft 365" [level=3] [ref=f7e111]
+              - generic "Microsoft 365" [ref=f7e112]:
+                - button "View all" [ref=f7e113] [cursor=pointer]
+        - button "Close pane" [ref=f7e114] [cursor=pointer]:
+          - generic [ref=f7e115]: 
+    - region

@@ -1,0 +1,193 @@
+- generic [ref=f1e1]:
+  - banner [ref=f1e9]:
+    - button "App launcher" [ref=f1e12] [cursor=pointer]: 
+    - generic [ref=f1e18]:
+      - generic [ref=f1e19]: Dynamics 365 Business Central
+      - generic [ref=f1e24]:
+        - 'button "ADIGO GmbH Mitte Ost, Environment: GTHU" [ref=f1e28] [cursor=pointer]':
+          - generic [ref=f1e30]:
+            - generic [ref=f1e32]:
+              - generic [ref=f1e33]: GO
+              - generic [ref=f1e34]: OST
+            - generic [ref=f1e35]:
+              - generic [ref=f1e36]: "Environment:"
+              - generic [ref=f1e37]: GTHU
+        - button "Copilot" [ref=f1e40] [cursor=pointer]:
+          - generic [ref=f1e41]: 
+        - button "Search" [ref=f1e44] [cursor=pointer]:
+          - generic [ref=f1e45]: 
+        - button "Notifications" [ref=f1e48] [cursor=pointer]:
+          - generic [ref=f1e49]: 
+        - button "Settings" [ref=f1e52] [cursor=pointer]:
+          - generic [ref=f1e53]: 
+        - button "Help" [ref=f1e56] [cursor=pointer]:
+          - generic [ref=f1e57]: 
+    - generic [ref=f1e58]:
+      - button "Account manager for Gregor Thume" [ref=f1e60] [cursor=pointer]:
+        - generic [ref=f1e61]: GT
+      - generic: 
+  - iframe [active] [ref=f1e76]:
+    - generic [ref=f2e1]:
+      - generic [ref=f2e3]:
+        - generic:
+          - form "Role Center":
+            - generic [ref=f2e5]:
+              - navigation [ref=f2e6]:
+                - generic [ref=f2e8]:
+                  - button "Skip to main content" [ref=f2e9] [cursor=pointer]
+                  - navigation "Main navigation" [ref=f2e10]:
+                    - menubar [ref=f2e19]:
+                      - generic [ref=f2e22]:
+                        - menuitem [ref=f2e362] [cursor=pointer]:
+                          - heading "ADIGO GmbH Mitte Ost" [level=1] [ref=f2e364]
+                        - menuitem "APP" [ref=f2e367] [cursor=pointer]
+                        - menuitem "All Reports" [ref=f2e372] [cursor=pointer]
+                        - menuitem "Explore all business features for my role in Business Central" [ref=f2e376] [cursor=pointer]:
+                          - generic [ref=f2e377]: 
+                        - generic [ref=f2e55]:
+                          - menuitem "Agent" [ref=f2e56] [cursor=pointer]:
+                            - generic [ref=f2e57]:
+                              - generic [ref=f2e58]: Agent
+                              - generic [ref=f2e64]: A
+                              - img "Not configured" [ref=f2e66]
+                          - menuitem "Payables Agent" [ref=f2e70] [cursor=pointer]:
+                            - generic [ref=f2e71]:
+                              - generic [ref=f2e72]: Payables Agent
+                              - generic [ref=f2e78]: PA
+                              - img "Not configured" [ref=f2e80]
+                          - menuitem "Sales Order Agent" [ref=f2e84] [cursor=pointer]:
+                            - generic [ref=f2e85]:
+                              - generic [ref=f2e86]: Sales Order Agent
+                              - generic [ref=f2e92]: SO
+                              - img "Not configured" [ref=f2e94]
+                    - generic [ref=f2e107]:
+                      - menubar [ref=f2e109]:
+                        - menuitem "Profiles, Specifies the Profiles." [ref=f2e379] [cursor=pointer]:
+                          - generic [ref=f2e380]: Profiles
+                      - button "Toggle wide layout" [ref=f2e123] [cursor=pointer]:
+                        - generic [ref=f2e124]: 
+              - main [ref=f2e127]:
+                - generic [ref=f2e131]:
+                  - generic [ref=f2e134]:
+                    - generic [ref=f2e136]:
+                      - generic [ref=f2e137]: BAU.Interfaces
+                      - generic "Headline 1 of 1." [ref=f2e138]: GAEB
+                    - generic [ref=f2e139]: Use the Left and Right arrow keys to navigate between headlines.
+                  - menu [ref=f2e141]:
+                    - generic [ref=f2e142]: Actions
+                    - generic [ref=f2e148]:
+                      - menuitem "Setup" [ref=f2e383] [cursor=pointer]:
+                        - generic [ref=f2e384]:
+                          - generic [ref=f2e387]: Setup
+                          - generic [ref=f2e389]: 
+                      - menuitem "Master Data" [ref=f2e390] [cursor=pointer]:
+                        - generic [ref=f2e391]:
+                          - generic [ref=f2e394]: Master Data
+                          - generic [ref=f2e396]: 
+                      - menuitem "Import" [ref=f2e397] [cursor=pointer]:
+                        - generic [ref=f2e398]:
+                          - generic [ref=f2e401]: Import
+                          - generic [ref=f2e403]: 
+                  - generic [ref=f2e182]:
+                    - heading [level=2] [ref=f2e184]:
+                      - button "GAE.01 Setup" [ref=f2e185] [cursor=pointer]
+                    - generic [ref=f2e192]:
+                      - heading "General" [level=3] [ref=f2e195]
+                      - list [ref=f2e201]:
+                        - listitem [ref=f2e202]:
+                          - button "People Setup" [ref=f2e205] [cursor=pointer]:
+                            - generic [ref=f2e208]: People
+                            - generic [ref=f2e209]: Setup
+                  - generic [ref=f2e212]:
+                    - heading [level=2] [ref=f2e214]:
+                      - button "GAE.02 Master Data" [ref=f2e215] [cursor=pointer]
+                    - generic [ref=f2e222]:
+                      - heading "General" [level=3] [ref=f2e225]
+                      - generic [ref=f2e226]:
+                        - list [ref=f2e231]:
+                          - listitem [ref=f2e232]:
+                            - button "GAEB Files 0" [ref=f2e236] [cursor=pointer]:
+                              - generic [ref=f2e237]: GAEB Files
+                              - generic [ref=f2e240]: "0"
+                          - listitem [ref=f2e247]:
+                            - button "Typed Docum… (Dev) 58" [ref=f2e251] [cursor=pointer]:
+                              - generic [ref=f2e254]:
+                                - generic [ref=f2e255]: Typed Docum…
+                                - generic [ref=f2e259]: (Dev)
+                              - generic [ref=f2e264]: "58"
+                          - listitem [ref=f2e271]:
+                            - button "Mapped Units 3" [ref=f2e275] [cursor=pointer]:
+                              - generic [ref=f2e276]: Mapped Units
+                              - generic [ref=f2e279]: "3"
+                          - listitem [ref=f2e286]:
+                            - button "Unmapped Units 3 Unfavorable" [ref=f2e290] [cursor=pointer]:
+                              - generic [ref=f2e291]: Unmapped Units
+                              - generic [ref=f2e294]: "3"
+                              - generic [ref=f2e296]: Unfavorable
+                        - list [ref=f2e306]:
+                          - listitem [ref=f2e307]:
+                            - button "New Import GAEB File" [ref=f2e310] [cursor=pointer]:
+                              - generic [ref=f2e313]: New
+                              - generic [ref=f2e316]:
+                                - generic [ref=f2e317]: Import GAEB
+                                - generic [ref=f2e321]: File
+                          - listitem [ref=f2e326]:
+                            - button "People GAEB XML Sources" [ref=f2e329] [cursor=pointer]:
+                              - generic [ref=f2e332]: People
+                              - generic [ref=f2e335]:
+                                - generic [ref=f2e336]: GAEB XML
+                                - generic [ref=f2e340]: Sources
+                          - listitem [ref=f2e345]:
+                            - button "Circle GAEB Projects" [ref=f2e348] [cursor=pointer]:
+                              - generic [ref=f2e351]: Circle
+                              - generic [ref=f2e352]: GAEB Projects
+                  - separator [ref=f2e355]
+                  - button "Back to top" [ref=f2e356] [cursor=pointer]
+        - generic:
+          - form "GAEB Setup":
+            - main:
+              - button "Go to the previous document of the same type" [ref=f2e548] [cursor=pointer]:
+                - generic [ref=f2e549]: 
+              - generic [ref=f2e551]:
+                - generic [ref=f2e554]:
+                  - button "Back" [ref=f2e557] [cursor=pointer]:
+                    - generic [ref=f2e558]: 
+                  - generic [ref=f2e560]:
+                    - generic [ref=f2e561]:
+                      - button "Open the page in read-only mode" [pressed] [ref=f2e562] [cursor=pointer]:
+                        - generic [ref=f2e563]: 
+                      - button "Share this page with other users or apps" [ref=f2e565] [cursor=pointer]:
+                        - generic [ref=f2e566]: 
+                      - button "Create a new entry." [ref=f2e568] [cursor=pointer]:
+                        - generic [ref=f2e569]: 
+                      - button "Delete the information" [ref=f2e571] [cursor=pointer]:
+                        - generic [ref=f2e572]: 
+                    - generic [ref=f2e574]:
+                      - generic "Your data is saved now and the page can be closed." [ref=f2e578]: Saved
+                      - button "Not bookmarked" [ref=f2e581] [cursor=pointer]:
+                        - generic [ref=f2e582]: 
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f2e586] [cursor=pointer]:
+                        - generic [ref=f2e587]: 
+                      - button "Toggle wide layout" [ref=f2e591] [cursor=pointer]:
+                        - generic [ref=f2e592]: 
+                    - generic [ref=f2e594]: GAEB Setup
+                - menubar [ref=f2e605]
+                - generic [ref=f2e613]:
+                  - button [expanded] [ref=f2e616] [cursor=pointer]:
+                    - heading "General" [level=2] [ref=f2e617]
+                  - generic [ref=f2e620]:
+                    - generic [ref=f2e621]:
+                      - button "GAEB Nos." [ref=f2e622] [cursor=pointer]
+                      - generic [ref=f2e623]:
+                        - button "Choose a value for GAEB Nos." [ref=f2e624] [cursor=pointer]
+                        - combobox "GAEB Nos." [ref=f2e625]: GAEB
+                    - generic [ref=f2e626]:
+                      - button "Project Nos." [ref=f2e627] [cursor=pointer]
+                      - generic [ref=f2e628]:
+                        - button "Choose a value for Project Nos." [ref=f2e629] [cursor=pointer]
+                        - combobox "Project Nos." [active] [ref=f2e630]: GAEB
+              - button "Go to the next document of the same type" [ref=f2e632] [cursor=pointer]:
+                - generic [ref=f2e633]: 
+      - text: Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.
+      - paragraph [ref=f2e843]: One suggestion available for GAEB. Use up and down arrows to review and select suggestions.
+      - paragraph [ref=f2e846]: Saved

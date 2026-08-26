@@ -1,0 +1,411 @@
+- generic [ref=f164e1]:
+  - banner [ref=f164e3]:
+    - button "App launcher" [ref=f164e6] [cursor=pointer]: 
+    - generic [ref=f164e12]:
+      - generic [ref=f164e13]: Dynamics 365 Business Central
+      - generic [ref=f164e18]:
+        - 'button "ADIGO GmbH Mitte Ost, Environment: GTHU" [ref=f164e22] [cursor=pointer]':
+          - generic [ref=f164e24]:
+            - generic [ref=f164e26]:
+              - generic [ref=f164e27]: GO
+              - generic [ref=f164e28]: OST
+            - generic [ref=f164e29]:
+              - generic [ref=f164e30]: "Environment:"
+              - generic [ref=f164e31]: GTHU
+        - button "Copilot" [ref=f164e34] [cursor=pointer]:
+          - generic [ref=f164e35]: 
+        - button "Search" [ref=f164e38] [cursor=pointer]:
+          - generic [ref=f164e39]: 
+        - button "Notifications" [ref=f164e42] [cursor=pointer]:
+          - generic [ref=f164e43]: 
+        - button "Settings" [ref=f164e46] [cursor=pointer]:
+          - generic [ref=f164e47]: 
+        - button "Help" [ref=f164e50] [cursor=pointer]:
+          - generic [ref=f164e51]: 
+    - generic [ref=f164e52]:
+      - button "Account manager for Gregor Thume" [ref=f164e54] [cursor=pointer]:
+        - generic [ref=f164e55]: GT
+      - generic: 
+  - iframe [active] [ref=f164e70]:
+    - generic [ref=f165e1]:
+      - generic [ref=f165e3]:
+        - generic:
+          - form "GAEB Files":
+            - generic [ref=f165e5]:
+              - generic [ref=f165e8]:
+                - button "Skip to main content" [ref=f165e9] [cursor=pointer]
+                - navigation "Main navigation" [ref=f165e10]:
+                  - menubar [ref=f165e19]:
+                    - generic [ref=f165e22]:
+                      - menuitem [ref=f165e26] [cursor=pointer]:
+                        - heading "ADIGO GmbH Mitte Ost" [level=1] [ref=f165e28]
+                      - menuitem "APP" [ref=f165e35] [cursor=pointer]
+                      - menuitem "All Reports" [ref=f165e43] [cursor=pointer]
+                      - menuitem "Explore all business features for my role in Business Central" [ref=f165e51] [cursor=pointer]:
+                        - generic [ref=f165e52]: 
+                      - generic [ref=f165e55]:
+                        - menuitem "Agent" [ref=f165e56] [cursor=pointer]:
+                          - generic [ref=f165e57]:
+                            - generic [ref=f165e58]: Agent
+                            - generic [ref=f165e64]: A
+                            - img "Not configured" [ref=f165e66]
+                        - menuitem "Payables Agent" [ref=f165e70] [cursor=pointer]:
+                          - generic [ref=f165e71]:
+                            - generic [ref=f165e72]: Payables Agent
+                            - generic [ref=f165e78]: PA
+                            - img "Not configured" [ref=f165e80]
+                        - menuitem "Sales Order Agent" [ref=f165e84] [cursor=pointer]:
+                          - generic [ref=f165e85]:
+                            - generic [ref=f165e86]: Sales Order Agent
+                            - generic [ref=f165e92]: SO
+                            - img "Not configured" [ref=f165e94]
+              - menubar [ref=f165e108]:
+                - generic [ref=f165e111]:
+                  - heading "GAEB Files:" [level=2] [ref=f165e113]
+                  - 'button "GAEB Files: All" [ref=f165e115] [cursor=pointer]':
+                    - generic [ref=f165e116]:
+                      - generic [ref=f165e117]: All
+                      - generic [ref=f165e119]: 
+                - generic [ref=f165e122]:
+                  - menuitem "Here's what Copilot can do on this page" [ref=f165e129] [cursor=pointer]:
+                    - generic [ref=f165e130]: 
+                  - menuitem [ref=f165e139] [cursor=pointer]:
+                    - generic [ref=f165e140]:
+                      - generic [ref=f165e141]: 
+                      - searchbox "Search GAEB Files"
+                - generic [ref=f165e143]:
+                  - menuitem "Enter analysis mode" [ref=f165e148] [cursor=pointer]
+                  - generic [ref=f165e158]:
+                    - generic [ref=f165e162]:
+                      - menuitem "Import" [ref=f165e167] [cursor=pointer]
+                      - menuitem "Retry Import" [disabled] [ref=f165e178]
+                      - menuitem "Cancel Import" [disabled] [ref=f165e189]
+                      - menuitem "Refresh" [ref=f165e200] [cursor=pointer]
+                      - menuitem "Show Coverage Gaps" [ref=f165e211] [cursor=pointer]
+                      - menuitem "GAEB Schema" [ref=f165e222] [cursor=pointer]
+                      - menuitem "Show the rest" [ref=f165e231] [cursor=pointer]:
+                        - generic [ref=f165e232]: 
+                    - generic [ref=f165e235]:
+                      - menuitem "Share" [ref=f165e238] [cursor=pointer]:
+                        - generic [ref=f165e239]: 
+                      - menuitemcheckbox "Toggle filter" [ref=f165e243] [cursor=pointer]:
+                        - generic [ref=f165e244]: 
+                      - menuitem "List layout selected" [ref=f165e247] [cursor=pointer]
+                      - menuitemcheckbox "Toggle wide layout" [ref=f165e252] [cursor=pointer]:
+                        - generic [ref=f165e253]: 
+                      - menuitemcheckbox "Not bookmarked" [ref=f165e257] [cursor=pointer]:
+                        - generic [ref=f165e258]: 
+              - main [ref=f165e261]:
+                - grid "GOXGAE GAEB Files" [ref=f165e268]:
+                  - rowgroup [ref=f165e270]:
+                    - row [ref=f165e271]:
+                      - columnheader [ref=f165e272]:
+                        - generic [ref=f165e273]:
+                          - button "Source Document No., sorted in Descending order" [ref=f165e274] [cursor=pointer]: Source Document No.
+                          - img "Descending" [ref=f165e276]
+                        - button "Open menu for Source Document No." [ref=f165e277] [cursor=pointer]
+                        - button [ref=f165e278]
+                      - columnheader "More Options" [ref=f165e281]
+                      - columnheader [ref=f165e283]:
+                        - button "File Name" [ref=f165e285] [cursor=pointer]
+                        - button "Open menu for File Name" [ref=f165e286] [cursor=pointer]
+                        - button [ref=f165e287]
+                      - columnheader [ref=f165e290]:
+                        - button "Project Name" [ref=f165e292] [cursor=pointer]
+                        - button "Open menu for Project Name" [ref=f165e293] [cursor=pointer]
+                        - button [ref=f165e294]
+                      - columnheader [ref=f165e297]:
+                        - button "GAEB Project ID" [ref=f165e299] [cursor=pointer]
+                        - button "Open menu for GAEB Project ID" [ref=f165e300] [cursor=pointer]
+                        - button [ref=f165e301]
+                      - columnheader [ref=f165e304]:
+                        - button "Exchange Phase" [ref=f165e306] [cursor=pointer]
+                        - button "Open menu for Exchange Phase" [ref=f165e307] [cursor=pointer]
+                        - button [ref=f165e308]
+                      - columnheader [ref=f165e311]:
+                        - button "Created At" [ref=f165e313] [cursor=pointer]
+                        - button "Open menu for Created At" [ref=f165e314] [cursor=pointer]
+                        - button [ref=f165e315]
+                      - columnheader [ref=f165e318]:
+                        - button "Source Size" [ref=f165e320] [cursor=pointer]
+                        - button "Open menu for Source Size" [ref=f165e321] [cursor=pointer]
+                        - button [ref=f165e322]
+                      - columnheader [ref=f165e325]:
+                        - button "Entry Count" [ref=f165e327] [cursor=pointer]
+                        - button "Open menu for Entry Count" [ref=f165e328] [cursor=pointer]
+                        - button [ref=f165e329]
+                      - columnheader [ref=f165e332]:
+                        - button "Import State" [ref=f165e334] [cursor=pointer]
+                        - button "Open menu for Import State" [ref=f165e335] [cursor=pointer]
+                        - button [ref=f165e336]
+                      - columnheader [ref=f165e339]:
+                        - button "Import Stage" [ref=f165e341] [cursor=pointer]
+                        - button "Open menu for Import Stage" [ref=f165e342] [cursor=pointer]
+                        - button [ref=f165e343]
+                      - columnheader [ref=f165e346]:
+                        - button "Import Progress %" [ref=f165e348] [cursor=pointer]
+                        - button "Open menu for Import Progress %" [ref=f165e349] [cursor=pointer]
+                        - button [ref=f165e350]
+                      - columnheader [ref=f165e353]:
+                        - button "Failure Reason" [ref=f165e355] [cursor=pointer]
+                        - button "Open menu for Failure Reason" [ref=f165e356] [cursor=pointer]
+                        - button [ref=f165e357]
+                      - columnheader [ref=f165e360]:
+                        - button "Population Status" [ref=f165e362] [cursor=pointer]
+                        - button "Open menu for Population Status" [ref=f165e363] [cursor=pointer]
+                        - button [ref=f165e364]
+                      - columnheader [ref=f165e367]:
+                        - button "Unconverted Value Count" [ref=f165e369] [cursor=pointer]
+                        - button "Open menu for Unconverted Value Count" [ref=f165e370] [cursor=pointer]
+                        - button [ref=f165e371]
+                  - generic [ref=f165e374]:
+                    - rowgroup [ref=f165e375]:
+                      - row [ref=f165e376]:
+                        - columnheader [ref=f165e377]
+                        - columnheader [ref=f165e378]
+                        - columnheader [ref=f165e380]
+                        - columnheader [ref=f165e381]
+                        - columnheader [ref=f165e382]
+                        - columnheader [ref=f165e383]
+                        - columnheader [ref=f165e384]
+                        - columnheader [ref=f165e385]
+                        - columnheader [ref=f165e386]
+                        - columnheader [ref=f165e387]
+                        - columnheader [ref=f165e388]
+                        - columnheader [ref=f165e389]
+                        - columnheader [ref=f165e390]
+                        - columnheader [ref=f165e391]
+                        - columnheader [ref=f165e392]
+                    - row [selected] [ref=f165e393]:
+                      - gridcell [ref=f165e394]:
+                        - button "Source Document No., sorted in Descending order GAEB0137" [ref=f165e395] [cursor=pointer]: GAEB0137
+                      - gridcell [ref=f165e396]:
+                        - button "Show more options" [ref=f165e397] [cursor=pointer]
+                      - gridcell [ref=f165e398]:
+                        - textbox "File Name" [ref=f165e399]
+                      - gridcell [ref=f165e400]:
+                        - textbox "Project Name" [ref=f165e401]
+                      - gridcell [ref=f165e402]:
+                        - textbox "GAEB Project ID" [ref=f165e403]
+                      - gridcell [ref=f165e404]:
+                        - textbox "Exchange Phase" [ref=f165e405]
+                      - gridcell [ref=f165e406]:
+                        - textbox "Created At" [ref=f165e407]
+                      - gridcell [ref=f165e408]:
+                        - textbox "Source Size" [ref=f165e409]
+                      - gridcell [ref=f165e410]:
+                        - textbox "Entry Count" [ref=f165e411]
+                      - gridcell [ref=f165e412]:
+                        - textbox "Import State" [ref=f165e413]
+                      - gridcell [ref=f165e414]:
+                        - textbox "Import Stage" [ref=f165e415]
+                      - gridcell [ref=f165e416]:
+                        - textbox "Import Progress %" [ref=f165e417]
+                      - gridcell [ref=f165e418]:
+                        - textbox "Failure Reason (Blank)" [ref=f165e419]
+                      - gridcell [ref=f165e420]:
+                        - textbox "Population Status" [ref=f165e421]
+                      - gridcell [ref=f165e422]:
+                        - textbox "Unconverted Value Count" [ref=f165e423]
+                    - row [ref=f165e424]:
+                      - gridcell [ref=f165e425]:
+                        - button "Source Document No., sorted in Descending order GAEB0136" [ref=f165e426] [cursor=pointer]: GAEB0136
+                      - gridcell [ref=f165e427]:
+                        - button "Show more options" [ref=f165e428] [cursor=pointer]
+                      - gridcell [ref=f165e429]:
+                        - textbox "File Name Bonner Wasserwerk (MWM-Muster) 1700 Positionen.x86" [ref=f165e430]
+                      - gridcell [ref=f165e431]:
+                        - textbox "Project Name Bonner Wasserwerk (MWM-Muster) - viele Ansätze" [ref=f165e432]
+                      - gridcell [ref=f165e433]:
+                        - textbox "GAEB Project ID 949FB6B89A4F458EB6518A8D229E09D0" [ref=f165e434]
+                      - gridcell [ref=f165e435]:
+                        - textbox "Exchange Phase 86" [ref=f165e436]
+                      - gridcell [ref=f165e437]:
+                        - textbox "Created At 23.08.2026 17:06" [ref=f165e438]
+                      - gridcell [ref=f165e439]:
+                        - textbox "Source Size 2181611" [ref=f165e440]
+                      - gridcell [ref=f165e441]:
+                        - textbox "Entry Count 71318" [ref=f165e442]
+                      - gridcell [ref=f165e443]:
+                        - textbox "Import State Completed" [ref=f165e444]
+                      - gridcell [ref=f165e445]:
+                        - textbox "Import Stage" [ref=f165e446]
+                      - gridcell [ref=f165e447]:
+                        - textbox "Import Progress % 100" [ref=f165e448]
+                      - gridcell [ref=f165e449]:
+                        - textbox "Failure Reason (Blank)" [ref=f165e450]
+                      - gridcell [ref=f165e451]:
+                        - textbox "Population Status Populated" [ref=f165e452]
+                      - gridcell [ref=f165e453]:
+                        - textbox "Unconverted Value Count 0" [ref=f165e454]
+                    - row [ref=f165e455]:
+                      - gridcell [ref=f165e456]:
+                        - button "Source Document No., sorted in Descending order GAEB0135" [ref=f165e457] [cursor=pointer]: GAEB0135
+                      - gridcell [ref=f165e458]:
+                        - button "Show more options" [ref=f165e459] [cursor=pointer]
+                      - gridcell [ref=f165e460]:
+                        - textbox "File Name gaeb.x83" [ref=f165e461]
+                      - gridcell [ref=f165e462]:
+                        - textbox "Project Name Beispielprojekt" [ref=f165e463]
+                      - gridcell [ref=f165e464]:
+                        - textbox "GAEB Project ID 3E8D929551C948D6AEA24775954C8181" [ref=f165e465]
+                      - gridcell [ref=f165e466]:
+                        - textbox "Exchange Phase 83" [ref=f165e467]
+                      - gridcell [ref=f165e468]:
+                        - textbox "Created At 23.08.2026 17:03" [ref=f165e469]
+                      - gridcell [ref=f165e470]:
+                        - textbox "Source Size 54129" [ref=f165e471]
+                      - gridcell [ref=f165e472]:
+                        - textbox "Entry Count 1363" [ref=f165e473]
+                      - gridcell [ref=f165e474]:
+                        - textbox "Import State Completed" [ref=f165e475]
+                      - gridcell [ref=f165e476]:
+                        - textbox "Import Stage" [ref=f165e477]
+                      - gridcell [ref=f165e478]:
+                        - textbox "Import Progress % 100" [ref=f165e479]
+                      - gridcell [ref=f165e480]:
+                        - textbox "Failure Reason (Blank)" [ref=f165e481]
+                      - gridcell [ref=f165e482]:
+                        - textbox "Population Status Populated" [ref=f165e483]
+                      - gridcell [ref=f165e484]:
+                        - textbox "Unconverted Value Count 0" [ref=f165e485]
+                    - row [ref=f165e486]:
+                      - gridcell [ref=f165e487]:
+                        - button "Source Document No., sorted in Descending order GAEB0134" [ref=f165e488] [cursor=pointer]: GAEB0134
+                      - gridcell [ref=f165e489]:
+                        - button "Show more options" [ref=f165e490] [cursor=pointer]
+                      - gridcell [ref=f165e491]:
+                        - textbox "File Name LV_Los03_Technische Anlagen_ELT.X83" [ref=f165e492]
+                      - gridcell [ref=f165e493]:
+                        - textbox "Project Name 650019" [ref=f165e494]
+                      - gridcell [ref=f165e495]:
+                        - textbox "GAEB Project ID B7D387E58CAA46B99E47B68B95096231" [ref=f165e496]
+                      - gridcell [ref=f165e497]:
+                        - textbox "Exchange Phase 83" [ref=f165e498]
+                      - gridcell [ref=f165e499]:
+                        - textbox "Created At 22.08.2026 10:24" [ref=f165e500]
+                      - gridcell [ref=f165e501]:
+                        - textbox "Source Size 669585" [ref=f165e502]
+                      - gridcell [ref=f165e503]:
+                        - textbox "Entry Count 15186" [ref=f165e504]
+                      - gridcell [ref=f165e505]:
+                        - textbox "Import State Completed" [ref=f165e506]
+                      - gridcell [ref=f165e507]:
+                        - textbox "Import Stage" [ref=f165e508]
+                      - gridcell [ref=f165e509]:
+                        - textbox "Import Progress % 100" [ref=f165e510]
+                      - gridcell [ref=f165e511]:
+                        - textbox "Failure Reason (Blank)" [ref=f165e512]
+                      - gridcell [ref=f165e513]:
+                        - textbox "Population Status Populated" [ref=f165e514]
+                      - gridcell [ref=f165e515]:
+                        - textbox "Unconverted Value Count 0" [ref=f165e516]
+                    - row [ref=f165e517]:
+                      - gridcell [ref=f165e518]:
+                        - button "Source Document No., sorted in Descending order GAEB0133" [ref=f165e519] [cursor=pointer]: GAEB0133
+                      - gridcell [ref=f165e520]:
+                        - button "Show more options" [ref=f165e521] [cursor=pointer]
+                      - gridcell [ref=f165e522]:
+                        - textbox "File Name 017-prjid-X83_Bonner_Wasserwerk.X83" [ref=f165e523]
+                      - gridcell [ref=f165e524]:
+                        - textbox "Project Name Bonner Wasserwerk" [ref=f165e525]
+                      - gridcell [ref=f165e526]:
+                        - textbox "GAEB Project ID 4F2C1A9B7D3E48F0A1B2C3D4E5F60717" [ref=f165e527]
+                      - gridcell [ref=f165e528]:
+                        - textbox "Exchange Phase 83" [ref=f165e529]
+                      - gridcell [ref=f165e530]:
+                        - textbox "Created At 22.08.2026 10:24" [ref=f165e531]
+                      - gridcell [ref=f165e532]:
+                        - textbox "Source Size 19721" [ref=f165e533]
+                      - gridcell [ref=f165e534]:
+                        - textbox "Entry Count 700" [ref=f165e535]
+                      - gridcell [ref=f165e536]:
+                        - textbox "Import State Completed" [ref=f165e537]
+                      - gridcell [ref=f165e538]:
+                        - textbox "Import Stage" [ref=f165e539]
+                      - gridcell [ref=f165e540]:
+                        - textbox "Import Progress % 100" [ref=f165e541]
+                      - gridcell [ref=f165e542]:
+                        - textbox "Failure Reason (Blank)" [ref=f165e543]
+                      - gridcell [ref=f165e544]:
+                        - textbox "Population Status Populated" [ref=f165e545]
+                      - gridcell [ref=f165e546]:
+                        - textbox "Unconverted Value Count 0" [ref=f165e547]
+                    - row [ref=f165e548]:
+                      - gridcell [ref=f165e549]:
+                        - button "Source Document No., sorted in Descending order GAEB0132" [ref=f165e550] [cursor=pointer]: GAEB0132
+                      - gridcell [ref=f165e551]:
+                        - button "Show more options" [ref=f165e552] [cursor=pointer]
+                      - gridcell [ref=f165e553]:
+                        - textbox "File Name EInfra-Zolldirektion_LV-7.53.11 PV-Anlagen inkl. Carport.X83" [ref=f165e554]
+                      - gridcell [ref=f165e555]:
+                        - textbox "Project Name 2300037764-TJEF" [ref=f165e556]
+                      - gridcell [ref=f165e557]:
+                        - textbox "GAEB Project ID 325B154BE89F45AC8C6CACF4879D759E" [ref=f165e558]
+                      - gridcell [ref=f165e559]:
+                        - textbox "Exchange Phase 83" [ref=f165e560]
+                      - gridcell [ref=f165e561]:
+                        - textbox "Created At 22.08.2026 10:24" [ref=f165e562]
+                      - gridcell [ref=f165e563]:
+                        - textbox "Source Size 2449544" [ref=f165e564]
+                      - gridcell [ref=f165e565]:
+                        - textbox "Entry Count 22983" [ref=f165e566]
+                      - gridcell [ref=f165e567]:
+                        - textbox "Import State Completed" [ref=f165e568]
+                      - gridcell [ref=f165e569]:
+                        - textbox "Import Stage" [ref=f165e570]
+                      - gridcell [ref=f165e571]:
+                        - textbox "Import Progress % 100" [ref=f165e572]
+                      - gridcell [ref=f165e573]:
+                        - textbox "Failure Reason (Blank)" [ref=f165e574]
+                      - gridcell [ref=f165e575]:
+                        - textbox "Population Status Populated" [ref=f165e576]
+                      - gridcell [ref=f165e577]:
+                        - textbox "Unconverted Value Count 0" [ref=f165e578]
+                    - row [ref=f165e579]:
+                      - gridcell [ref=f165e580]:
+                        - button "Source Document No., sorted in Descending order GAEB0131" [ref=f165e581] [cursor=pointer]: GAEB0131
+                      - gridcell [ref=f165e582]:
+                        - button "Show more options" [ref=f165e583] [cursor=pointer]
+                      - gridcell [ref=f165e584]:
+                        - textbox "File Name EInfra-Infineon_230616_J136_KG440_450_LV-unverpreist.X83" [ref=f165e585]
+                      - gridcell [ref=f165e586]:
+                        - textbox "Project Name 2221024" [ref=f165e587]
+                      - gridcell [ref=f165e588]:
+                        - textbox "GAEB Project ID D92A4629194143659B114C973795D99E" [ref=f165e589]
+                      - gridcell [ref=f165e590]:
+                        - textbox "Exchange Phase 83" [ref=f165e591]
+                      - gridcell [ref=f165e592]:
+                        - textbox "Created At 22.08.2026 10:21" [ref=f165e593]
+                      - gridcell [ref=f165e594]:
+                        - textbox "Source Size 995674" [ref=f165e595]
+                      - gridcell [ref=f165e596]:
+                        - textbox "Entry Count 32744" [ref=f165e597]
+                      - gridcell [ref=f165e598]:
+                        - textbox "Import State Completed" [ref=f165e599]
+                      - gridcell [ref=f165e600]:
+                        - textbox "Import Stage" [ref=f165e601]
+                      - gridcell [ref=f165e602]:
+                        - textbox "Import Progress % 100" [ref=f165e603]
+                      - gridcell [ref=f165e604]:
+                        - textbox "Failure Reason (Blank)" [ref=f165e605]
+                      - gridcell [ref=f165e606]:
+                        - textbox "Population Status Populated" [ref=f165e607]
+                      - gridcell [ref=f165e608]:
+                        - textbox "Unconverted Value Count 0" [ref=f165e609]
+        - dialog [ref=f165e641]:
+          - main [ref=f165e616]:
+            - heading [level=1] [ref=f165e620]:
+              - paragraph [ref=f165e622]: Please select the GAEB XML file
+            - button "Drop a file here to upload, or click here to browse" [ref=f165e628] [cursor=pointer]:
+              - generic: 
+              - generic: Drop a file here to upload, or
+              - generic: click here to browse
+            - button "Cancel" [ref=f165e631] [cursor=pointer]
+        - dialog [ref=f165e643]:
+          - generic [ref=f165e645]:
+            - paragraph [ref=f165e649]: "Select a file with one of the following extensions: xml, x80, x81, x82, x83, x84, x85, x86, x87, x88, x89"
+            - button "OK" [active] [ref=f165e652] [cursor=pointer]
+      - text: Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.
+      - paragraph [ref=f165e637]: List with title "GAEB Files" now has 7 items
+      - paragraph [ref=f165e639]: Source Document No., sorted in Descending order

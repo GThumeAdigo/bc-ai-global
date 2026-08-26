@@ -1,0 +1,506 @@
+- generic [ref=f205e1]:
+  - banner [ref=f205e9]:
+    - button "App launcher" [ref=f205e12] [cursor=pointer]: 
+    - generic [ref=f205e18]:
+      - generic [ref=f205e19]: Dynamics 365 Business Central
+      - generic [ref=f205e24]:
+        - 'button "ADIGO GmbH Mitte Ost, Environment: GTHU" [ref=f205e28] [cursor=pointer]':
+          - generic [ref=f205e30]:
+            - generic [ref=f205e32]:
+              - generic [ref=f205e33]: GO
+              - generic [ref=f205e34]: OST
+            - generic [ref=f205e35]:
+              - generic [ref=f205e36]: "Environment:"
+              - generic [ref=f205e37]: GTHU
+        - button "Copilot" [ref=f205e40] [cursor=pointer]:
+          - generic [ref=f205e41]: 
+        - button "Search" [ref=f205e44] [cursor=pointer]:
+          - generic [ref=f205e45]: 
+        - button "Notifications" [ref=f205e48] [cursor=pointer]:
+          - generic [ref=f205e49]: 
+        - button "Settings" [ref=f205e52] [cursor=pointer]:
+          - generic [ref=f205e53]: 
+        - button "Help" [ref=f205e56] [cursor=pointer]:
+          - generic [ref=f205e57]: 
+    - generic [ref=f205e58]:
+      - button "Account manager for Gregor Thume" [ref=f205e60] [cursor=pointer]:
+        - generic [ref=f205e61]: GT
+      - generic: 
+  - iframe [active] [ref=f205e76]:
+    - generic [ref=f206e1]:
+      - generic [ref=f206e2]:
+        - generic:
+          - form "GAEB Schema":
+            - main:
+              - generic:
+                - button "Go to the previous document of the same type":
+                  - generic: 
+              - generic [ref=f206e4]:
+                - generic [ref=f206e7]:
+                  - button "Back" [ref=f206e10] [cursor=pointer]:
+                    - generic [ref=f206e11]: 
+                  - generic [ref=f206e13]:
+                    - heading "GAEB Schema" [level=1] [ref=f206e14]
+                    - generic [ref=f206e19]:
+                      - button "Make changes on the page" [disabled] [ref=f206e20]:
+                        - generic [ref=f206e21]: 
+                      - button "Share this page with other users or apps" [ref=f206e23] [cursor=pointer]:
+                        - generic [ref=f206e24]: 
+                      - button "Create a new entry." [disabled] [ref=f206e26]:
+                        - generic [ref=f206e27]: 
+                      - button "Delete the information" [disabled] [ref=f206e29]:
+                        - generic [ref=f206e30]: 
+                    - generic [ref=f206e32]:
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f206e35] [cursor=pointer]:
+                        - generic [ref=f206e36]: 
+                      - button "Toggle wide layout" [ref=f206e40] [cursor=pointer]:
+                        - generic [ref=f206e41]: 
+                    - heading "GAEB0136" [level=2] [ref=f206e44]
+                - menubar [ref=f206e54]:
+                  - generic [ref=f206e68]:
+                    - menuitem "All Typed Tables" [ref=f206e73] [cursor=pointer]
+                    - menuitem "Text Overlays" [ref=f206e84] [cursor=pointer]
+                    - menuitem "GAEB File Card" [ref=f206e95] [cursor=pointer]
+                    - menuitem "GAEB Source Entries" [ref=f206e106] [cursor=pointer]
+                    - menuitem "More options" [ref=f206e117] [cursor=pointer]
+                - generic [ref=f206e127]:
+                  - generic [ref=f206e128]:
+                    - generic [ref=f206e129]:
+                      - button [expanded] [ref=f206e131] [cursor=pointer]:
+                        - heading "Document" [level=3] [ref=f206e132]
+                      - button "Document, Show more" [ref=f206e133] [cursor=pointer]: Show more
+                    - generic [ref=f206e136]:
+                      - generic [ref=f206e137]:
+                        - button "Source Document No." [ref=f206e138] [cursor=pointer]
+                        - textbox "Source Document No. GAEB0136" [ref=f206e140]
+                      - generic [ref=f206e141]:
+                        - button "File Name" [ref=f206e142] [cursor=pointer]
+                        - textbox "File Name Bonner Wasserwerk (MWM-Muster) 1700 Positionen.x86" [ref=f206e144]
+                      - generic [ref=f206e145]:
+                        - button "Project Name" [ref=f206e146] [cursor=pointer]
+                        - textbox "Project Name Bonner Wasserwerk (MWM-Muster) - viele Ansätze" [ref=f206e148]
+                      - generic [ref=f206e149]:
+                        - button "Exchange Phase" [ref=f206e150] [cursor=pointer]
+                        - textbox "Exchange Phase 86" [ref=f206e152]
+                      - generic [ref=f206e153]:
+                        - button "Population Status" [ref=f206e154] [cursor=pointer]
+                        - textbox "Population Status Populated" [ref=f206e156]
+                  - generic [ref=f206e157]:
+                    - menubar [ref=f206e167]:
+                      - heading [level=3] [ref=f206e172]:
+                        - button "Document Constructs" [ref=f206e173] [cursor=pointer]
+                      - generic [ref=f206e185]:
+                        - generic [ref=f206e189]:
+                          - menuitem "Open" [ref=f206e194] [cursor=pointer]
+                          - menuitem "Show Empty Relations" [ref=f206e205] [cursor=pointer]
+                        - generic [ref=f206e212]:
+                          - menuitem "Share" [ref=f206e215] [cursor=pointer]:
+                            - generic [ref=f206e216]: 
+                          - menuitemcheckbox "Toggle focus mode" [ref=f206e220] [cursor=pointer]:
+                            - generic [ref=f206e221]: 
+                    - grid "Document Constructs" [ref=f206e226]:
+                      - rowgroup [ref=f206e228]:
+                        - row [ref=f206e229]:
+                          - columnheader "Error" [ref=f206e230]
+                          - columnheader [ref=f206e231]:
+                            - generic [ref=f206e232]:
+                              - button "Related Table, sorted in Ascending order" [ref=f206e233] [cursor=pointer]: Related Table
+                              - img "Ascending" [ref=f206e235]
+                            - button "Open menu for Related Table" [ref=f206e236] [cursor=pointer]
+                            - button [ref=f206e237]
+                          - columnheader "More Options" [ref=f206e240]
+                          - columnheader [ref=f206e242]:
+                            - button "Description" [ref=f206e244] [cursor=pointer]
+                            - button "Open menu for Description" [ref=f206e245] [cursor=pointer]
+                            - button [ref=f206e246]
+                          - columnheader [ref=f206e249]:
+                            - button "Via Elements" [ref=f206e251] [cursor=pointer]
+                            - button "Open menu for Via Elements" [ref=f206e252] [cursor=pointer]
+                            - button [ref=f206e253]
+                          - columnheader [ref=f206e256]:
+                            - button "Relation" [ref=f206e258] [cursor=pointer]
+                            - button "Open menu for Relation" [ref=f206e259] [cursor=pointer]
+                            - button [ref=f206e260]
+                          - columnheader [ref=f206e263]:
+                            - generic [ref=f206e264]:
+                              - button "Links" [ref=f206e265] [cursor=pointer]
+                              - img "Filtered" [ref=f206e267]
+                            - button "Open menu for Links" [ref=f206e268] [cursor=pointer]
+                            - button [ref=f206e269]
+                      - generic [ref=f206e272]:
+                        - rowgroup [ref=f206e273]:
+                          - row [ref=f206e274]:
+                            - columnheader [ref=f206e275]
+                            - columnheader [ref=f206e276]
+                            - columnheader [ref=f206e277]
+                            - columnheader [ref=f206e279]
+                            - columnheader [ref=f206e280]
+                            - columnheader [ref=f206e281]
+                            - columnheader [ref=f206e282]
+                        - row [ref=f206e283]:
+                          - rowheader [ref=f206e284]
+                          - gridcell [ref=f206e285]:
+                            - textbox "Related Table, sorted in Ascending order GAEB Award" [ref=f206e286]
+                          - gridcell [ref=f206e287]:
+                            - button "Show more options" [ref=f206e288] [cursor=pointer]
+                          - gridcell [ref=f206e289]:
+                            - textbox "Description 86" [ref=f206e290]
+                          - gridcell [ref=f206e291]:
+                            - textbox "Via Elements Award" [ref=f206e292]
+                          - gridcell [ref=f206e293]:
+                            - textbox "Relation Single" [ref=f206e294]
+                          - gridcell [ref=f206e295]:
+                            - button "Links 1" [ref=f206e296] [cursor=pointer]: "1"
+                        - row [ref=f206e297]:
+                          - rowheader [ref=f206e298]
+                          - gridcell [ref=f206e299]:
+                            - textbox "Related Table, sorted in Ascending order GAEB Exchange Info" [ref=f206e300]
+                          - gridcell [ref=f206e301]:
+                            - button "Show more options" [ref=f206e302] [cursor=pointer]
+                          - gridcell [ref=f206e303]:
+                            - textbox "Description MwmMfc 98, 10.12.21" [ref=f206e304]
+                          - gridcell [ref=f206e305]:
+                            - textbox "Via Elements GAEBInfo" [ref=f206e306]
+                          - gridcell [ref=f206e307]:
+                            - textbox "Relation Single" [ref=f206e308]
+                          - gridcell [ref=f206e309]:
+                            - button "Links 1" [ref=f206e310] [cursor=pointer]: "1"
+                        - row [selected] [ref=f206e311]:
+                          - rowheader [ref=f206e312]
+                          - gridcell [ref=f206e313]:
+                            - textbox "Related Table, sorted in Ascending order" [ref=f206e314]
+                          - gridcell [ref=f206e315]:
+                            - button "Show more options" [ref=f206e316] [cursor=pointer]
+                          - gridcell [ref=f206e317]:
+                            - textbox "Description" [ref=f206e318]
+                          - gridcell [ref=f206e319]:
+                            - textbox "Via Elements" [ref=f206e320]
+                          - gridcell [ref=f206e321]:
+                            - textbox "Relation" [ref=f206e322]
+                          - gridcell [ref=f206e323]:
+                            - button "Links 1" [ref=f206e324] [cursor=pointer]: "1"
+              - generic:
+                - button "Go to the next document of the same type":
+                  - generic: 
+        - generic:
+          - form "GAEB Item List Rows" [active]:
+            - main:
+              - generic [ref=f206e326]:
+                - generic [ref=f206e329]:
+                  - button "Back" [ref=f206e332] [cursor=pointer]:
+                    - generic [ref=f206e333]: 
+                  - generic [ref=f206e335]:
+                    - heading "GAEB Item List Rows" [level=1] [ref=f206e336]
+                    - generic [ref=f206e341]:
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f206e344] [cursor=pointer]:
+                        - generic [ref=f206e345]: 
+                      - button "Toggle wide layout" [ref=f206e349] [cursor=pointer]:
+                        - generic [ref=f206e350]: 
+                - menubar [ref=f206e362]:
+                  - generic [ref=f206e363]:
+                    - menuitem "Here's what Copilot can do on this page" [ref=f206e370] [cursor=pointer]:
+                      - generic [ref=f206e371]: 
+                    - menuitem [ref=f206e380] [cursor=pointer]:
+                      - generic [ref=f206e381]:
+                        - generic [ref=f206e382]: 
+                        - searchbox "Search GAEB Item List Rows"
+                  - generic [ref=f206e384]:
+                    - menuitem "Enter analysis mode" [ref=f206e389] [cursor=pointer]
+                    - generic [ref=f206e404]:
+                      - generic [ref=f206e408]:
+                        - menuitem "Manage" [ref=f206e413] [cursor=pointer]
+                        - menuitem "Parent Row" [ref=f206e421] [cursor=pointer]
+                        - menuitem "Related Rows" [ref=f206e432] [cursor=pointer]
+                        - menuitem "GAEB File Card" [ref=f206e443] [cursor=pointer]
+                        - menuitem "GAEB Source Entry" [ref=f206e454] [cursor=pointer]
+                        - menuitem "More options" [ref=f206e465] [cursor=pointer]
+                      - generic [ref=f206e469]:
+                        - menuitem "Share" [ref=f206e472] [cursor=pointer]:
+                          - generic [ref=f206e473]: 
+                        - menuitemcheckbox "Toggle filter" [ref=f206e477] [cursor=pointer]:
+                          - generic [ref=f206e478]: 
+                        - menuitem "List layout selected" [ref=f206e481] [cursor=pointer]
+                - grid "GOXGAE Itemlist List" [ref=f206e492]:
+                  - rowgroup [ref=f206e494]:
+                    - row [ref=f206e495]:
+                      - columnheader "Ordinal and Designation Open menu for Ordinal and Designation" [ref=f206e496]:
+                        - generic [ref=f206e497]: Ordinal and Designation
+                        - button "Open menu for Ordinal and Designation" [ref=f206e498] [cursor=pointer]
+                        - button [ref=f206e499]
+                      - columnheader "More Options" [ref=f206e502]
+                      - columnheader [ref=f206e504]:
+                        - generic [ref=f206e505]:
+                          - button "Source Entry No., sorted in Ascending order" [ref=f206e506] [cursor=pointer]: Source Entry No.
+                          - img "Ascending" [ref=f206e508]
+                        - button "Open menu for Source Entry No." [ref=f206e509] [cursor=pointer]
+                        - button [ref=f206e510]
+                  - generic [ref=f206e513]:
+                    - rowgroup [ref=f206e514]:
+                      - row [ref=f206e515]:
+                        - columnheader [ref=f206e516]
+                        - columnheader [ref=f206e517]
+                        - columnheader [ref=f206e519]
+                    - row [selected] [ref=f206e520]:
+                      - gridcell [ref=f206e521]:
+                        - button "Ordinal and Designation 01.01" [ref=f206e522] [cursor=pointer]: "01.01"
+                      - gridcell [ref=f206e523]:
+                        - button "Show more options" [ref=f206e524] [cursor=pointer]
+                      - gridcell [ref=f206e525]:
+                        - textbox "Source Entry No., sorted in Ascending order" [ref=f206e526]
+                    - row [ref=f206e527]:
+                      - gridcell [ref=f206e528]:
+                        - button "Ordinal and Designation 01.02" [ref=f206e529] [cursor=pointer]: "01.02"
+                      - gridcell [ref=f206e530]:
+                        - button "Show more options" [ref=f206e531] [cursor=pointer]
+                      - gridcell [ref=f206e532]:
+                        - textbox "Source Entry No., sorted in Ascending order 325" [ref=f206e533]
+                    - row [ref=f206e534]:
+                      - gridcell [ref=f206e535]:
+                        - button "Ordinal and Designation 01.03" [ref=f206e536] [cursor=pointer]: "01.03"
+                      - gridcell [ref=f206e537]:
+                        - button "Show more options" [ref=f206e538] [cursor=pointer]
+                      - gridcell [ref=f206e539]:
+                        - textbox "Source Entry No., sorted in Ascending order 650" [ref=f206e540]
+                    - row [ref=f206e541]:
+                      - gridcell [ref=f206e542]:
+                        - button "Ordinal and Designation 01.04" [ref=f206e543] [cursor=pointer]: "01.04"
+                      - gridcell [ref=f206e544]:
+                        - button "Show more options" [ref=f206e545] [cursor=pointer]
+                      - gridcell [ref=f206e546]:
+                        - textbox "Source Entry No., sorted in Ascending order 827" [ref=f206e547]
+                    - row [ref=f206e548]:
+                      - gridcell [ref=f206e549]:
+                        - button "Ordinal and Designation 01.05" [ref=f206e550] [cursor=pointer]: "01.05"
+                      - gridcell [ref=f206e551]:
+                        - button "Show more options" [ref=f206e552] [cursor=pointer]
+                      - gridcell [ref=f206e553]:
+                        - textbox "Source Entry No., sorted in Ascending order 1213" [ref=f206e554]
+                    - row [ref=f206e555]:
+                      - gridcell [ref=f206e556]:
+                        - button "Ordinal and Designation 02.01" [ref=f206e557] [cursor=pointer]: "02.01"
+                      - gridcell [ref=f206e558]:
+                        - button "Show more options" [ref=f206e559] [cursor=pointer]
+                      - gridcell [ref=f206e560]:
+                        - textbox "Source Entry No., sorted in Ascending order 1346" [ref=f206e561]
+                    - row [ref=f206e562]:
+                      - gridcell [ref=f206e563]:
+                        - button "Ordinal and Designation 02.02" [ref=f206e564] [cursor=pointer]: "02.02"
+                      - gridcell [ref=f206e565]:
+                        - button "Show more options" [ref=f206e566] [cursor=pointer]
+                      - gridcell [ref=f206e567]:
+                        - textbox "Source Entry No., sorted in Ascending order 1423" [ref=f206e568]
+                    - row [ref=f206e569]:
+                      - gridcell [ref=f206e570]:
+                        - button "Ordinal and Designation 02.03" [ref=f206e571] [cursor=pointer]: "02.03"
+                      - gridcell [ref=f206e572]:
+                        - button "Show more options" [ref=f206e573] [cursor=pointer]
+                      - gridcell [ref=f206e574]:
+                        - textbox "Source Entry No., sorted in Ascending order 1645" [ref=f206e575]
+                    - row [ref=f206e576]:
+                      - gridcell [ref=f206e577]:
+                        - button "Ordinal and Designation 02.04" [ref=f206e578] [cursor=pointer]: "02.04"
+                      - gridcell [ref=f206e579]:
+                        - button "Show more options" [ref=f206e580] [cursor=pointer]
+                      - gridcell [ref=f206e581]:
+                        - textbox "Source Entry No., sorted in Ascending order 1810" [ref=f206e582]
+                    - row [ref=f206e583]:
+                      - gridcell [ref=f206e584]:
+                        - button "Ordinal and Designation 02.05" [ref=f206e585] [cursor=pointer]: "02.05"
+                      - gridcell [ref=f206e586]:
+                        - button "Show more options" [ref=f206e587] [cursor=pointer]
+                      - gridcell [ref=f206e588]:
+                        - textbox "Source Entry No., sorted in Ascending order 1925" [ref=f206e589]
+                    - row [ref=f206e590]:
+                      - gridcell [ref=f206e591]:
+                        - button "Ordinal and Designation 03.01" [ref=f206e592] [cursor=pointer]: "03.01"
+                      - gridcell [ref=f206e593]:
+                        - button "Show more options" [ref=f206e594] [cursor=pointer]
+                      - gridcell [ref=f206e595]:
+                        - textbox "Source Entry No., sorted in Ascending order 2058" [ref=f206e596]
+                    - row [ref=f206e597]:
+                      - gridcell [ref=f206e598]:
+                        - button "Ordinal and Designation 03.02" [ref=f206e599] [cursor=pointer]: "03.02"
+                      - gridcell [ref=f206e600]:
+                        - button "Show more options" [ref=f206e601] [cursor=pointer]
+                      - gridcell [ref=f206e602]:
+                        - textbox "Source Entry No., sorted in Ascending order 2135" [ref=f206e603]
+                    - row [ref=f206e604]:
+                      - gridcell [ref=f206e605]:
+                        - button "Ordinal and Designation 03.03" [ref=f206e606] [cursor=pointer]: "03.03"
+                      - gridcell [ref=f206e607]:
+                        - button "Show more options" [ref=f206e608] [cursor=pointer]
+                      - gridcell [ref=f206e609]:
+                        - textbox "Source Entry No., sorted in Ascending order 2379" [ref=f206e610]
+                    - row [ref=f206e611]:
+                      - gridcell [ref=f206e612]:
+                        - button "Ordinal and Designation 03.04" [ref=f206e613] [cursor=pointer]: "03.04"
+                      - gridcell [ref=f206e614]:
+                        - button "Show more options" [ref=f206e615] [cursor=pointer]
+                      - gridcell [ref=f206e616]:
+                        - textbox "Source Entry No., sorted in Ascending order 2556" [ref=f206e617]
+                    - row [ref=f206e618]:
+                      - gridcell [ref=f206e619]:
+                        - button "Ordinal and Designation 03.05" [ref=f206e620] [cursor=pointer]: "03.05"
+                      - gridcell [ref=f206e621]:
+                        - button "Show more options" [ref=f206e622] [cursor=pointer]
+                      - gridcell [ref=f206e623]:
+                        - textbox "Source Entry No., sorted in Ascending order 2671" [ref=f206e624]
+                    - row [ref=f206e625]:
+                      - gridcell [ref=f206e626]:
+                        - button "Ordinal and Designation 04.01" [ref=f206e627] [cursor=pointer]: "04.01"
+                      - gridcell [ref=f206e628]:
+                        - button "Show more options" [ref=f206e629] [cursor=pointer]
+                      - gridcell [ref=f206e630]:
+                        - textbox "Source Entry No., sorted in Ascending order 2804" [ref=f206e631]
+                    - row [ref=f206e632]:
+                      - gridcell [ref=f206e633]:
+                        - button "Ordinal and Designation 04.02" [ref=f206e634] [cursor=pointer]: "04.02"
+                      - gridcell [ref=f206e635]:
+                        - button "Show more options" [ref=f206e636] [cursor=pointer]
+                      - gridcell [ref=f206e637]:
+                        - textbox "Source Entry No., sorted in Ascending order 2852" [ref=f206e638]
+                    - row [ref=f206e639]:
+                      - gridcell [ref=f206e640]:
+                        - button "Ordinal and Designation 04.03" [ref=f206e641] [cursor=pointer]: "04.03"
+                      - gridcell [ref=f206e642]:
+                        - button "Show more options" [ref=f206e643] [cursor=pointer]
+                      - gridcell [ref=f206e644]:
+                        - textbox "Source Entry No., sorted in Ascending order 3074" [ref=f206e645]
+                    - row [ref=f206e646]:
+                      - gridcell [ref=f206e647]:
+                        - button "Ordinal and Designation 04.04" [ref=f206e648] [cursor=pointer]: "04.04"
+                      - gridcell [ref=f206e649]:
+                        - button "Show more options" [ref=f206e650] [cursor=pointer]
+                      - gridcell [ref=f206e651]:
+                        - textbox "Source Entry No., sorted in Ascending order 3239" [ref=f206e652]
+                    - row [ref=f206e653]:
+                      - gridcell [ref=f206e654]:
+                        - button "Ordinal and Designation 04.05" [ref=f206e655] [cursor=pointer]: "04.05"
+                      - gridcell [ref=f206e656]:
+                        - button "Show more options" [ref=f206e657] [cursor=pointer]
+                      - gridcell [ref=f206e658]:
+                        - textbox "Source Entry No., sorted in Ascending order 3354" [ref=f206e659]
+                    - row [ref=f206e660]:
+                      - gridcell [ref=f206e661]:
+                        - button "Ordinal and Designation 05.01" [ref=f206e662] [cursor=pointer]: "05.01"
+                      - gridcell [ref=f206e663]:
+                        - button "Show more options" [ref=f206e664] [cursor=pointer]
+                      - gridcell [ref=f206e665]:
+                        - textbox "Source Entry No., sorted in Ascending order 3487" [ref=f206e666]
+                    - row [ref=f206e667]:
+                      - gridcell [ref=f206e668]:
+                        - button "Ordinal and Designation 05.02" [ref=f206e669] [cursor=pointer]: "05.02"
+                      - gridcell [ref=f206e670]:
+                        - button "Show more options" [ref=f206e671] [cursor=pointer]
+                      - gridcell [ref=f206e672]:
+                        - textbox "Source Entry No., sorted in Ascending order 3564" [ref=f206e673]
+                    - row [ref=f206e674]:
+                      - gridcell [ref=f206e675]:
+                        - button "Ordinal and Designation 05.03" [ref=f206e676] [cursor=pointer]: "05.03"
+                      - gridcell [ref=f206e677]:
+                        - button "Show more options" [ref=f206e678] [cursor=pointer]
+                      - gridcell [ref=f206e679]:
+                        - textbox "Source Entry No., sorted in Ascending order 3808" [ref=f206e680]
+                    - row [ref=f206e681]:
+                      - gridcell [ref=f206e682]:
+                        - button "Ordinal and Designation 05.04" [ref=f206e683] [cursor=pointer]: "05.04"
+                      - gridcell [ref=f206e684]:
+                        - button "Show more options" [ref=f206e685] [cursor=pointer]
+                      - gridcell [ref=f206e686]:
+                        - textbox "Source Entry No., sorted in Ascending order 3985" [ref=f206e687]
+                    - row [ref=f206e688]:
+                      - gridcell [ref=f206e689]:
+                        - button "Ordinal and Designation 05.05" [ref=f206e690] [cursor=pointer]: "05.05"
+                      - gridcell [ref=f206e691]:
+                        - button "Show more options" [ref=f206e692] [cursor=pointer]
+                      - gridcell [ref=f206e693]:
+                        - textbox "Source Entry No., sorted in Ascending order 4100" [ref=f206e694]
+                    - row [ref=f206e695]:
+                      - gridcell [ref=f206e696]:
+                        - button "Ordinal and Designation 06.01" [ref=f206e697] [cursor=pointer]: "06.01"
+                      - gridcell [ref=f206e698]:
+                        - button "Show more options" [ref=f206e699] [cursor=pointer]
+                      - gridcell [ref=f206e700]:
+                        - textbox "Source Entry No., sorted in Ascending order 4233" [ref=f206e701]
+                    - row [ref=f206e702]:
+                      - gridcell [ref=f206e703]:
+                        - button "Ordinal and Designation 06.02" [ref=f206e704] [cursor=pointer]: "06.02"
+                      - gridcell [ref=f206e705]:
+                        - button "Show more options" [ref=f206e706] [cursor=pointer]
+                      - gridcell [ref=f206e707]:
+                        - textbox "Source Entry No., sorted in Ascending order 4281" [ref=f206e708]
+                    - row [ref=f206e709]:
+                      - gridcell [ref=f206e710]:
+                        - button "Ordinal and Designation 06.03" [ref=f206e711] [cursor=pointer]: "06.03"
+                      - gridcell [ref=f206e712]:
+                        - button "Show more options" [ref=f206e713] [cursor=pointer]
+                      - gridcell [ref=f206e714]:
+                        - textbox "Source Entry No., sorted in Ascending order 4503" [ref=f206e715]
+                    - row [ref=f206e716]:
+                      - gridcell [ref=f206e717]:
+                        - button "Ordinal and Designation 06.04" [ref=f206e718] [cursor=pointer]: "06.04"
+                      - gridcell [ref=f206e719]:
+                        - button "Show more options" [ref=f206e720] [cursor=pointer]
+                      - gridcell [ref=f206e721]:
+                        - textbox "Source Entry No., sorted in Ascending order 4668" [ref=f206e722]
+                    - row [ref=f206e723]:
+                      - gridcell [ref=f206e724]:
+                        - button "Ordinal and Designation 06.05" [ref=f206e725] [cursor=pointer]: "06.05"
+                      - gridcell [ref=f206e726]:
+                        - button "Show more options" [ref=f206e727] [cursor=pointer]
+                      - gridcell [ref=f206e728]:
+                        - textbox "Source Entry No., sorted in Ascending order 4783" [ref=f206e729]
+                    - row [ref=f206e730]:
+                      - gridcell [ref=f206e731]:
+                        - button "Ordinal and Designation 07.01" [ref=f206e732] [cursor=pointer]: "07.01"
+                      - gridcell [ref=f206e733]:
+                        - button "Show more options" [ref=f206e734] [cursor=pointer]
+                      - gridcell [ref=f206e735]:
+                        - textbox "Source Entry No., sorted in Ascending order 4916" [ref=f206e736]
+                    - row [ref=f206e737]:
+                      - gridcell [ref=f206e738]:
+                        - button "Ordinal and Designation 07.02" [ref=f206e739] [cursor=pointer]: "07.02"
+                      - gridcell [ref=f206e740]:
+                        - button "Show more options" [ref=f206e741] [cursor=pointer]
+                      - gridcell [ref=f206e742]:
+                        - textbox "Source Entry No., sorted in Ascending order 4993" [ref=f206e743]
+                    - row [ref=f206e744]:
+                      - gridcell [ref=f206e745]:
+                        - button "Ordinal and Designation 07.03" [ref=f206e746] [cursor=pointer]: "07.03"
+                      - gridcell [ref=f206e747]:
+                        - button "Show more options" [ref=f206e748] [cursor=pointer]
+                      - gridcell [ref=f206e749]:
+                        - textbox "Source Entry No., sorted in Ascending order 5237" [ref=f206e750]
+                    - row [ref=f206e751]:
+                      - gridcell [ref=f206e752]:
+                        - button "Ordinal and Designation 07.04" [ref=f206e753] [cursor=pointer]: "07.04"
+                      - gridcell [ref=f206e754]:
+                        - button "Show more options" [ref=f206e755] [cursor=pointer]
+                      - gridcell [ref=f206e756]:
+                        - textbox "Source Entry No., sorted in Ascending order 5414" [ref=f206e757]
+                    - row [ref=f206e758]:
+                      - gridcell [ref=f206e759]:
+                        - button "Ordinal and Designation 07.05" [ref=f206e760] [cursor=pointer]: "07.05"
+                      - gridcell [ref=f206e761]:
+                        - button "Show more options" [ref=f206e762] [cursor=pointer]
+                      - gridcell [ref=f206e763]:
+                        - textbox "Source Entry No., sorted in Ascending order 5529" [ref=f206e764]
+                    - row [ref=f206e765]:
+                      - gridcell [ref=f206e766]:
+                        - button "Ordinal and Designation 08.01" [ref=f206e767] [cursor=pointer]: "08.01"
+                      - gridcell [ref=f206e768]:
+                        - button "Show more options" [ref=f206e769] [cursor=pointer]
+                      - gridcell [ref=f206e770]:
+                        - textbox "Source Entry No., sorted in Ascending order 5662" [ref=f206e771]
+        - generic [ref=f206e778]:
+          - paragraph [ref=f206e780]: Ordinal and Designation
+          - generic "Ordinal and Designation Specifies the composed GAEB ordinal of the row followed by the beginning of its text. Ask Copilot" [ref=f206e781]:
+            - paragraph [ref=f206e782]: Specifies the composed GAEB ordinal of the row followed by the beginning of its text.
+          - button [ref=f206e786] [cursor=pointer]
+      - text: Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.
+      - paragraph [ref=f206e795]: GAEB0136. GAEB Schema
+      - paragraph [ref=f206e797]: List with title "Related Rows" now has 3 items
+      - paragraph [ref=f206e799]: Related Table, sorted in Ascending order
+      - paragraph [ref=f206e803]: Related Table, sorted in Ascending order
+      - paragraph [ref=f206e807]: List with title "GAEB Item List Rows" now has 147 items
+      - paragraph [ref=f206e809]: Source Entry No., sorted in Ascending order

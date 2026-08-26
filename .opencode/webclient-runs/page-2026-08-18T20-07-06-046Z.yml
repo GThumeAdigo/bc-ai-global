@@ -1,0 +1,370 @@
+- generic [ref=f1e1]:
+  - banner [ref=f1e9]:
+    - button "App launcher" [ref=f1e12] [cursor=pointer]: 
+    - generic [ref=f1e18]:
+      - generic [ref=f1e19]: Dynamics 365 Business Central
+      - generic [ref=f1e24]:
+        - 'button "ADIGO GmbH Mitte Ost, Environment: GTHU" [ref=f1e28] [cursor=pointer]':
+          - generic [ref=f1e30]:
+            - generic [ref=f1e32]:
+              - generic [ref=f1e33]: GO
+              - generic [ref=f1e34]: OST
+            - generic [ref=f1e35]:
+              - generic [ref=f1e36]: "Environment:"
+              - generic [ref=f1e37]: GTHU
+        - button "Copilot" [ref=f1e40] [cursor=pointer]:
+          - generic [ref=f1e41]: 
+        - button "Search" [ref=f1e44] [cursor=pointer]:
+          - generic [ref=f1e45]: 
+        - button "Notifications" [ref=f1e48] [cursor=pointer]:
+          - generic [ref=f1e49]: 
+        - button "Settings" [ref=f1e52] [cursor=pointer]:
+          - generic [ref=f1e53]: 
+        - button "Help" [ref=f1e56] [cursor=pointer]:
+          - generic [ref=f1e57]: 
+    - generic [ref=f1e58]:
+      - button "Account manager for Gregor Thume" [ref=f1e60] [cursor=pointer]:
+        - generic [ref=f1e61]: GT
+      - generic: 
+  - iframe [active] [ref=f1e76]:
+    - generic [ref=f2e1]:
+      - generic [ref=f2e3]:
+        - generic:
+          - form "Role Center":
+            - generic [ref=f2e5]:
+              - navigation [ref=f2e6]:
+                - generic [ref=f2e8]:
+                  - button "Skip to main content" [ref=f2e9] [cursor=pointer]
+                  - navigation "Main navigation" [ref=f2e10]:
+                    - menubar [ref=f2e19]:
+                      - generic [ref=f2e22]:
+                        - menuitem [ref=f2e362] [cursor=pointer]:
+                          - heading "ADIGO GmbH Mitte Ost" [level=1] [ref=f2e364]
+                        - menuitem "APP" [ref=f2e367] [cursor=pointer]
+                        - menuitem "All Reports" [ref=f2e372] [cursor=pointer]
+                        - menuitem "Explore all business features for my role in Business Central" [ref=f2e376] [cursor=pointer]:
+                          - generic [ref=f2e377]: 
+                        - generic [ref=f2e55]:
+                          - menuitem "Agent" [ref=f2e56] [cursor=pointer]:
+                            - generic [ref=f2e57]:
+                              - generic [ref=f2e58]: Agent
+                              - generic [ref=f2e64]: A
+                              - img "Not configured" [ref=f2e66]
+                          - menuitem "Payables Agent" [ref=f2e70] [cursor=pointer]:
+                            - generic [ref=f2e71]:
+                              - generic [ref=f2e72]: Payables Agent
+                              - generic [ref=f2e78]: PA
+                              - img "Not configured" [ref=f2e80]
+                          - menuitem "Sales Order Agent" [ref=f2e84] [cursor=pointer]:
+                            - generic [ref=f2e85]:
+                              - generic [ref=f2e86]: Sales Order Agent
+                              - generic [ref=f2e92]: SO
+                              - img "Not configured" [ref=f2e94]
+                    - generic [ref=f2e107]:
+                      - menubar [ref=f2e109]:
+                        - menuitem "Profiles, Specifies the Profiles." [ref=f2e379] [cursor=pointer]:
+                          - generic [ref=f2e380]: Profiles
+                      - button "Toggle wide layout" [ref=f2e123] [cursor=pointer]:
+                        - generic [ref=f2e124]: 
+              - main [ref=f2e127]:
+                - generic [ref=f2e131]:
+                  - generic [ref=f2e134]:
+                    - generic [ref=f2e136]:
+                      - generic [ref=f2e137]: BAU.Interfaces
+                      - generic "Headline 1 of 1." [ref=f2e138]: GAEB
+                    - generic [ref=f2e139]: Use the Left and Right arrow keys to navigate between headlines.
+                  - menu [ref=f2e141]:
+                    - generic [ref=f2e142]: Actions
+                    - generic [ref=f2e148]:
+                      - menuitem "Setup" [ref=f2e383] [cursor=pointer]:
+                        - generic [ref=f2e384]:
+                          - generic [ref=f2e387]: Setup
+                          - generic [ref=f2e389]: 
+                      - menuitem "Master Data" [ref=f2e390] [cursor=pointer]:
+                        - generic [ref=f2e391]:
+                          - generic [ref=f2e394]: Master Data
+                          - generic [ref=f2e396]: 
+                      - menuitem "Import" [ref=f2e397] [cursor=pointer]:
+                        - generic [ref=f2e398]:
+                          - generic [ref=f2e401]: Import
+                          - generic [ref=f2e403]: 
+                  - generic [ref=f2e182]:
+                    - heading [level=2] [ref=f2e184]:
+                      - button "GAE.01 Setup" [ref=f2e185] [cursor=pointer]
+                    - generic [ref=f2e192]:
+                      - heading "General" [level=3] [ref=f2e195]
+                      - list [ref=f2e201]:
+                        - listitem [ref=f2e202]:
+                          - button "People Setup" [ref=f2e205] [cursor=pointer]:
+                            - generic [ref=f2e208]: People
+                            - generic [ref=f2e209]: Setup
+                  - generic [ref=f2e212]:
+                    - heading [level=2] [ref=f2e214]:
+                      - button "GAE.02 Master Data" [ref=f2e215] [cursor=pointer]
+                    - generic [ref=f2e222]:
+                      - heading "General" [level=3] [ref=f2e225]
+                      - generic [ref=f2e226]:
+                        - list [ref=f2e231]:
+                          - listitem [ref=f2e232]:
+                            - button "GAEB Files 0" [ref=f2e236] [cursor=pointer]:
+                              - generic [ref=f2e237]: GAEB Files
+                              - generic [ref=f2e240]: "0"
+                          - listitem [ref=f2e247]:
+                            - button "Typed Docum… (Dev) 58" [ref=f2e251] [cursor=pointer]:
+                              - generic [ref=f2e254]:
+                                - generic [ref=f2e255]: Typed Docum…
+                                - generic [ref=f2e259]: (Dev)
+                              - generic [ref=f2e264]: "58"
+                          - listitem [ref=f2e271]:
+                            - button "Mapped Units 3" [ref=f2e275] [cursor=pointer]:
+                              - generic [ref=f2e276]: Mapped Units
+                              - generic [ref=f2e279]: "3"
+                          - listitem [ref=f2e286]:
+                            - button "Unmapped Units 3 Unfavorable" [ref=f2e290] [cursor=pointer]:
+                              - generic [ref=f2e291]: Unmapped Units
+                              - generic [ref=f2e294]: "3"
+                              - generic [ref=f2e296]: Unfavorable
+                        - list [ref=f2e306]:
+                          - listitem [ref=f2e307]:
+                            - button "New Import GAEB File" [ref=f2e310] [cursor=pointer]:
+                              - generic [ref=f2e313]: New
+                              - generic [ref=f2e316]:
+                                - generic [ref=f2e317]: Import GAEB
+                                - generic [ref=f2e321]: File
+                          - listitem [ref=f2e326]:
+                            - button "People GAEB XML Sources" [ref=f2e329] [cursor=pointer]:
+                              - generic [ref=f2e332]: People
+                              - generic [ref=f2e335]:
+                                - generic [ref=f2e336]: GAEB XML
+                                - generic [ref=f2e340]: Sources
+                          - listitem [ref=f2e345]:
+                            - button "Circle GAEB Projects" [ref=f2e348] [cursor=pointer]:
+                              - generic [ref=f2e351]: Circle
+                              - generic [ref=f2e352]: GAEB Projects
+                  - separator [ref=f2e355]
+                  - button "Back to top" [ref=f2e356] [cursor=pointer]
+        - generic:
+          - form "GAEB Setup":
+            - main:
+              - generic:
+                - button "Go to the previous document of the same type":
+                  - generic: 
+              - generic [ref=f2e551]:
+                - generic [ref=f2e554]:
+                  - button "Back" [ref=f2e557] [cursor=pointer]:
+                    - generic [ref=f2e558]: 
+                  - generic [ref=f2e560]:
+                    - generic [ref=f2e561]:
+                      - button "Open the page in read-only mode" [pressed] [ref=f2e562] [cursor=pointer]:
+                        - generic [ref=f2e563]: 
+                      - button "Share this page with other users or apps" [ref=f2e565] [cursor=pointer]:
+                        - generic [ref=f2e566]: 
+                      - button "Create a new entry." [ref=f2e568] [cursor=pointer]:
+                        - generic [ref=f2e569]: 
+                      - button "Delete the information" [ref=f2e571] [cursor=pointer]:
+                        - generic [ref=f2e572]: 
+                    - generic [ref=f2e574]:
+                      - generic "Your data is saved now and the page can be closed." [ref=f2e578]: Saved
+                      - button "Not bookmarked" [ref=f2e581] [cursor=pointer]:
+                        - generic [ref=f2e582]: 
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f2e586] [cursor=pointer]:
+                        - generic [ref=f2e587]: 
+                      - button "Toggle wide layout" [ref=f2e591] [cursor=pointer]:
+                        - generic [ref=f2e592]: 
+                    - generic [ref=f2e594]: GAEB Setup
+                - menubar [ref=f2e605]
+                - generic [ref=f2e613]:
+                  - button [expanded] [ref=f2e616] [cursor=pointer]:
+                    - heading "General" [level=2] [ref=f2e617]
+                  - generic [ref=f2e620]:
+                    - generic [ref=f2e621]:
+                      - button "GAEB Nos." [ref=f2e622] [cursor=pointer]
+                      - generic [ref=f2e623]:
+                        - button "Choose a value for GAEB Nos." [ref=f2e624] [cursor=pointer]
+                        - combobox "GAEB Nos." [ref=f2e625]: GAEB
+                    - generic [ref=f2e626]:
+                      - button "Project Nos." [ref=f2e627] [cursor=pointer]
+                      - generic [ref=f2e628]:
+                        - button "Choose a value for Project Nos." [ref=f2e629] [cursor=pointer]
+                        - combobox "Project Nos." [expanded] [active] [ref=f2e630]:
+                          - grid "Lookupform308_No Series" [ref=f2e639]:
+                            - rowgroup [ref=f2e641]:
+                              - row [ref=f2e642]:
+                                - columnheader "Error" [ref=f2e643]
+                                - columnheader [ref=f2e644]:
+                                  - generic [ref=f2e645]:
+                                    - button "Code, sorted in Ascending order" [ref=f2e646] [cursor=pointer]: Code
+                                    - img "Ascending" [ref=f2e648]
+                                  - button "Open menu for Code" [ref=f2e649] [cursor=pointer]
+                                  - button [ref=f2e650]
+                                - columnheader [ref=f2e653]:
+                                  - button "Description" [ref=f2e655] [cursor=pointer]
+                                  - button "Open menu for Description" [ref=f2e656] [cursor=pointer]
+                                  - button [ref=f2e657]
+                            - generic [ref=f2e660]:
+                              - rowgroup [ref=f2e661]:
+                                - row [ref=f2e662]:
+                                  - columnheader [ref=f2e663]
+                                  - columnheader [ref=f2e664]
+                                  - columnheader [ref=f2e665]
+                              - row [ref=f2e666]:
+                                - rowheader [ref=f2e667]
+                                - gridcell [ref=f2e668]:
+                                  - button "Code, sorted in Ascending order ACC.01 OST" [ref=f2e669]: ACC.01 OST
+                                - gridcell [ref=f2e670]:
+                                  - textbox "Description" [ref=f2e671]
+                              - row [ref=f2e672]:
+                                - rowheader [ref=f2e673]
+                                - gridcell [ref=f2e674]:
+                                  - button "Code, sorted in Ascending order ANL-AKT" [ref=f2e675]: ANL-AKT
+                                - gridcell [ref=f2e676]:
+                                  - textbox "Description Anlagen Aktivierung (TRD Miete)" [ref=f2e677]
+                              - row [ref=f2e678]:
+                                - rowheader [ref=f2e679]
+                                - gridcell [ref=f2e680]:
+                                  - button "Code, sorted in Ascending order ANL-ANLAGE" [ref=f2e681]: ANL-ANLAGE
+                                - gridcell [ref=f2e682]:
+                                  - textbox "Description Anlage" [ref=f2e683]
+                              - row [ref=f2e684]:
+                                - rowheader [ref=f2e685]
+                                - gridcell [ref=f2e686]:
+                                  - button "Code, sorted in Ascending order ANL-BL-WDK" [ref=f2e687]: ANL-BL-WDK
+                                - gridcell [ref=f2e688]:
+                                  - textbox "Description Wiederk. Anl. Buch.-Bl." [ref=f2e689]
+                              - row [ref=f2e690]:
+                                - rowheader [ref=f2e691]
+                                - gridcell [ref=f2e692]:
+                                  - button "Code, sorted in Ascending order ANL-BUBL-FIBU" [ref=f2e693]: ANL-BUBL-FIBU
+                                - gridcell [ref=f2e694]:
+                                  - textbox "Description Anlagen-Fibu Buch.-Blatt" [ref=f2e695]
+                              - row [ref=f2e696]:
+                                - rowheader [ref=f2e697]
+                                - gridcell [ref=f2e698]:
+                                  - button "Code, sorted in Ascending order ANL-BUBL-GLR" [ref=f2e699]: ANL-BUBL-GLR
+                                - gridcell [ref=f2e700]:
+                                  - textbox "Description Wiederk. Anl.-Fibu Buch.-Blatt" [ref=f2e701]
+                              - row [ref=f2e702]:
+                                - rowheader [ref=f2e703]
+                                - gridcell [ref=f2e704]:
+                                  - button "Code, sorted in Ascending order ANL-BUCHBL" [ref=f2e705]: ANL-BUCHBL
+                                - gridcell [ref=f2e706]:
+                                  - textbox "Description Anlagen Buch.-Blatt" [ref=f2e707]
+                              - row [ref=f2e708]:
+                                - rowheader [ref=f2e709]
+                                - gridcell [ref=f2e710]:
+                                  - button "Code, sorted in Ascending order ANL-VER-BUCHBL" [ref=f2e711]: ANL-VER-BUCHBL
+                                - gridcell [ref=f2e712]:
+                                  - textbox "Description Versicherung Buch.-Blatt" [ref=f2e713]
+                              - row [ref=f2e714]:
+                                - rowheader [ref=f2e715]
+                                - gridcell [ref=f2e716]:
+                                  - button "Code, sorted in Ascending order ANL-VERS." [ref=f2e717]: ANL-VERS.
+                                - gridcell [ref=f2e718]:
+                                  - textbox "Description Versicherung" [ref=f2e719]
+                              - row [ref=f2e720]:
+                                - rowheader [ref=f2e721]
+                                - gridcell [ref=f2e722]:
+                                  - button "Code, sorted in Ascending order ANL-VERSBB" [ref=f2e723]: ANL-VERSBB
+                                - gridcell [ref=f2e724]:
+                                  - textbox "Description Versicherung Buch.-Blatt" [ref=f2e725]
+                              - row [ref=f2e726]:
+                                - rowheader [ref=f2e727]
+                                - gridcell [ref=f2e728]:
+                                  - button "Code, sorted in Ascending order ANL-VORL" [ref=f2e729]: ANL-VORL
+                                - gridcell [ref=f2e730]:
+                                  - textbox "Description Anlagen Vorlagen" [ref=f2e731]
+                              - row [ref=f2e732]:
+                                - rowheader [ref=f2e733]
+                                - gridcell [ref=f2e734]:
+                                  - button "Code, sorted in Ascending order BA" [ref=f2e735]: BA
+                                - gridcell [ref=f2e736]:
+                                  - textbox "Description Budgetaufgabe" [ref=f2e737]
+                              - row [ref=f2e738]:
+                                - rowheader [ref=f2e739]
+                                - gridcell [ref=f2e740]:
+                                  - button "Code, sorted in Ascending order BANK-BANK" [ref=f2e741]: BANK-BANK
+                                - gridcell [ref=f2e742]:
+                                  - textbox "Description BANK" [ref=f2e743]
+                              - row [ref=f2e744]:
+                                - rowheader [ref=f2e745]
+                                - gridcell [ref=f2e746]:
+                                  - button "Code, sorted in Ascending order BANK-BUCHBL" [ref=f2e747]: BANK-BUCHBL
+                                - gridcell [ref=f2e748]:
+                                  - textbox "Description Zahlung Buch.-Blatt" [ref=f2e749]
+                              - row [ref=f2e750]:
+                                - rowheader [ref=f2e751]
+                                - gridcell [ref=f2e752]:
+                                  - button "Code, sorted in Ascending order BANK-DAUERAUF" [ref=f2e753]: BANK-DAUERAUF
+                                - gridcell [ref=f2e754]:
+                                  - textbox "Description Dauerauftrag" [ref=f2e755]
+                              - row [ref=f2e756]:
+                                - rowheader [ref=f2e757]
+                                - gridcell [ref=f2e758]:
+                                  - button "Code, sorted in Ascending order BANK-DTAUS" [ref=f2e759]: BANK-DTAUS
+                                - gridcell [ref=f2e760]:
+                                  - textbox "Description Dtaus Dateien" [ref=f2e761]
+                              - row [ref=f2e762]:
+                                - rowheader [ref=f2e763]
+                                - gridcell [ref=f2e764]:
+                                  - button "Code, sorted in Ascending order BANKEINZ" [ref=f2e765]: BANKEINZ
+                                - gridcell [ref=f2e766]:
+                                  - textbox "Description Bankeinzahlung" [ref=f2e767]
+                              - row [ref=f2e768]:
+                                - rowheader [ref=f2e769]
+                                - gridcell [ref=f2e770]:
+                                  - button "Code, sorted in Ascending order BANK-SEPACT-N." [ref=f2e771]: BANK-SEPACT-N.
+                                - gridcell [ref=f2e772]:
+                                  - textbox "Description SEPA Kreditübertrag. Nachr.-ID" [ref=f2e773]
+                              - row [ref=f2e774]:
+                                - rowheader [ref=f2e775]
+                                - gridcell [ref=f2e776]:
+                                  - button "Code, sorted in Ascending order BANK-SEPADD-N." [ref=f2e777]: BANK-SEPADD-N.
+                                - gridcell [ref=f2e778]:
+                                  - textbox "Description SEPA-Lastschrift Nachr.-ID" [ref=f2e779]
+                              - row [ref=f2e780]:
+                                - rowheader [ref=f2e781]
+                                - gridcell [ref=f2e782]:
+                                  - button "Code, sorted in Ascending order BANK-ZAHL-DAT" [ref=f2e783]: BANK-ZAHL-DAT
+                                - gridcell [ref=f2e784]:
+                                  - textbox "Description Zahldatei" [ref=f2e785]
+                              - row [ref=f2e786]:
+                                - rowheader [ref=f2e787]
+                                - gridcell [ref=f2e788]:
+                                  - button "Code, sorted in Ascending order BANK-ZAHL-VOR" [ref=f2e789]: BANK-ZAHL-VOR
+                                - gridcell [ref=f2e790]:
+                                  - textbox "Description Zahlungsvorschlag" [ref=f2e791]
+                              - row [ref=f2e792]:
+                                - rowheader [ref=f2e793]
+                                - gridcell [ref=f2e794]:
+                                  - button "Code, sorted in Ascending order BANK-ZE-BUCHBL" [ref=f2e795]: BANK-ZE-BUCHBL
+                                - gridcell [ref=f2e796]:
+                                  - textbox "Description Zahlungseing. Buch.-Bl." [ref=f2e797]
+                              - row [ref=f2e798]:
+                                - rowheader [ref=f2e799]
+                                - gridcell [ref=f2e800]:
+                                  - button "Code, sorted in Ascending order BANK-ZLG_IMP_1" [ref=f2e801]: BANK-ZLG_IMP_1
+                                - gridcell [ref=f2e802]:
+                                  - textbox "Description Zlg.-Importjournal" [ref=f2e803]
+                              - row [ref=f2e804]:
+                                - rowheader [ref=f2e805]
+                                - gridcell [ref=f2e806]:
+                                  - button "Code, sorted in Ascending order BANK-ZLG_IM-P_2" [ref=f2e807]: BANK-ZLG_IM-P_2
+                                - gridcell [ref=f2e808]:
+                                  - textbox "Description Zlg.-Importschnittstelle" [ref=f2e809]
+                              - row [ref=f2e810]:
+                                - rowheader [ref=f2e811]
+                                - gridcell [ref=f2e812]:
+                                  - button "Code, sorted in Ascending order BANK-ZLG-AZV1" [ref=f2e813]: BANK-ZLG-AZV1
+                                - gridcell [ref=f2e814]:
+                                  - textbox "Description AZV1 Dateien" [ref=f2e815]
+              - generic:
+                - button "Go to the next document of the same type":
+                  - generic: 
+        - form "Select" [ref=f2e817]:
+          - generic [ref=f2e820]:
+            - button "New" [ref=f2e821] [cursor=pointer]
+            - generic [ref=f2e822]:
+              - button "Show details" [disabled] [ref=f2e824]
+              - button "Select from full list" [ref=f2e826] [cursor=pointer]
+      - text: Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.
+      - paragraph [ref=f2e828]: Code, sorted in Ascending order

@@ -1,0 +1,261 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - generic:
+      - form "Performance Profiler":
+        - main:
+          - generic [ref=e4]:
+            - 'generic "Company Badge: GO O" [ref=e6] [cursor=pointer]':
+              - generic [ref=e8]:
+                - generic [ref=e9]: GO
+                - generic [ref=e10]: OST
+            - generic [ref=e15]:
+              - generic [ref=e16]:
+                - button "Open the page in read-only mode" [disabled] [pressed] [ref=e17]:
+                  - generic [ref=e18]: 
+                - button "Share this page with other users or apps" [ref=e20] [cursor=pointer]:
+                  - generic [ref=e21]: 
+                - button "Create a new entry." [disabled] [ref=e23]:
+                  - generic [ref=e24]: 
+                - button "Delete the information" [disabled] [ref=e26]:
+                  - generic [ref=e27]: 
+              - generic [ref=e29]:
+                - generic "Your data is saved now and the page can be closed." [ref=e33]: Saved
+                - button "Not bookmarked" [ref=e36] [cursor=pointer]:
+                  - generic [ref=e37]: 
+              - generic [ref=e39]: Performance Profiler
+            - menubar [ref=e50]:
+              - generic [ref=e64]:
+                - menuitem "Start" [disabled] [ref=e69]
+                - menuitem "Stop" [disabled] [ref=e80]
+                - menuitem "Clear" [ref=e91] [cursor=pointer]
+                - menuitem [ref=e102]:
+                  - generic [ref=e103]:
+                    - button "Download" [ref=e104] [cursor=pointer]
+                    - button "Related actions for Download" [ref=e111] [cursor=pointer]:
+                      - generic [ref=e112]: 
+                - menuitem "Upload" [disabled] [ref=e119]
+                - menuitem "Settings" [disabled] [ref=e130]
+            - generic [ref=e143]:
+              - generic [ref=e170]:
+                - menubar [ref=e180]:
+                  - button "Active Apps" [ref=e186] [cursor=pointer]
+                  - menuitem "Actions" [ref=e207] [cursor=pointer]
+                - generic [ref=e212]:
+                  - iframe [ref=e214]:
+                    - region "Chart. HighCharts interactive chart." [ref=f1e2]:
+                      - region "Chart screen reader information.":
+                        - generic [ref=f1e3]:
+                          - generic [ref=f1e4]: Bar chart with 4 Balken.
+                          - generic [ref=f1e5]: The chart has 1 X axis displaying categories.
+                          - generic [ref=f1e6]: The chart has 1 Y axis displaying values.
+                      - img "Interactive chart" [ref=f1e11]:
+                        - generic [ref=f1e18] [cursor=pointer]:
+                          - 'img "App Name: ADIGO.BAU.Interfaces.GAEB, Duration (milliseconds): 102036" [ref=f1e19]'
+                          - 'img "App Name: System Application, Duration (milliseconds): 109"'
+                          - 'img "App Name: Continia Document Capture, Duration (milliseconds): 109"'
+                          - 'img "App Name: System, Duration (milliseconds): 109"'
+                        - generic [ref=f1e22]:
+                          - generic [ref=f1e23]: "0"
+                          - generic [ref=f1e24]: 25k
+                          - generic [ref=f1e25]: 50k
+                          - generic [ref=f1e26]: 75k
+                          - generic [ref=f1e27]: 100k
+                          - generic [ref=f1e28]: 125k
+                        - generic [ref=f1e29]:
+                          - generic [ref=f1e30]: ADIGO.BAU.Interfaces.GAEB
+                          - generic [ref=f1e31]: System Application
+                          - generic [ref=f1e32]: Continia Document Capture
+                          - generic [ref=f1e33]: System
+                      - generic: End of interactive chart.
+                  - paragraph [ref=e217]: Shows the apps that where active during the recording. They were either running or called other apps. The duration represents the time you might save by removing an app.
+              - generic [ref=e223]:
+                - button "Show technical information" [ref=e224] [cursor=pointer]
+                - checkbox "Show technical information" [checked] [ref=e226]:
+                  - generic [ref=e227] [cursor=pointer]
+              - generic [ref=e230]:
+                - menubar [ref=e240]:
+                  - button "Time Spent" [ref=e246] [cursor=pointer]
+                  - menuitem "Actions" [ref=e267] [cursor=pointer]
+                - generic [ref=e272]:
+                  - iframe [ref=e274]:
+                    - region "Chart. HighCharts interactive chart." [ref=f2e2]:
+                      - region "Chart screen reader information.":
+                        - generic [ref=f2e3]: Pie chart with 4 Segmente.
+                      - img "Interactive chart" [ref=f2e9]:
+                        - generic [ref=f2e14] [cursor=pointer]:
+                          - 'img "App Name: ADIGO.BAU.Interfaces.GAEB, Duration (milliseconds): 100%" [ref=f2e15]'
+                          - 'img "App Name: System Application, Duration (milliseconds): 0%" [ref=f2e16]'
+                          - 'img "App Name: System, Duration (milliseconds): 0%" [ref=f2e17]'
+                          - 'img "App Name: Continia Document Capture, Duration (milliseconds): 0%" [ref=f2e18]'
+                        - generic [ref=f2e19] [cursor=pointer]:
+                          - generic [ref=f2e21]:
+                            - generic [ref=f2e22]: ADIGO.BAU.Interfaces.GAEB
+                            - text: ADIGO.BAU.Interfaces.GAEB
+                          - generic [ref=f2e24]:
+                            - generic [ref=f2e25]: System Application
+                            - text: System Application
+                          - generic [ref=f2e27]:
+                            - generic [ref=f2e28]: System
+                            - text: System
+                          - generic [ref=f2e30]:
+                            - generic [ref=f2e31]: Continia Document Capture
+                            - text: Continia Document Capture
+                      - generic: End of interactive chart.
+                  - paragraph [ref=e277]: Shows which apps were running during the recording. Durations are self-time. They show the length of activity but do not include time spent calling other apps.
+              - generic [ref=e278]:
+                - menubar [ref=e288]:
+                  - button "Time Spent by Application Object" [ref=e323] [cursor=pointer]
+                  - generic [ref=e335]:
+                    - menuitem "Share" [ref=e338] [cursor=pointer]:
+                      - generic [ref=e339]: 
+                    - menuitemcheckbox "Toggle focus mode" [ref=e343] [cursor=pointer]:
+                      - generic [ref=e344]: 
+                - grid "Time Spent by Application Object" [ref=e349]:
+                  - rowgroup [ref=e351]:
+                    - row [ref=e352]:
+                      - columnheader "Error" [ref=e353]
+                      - columnheader [ref=e354]:
+                        - button "Object Type" [ref=e356] [cursor=pointer]
+                        - button "Open menu for Object Type" [ref=e357] [cursor=pointer]
+                        - button [ref=e358]
+                      - columnheader "More Options" [ref=e361]
+                      - columnheader [ref=e363]:
+                        - button "Object Name" [ref=e365] [cursor=pointer]
+                        - button "Open menu for Object Name" [ref=e366] [cursor=pointer]
+                        - button [ref=e367]
+                      - columnheader [ref=e370]:
+                        - generic [ref=e371]:
+                          - button "Time Spent, sorted in Descending order" [ref=e372] [cursor=pointer]: Time Spent
+                          - img "Descending" [ref=e374]
+                        - button "Open menu for Time Spent" [ref=e375] [cursor=pointer]
+                        - button [ref=e376]
+                      - columnheader [ref=e379]:
+                        - button "App Name" [ref=e381] [cursor=pointer]
+                        - button "Open menu for App Name" [ref=e382] [cursor=pointer]
+                        - button [ref=e383]
+                  - generic [ref=e386]:
+                    - rowgroup [ref=e387]:
+                      - row [ref=e388]:
+                        - columnheader [ref=e389]
+                        - columnheader [ref=e390]
+                        - columnheader [ref=e391]
+                        - columnheader [ref=e393]
+                        - columnheader [ref=e394]
+                        - columnheader [ref=e395]
+                    - row [ref=e508]:
+                      - rowheader [ref=e509]
+                      - gridcell [ref=e510]:
+                        - textbox "Object Type Codeunit" [ref=e511]
+                      - gridcell [ref=e512]:
+                        - button "Show more options" [ref=e513] [cursor=pointer]
+                      - gridcell [ref=e514]:
+                        - textbox "Object Name GOXGAE Population Engine" [ref=e515]
+                      - gridcell [ref=e516]:
+                        - button "Time Spent, sorted in Descending order 55 seconds 453 milliseconds" [ref=e517] [cursor=pointer]: 55 seconds 453 milliseconds
+                      - gridcell [ref=e518]:
+                        - textbox "App Name ADIGO.BAU.Interfaces.GAEB" [ref=e519]
+                    - row [selected] [ref=e520]:
+                      - rowheader [ref=e397]
+                      - gridcell [ref=e398]:
+                        - textbox "Object Type" [ref=e399]
+                      - gridcell [ref=e400]:
+                        - button "Show more options" [ref=e401] [cursor=pointer]
+                      - gridcell [ref=e402]:
+                        - textbox "Object Name" [active] [ref=e403]
+                      - gridcell [ref=e521]:
+                        - button "Time Spent, sorted in Descending order 35 seconds 510 milliseconds" [ref=e522] [cursor=pointer]: 35 seconds 510 milliseconds
+                      - gridcell [ref=e406]:
+                        - textbox "App Name" [ref=e407]
+                    - row [ref=e420]:
+                      - rowheader [ref=e421]
+                      - gridcell [ref=e422]:
+                        - textbox "Object Type Codeunit" [ref=e423]
+                      - gridcell [ref=e424]:
+                        - button "Show more options" [ref=e425] [cursor=pointer]
+                      - gridcell [ref=e426]:
+                        - textbox "Object Name GOXGAE Population Data Access" [ref=e427]
+                      - gridcell [ref=e428]:
+                        - button "Time Spent, sorted in Descending order 7 seconds 161 milliseconds" [ref=e429] [cursor=pointer]: 7 seconds 161 milliseconds
+                      - gridcell [ref=e430]:
+                        - textbox "App Name ADIGO.BAU.Interfaces.GAEB" [ref=e431]
+                    - row [ref=e432]:
+                      - rowheader [ref=e433]
+                      - gridcell [ref=e434]:
+                        - textbox "Object Type Codeunit" [ref=e435]
+                      - gridcell [ref=e436]:
+                        - button "Show more options" [ref=e437] [cursor=pointer]
+                      - gridcell [ref=e438]:
+                        - textbox "Object Name GOXGAE XML Store" [ref=e439]
+                      - gridcell [ref=e440]:
+                        - button "Time Spent, sorted in Descending order 1 second 858 milliseconds" [ref=e441] [cursor=pointer]: 1 second 858 milliseconds
+                      - gridcell [ref=e442]:
+                        - textbox "App Name ADIGO.BAU.Interfaces.GAEB" [ref=e443]
+                    - row [ref=e444]:
+                      - rowheader [ref=e445]
+                      - gridcell [ref=e446]:
+                        - textbox "Object Type Table" [ref=e447]
+                      - gridcell [ref=e448]:
+                        - button "Show more options" [ref=e449] [cursor=pointer]
+                      - gridcell [ref=e450]:
+                        - textbox "Object Name GOXGAE XML Entry" [ref=e451]
+                      - gridcell [ref=e452]:
+                        - button "Time Spent, sorted in Descending order 1 second 836 milliseconds" [ref=e453] [cursor=pointer]: 1 second 836 milliseconds
+                      - gridcell [ref=e454]:
+                        - textbox "App Name ADIGO.BAU.Interfaces.GAEB" [ref=e455]
+                    - row [ref=e456]:
+                      - rowheader [ref=e457]
+                      - gridcell [ref=e458]:
+                        - textbox "Object Type Codeunit" [ref=e459]
+                      - gridcell [ref=e460]:
+                        - button "Show more options" [ref=e461] [cursor=pointer]
+                      - gridcell [ref=e462]:
+                        - textbox "Object Name GOXGAE Coverage Recorder" [ref=e463]
+                      - gridcell [ref=e464]:
+                        - button "Time Spent, sorted in Descending order 109 milliseconds" [ref=e465] [cursor=pointer]: 109 milliseconds
+                      - gridcell [ref=e466]:
+                        - textbox "App Name ADIGO.BAU.Interfaces.GAEB" [ref=e467]
+                    - row [ref=e468]:
+                      - rowheader [ref=e469]
+                      - gridcell [ref=e470]:
+                        - textbox "Object Type Codeunit" [ref=e471]
+                      - gridcell [ref=e472]:
+                        - button "Show more options" [ref=e473] [cursor=pointer]
+                      - gridcell [ref=e474]:
+                        - textbox "Object Name Temp Blob Impl." [ref=e475]
+                      - gridcell [ref=e476]:
+                        - button "Time Spent, sorted in Descending order 109 milliseconds" [ref=e477] [cursor=pointer]: 109 milliseconds
+                      - gridcell [ref=e478]:
+                        - textbox "App Name System Application" [ref=e479]
+                    - row [ref=e480]:
+                      - rowheader [ref=e481]
+                      - gridcell [ref=e482]:
+                        - textbox "Object Type Codeunit" [ref=e483]
+                      - gridcell [ref=e484]:
+                        - button "Show more options" [ref=e485] [cursor=pointer]
+                      - gridcell [ref=e486]:
+                        - textbox "Object Name Global Triggers" [ref=e487]
+                      - gridcell [ref=e488]:
+                        - button "Time Spent, sorted in Descending order 109 milliseconds" [ref=e489] [cursor=pointer]: 109 milliseconds
+                      - gridcell [ref=e490]:
+                        - textbox "App Name System" [ref=e491]
+                    - row [ref=e492]:
+                      - rowheader [ref=e493]
+                      - gridcell [ref=e494]:
+                        - textbox "Object Type Codeunit" [ref=e495]
+                      - gridcell [ref=e496]:
+                        - button "Show more options" [ref=e497] [cursor=pointer]
+                      - gridcell [ref=e498]:
+                        - textbox "Object Name CDC Continia License Mgt." [ref=e499]
+                      - gridcell [ref=e500]:
+                        - button "Time Spent, sorted in Descending order 109 milliseconds" [ref=e501] [cursor=pointer]: 109 milliseconds
+                      - gridcell [ref=e502]:
+                        - textbox "App Name Continia Document Capture" [ref=e503]
+              - generic [ref=e298]:
+                - menubar [ref=e308]:
+                  - button [ref=e314] [cursor=pointer]: Call Tree
+                - heading [level=2] [ref=e315]:
+                  - button "Call Tree" [ref=e317] [cursor=pointer]
+  - text: Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.
+  - paragraph [ref=e319]: Saved
+  - paragraph [ref=e505]: List with title "Time Spent by Application Object" now has 9 items
+  - paragraph [ref=e507]: Time Spent, sorted in Descending order

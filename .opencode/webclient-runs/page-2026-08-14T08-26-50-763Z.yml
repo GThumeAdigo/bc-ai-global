@@ -1,0 +1,27 @@
+- generic [ref=e5]:
+  - img "Organization background image" [ref=e6]
+  - generic [ref=e7]:
+    - generic [ref=e13]:
+      - img "Microsoft" [ref=e19]
+      - main [ref=e16]:
+        - generic [ref=e17]:
+          - generic [ref=e22]:
+            - button "Back" [ref=e23] [cursor=pointer]
+            - generic "gregor.thume@adigosolutions.onmicrosoft.com" [ref=e24]
+          - generic [ref=e25]:
+            - textbox [ref=e26]: gregor.thume@adigosolutions.onmicrosoft.com
+            - heading "Enter password" [level=1] [ref=e28]
+            - generic [ref=e30]:
+              - alert
+              - textbox "Enter the password for gregor.thume@adigosolutions.onmicrosoft.com" [active] [ref=e32]:
+                - /placeholder: Password
+            - link "Forgot my password" [ref=e39] [cursor=pointer]:
+              - /url: https://passwordreset.microsoftonline.com/?ru=https%3a%2f%2flogin.microsoftonline.com%2f3b1b504a-1113-405d-9c1e-634652755d7f%2freprocess%3fctx%3drQQIARAAndM7b-N0AADwpO0dbQW9XsWAEMMNJ4EoTv1-VKpQmji24_iV2M5DSFZs_-M4fib-J7HzAdBN6MTIyIJ00wkhhEA6MVcMN9zELbew3NITU8WE-Aosv2_wOz5kGxjZQBvo5_tYA7t8zHG0D2aEj7gE7SEkRhEIS6MMMqVnPuGhmMtys9XZ8enXtx-74s9k86c374507SvkWZ2YQ5gXlxcX7roIU1AUHkjhaho3_CqdJqFXNLwsuViBJIMAKcIgRcL0l3r9Zb3-bK-gCQ7HcQ5nWIajOBZj8MakHUcToZ-oOwOqAr9VWiiqLiS0N-wmmmlA1TR2aiLhqhmgk0Vnrg77cyUxSG3IQ9WMMGWAoqrZTXpmUE4SCao7Dx0vDFJNxthE4Kk_9x5ozTWc4_-RrcId-HvvaJatEifPCvjd_vOD1qzdZSW1WgVOQpglP8-hT9l0EY1jyxfWnu6F3owrr4f6Ith6E2SshO41vu0raYuP_dBp4vpy1_FItMKknWGl8szpQtuMWwMiTSAiwB3sbyICsOJSXEY9yQmxgBa466nrgAFNU6ucMBjP6nZZY1vEMJaS1pQuBwZWGjpuDFf9DZ_6qtHU1tfX9ihstxyQt8yJHXNwrOIYTWKuJDPAlpC11Kt8QezKpt0LegLFN-ONzcHQXnobOVUZnBBlW1zKmTBbrrojm7YKWyVLacMwamlpvKPPDd-bQjLHOCMTe3rZrSpOy0Svr0xQdtLejgDnDDS-o2kbPeZVeTqWx0MQcpv5Ql4AVIA7qo9URSISklJEfqIJZIe3WtGyNEXHywYWYkFSWdvmIosEPaKpalQGoaIP2vJosPCtlkWlVKddjGKOpzvFaFtt7HlKkxU5FdXuxpNomZhX1SYqK2DngAmuWdytSH4BFi0vV6Q5OcAUB_MCR0DTtpTBKhDRMT2S0EUS9TMw9AmxpCYDAix9pb_pd1W22upg0CVNJrI6qt4OptgA240IwU50aDfRpdFkzBl0OMCIclZlOPxx_zHhYi6FklMEwzACIVHKRzgPAwhNkDSFMxTlM7Ob_ZMsB2noP8pX2SyMwcuD-tuD9w8PT08-qj2qffYhenh3UP_-3tnx6esr-ZNPX_3RfvHqy3---faydnPvwj2ntbjT03K7nIytdUILgXhenIOADWk1NXrbXE-YxOqFTHHFXmJP79dv7h9JbUflTdZB392vP3mv9uvR_8n6-we1u5Pbpz_89fq3F7fi2wdfNE1p6MrEuYxrbhUCQ8h7ulVtY2-XJCNd6VVRZzLDt_11nF09P629Oa29eVi7e3j65Kz2Lw2&mkt=en-US&hosted=0&device_platform=Linux
+            - button "Sign in" [ref=e42] [cursor=pointer]
+    - contentinfo [ref=e43]:
+      - generic [ref=e44]:
+        - link "Terms of use" [ref=e45] [cursor=pointer]:
+          - /url: https://www.microsoft.com/en-US/servicesagreement/
+        - link "Privacy & cookies" [ref=e46] [cursor=pointer]:
+          - /url: https://privacy.microsoft.com/en-US/privacystatement
+        - button "Click here for troubleshooting information" [ref=e47] [cursor=pointer]: ...

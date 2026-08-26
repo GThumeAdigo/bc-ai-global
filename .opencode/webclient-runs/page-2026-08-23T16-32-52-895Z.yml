@@ -1,0 +1,130 @@
+- generic [ref=f185e1]:
+  - banner [ref=f185e9]:
+    - button "App launcher" [ref=f185e12] [cursor=pointer]: 
+    - generic [ref=f185e18]:
+      - generic [ref=f185e19]: Dynamics 365 Business Central
+      - generic [ref=f185e24]:
+        - 'button "ADIGO GmbH Mitte Ost, Environment: GTHU" [ref=f185e28] [cursor=pointer]':
+          - generic [ref=f185e30]:
+            - generic [ref=f185e32]:
+              - generic [ref=f185e33]: GO
+              - generic [ref=f185e34]: OST
+            - generic [ref=f185e35]:
+              - generic [ref=f185e36]: "Environment:"
+              - generic [ref=f185e37]: GTHU
+        - button "Copilot" [ref=f185e40] [cursor=pointer]:
+          - generic [ref=f185e41]: 
+        - button "Search" [ref=f185e44] [cursor=pointer]:
+          - generic [ref=f185e45]: 
+        - button "Notifications" [ref=f185e48] [cursor=pointer]:
+          - generic [ref=f185e49]: 
+        - button "Settings" [ref=f185e52] [cursor=pointer]:
+          - generic [ref=f185e53]: 
+        - button "Help" [ref=f185e56] [cursor=pointer]:
+          - generic [ref=f185e57]: 
+    - generic [ref=f185e58]:
+      - button "Account manager for Gregor Thume" [ref=f185e60] [cursor=pointer]:
+        - generic [ref=f185e61]: GT
+      - generic: 
+  - iframe [active] [ref=f185e76]:
+    - generic [ref=f186e1]:
+      - generic [ref=f186e3]:
+        - generic:
+          - form "Role Center" [active]:
+            - generic [ref=f186e5]:
+              - navigation [ref=f186e6]:
+                - generic [ref=f186e8]:
+                  - button "Skip to main content" [ref=f186e9] [cursor=pointer]
+                  - navigation "Main navigation" [ref=f186e10]:
+                    - menubar [ref=f186e19]:
+                      - generic [ref=f186e22]:
+                        - menuitem [ref=f186e26] [cursor=pointer]:
+                          - heading "ADIGO GmbH Mitte Ost" [level=1] [ref=f186e28]
+                        - menuitem "APP" [ref=f186e35] [cursor=pointer]
+                        - menuitem "All Reports" [ref=f186e43] [cursor=pointer]
+                        - menuitem "Explore all business features for my role in Business Central" [ref=f186e51] [cursor=pointer]:
+                          - generic [ref=f186e52]: 
+                        - generic [ref=f186e55]:
+                          - menuitem "Agent" [ref=f186e56] [cursor=pointer]:
+                            - generic [ref=f186e57]:
+                              - generic [ref=f186e58]: Agent
+                              - generic [ref=f186e64]: A
+                              - img "Not configured" [ref=f186e66]
+                          - menuitem "Payables Agent" [ref=f186e70] [cursor=pointer]:
+                            - generic [ref=f186e71]:
+                              - generic [ref=f186e72]: Payables Agent
+                              - generic [ref=f186e78]: PA
+                              - img "Not configured" [ref=f186e80]
+                          - menuitem "Sales Order Agent" [ref=f186e84] [cursor=pointer]:
+                            - generic [ref=f186e85]:
+                              - generic [ref=f186e86]: Sales Order Agent
+                              - generic [ref=f186e92]: SO
+                              - img "Not configured" [ref=f186e94]
+                    - generic [ref=f186e107]:
+                      - menubar [ref=f186e109]:
+                        - menuitem "Profiles, Specifies the Profiles." [ref=f186e116] [cursor=pointer]:
+                          - generic [ref=f186e117]: Profiles
+                      - button "Toggle wide layout" [ref=f186e123] [cursor=pointer]:
+                        - generic [ref=f186e124]: 
+              - main [ref=f186e127]:
+                - generic [ref=f186e131]:
+                  - generic [ref=f186e134]:
+                    - generic [ref=f186e136]:
+                      - generic [ref=f186e137]: BAU.Interfaces
+                      - generic "Headline 1 of 1." [ref=f186e138]: GAEB
+                    - generic [ref=f186e139]: Use the Left and Right arrow keys to navigate between headlines.
+                  - menu [ref=f186e141]:
+                    - generic [ref=f186e142]: Actions
+                    - generic [ref=f186e148]:
+                      - menuitem "Setup" [ref=f186e153] [cursor=pointer]:
+                        - generic [ref=f186e154]:
+                          - generic [ref=f186e157]: Setup
+                          - generic [ref=f186e159]: 
+                      - menuitem "Master Data" [ref=f186e164] [cursor=pointer]:
+                        - generic [ref=f186e165]:
+                          - generic [ref=f186e168]: Master Data
+                          - generic [ref=f186e170]: 
+                      - menuitem "Import" [ref=f186e175] [cursor=pointer]:
+                        - generic [ref=f186e176]:
+                          - generic [ref=f186e179]: Import
+                          - generic [ref=f186e181]: 
+                  - generic [ref=f186e182]:
+                    - heading [level=2] [ref=f186e184]:
+                      - button "GAE.01 Setup" [ref=f186e185] [cursor=pointer]
+                    - generic [ref=f186e192]:
+                      - heading "General" [level=3] [ref=f186e195]
+                      - list [ref=f186e201]:
+                        - listitem [ref=f186e202]:
+                          - button "People Setup" [ref=f186e205] [cursor=pointer]:
+                            - generic [ref=f186e208]: People
+                            - generic [ref=f186e209]: Setup
+                  - generic [ref=f186e212]:
+                    - heading [level=2] [ref=f186e214]:
+                      - button "GAE.02 Master Data" [ref=f186e215] [cursor=pointer]
+                    - generic [ref=f186e222]:
+                      - heading "General" [level=3] [ref=f186e225]
+                      - generic [ref=f186e226]:
+                        - list [ref=f186e231]:
+                          - listitem [ref=f186e232]:
+                            - button "GAEB Files 8" [ref=f186e236] [cursor=pointer]:
+                              - generic [ref=f186e237]: GAEB Files
+                              - generic [ref=f186e240]: "8"
+                          - listitem [ref=f186e247]:
+                            - button "Mapped Units 3" [ref=f186e251] [cursor=pointer]:
+                              - generic [ref=f186e252]: Mapped Units
+                              - generic [ref=f186e255]: "3"
+                          - listitem [ref=f186e262]:
+                            - button "Unmapped Units 16 Unfavorable" [ref=f186e266] [cursor=pointer]:
+                              - generic [ref=f186e267]: Unmapped Units
+                              - generic [ref=f186e270]: "16"
+                              - generic [ref=f186e272]: Unfavorable
+                        - list [ref=f186e282]:
+                          - listitem [ref=f186e283]:
+                            - button "New Import GAEB File" [ref=f186e286] [cursor=pointer]:
+                              - generic [ref=f186e289]: New
+                              - generic [ref=f186e292]:
+                                - generic [ref=f186e293]: Import GAEB
+                                - generic [ref=f186e297]: File
+                  - separator [ref=f186e302]
+                  - button "Back to top" [ref=f186e303] [cursor=pointer]
+      - text: Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.

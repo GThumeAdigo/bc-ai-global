@@ -1,0 +1,392 @@
+- generic [ref=f14e1]:
+  - banner [ref=f14e9]:
+    - button "App launcher" [ref=f14e12] [cursor=pointer]: 
+    - generic [ref=f14e18]:
+      - generic [ref=f14e19]: Dynamics 365 Business Central
+      - generic [ref=f14e24]:
+        - 'button "ADIGO GmbH Mitte Ost, Environment: GTHU" [ref=f14e28] [cursor=pointer]':
+          - generic [ref=f14e30]:
+            - generic [ref=f14e32]:
+              - generic [ref=f14e33]: GO
+              - generic [ref=f14e34]: OST
+            - generic [ref=f14e35]:
+              - generic [ref=f14e36]: "Environment:"
+              - generic [ref=f14e37]: GTHU
+        - button "Copilot" [ref=f14e40] [cursor=pointer]:
+          - generic [ref=f14e41]: 
+        - button "Search" [ref=f14e44] [cursor=pointer]:
+          - generic [ref=f14e45]: 
+        - button "Notifications" [ref=f14e48] [cursor=pointer]:
+          - generic [ref=f14e49]: 
+        - button "Settings" [ref=f14e52] [cursor=pointer]:
+          - generic [ref=f14e53]: 
+        - button "Help" [ref=f14e56] [cursor=pointer]:
+          - generic [ref=f14e57]: 
+    - generic [ref=f14e58]:
+      - button "Account manager for Gregor Thume" [ref=f14e60] [cursor=pointer]:
+        - generic [ref=f14e61]: GT
+      - generic: 
+  - iframe [active] [ref=f14e76]:
+    - generic [ref=f15e1]:
+      - generic [ref=f15e3]:
+        - generic:
+          - form "GAEB Projects":
+            - generic [ref=f15e5]:
+              - generic [ref=f15e8]:
+                - button "Skip to main content" [ref=f15e9] [cursor=pointer]
+                - navigation "Main navigation" [ref=f15e10]:
+                  - menubar [ref=f15e19]:
+                    - generic [ref=f15e22]:
+                      - menuitem [ref=f15e829] [cursor=pointer]:
+                        - heading "ADIGO GmbH Mitte Ost" [level=1] [ref=f15e831]
+                      - menuitem "APP" [ref=f15e834] [cursor=pointer]
+                      - menuitem "All Reports" [ref=f15e839] [cursor=pointer]
+                      - menuitem "Explore all business features for my role in Business Central" [ref=f15e843] [cursor=pointer]:
+                        - generic [ref=f15e844]: 
+                      - generic [ref=f15e55]:
+                        - menuitem "Agent" [ref=f15e56] [cursor=pointer]:
+                          - generic [ref=f15e57]:
+                            - generic [ref=f15e58]: Agent
+                            - generic [ref=f15e64]: A
+                            - img "Not configured" [ref=f15e66]
+                        - menuitem "Payables Agent" [ref=f15e70] [cursor=pointer]:
+                          - generic [ref=f15e71]:
+                            - generic [ref=f15e72]: Payables Agent
+                            - generic [ref=f15e78]: PA
+                            - img "Not configured" [ref=f15e80]
+                        - menuitem "Sales Order Agent" [ref=f15e84] [cursor=pointer]:
+                          - generic [ref=f15e85]:
+                            - generic [ref=f15e86]: Sales Order Agent
+                            - generic [ref=f15e92]: SO
+                            - img "Not configured" [ref=f15e94]
+              - menubar [ref=f15e108]:
+                - generic [ref=f15e111]:
+                  - heading "GAEB Projects:" [level=2] [ref=f15e113]
+                  - 'button "GAEB Projects: All" [ref=f15e115] [cursor=pointer]':
+                    - generic [ref=f15e116]:
+                      - generic [ref=f15e117]: All
+                      - generic [ref=f15e119]: 
+                - generic [ref=f15e122]:
+                  - menuitem "Here's what Copilot can do on this page" [ref=f15e129] [cursor=pointer]:
+                    - generic [ref=f15e130]: 
+                  - menuitem [ref=f15e139] [cursor=pointer]:
+                    - generic [ref=f15e140]:
+                      - generic [ref=f15e141]: 
+                      - searchbox "Search GAEB Projects"
+                - generic [ref=f15e143]:
+                  - menuitem "Enter analysis mode" [ref=f15e846] [cursor=pointer]
+                  - generic [ref=f15e158]:
+                    - generic [ref=f15e162]:
+                      - menuitem "New" [ref=f15e851] [cursor=pointer]
+                      - menuitem "Delete Project" [ref=f15e857] [cursor=pointer]
+                      - menuitem "More options" [ref=f15e864] [cursor=pointer]
+                    - generic [ref=f15e192]:
+                      - menuitem "Share" [ref=f15e195] [cursor=pointer]:
+                        - generic [ref=f15e196]: 
+                      - menuitemcheckbox "Toggle filter" [ref=f15e200] [cursor=pointer]:
+                        - generic [ref=f15e201]: 
+                      - menuitem "List layout selected" [ref=f15e204] [cursor=pointer]
+                      - menuitemcheckbox "Toggle wide layout" [ref=f15e209] [cursor=pointer]:
+                        - generic [ref=f15e210]: 
+                      - menuitemcheckbox "Not bookmarked" [ref=f15e214] [cursor=pointer]:
+                        - generic [ref=f15e215]: 
+              - main [ref=f15e218]:
+                - grid "GOXGAE Projects" [ref=f15e225]:
+                  - rowgroup [ref=f15e227]:
+                    - row [ref=f15e228]:
+                      - columnheader [ref=f15e229]:
+                        - generic [ref=f15e230]:
+                          - button "Code, sorted in Ascending order" [ref=f15e231] [cursor=pointer]: Code
+                          - img "Ascending" [ref=f15e233]
+                        - button "Open menu for Code" [ref=f15e234] [cursor=pointer]
+                        - button [ref=f15e235]
+                      - columnheader "More Options" [ref=f15e238]
+                      - columnheader [ref=f15e240]:
+                        - button "Description" [ref=f15e242] [cursor=pointer]
+                        - button "Open menu for Description" [ref=f15e243] [cursor=pointer]
+                        - button [ref=f15e244]
+                      - columnheader [ref=f15e247]:
+                        - button "Project Name" [ref=f15e249] [cursor=pointer]
+                        - button "Open menu for Project Name" [ref=f15e250] [cursor=pointer]
+                        - button [ref=f15e251]
+                      - columnheader [ref=f15e254]:
+                        - button "Award No." [ref=f15e256] [cursor=pointer]
+                        - button "Open menu for Award No." [ref=f15e257] [cursor=pointer]
+                        - button [ref=f15e258]
+                      - columnheader [ref=f15e261]:
+                        - button "DP No." [ref=f15e263] [cursor=pointer]
+                        - button "Open menu for DP No." [ref=f15e264] [cursor=pointer]
+                        - button [ref=f15e265]
+                      - columnheader [ref=f15e268]:
+                        - button "GAEB Project ID" [ref=f15e270] [cursor=pointer]
+                        - button "Open menu for GAEB Project ID" [ref=f15e271] [cursor=pointer]
+                        - button [ref=f15e272]
+                      - columnheader [ref=f15e275]:
+                        - button "Project ID Origin" [ref=f15e277] [cursor=pointer]
+                        - button "Open menu for Project ID Origin" [ref=f15e278] [cursor=pointer]
+                        - button [ref=f15e279]
+                  - generic [ref=f15e282]:
+                    - rowgroup [ref=f15e283]:
+                      - row [ref=f15e284]:
+                        - columnheader [ref=f15e285]
+                        - columnheader [ref=f15e286]
+                        - columnheader [ref=f15e288]
+                        - columnheader [ref=f15e289]
+                        - columnheader [ref=f15e290]
+                        - columnheader [ref=f15e291]
+                        - columnheader [ref=f15e292]
+                        - columnheader [ref=f15e293]
+                    - row [selected] [ref=f15e868]:
+                      - gridcell [ref=f15e869]:
+                        - button "Code, sorted in Ascending order GAEB0095" [ref=f15e870] [cursor=pointer]: GAEB0095
+                      - gridcell [ref=f15e297]:
+                        - button "Show more options" [ref=f15e298] [cursor=pointer]
+                      - gridcell [ref=f15e299]:
+                        - textbox "Description" [ref=f15e300]
+                      - gridcell [ref=f15e301]:
+                        - textbox "Project Name" [ref=f15e302]
+                      - gridcell [ref=f15e871]:
+                        - textbox "Award No. (Blank)" [ref=f15e872]
+                      - gridcell [ref=f15e873]:
+                        - textbox "DP No. (Blank)" [ref=f15e874]
+                      - gridcell [ref=f15e307]:
+                        - textbox "GAEB Project ID" [ref=f15e308]
+                      - gridcell [ref=f15e309]:
+                        - textbox "Project ID Origin" [ref=f15e310]
+                    - row [ref=f15e875]:
+                      - gridcell [ref=f15e312]:
+                        - button "Code, sorted in Ascending order GAEB0098" [ref=f15e313] [cursor=pointer]: GAEB0098
+                      - gridcell [ref=f15e314]:
+                        - button "Show more options" [ref=f15e315] [cursor=pointer]
+                      - gridcell [ref=f15e876]:
+                        - textbox "Description BVBS GAEB Muster (renamed)" [ref=f15e877]
+                      - gridcell [ref=f15e318]:
+                        - textbox "Project Name BVBS GAEB Muster" [ref=f15e319]
+                      - gridcell [ref=f15e320]:
+                        - textbox "Award No. BVBS-4711" [ref=f15e321]
+                      - gridcell [ref=f15e322]:
+                        - textbox "DP No. A-2021-10" [ref=f15e323]
+                      - gridcell [ref=f15e324]:
+                        - textbox "GAEB Project ID 735BB572388A4DA78F900F886BAF33B0" [ref=f15e325]
+                      - gridcell [ref=f15e326]:
+                        - textbox "Project ID Origin Generated" [ref=f15e327]
+                    - row [ref=f15e328]:
+                      - gridcell [ref=f15e329]:
+                        - button "Code, sorted in Ascending order GAEB0102" [ref=f15e330] [cursor=pointer]: GAEB0102
+                      - gridcell [ref=f15e331]:
+                        - button "Show more options" [ref=f15e332] [cursor=pointer]
+                      - gridcell [ref=f15e333]:
+                        - textbox "Description Bonner Wasserwerk" [ref=f15e334]
+                      - gridcell [ref=f15e335]:
+                        - textbox "Project Name Bonner Wasserwerk" [ref=f15e336]
+                      - gridcell [ref=f15e337]:
+                        - textbox "Award No. (Blank)" [ref=f15e338]
+                      - gridcell [ref=f15e339]:
+                        - textbox "DP No. (Blank)" [ref=f15e340]
+                      - gridcell [ref=f15e341]:
+                        - textbox "GAEB Project ID 4F2C1A9B7D3E48F0A1B2C3D4E5F60717" [ref=f15e342]
+                      - gridcell [ref=f15e343]:
+                        - textbox "Project ID Origin From File" [ref=f15e344]
+        - generic:
+          - form "GAEB Project":
+            - main:
+              - generic:
+                - button "Go to the previous document of the same type":
+                  - generic: 
+              - generic [ref=f15e881]:
+                - generic [ref=f15e884]:
+                  - button "Back" [ref=f15e887] [cursor=pointer]:
+                    - generic [ref=f15e888]: 
+                  - generic [ref=f15e890]:
+                    - heading "GAEB Project" [level=1] [ref=f15e891]
+                    - generic [ref=f15e896]:
+                      - button "Open the page in read-only mode" [pressed] [ref=f15e897] [cursor=pointer]:
+                        - generic [ref=f15e898]: 
+                      - button "Share this page with other users or apps" [ref=f15e900] [cursor=pointer]:
+                        - generic [ref=f15e901]: 
+                      - button "Create a new entry." [ref=f15e903] [cursor=pointer]:
+                        - generic [ref=f15e904]: 
+                      - button "Delete the information" [disabled] [ref=f15e906]:
+                        - generic [ref=f15e907]: 
+                    - generic [ref=f15e909]:
+                      - generic "Your data is saved now and the page can be closed." [ref=f15e913]: Saved
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f15e916] [cursor=pointer]:
+                        - generic [ref=f15e917]: 
+                      - button "Toggle wide layout" [ref=f15e921] [cursor=pointer]:
+                        - generic [ref=f15e922]: 
+                    - heading "GAEB0095" [level=2] [ref=f15e925]
+                - menubar [ref=f15e935]:
+                  - generic [ref=f15e949]:
+                    - menuitem "Add GAEB Files" [ref=f15e1278] [cursor=pointer]
+                    - menuitem "Delete Project" [ref=f15e1285] [cursor=pointer]
+                    - menuitem "More options" [ref=f15e1292] [cursor=pointer]
+                - generic [ref=f15e986]:
+                  - generic [ref=f15e987]:
+                    - button [expanded] [ref=f15e990] [cursor=pointer]:
+                      - heading "General" [level=3] [ref=f15e991]
+                    - generic [ref=f15e994]:
+                      - generic [ref=f15e995]:
+                        - button "Code" [ref=f15e996] [cursor=pointer]
+                        - textbox "Code" [ref=f15e998]: GAEB0095
+                      - generic [ref=f15e999]:
+                        - button "Description" [ref=f15e1000] [cursor=pointer]
+                        - textbox "Description" [ref=f15e1002]: Bonner Wasserwerk
+                  - generic [ref=f15e1003]:
+                    - button [expanded] [ref=f15e1006] [cursor=pointer]:
+                      - heading "GAEB Identity" [level=3] [ref=f15e1007]
+                    - generic [ref=f15e1010]:
+                      - generic [ref=f15e1011]:
+                        - button "GAEB Project ID" [ref=f15e1012] [cursor=pointer]
+                        - textbox "GAEB Project ID B1EF4866AC8E450BAB8FE2995728B00A" [ref=f15e1014]
+                      - generic [ref=f15e1015]:
+                        - button "Project ID Origin" [ref=f15e1016] [cursor=pointer]
+                        - textbox "Project ID Origin Generated" [ref=f15e1018]
+                  - generic [ref=f15e1019]:
+                    - button [expanded] [ref=f15e1022] [cursor=pointer]:
+                      - heading "Matching Hints" [level=3] [ref=f15e1023]
+                    - generic [ref=f15e1026]:
+                      - generic [ref=f15e1027]:
+                        - button "Project Name" [ref=f15e1028] [cursor=pointer]
+                        - textbox "Project Name" [ref=f15e1030]: Bonner Wasserwerk
+                      - generic [ref=f15e1031]:
+                        - button "Award No." [ref=f15e1032] [cursor=pointer]
+                        - generic [ref=f15e1033]:
+                          - textbox "Award No." [ref=f15e1034]
+                          - generic: Press Alt + I to generate a suggestion for this field.
+                      - generic [ref=f15e1036]:
+                        - button "DP No." [ref=f15e1037] [cursor=pointer]
+                        - generic [ref=f15e1038]:
+                          - textbox "DP No." [ref=f15e1039]
+                          - generic: Press Alt + I to generate a suggestion for this field.
+                  - generic [ref=f15e1041]:
+                    - menubar [ref=f15e1051]:
+                      - heading [level=3] [ref=f15e1056]:
+                        - button "GAEB Files" [ref=f15e1057] [cursor=pointer]
+                      - generic [ref=f15e1069]:
+                        - generic [ref=f15e1073]:
+                          - menuitem "Open GAEB File" [ref=f15e1078] [cursor=pointer]
+                          - menuitem "Set Derived From" [ref=f15e1089] [cursor=pointer]
+                          - menuitem "Clear Derived From" [ref=f15e1100] [cursor=pointer]
+                          - menuitem "Remove from Project" [ref=f15e1111] [cursor=pointer]
+                        - generic [ref=f15e1118]:
+                          - menuitem "Share" [ref=f15e1121] [cursor=pointer]:
+                            - generic [ref=f15e1122]: 
+                          - menuitemcheckbox "Toggle focus mode" [ref=f15e1126] [cursor=pointer]:
+                            - generic [ref=f15e1127]: 
+                    - grid "GAEB Files" [ref=f15e1132]:
+                      - rowgroup [ref=f15e1134]:
+                        - row [ref=f15e1135]:
+                          - columnheader "Error" [ref=f15e1136]
+                          - columnheader [ref=f15e1137]:
+                            - button "No." [ref=f15e1139] [cursor=pointer]
+                            - button "Open menu for No." [ref=f15e1140] [cursor=pointer]
+                            - button [ref=f15e1141]
+                          - columnheader "More Options" [ref=f15e1144]
+                          - columnheader [ref=f15e1146]:
+                            - generic [ref=f15e1147]:
+                              - button "Exchange Phase, sorted in Ascending order" [ref=f15e1148] [cursor=pointer]: Exchange Phase
+                              - img "Ascending" [ref=f15e1150]
+                            - button "Open menu for Exchange Phase" [ref=f15e1151] [cursor=pointer]
+                            - button [ref=f15e1152]
+                          - columnheader [ref=f15e1155]:
+                            - button "File Name" [ref=f15e1157] [cursor=pointer]
+                            - button "Open menu for File Name" [ref=f15e1158] [cursor=pointer]
+                            - button [ref=f15e1159]
+                          - columnheader [ref=f15e1162]:
+                            - button "Created At" [ref=f15e1164] [cursor=pointer]
+                            - button "Open menu for Created At" [ref=f15e1165] [cursor=pointer]
+                            - button [ref=f15e1166]
+                          - columnheader "PopulationStatus Open menu for PopulationStatus" [ref=f15e1169]:
+                            - generic [ref=f15e1170]: PopulationStatus
+                            - button "Open menu for PopulationStatus" [ref=f15e1171] [cursor=pointer]
+                            - button [ref=f15e1172]
+                          - columnheader "UnconvertedValueCount Open menu for UnconvertedValueCount" [ref=f15e1175]:
+                            - generic [ref=f15e1176]: UnconvertedValueCount
+                            - button "Open menu for UnconvertedValueCount" [ref=f15e1177] [cursor=pointer]
+                            - button [ref=f15e1178]
+                          - columnheader [ref=f15e1181]:
+                            - button "Derived From" [ref=f15e1183] [cursor=pointer]
+                            - button "Open menu for Derived From" [ref=f15e1184] [cursor=pointer]
+                            - button [ref=f15e1185]
+                          - columnheader [ref=f15e1188]:
+                            - button "Archived" [ref=f15e1190] [cursor=pointer]
+                            - button "Open menu for Archived" [ref=f15e1191] [cursor=pointer]
+                            - button [ref=f15e1192]
+                          - columnheader [ref=f15e1195]:
+                            - button "Superseded By" [ref=f15e1197] [cursor=pointer]
+                            - button "Open menu for Superseded By" [ref=f15e1198] [cursor=pointer]
+                            - button [ref=f15e1199]
+                      - generic [ref=f15e1202]:
+                        - rowgroup [ref=f15e1203]:
+                          - row [ref=f15e1204]:
+                            - columnheader [ref=f15e1205]
+                            - columnheader [ref=f15e1206]
+                            - columnheader [ref=f15e1207]
+                            - columnheader [ref=f15e1209]
+                            - columnheader [ref=f15e1210]
+                            - columnheader [ref=f15e1211]
+                            - columnheader [ref=f15e1212]
+                            - columnheader [ref=f15e1213]
+                            - columnheader [ref=f15e1214]
+                            - columnheader [ref=f15e1215]
+                            - columnheader [ref=f15e1216]
+                        - row [selected] [ref=f15e1217]:
+                          - rowheader [ref=f15e1218]
+                          - gridcell [ref=f15e1219]:
+                            - textbox "No." [ref=f15e1220]
+                          - gridcell [ref=f15e1221]:
+                            - button "Show more options" [ref=f15e1222] [cursor=pointer]
+                          - gridcell [ref=f15e1223]:
+                            - textbox "Exchange Phase, sorted in Ascending order" [ref=f15e1224]
+                          - gridcell [ref=f15e1225]:
+                            - textbox "File Name" [ref=f15e1226]
+                          - gridcell [ref=f15e1227]:
+                            - textbox "Created At" [ref=f15e1228]
+                          - gridcell "PopulationStatus" [ref=f15e1229]:
+                            - textbox "PopulationStatus" [ref=f15e1230]
+                          - gridcell "UnconvertedValueCount" [ref=f15e1231]:
+                            - textbox "UnconvertedValueCount" [ref=f15e1232]
+                          - gridcell [ref=f15e1233]:
+                            - button "Derived From (Blank)" [ref=f15e1234] [cursor=pointer]
+                          - gridcell [ref=f15e1235]:
+                            - checkbox "Archived" [disabled] [ref=f15e1236]:
+                              - checkbox [disabled] [ref=f15e1237]
+                          - gridcell [ref=f15e1238]:
+                            - button "Superseded By (Blank)" [ref=f15e1239] [cursor=pointer]
+                        - row [ref=f15e1240]:
+                          - rowheader [ref=f15e1241]
+                          - gridcell [ref=f15e1242]:
+                            - textbox "No. GAEB0096" [ref=f15e1243]
+                          - gridcell [ref=f15e1244]:
+                            - button "Show more options" [ref=f15e1245] [cursor=pointer]
+                          - gridcell [ref=f15e1246]:
+                            - textbox "Exchange Phase, sorted in Ascending order 83" [ref=f15e1247]
+                          - gridcell [ref=f15e1248]:
+                            - textbox "File Name X83_Bonner_Wasserwerk_MWM-Muster.xml" [ref=f15e1249]
+                          - gridcell [ref=f15e1250]:
+                            - textbox "Created At 18.08.2026 22:12" [ref=f15e1251]
+                          - gridcell [ref=f15e1252]:
+                            - textbox "PopulationStatus Populated" [ref=f15e1253]
+                          - gridcell [ref=f15e1254]:
+                            - textbox "UnconvertedValueCount 0" [ref=f15e1255]
+                          - gridcell [ref=f15e1256]:
+                            - button "Derived From (Blank)" [ref=f15e1257] [cursor=pointer]
+                          - gridcell [ref=f15e1258]:
+                            - checkbox "Archived (Blank)" [ref=f15e1259]:
+                              - checkbox [disabled] [ref=f15e1260]
+                          - gridcell [ref=f15e1261]:
+                            - button "Superseded By (Blank)" [ref=f15e1262] [cursor=pointer]
+              - generic:
+                - button "Go to the next document of the same type":
+                  - generic: 
+        - dialog [ref=f15e1297]:
+          - main [ref=f15e1299]:
+            - paragraph [ref=f15e1307]: GAEB project GAEB0095 has 2 file(s). Deleting the project leaves every one of them imported, populated and usable, merely unassigned. No GAEB file is deleted. Delete the project?
+            - generic [ref=f15e1310]:
+              - button "Yes" [ref=f15e1311] [cursor=pointer]
+              - button "No" [active] [ref=f15e1313] [cursor=pointer]
+      - text: Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.
+      - paragraph [ref=f15e349]: List with title "GAEB Projects" now has 3 items
+      - paragraph [ref=f15e1271]: GAEB0095. GAEB Project
+      - paragraph [ref=f15e1273]: List with title "GAEB Files" now has 2 items
+      - paragraph [ref=f15e1275]: Exchange Phase, sorted in Ascending order

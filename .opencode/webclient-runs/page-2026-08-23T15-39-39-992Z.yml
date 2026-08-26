@@ -1,0 +1,631 @@
+- generic [ref=f129e1]:
+  - banner [ref=f129e3]:
+    - button "App launcher" [ref=f129e6] [cursor=pointer]: 
+    - generic [ref=f129e12]:
+      - generic [ref=f129e13]: Dynamics 365 Business Central
+      - generic [ref=f129e18]:
+        - 'button "ADIGO GmbH Mitte Ost, Environment: GTHU" [ref=f129e22] [cursor=pointer]':
+          - generic [ref=f129e24]:
+            - generic [ref=f129e26]:
+              - generic [ref=f129e27]: GO
+              - generic [ref=f129e28]: OST
+            - generic [ref=f129e29]:
+              - generic [ref=f129e30]: "Environment:"
+              - generic [ref=f129e31]: GTHU
+        - button "Copilot" [ref=f129e34] [cursor=pointer]:
+          - generic [ref=f129e35]: 
+        - button "Search" [ref=f129e38] [cursor=pointer]:
+          - generic [ref=f129e39]: 
+        - button "Notifications" [ref=f129e42] [cursor=pointer]:
+          - generic [ref=f129e43]: 
+        - button "Settings" [ref=f129e46] [cursor=pointer]:
+          - generic [ref=f129e47]: 
+        - button "Help" [ref=f129e50] [cursor=pointer]:
+          - generic [ref=f129e51]: 
+    - generic [ref=f129e52]:
+      - button "Account manager for Gregor Thume" [ref=f129e54] [cursor=pointer]:
+        - generic [ref=f129e55]: GT
+      - generic: 
+  - iframe [active] [ref=f129e70]:
+    - generic [ref=f130e1]:
+      - generic [ref=f130e2]:
+        - generic:
+          - form "GAEB Bill of Quantities":
+            - main:
+              - generic:
+                - button "Go to the previous document of the same type":
+                  - generic: 
+              - generic [ref=f130e1854]:
+                - generic [ref=f130e1857]:
+                  - button "Back" [ref=f130e1860] [cursor=pointer]:
+                    - generic [ref=f130e1861]: 
+                  - generic [ref=f130e1863]:
+                    - heading "GAEB Bill of Quantities" [level=1] [ref=f130e1864]
+                    - generic [ref=f130e1869]:
+                      - button "Make changes on the page" [disabled] [ref=f130e1870]:
+                        - generic [ref=f130e1871]: 
+                      - button "Share this page with other users or apps" [ref=f130e1873] [cursor=pointer]:
+                        - generic [ref=f130e1874]: 
+                      - button "Create a new entry." [disabled] [ref=f130e1876]:
+                        - generic [ref=f130e1877]: 
+                      - button "Delete the information" [disabled] [ref=f130e1879]:
+                        - generic [ref=f130e1880]: 
+                    - generic [ref=f130e1882]:
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f130e1885] [cursor=pointer]:
+                        - generic [ref=f130e1886]: 
+                      - button "Toggle wide layout" [ref=f130e1890] [cursor=pointer]:
+                        - generic [ref=f130e1891]: 
+                    - heading "ID15B034E0" [level=2] [ref=f130e1894]
+                - menubar [ref=f130e1904]:
+                  - generic [ref=f130e1918]:
+                    - menuitem "Parent Row" [ref=f130e2042] [cursor=pointer]
+                    - menuitem "GAEB File Card" [ref=f130e2049] [cursor=pointer]
+                    - menuitem "GAEB Schema" [ref=f130e2056] [cursor=pointer]
+                    - menuitem "GAEB Source Entry" [ref=f130e2063] [cursor=pointer]
+                    - menuitem "More options" [ref=f130e2070] [cursor=pointer]
+                - generic [ref=f130e1978]:
+                  - button [expanded] [ref=f130e1981] [cursor=pointer]:
+                    - heading "General" [level=3] [ref=f130e1982]
+                  - generic [ref=f130e1985]:
+                    - generic [ref=f130e1986]:
+                      - button "ID" [ref=f130e1987] [cursor=pointer]
+                      - textbox "ID ID15B034E0" [ref=f130e1989]
+                    - generic [ref=f130e1990]:
+                      - button "BoQ Details" [ref=f130e1991] [cursor=pointer]
+                      - button "BoQ Details Bonner Wasserwerk (M, Bonner Wasserwerk (MWM-Muster)" [ref=f130e1993] [cursor=pointer]: Bonner Wasserwerk (M, Bonner Wasserwerk (MWM-Muster)
+                    - generic [ref=f130e1994]:
+                      - button "BoQ Breakdowns" [ref=f130e1995] [cursor=pointer]
+                      - button "BoQ Breakdowns (Blank)" [ref=f130e1997] [cursor=pointer]
+                    - generic [ref=f130e1998]:
+                      - button "BoQ Bodies" [ref=f130e1999] [cursor=pointer]
+                      - button "BoQ Bodies BoQ Body" [ref=f130e2001] [cursor=pointer]: BoQ Body
+                    - generic [ref=f130e2002]:
+                      - button "Lot Groups" [ref=f130e2003] [cursor=pointer]
+                      - button "Lot Groups (Blank)" [ref=f130e2005] [cursor=pointer]
+              - generic:
+                - button "Go to the next document of the same type":
+                  - generic: 
+        - generic:
+          - form "GAEB BoQ Body":
+            - main:
+              - generic:
+                - button "Go to the previous document of the same type":
+                  - generic: 
+              - generic [ref=f130e2077]:
+                - generic [ref=f130e2080]:
+                  - button "Back" [ref=f130e2083] [cursor=pointer]:
+                    - generic [ref=f130e2084]: 
+                  - generic [ref=f130e2086]:
+                    - heading "GAEB BoQ Body" [level=1] [ref=f130e2087]
+                    - generic [ref=f130e2092]:
+                      - button "Make changes on the page" [disabled] [ref=f130e2093]:
+                        - generic [ref=f130e2094]: 
+                      - button "Share this page with other users or apps" [ref=f130e2096] [cursor=pointer]:
+                        - generic [ref=f130e2097]: 
+                      - button "Create a new entry." [disabled] [ref=f130e2099]:
+                        - generic [ref=f130e2100]: 
+                      - button "Delete the information" [disabled] [ref=f130e2102]:
+                        - generic [ref=f130e2103]: 
+                    - generic [ref=f130e2105]:
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f130e2108] [cursor=pointer]:
+                        - generic [ref=f130e2109]: 
+                      - button "Toggle wide layout" [ref=f130e2113] [cursor=pointer]:
+                        - generic [ref=f130e2114]: 
+                    - heading "GAEB0136, 233" [level=2] [ref=f130e2117]
+                - menubar [ref=f130e2127]:
+                  - generic [ref=f130e2141]:
+                    - menuitem "Parent Row" [ref=f130e2233] [cursor=pointer]
+                    - menuitem "GAEB File Card" [ref=f130e2240] [cursor=pointer]
+                    - menuitem "GAEB Schema" [ref=f130e2247] [cursor=pointer]
+                    - menuitem "GAEB Source Entry" [ref=f130e2254] [cursor=pointer]
+                    - menuitem "More options" [ref=f130e2261] [cursor=pointer]
+                - generic [ref=f130e2201]:
+                  - button [expanded] [ref=f130e2204] [cursor=pointer]:
+                    - heading "General" [level=3] [ref=f130e2205]
+                  - generic [ref=f130e2208]:
+                    - generic [ref=f130e2209]:
+                      - button "Remarks" [ref=f130e2210] [cursor=pointer]
+                      - button "Remarks (Blank)" [ref=f130e2212] [cursor=pointer]
+                    - generic [ref=f130e2213]:
+                      - button "Performance Descriptions" [ref=f130e2214] [cursor=pointer]
+                      - button "Performance Descriptions (Blank)" [ref=f130e2216] [cursor=pointer]
+                    - generic [ref=f130e2217]:
+                      - button "BoQ Categories" [ref=f130e2218] [cursor=pointer]
+                      - button "BoQ Categories 99" [ref=f130e2220] [cursor=pointer]: "99"
+                    - generic [ref=f130e2221]:
+                      - button "Item Lists" [ref=f130e2222] [cursor=pointer]
+                      - button "Item Lists (Blank)" [ref=f130e2224] [cursor=pointer]
+              - generic:
+                - button "Go to the next document of the same type":
+                  - generic: 
+        - generic:
+          - form "GAEB BoQ Category Rows":
+            - main:
+              - generic [ref=f130e2265]:
+                - generic [ref=f130e2268]:
+                  - button "Back" [ref=f130e2271] [cursor=pointer]:
+                    - generic [ref=f130e2272]: 
+                  - generic [ref=f130e2274]:
+                    - heading "GAEB BoQ Category Rows" [level=1] [ref=f130e2275]
+                    - generic [ref=f130e2280]:
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f130e2283] [cursor=pointer]:
+                        - generic [ref=f130e2284]: 
+                      - button "Toggle wide layout" [ref=f130e2288] [cursor=pointer]:
+                        - generic [ref=f130e2289]: 
+                - menubar [ref=f130e2301]:
+                  - generic [ref=f130e2302]:
+                    - menuitem "Here's what Copilot can do on this page" [ref=f130e2309] [cursor=pointer]:
+                      - generic [ref=f130e2310]: 
+                    - menuitem [ref=f130e2319] [cursor=pointer]:
+                      - generic [ref=f130e2320]:
+                        - generic [ref=f130e2321]: 
+                        - searchbox "Search GAEB BoQ Category Rows"
+                  - generic [ref=f130e2323]:
+                    - menuitem "Enter analysis mode" [ref=f130e2795] [cursor=pointer]
+                    - generic [ref=f130e2343]:
+                      - generic [ref=f130e2347]:
+                        - menuitem "Manage" [ref=f130e2800] [cursor=pointer]
+                        - menuitem "Parent Row" [ref=f130e2804] [cursor=pointer]
+                        - menuitem "Related Rows" [ref=f130e2811] [cursor=pointer]
+                        - menuitem "GAEB File Card" [ref=f130e2818] [cursor=pointer]
+                        - menuitem "GAEB Source Entry" [ref=f130e2825] [cursor=pointer]
+                        - menuitem "More options" [ref=f130e2832] [cursor=pointer]
+                      - generic [ref=f130e2408]:
+                        - menuitem "Share" [ref=f130e2411] [cursor=pointer]:
+                          - generic [ref=f130e2412]: 
+                        - menuitemcheckbox "Toggle filter" [ref=f130e2416] [cursor=pointer]:
+                          - generic [ref=f130e2417]: 
+                        - menuitem "List layout selected" [ref=f130e2420] [cursor=pointer]
+                - grid "GOXGAE BoQCtgy List" [ref=f130e2431]:
+                  - rowgroup [ref=f130e2433]:
+                    - row [ref=f130e2434]:
+                      - columnheader "Ordinal and Designation Open menu for Ordinal and Designation" [ref=f130e2435]:
+                        - generic [ref=f130e2436]: Ordinal and Designation
+                        - button "Open menu for Ordinal and Designation" [ref=f130e2437] [cursor=pointer]
+                        - button [ref=f130e2438]
+                      - columnheader "More Options" [ref=f130e2441]
+                      - columnheader [ref=f130e2443]:
+                        - button "RNoPart" [ref=f130e2445] [cursor=pointer]
+                        - button "Open menu for RNoPart" [ref=f130e2446] [cursor=pointer]
+                        - button [ref=f130e2447]
+                      - columnheader [ref=f130e2450]:
+                        - button "ID" [ref=f130e2452] [cursor=pointer]
+                        - button "Open menu for ID" [ref=f130e2453] [cursor=pointer]
+                        - button [ref=f130e2454]
+                  - generic [ref=f130e2457]:
+                    - rowgroup [ref=f130e2458]:
+                      - row [ref=f130e2459]:
+                        - columnheader [ref=f130e2460]
+                        - columnheader [ref=f130e2461]
+                        - columnheader [ref=f130e2463]
+                        - columnheader [ref=f130e2464]
+                    - row [selected] [ref=f130e2465]:
+                      - gridcell [ref=f130e2466]:
+                        - button "Ordinal and Designation 01 Gebäude Ost" [ref=f130e2467] [cursor=pointer]: 01 Gebäude Ost
+                      - gridcell [ref=f130e2468]:
+                        - button "Show more options" [ref=f130e2469] [cursor=pointer]
+                      - gridcell [ref=f130e2470]:
+                        - textbox "RNoPart" [ref=f130e2471]
+                      - gridcell [ref=f130e2472]:
+                        - textbox "ID" [ref=f130e2473]
+                    - row [ref=f130e2474]:
+                      - gridcell [ref=f130e2475]:
+                        - button "Ordinal and Designation 02 Gebäude West" [ref=f130e2476] [cursor=pointer]: 02 Gebäude West
+                      - gridcell [ref=f130e2477]:
+                        - button "Show more options" [ref=f130e2478] [cursor=pointer]
+                      - gridcell [ref=f130e2479]:
+                        - textbox "RNoPart 02" [ref=f130e2480]
+                      - gridcell [ref=f130e2481]:
+                        - textbox "ID ID149004D0" [ref=f130e2482]
+                    - row [ref=f130e2483]:
+                      - gridcell [ref=f130e2484]:
+                        - button "Ordinal and Designation 03 Gebäude Ost" [ref=f130e2485] [cursor=pointer]: 03 Gebäude Ost
+                      - gridcell [ref=f130e2486]:
+                        - button "Show more options" [ref=f130e2487] [cursor=pointer]
+                      - gridcell [ref=f130e2488]:
+                        - textbox "RNoPart 03" [ref=f130e2489]
+                      - gridcell [ref=f130e2490]:
+                        - textbox "ID ID15877170" [ref=f130e2491]
+                    - row [ref=f130e2492]:
+                      - gridcell [ref=f130e2493]:
+                        - button "Ordinal and Designation 04 Gebäude West" [ref=f130e2494] [cursor=pointer]: 04 Gebäude West
+                      - gridcell [ref=f130e2495]:
+                        - button "Show more options" [ref=f130e2496] [cursor=pointer]
+                      - gridcell [ref=f130e2497]:
+                        - textbox "RNoPart 04" [ref=f130e2498]
+                      - gridcell [ref=f130e2499]:
+                        - textbox "ID ID15877B90" [ref=f130e2500]
+                    - row [ref=f130e2501]:
+                      - gridcell [ref=f130e2502]:
+                        - button "Ordinal and Designation 05 Gebäude Ost" [ref=f130e2503] [cursor=pointer]: 05 Gebäude Ost
+                      - gridcell [ref=f130e2504]:
+                        - button "Show more options" [ref=f130e2505] [cursor=pointer]
+                      - gridcell [ref=f130e2506]:
+                        - textbox "RNoPart 05" [ref=f130e2507]
+                      - gridcell [ref=f130e2508]:
+                        - textbox "ID ID1502B420" [ref=f130e2509]
+                    - row [ref=f130e2510]:
+                      - gridcell [ref=f130e2511]:
+                        - button "Ordinal and Designation 06 Gebäude West" [ref=f130e2512] [cursor=pointer]: 06 Gebäude West
+                      - gridcell [ref=f130e2513]:
+                        - button "Show more options" [ref=f130e2514] [cursor=pointer]
+                      - gridcell [ref=f130e2515]:
+                        - textbox "RNoPart 06" [ref=f130e2516]
+                      - gridcell [ref=f130e2517]:
+                        - textbox "ID ID1502B810" [ref=f130e2518]
+                    - row [ref=f130e2519]:
+                      - gridcell [ref=f130e2520]:
+                        - button "Ordinal and Designation 07 Gebäude Ost" [ref=f130e2521] [cursor=pointer]: 07 Gebäude Ost
+                      - gridcell [ref=f130e2522]:
+                        - button "Show more options" [ref=f130e2523] [cursor=pointer]
+                      - gridcell [ref=f130e2524]:
+                        - textbox "RNoPart 07" [ref=f130e2525]
+                      - gridcell [ref=f130e2526]:
+                        - textbox "ID ID14C83C88" [ref=f130e2527]
+                    - row [ref=f130e2528]:
+                      - gridcell [ref=f130e2529]:
+                        - button "Ordinal and Designation 08 Gebäude West" [ref=f130e2530] [cursor=pointer]: 08 Gebäude West
+                      - gridcell [ref=f130e2531]:
+                        - button "Show more options" [ref=f130e2532] [cursor=pointer]
+                      - gridcell [ref=f130e2533]:
+                        - textbox "RNoPart 08" [ref=f130e2534]
+                      - gridcell [ref=f130e2535]:
+                        - textbox "ID ID0B632B98" [ref=f130e2536]
+                    - row [ref=f130e2537]:
+                      - gridcell [ref=f130e2538]:
+                        - button "Ordinal and Designation 09 Gebäude Ost" [ref=f130e2539] [cursor=pointer]: 09 Gebäude Ost
+                      - gridcell [ref=f130e2540]:
+                        - button "Show more options" [ref=f130e2541] [cursor=pointer]
+                      - gridcell [ref=f130e2542]:
+                        - textbox "RNoPart 09" [ref=f130e2543]
+                      - gridcell [ref=f130e2544]:
+                        - textbox "ID ID0B632688" [ref=f130e2545]
+                    - row [ref=f130e2546]:
+                      - gridcell [ref=f130e2547]:
+                        - button "Ordinal and Designation 10 Gebäude West" [ref=f130e2548] [cursor=pointer]: 10 Gebäude West
+                      - gridcell [ref=f130e2549]:
+                        - button "Show more options" [ref=f130e2550] [cursor=pointer]
+                      - gridcell [ref=f130e2551]:
+                        - textbox "RNoPart 10" [ref=f130e2552]
+                      - gridcell [ref=f130e2553]:
+                        - textbox "ID ID1590B370" [ref=f130e2554]
+                    - row [ref=f130e2555]:
+                      - gridcell [ref=f130e2556]:
+                        - button "Ordinal and Designation 11 Gebäude Ost" [ref=f130e2557] [cursor=pointer]: 11 Gebäude Ost
+                      - gridcell [ref=f130e2558]:
+                        - button "Show more options" [ref=f130e2559] [cursor=pointer]
+                      - gridcell [ref=f130e2560]:
+                        - textbox "RNoPart 11" [ref=f130e2561]
+                      - gridcell [ref=f130e2562]:
+                        - textbox "ID ID1590B520" [ref=f130e2563]
+                    - row [ref=f130e2564]:
+                      - gridcell [ref=f130e2565]:
+                        - button "Ordinal and Designation 12 Gebäude West" [ref=f130e2566] [cursor=pointer]: 12 Gebäude West
+                      - gridcell [ref=f130e2567]:
+                        - button "Show more options" [ref=f130e2568] [cursor=pointer]
+                      - gridcell [ref=f130e2569]:
+                        - textbox "RNoPart 12" [ref=f130e2570]
+                      - gridcell [ref=f130e2571]:
+                        - textbox "ID ID0533A318" [ref=f130e2572]
+                    - row [ref=f130e2573]:
+                      - gridcell [ref=f130e2574]:
+                        - button "Ordinal and Designation 13 Gebäude Ost" [ref=f130e2575] [cursor=pointer]: 13 Gebäude Ost
+                      - gridcell [ref=f130e2576]:
+                        - button "Show more options" [ref=f130e2577] [cursor=pointer]
+                      - gridcell [ref=f130e2578]:
+                        - textbox "RNoPart 13" [ref=f130e2579]
+                      - gridcell [ref=f130e2580]:
+                        - textbox "ID ID0533A438" [ref=f130e2581]
+                    - row [ref=f130e2582]:
+                      - gridcell [ref=f130e2583]:
+                        - button "Ordinal and Designation 14 Gebäude West" [ref=f130e2584] [cursor=pointer]: 14 Gebäude West
+                      - gridcell [ref=f130e2585]:
+                        - button "Show more options" [ref=f130e2586] [cursor=pointer]
+                      - gridcell [ref=f130e2587]:
+                        - textbox "RNoPart 14" [ref=f130e2588]
+                      - gridcell [ref=f130e2589]:
+                        - textbox "ID ID0533BD88" [ref=f130e2590]
+                    - row [ref=f130e2591]:
+                      - gridcell [ref=f130e2592]:
+                        - button "Ordinal and Designation 15 Gebäude Ost" [ref=f130e2593] [cursor=pointer]: 15 Gebäude Ost
+                      - gridcell [ref=f130e2594]:
+                        - button "Show more options" [ref=f130e2595] [cursor=pointer]
+                      - gridcell [ref=f130e2596]:
+                        - textbox "RNoPart 15" [ref=f130e2597]
+                      - gridcell [ref=f130e2598]:
+                        - textbox "ID ID0533C7A8" [ref=f130e2599]
+                    - row [ref=f130e2600]:
+                      - gridcell [ref=f130e2601]:
+                        - button "Ordinal and Designation 16 Gebäude West" [ref=f130e2602] [cursor=pointer]: 16 Gebäude West
+                      - gridcell [ref=f130e2603]:
+                        - button "Show more options" [ref=f130e2604] [cursor=pointer]
+                      - gridcell [ref=f130e2605]:
+                        - textbox "RNoPart 16" [ref=f130e2606]
+                      - gridcell [ref=f130e2607]:
+                        - textbox "ID ID0B45CF18" [ref=f130e2608]
+                    - row [ref=f130e2609]:
+                      - gridcell [ref=f130e2610]:
+                        - button "Ordinal and Designation 17 Gebäude Ost" [ref=f130e2611] [cursor=pointer]: 17 Gebäude Ost
+                      - gridcell [ref=f130e2612]:
+                        - button "Show more options" [ref=f130e2613] [cursor=pointer]
+                      - gridcell [ref=f130e2614]:
+                        - textbox "RNoPart 17" [ref=f130e2615]
+                      - gridcell [ref=f130e2616]:
+                        - textbox "ID ID0B45D278" [ref=f130e2617]
+                    - row [ref=f130e2618]:
+                      - gridcell [ref=f130e2619]:
+                        - button "Ordinal and Designation 18 Gebäude West" [ref=f130e2620] [cursor=pointer]: 18 Gebäude West
+                      - gridcell [ref=f130e2621]:
+                        - button "Show more options" [ref=f130e2622] [cursor=pointer]
+                      - gridcell [ref=f130e2623]:
+                        - textbox "RNoPart 18" [ref=f130e2624]
+                      - gridcell [ref=f130e2625]:
+                        - textbox "ID ID14B903A0" [ref=f130e2626]
+                    - row [ref=f130e2627]:
+                      - gridcell [ref=f130e2628]:
+                        - button "Ordinal and Designation 19 Gebäude Ost" [ref=f130e2629] [cursor=pointer]: 19 Gebäude Ost
+                      - gridcell [ref=f130e2630]:
+                        - button "Show more options" [ref=f130e2631] [cursor=pointer]
+                      - gridcell [ref=f130e2632]:
+                        - textbox "RNoPart 19" [ref=f130e2633]
+                      - gridcell [ref=f130e2634]:
+                        - textbox "ID ID14B90700" [ref=f130e2635]
+                    - row [ref=f130e2636]:
+                      - gridcell [ref=f130e2637]:
+                        - button "Ordinal and Designation 20 Gebäude West" [ref=f130e2638] [cursor=pointer]: 20 Gebäude West
+                      - gridcell [ref=f130e2639]:
+                        - button "Show more options" [ref=f130e2640] [cursor=pointer]
+                      - gridcell [ref=f130e2641]:
+                        - textbox "RNoPart 20" [ref=f130e2642]
+                      - gridcell [ref=f130e2643]:
+                        - textbox "ID ID153C6258" [ref=f130e2644]
+                    - row [ref=f130e2645]:
+                      - gridcell [ref=f130e2646]:
+                        - button "Ordinal and Designation 21 Gebäude Ost" [ref=f130e2647] [cursor=pointer]: 21 Gebäude Ost
+                      - gridcell [ref=f130e2648]:
+                        - button "Show more options" [ref=f130e2649] [cursor=pointer]
+                      - gridcell [ref=f130e2650]:
+                        - textbox "RNoPart 21" [ref=f130e2651]
+                      - gridcell [ref=f130e2652]:
+                        - textbox "ID ID153C6408" [ref=f130e2653]
+                    - row [ref=f130e2654]:
+                      - gridcell [ref=f130e2655]:
+                        - button "Ordinal and Designation 22 Gebäude West" [ref=f130e2656] [cursor=pointer]: 22 Gebäude West
+                      - gridcell [ref=f130e2657]:
+                        - button "Show more options" [ref=f130e2658] [cursor=pointer]
+                      - gridcell [ref=f130e2659]:
+                        - textbox "RNoPart 22" [ref=f130e2660]
+                      - gridcell [ref=f130e2661]:
+                        - textbox "ID ID14B8A5B0" [ref=f130e2662]
+                    - row [ref=f130e2663]:
+                      - gridcell [ref=f130e2664]:
+                        - button "Ordinal and Designation 23 Gebäude Ost" [ref=f130e2665] [cursor=pointer]: 23 Gebäude Ost
+                      - gridcell [ref=f130e2666]:
+                        - button "Show more options" [ref=f130e2667] [cursor=pointer]
+                      - gridcell [ref=f130e2668]:
+                        - textbox "RNoPart 23" [ref=f130e2669]
+                      - gridcell [ref=f130e2670]:
+                        - textbox "ID ID0B45CE88" [ref=f130e2671]
+                    - row [ref=f130e2672]:
+                      - gridcell [ref=f130e2673]:
+                        - button "Ordinal and Designation 24 Gebäude West" [ref=f130e2674] [cursor=pointer]: 24 Gebäude West
+                      - gridcell [ref=f130e2675]:
+                        - button "Show more options" [ref=f130e2676] [cursor=pointer]
+                      - gridcell [ref=f130e2677]:
+                        - textbox "RNoPart 24" [ref=f130e2678]
+                      - gridcell [ref=f130e2679]:
+                        - textbox "ID ID15F90600" [ref=f130e2680]
+                    - row [ref=f130e2681]:
+                      - gridcell [ref=f130e2682]:
+                        - button "Ordinal and Designation 25 Gebäude Ost" [ref=f130e2683] [cursor=pointer]: 25 Gebäude Ost
+                      - gridcell [ref=f130e2684]:
+                        - button "Show more options" [ref=f130e2685] [cursor=pointer]
+                      - gridcell [ref=f130e2686]:
+                        - textbox "RNoPart 25" [ref=f130e2687]
+                      - gridcell [ref=f130e2688]:
+                        - textbox "ID ID15EAA8B8" [ref=f130e2689]
+                    - row [ref=f130e2690]:
+                      - gridcell [ref=f130e2691]:
+                        - button "Ordinal and Designation 26 Gebäude West" [ref=f130e2692] [cursor=pointer]: 26 Gebäude West
+                      - gridcell [ref=f130e2693]:
+                        - button "Show more options" [ref=f130e2694] [cursor=pointer]
+                      - gridcell [ref=f130e2695]:
+                        - textbox "RNoPart 26" [ref=f130e2696]
+                      - gridcell [ref=f130e2697]:
+                        - textbox "ID ID15EAA5E8" [ref=f130e2698]
+                    - row [ref=f130e2699]:
+                      - gridcell [ref=f130e2700]:
+                        - button "Ordinal and Designation 27 Gebäude Ost" [ref=f130e2701] [cursor=pointer]: 27 Gebäude Ost
+                      - gridcell [ref=f130e2702]:
+                        - button "Show more options" [ref=f130e2703] [cursor=pointer]
+                      - gridcell [ref=f130e2704]:
+                        - textbox "RNoPart 27" [ref=f130e2705]
+                      - gridcell [ref=f130e2706]:
+                        - textbox "ID ID0530CBC8" [ref=f130e2707]
+                    - row [ref=f130e2708]:
+                      - gridcell [ref=f130e2709]:
+                        - button "Ordinal and Designation 28 Gebäude West" [ref=f130e2710] [cursor=pointer]: 28 Gebäude West
+                      - gridcell [ref=f130e2711]:
+                        - button "Show more options" [ref=f130e2712] [cursor=pointer]
+                      - gridcell [ref=f130e2713]:
+                        - textbox "RNoPart 28" [ref=f130e2714]
+                      - gridcell [ref=f130e2715]:
+                        - textbox "ID ID0530D288" [ref=f130e2716]
+                    - row [ref=f130e2717]:
+                      - gridcell [ref=f130e2718]:
+                        - button "Ordinal and Designation 29 Gebäude Ost" [ref=f130e2719] [cursor=pointer]: 29 Gebäude Ost
+                      - gridcell [ref=f130e2720]:
+                        - button "Show more options" [ref=f130e2721] [cursor=pointer]
+                      - gridcell [ref=f130e2722]:
+                        - textbox "RNoPart 29" [ref=f130e2723]
+                      - gridcell [ref=f130e2724]:
+                        - textbox "ID ID15AAB5D8" [ref=f130e2725]
+                    - row [ref=f130e2726]:
+                      - gridcell [ref=f130e2727]:
+                        - button "Ordinal and Designation 30 Gebäude West" [ref=f130e2728] [cursor=pointer]: 30 Gebäude West
+                      - gridcell [ref=f130e2729]:
+                        - button "Show more options" [ref=f130e2730] [cursor=pointer]
+                      - gridcell [ref=f130e2731]:
+                        - textbox "RNoPart 30" [ref=f130e2732]
+                      - gridcell [ref=f130e2733]:
+                        - textbox "ID ID15AABA58" [ref=f130e2734]
+                    - row [ref=f130e2735]:
+                      - gridcell [ref=f130e2736]:
+                        - button "Ordinal and Designation 31 Gebäude Ost" [ref=f130e2737] [cursor=pointer]: 31 Gebäude Ost
+                      - gridcell [ref=f130e2738]:
+                        - button "Show more options" [ref=f130e2739] [cursor=pointer]
+                      - gridcell [ref=f130e2740]:
+                        - textbox "RNoPart 31" [ref=f130e2741]
+                      - gridcell [ref=f130e2742]:
+                        - textbox "ID ID051C4EF8" [ref=f130e2743]
+                    - row [ref=f130e2744]:
+                      - gridcell [ref=f130e2745]:
+                        - button "Ordinal and Designation 32 Gebäude West" [ref=f130e2746] [cursor=pointer]: 32 Gebäude West
+                      - gridcell [ref=f130e2747]:
+                        - button "Show more options" [ref=f130e2748] [cursor=pointer]
+                      - gridcell [ref=f130e2749]:
+                        - textbox "RNoPart 32" [ref=f130e2750]
+                      - gridcell [ref=f130e2751]:
+                        - textbox "ID ID051C4B08" [ref=f130e2752]
+                    - row [ref=f130e2753]:
+                      - gridcell [ref=f130e2754]:
+                        - button "Ordinal and Designation 33 Gebäude Ost" [ref=f130e2755] [cursor=pointer]: 33 Gebäude Ost
+                      - gridcell [ref=f130e2756]:
+                        - button "Show more options" [ref=f130e2757] [cursor=pointer]
+                      - gridcell [ref=f130e2758]:
+                        - textbox "RNoPart 33" [ref=f130e2759]
+                      - gridcell [ref=f130e2760]:
+                        - textbox "ID ID059D88C8" [ref=f130e2761]
+                    - row [ref=f130e2762]:
+                      - gridcell [ref=f130e2763]:
+                        - button "Ordinal and Designation 34 Gebäude West" [ref=f130e2764] [cursor=pointer]: 34 Gebäude West
+                      - gridcell [ref=f130e2765]:
+                        - button "Show more options" [ref=f130e2766] [cursor=pointer]
+                      - gridcell [ref=f130e2767]:
+                        - textbox "RNoPart 34" [ref=f130e2768]
+                      - gridcell [ref=f130e2769]:
+                        - textbox "ID ID059D8A78" [ref=f130e2770]
+                    - row [ref=f130e2771]:
+                      - gridcell [ref=f130e2772]:
+                        - button "Ordinal and Designation 35 Gebäude Ost" [ref=f130e2773] [cursor=pointer]: 35 Gebäude Ost
+                      - gridcell [ref=f130e2774]:
+                        - button "Show more options" [ref=f130e2775] [cursor=pointer]
+                      - gridcell [ref=f130e2776]:
+                        - textbox "RNoPart 35" [ref=f130e2777]
+                      - gridcell [ref=f130e2778]:
+                        - textbox "ID ID059D97F8" [ref=f130e2779]
+                    - row [ref=f130e2780]:
+                      - gridcell [ref=f130e2781]:
+                        - button "Ordinal and Designation 36 Gebäude West" [ref=f130e2782] [cursor=pointer]: 36 Gebäude West
+                      - gridcell [ref=f130e2783]:
+                        - button "Show more options" [ref=f130e2784] [cursor=pointer]
+                      - gridcell [ref=f130e2785]:
+                        - textbox "RNoPart 36" [ref=f130e2786]
+                      - gridcell [ref=f130e2787]:
+                        - textbox "ID ID059D9FD8" [ref=f130e2788]
+        - generic:
+          - form "GAEB BoQ Category":
+            - main:
+              - button "Go to the previous document of the same type" [ref=f130e2836] [cursor=pointer]:
+                - generic [ref=f130e2837]: 
+              - generic [ref=f130e2839]:
+                - generic [ref=f130e2842]:
+                  - button "Back" [ref=f130e2845] [cursor=pointer]:
+                    - generic [ref=f130e2846]: 
+                  - generic [ref=f130e2848]:
+                    - heading "GAEB BoQ Category" [level=1] [ref=f130e2849]
+                    - generic [ref=f130e2854]:
+                      - button "Make changes on the page" [disabled] [ref=f130e2855]:
+                        - generic [ref=f130e2856]: 
+                      - button "Share this page with other users or apps" [ref=f130e2858] [cursor=pointer]:
+                        - generic [ref=f130e2859]: 
+                      - button "Create a new entry." [disabled] [ref=f130e2861]:
+                        - generic [ref=f130e2862]: 
+                      - button "Delete the information" [disabled] [ref=f130e2864]:
+                        - generic [ref=f130e2865]: 
+                    - generic [ref=f130e2867]:
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f130e2870] [cursor=pointer]:
+                        - generic [ref=f130e2871]: 
+                      - button "Toggle wide layout" [ref=f130e2875] [cursor=pointer]:
+                        - generic [ref=f130e2876]: 
+                    - heading "01 Gebäude Ost" [level=2] [ref=f130e2879]
+                - menubar [ref=f130e2889]:
+                  - generic [ref=f130e2903]:
+                    - menuitem "Parent Row" [ref=f130e2908] [cursor=pointer]
+                    - menuitem "GAEB File Card" [ref=f130e2919] [cursor=pointer]
+                    - menuitem "GAEB Schema" [ref=f130e2930] [cursor=pointer]
+                    - menuitem "GAEB Source Entry" [ref=f130e2941] [cursor=pointer]
+                    - menuitem "More options" [ref=f130e2952] [cursor=pointer]
+                - generic [ref=f130e2962]:
+                  - generic [ref=f130e2963]:
+                    - button [expanded] [ref=f130e2966] [cursor=pointer]:
+                      - heading "General" [level=3] [ref=f130e2967]
+                    - generic [ref=f130e2970]:
+                      - generic [ref=f130e2971]:
+                        - button "LblTx Style" [ref=f130e2972] [cursor=pointer]
+                        - textbox "LblTx Style (Blank)" [ref=f130e2974]
+                      - generic [ref=f130e2975]:
+                        - button "CONo" [ref=f130e2976] [cursor=pointer]
+                        - textbox "CONo (Blank)" [ref=f130e2978]
+                      - generic [ref=f130e2979]:
+                        - button "COStatus" [ref=f130e2980] [cursor=pointer]
+                        - textbox "COStatus" [ref=f130e2982]
+                      - generic [ref=f130e2983]:
+                        - button "ALNBGroupNo" [ref=f130e2984] [cursor=pointer]
+                        - textbox "ALNBGroupNo (Blank)" [ref=f130e2986]
+                      - generic [ref=f130e2987]:
+                        - button "ALNBSerNo" [ref=f130e2988] [cursor=pointer]
+                        - textbox "ALNBSerNo (Blank)" [ref=f130e2990]
+                      - generic [ref=f130e2991]:
+                        - button "Accepted" [ref=f130e2992] [cursor=pointer]
+                        - textbox "Accepted" [ref=f130e2994]
+                      - generic [ref=f130e2995]:
+                        - button "NotApplBoQ" [ref=f130e2996] [cursor=pointer]
+                        - textbox "NotApplBoQ" [ref=f130e2998]
+                      - generic [ref=f130e2999]:
+                        - button "AlterBidStatus" [ref=f130e3000] [cursor=pointer]
+                        - textbox "AlterBidStatus" [ref=f130e3002]
+                      - generic [ref=f130e3003]:
+                        - button "BidUpDownReq" [ref=f130e3004] [cursor=pointer]
+                        - textbox "BidUpDownReq" [ref=f130e3006]
+                      - generic [ref=f130e3007]:
+                        - button "BidUpDownPct" [ref=f130e3008] [cursor=pointer]
+                        - textbox "BidUpDownPct (Blank)" [ref=f130e3010]
+                      - generic [ref=f130e3011]:
+                        - button "ID" [ref=f130e3012] [cursor=pointer]
+                        - textbox "ID ID148FFE10" [ref=f130e3014]
+                      - generic [ref=f130e3015]:
+                        - button "RNoPart" [ref=f130e3016] [cursor=pointer]
+                        - textbox "RNoPart 01" [ref=f130e3018]
+                      - generic [ref=f130e3019]:
+                        - button "CPV Codes" [ref=f130e3020] [cursor=pointer]
+                        - button "CPV Codes (Blank)" [active] [ref=f130e3022] [cursor=pointer]
+                      - generic [ref=f130e3023]:
+                        - button "Catalogue Assignments" [ref=f130e3024] [cursor=pointer]
+                        - button "Catalogue Assignments (Blank)" [ref=f130e3026] [cursor=pointer]
+                      - generic [ref=f130e3027]:
+                        - button "BoQ Bodies" [ref=f130e3028] [cursor=pointer]
+                        - button "BoQ Bodies 01 BoQ Body" [ref=f130e3030] [cursor=pointer]: 01 BoQ Body
+                      - generic [ref=f130e3031]:
+                        - button "Totals" [ref=f130e3032] [cursor=pointer]
+                        - button "Totals 01 Totals" [ref=f130e3034] [cursor=pointer]: 01 Totals
+                  - generic [ref=f130e3035]:
+                    - button [expanded] [ref=f130e3038] [cursor=pointer]:
+                      - heading "Texts" [level=3] [ref=f130e3039]
+                    - generic [ref=f130e3043]:
+                      - button "LblTx Markup" [ref=f130e3044] [cursor=pointer]
+                      - button "LblTx Markup Gebäude Ost" [ref=f130e3046] [cursor=pointer]: Gebäude Ost
+              - button "Go to the next document of the same type" [ref=f130e3048] [cursor=pointer]:
+                - generic [ref=f130e3049]: 
+      - text: Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.
+      - paragraph [ref=f130e2020]: GAEB0136. GAEB File
+      - paragraph [ref=f130e2022]: List with title "GAEB Bill of Quantities" now has 148 items
+      - paragraph [ref=f130e2024]: List with title "GAEB Parties and Sites" now has 2 items
+      - paragraph [ref=f130e2026]: List with title "GAEB Additional Texts" now has 2 items
+      - paragraph [ref=f130e2031]: GAEB0136. GAEB Schema
+      - paragraph [ref=f130e2033]: List with title "Related Rows" now has 3 items
+      - paragraph [ref=f130e2037]: Related Table, sorted in Ascending order
+      - paragraph [ref=f130e2041]: ID15B034E0. GAEB Bill of Quantities
+      - paragraph [ref=f130e2232]: GAEB0136, 233. GAEB BoQ Body
+      - paragraph [ref=f130e2793]: List with title "GAEB BoQ Category Rows" now has 147 items
+      - paragraph [ref=f130e3054]: 01 Gebäude Ost. GAEB BoQ Category

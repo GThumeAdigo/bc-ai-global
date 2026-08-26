@@ -1,0 +1,38 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "AGENTS.md"
+  ],
+  "skills": {
+    "paths": [".opencode/skills"]
+  },
+  "plugin": [
+    ".opencode/plugins/post-build-verify.ts"
+  ],
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@playwright/mcp@latest",
+        "--browser",
+        "chromium",
+        "--user-data-dir",
+        "/home/greg/.cache/opencode-bc-webclient/profile",
+        "--output-dir",
+        ".opencode/webclient-runs",
+        "--viewport-size",
+        "1920x1080",
+        "--console-level",
+        "warning",
+        "--timeout-navigation",
+        "120000",
+        "--timeout-settle",
+        "1500"
+      ],
+      "cwd": ".",
+      "enabled": true
+    }
+  }
+}

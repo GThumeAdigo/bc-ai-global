@@ -1,0 +1,149 @@
+- generic [ref=f20e1]:
+  - banner [ref=f20e3]:
+    - button "App launcher" [ref=f20e6] [cursor=pointer]: 
+    - generic [ref=f20e12]:
+      - generic [ref=f20e13]: Dynamics 365 Business Central
+      - generic [ref=f20e18]:
+        - 'button "ADIGO GmbH Mitte Ost, Environment: GTHU" [ref=f20e22] [cursor=pointer]':
+          - generic [ref=f20e24]:
+            - generic [ref=f20e26]:
+              - generic [ref=f20e27]: GO
+              - generic [ref=f20e28]: OST
+            - generic [ref=f20e29]:
+              - generic [ref=f20e30]: "Environment:"
+              - generic [ref=f20e31]: GTHU
+        - button "Copilot" [ref=f20e34] [cursor=pointer]:
+          - generic [ref=f20e35]: 
+        - button "Search" [ref=f20e38] [cursor=pointer]:
+          - generic [ref=f20e39]: 
+        - button "Notifications" [ref=f20e42] [cursor=pointer]:
+          - generic [ref=f20e43]: 
+        - button "Settings" [ref=f20e46] [cursor=pointer]:
+          - generic [ref=f20e47]: 
+        - button "Help" [ref=f20e50] [cursor=pointer]:
+          - generic [ref=f20e51]: 
+    - generic [ref=f20e52]:
+      - button "Account manager for Gregor Thume" [ref=f20e54] [cursor=pointer]:
+        - generic [ref=f20e55]: GT
+      - generic: 
+  - iframe [active] [ref=f20e70]:
+    - generic [ref=f21e1]:
+      - generic [ref=f21e3]:
+        - generic:
+          - form "Typed GAEB Documents (Dev)":
+            - generic [ref=f21e5]:
+              - generic [ref=f21e8]:
+                - button "Skip to main content" [ref=f21e9] [cursor=pointer]
+                - navigation "Main navigation" [ref=f21e10]:
+                  - menubar [ref=f21e19]:
+                    - generic [ref=f21e22]:
+                      - menuitem [ref=f21e26] [cursor=pointer]:
+                        - heading "ADIGO GmbH Mitte Ost" [level=1] [ref=f21e28]
+                      - menuitem "APP" [ref=f21e35] [cursor=pointer]
+                      - menuitem "All Reports" [ref=f21e43] [cursor=pointer]
+                      - menuitem "Explore all business features for my role in Business Central" [ref=f21e51] [cursor=pointer]:
+                        - generic [ref=f21e52]: 
+                      - generic [ref=f21e55]:
+                        - menuitem "Agent" [ref=f21e56] [cursor=pointer]:
+                          - generic [ref=f21e57]:
+                            - generic [ref=f21e58]: Agent
+                            - generic [ref=f21e64]: A
+                            - img "Not configured" [ref=f21e66]
+                        - menuitem "Payables Agent" [ref=f21e70] [cursor=pointer]:
+                          - generic [ref=f21e71]:
+                            - generic [ref=f21e72]: Payables Agent
+                            - generic [ref=f21e78]: PA
+                            - img "Not configured" [ref=f21e80]
+                        - menuitem "Sales Order Agent" [ref=f21e84] [cursor=pointer]:
+                          - generic [ref=f21e85]:
+                            - generic [ref=f21e86]: Sales Order Agent
+                            - generic [ref=f21e92]: SO
+                            - img "Not configured" [ref=f21e94]
+              - menubar [ref=f21e108]:
+                - generic [ref=f21e111]:
+                  - heading "Typed GAEB Documents (Dev):" [level=2] [ref=f21e113]
+                  - 'button "Typed GAEB Documents (Dev): All" [ref=f21e115] [cursor=pointer]':
+                    - generic [ref=f21e116]:
+                      - generic [ref=f21e117]: All
+                      - generic [ref=f21e119]: 
+                - generic [ref=f21e122]:
+                  - menuitem "Here's what Copilot can do on this page" [ref=f21e129] [cursor=pointer]:
+                    - generic [ref=f21e130]: 
+                  - menuitem [ref=f21e139] [cursor=pointer]:
+                    - generic [ref=f21e140]:
+                      - generic [ref=f21e141]: 
+                      - searchbox "Search Typed GAEB Documents (Dev)"
+                - generic [ref=f21e143]:
+                  - menuitem "Enter analysis mode" [ref=f21e148] [cursor=pointer]
+                  - generic [ref=f21e158]:
+                    - generic [ref=f21e162]:
+                      - menuitem "Inspect Typed Rows" [ref=f21e167] [cursor=pointer]
+                      - menuitem "More options" [ref=f21e178] [cursor=pointer]
+                    - generic [ref=f21e182]:
+                      - menuitem "Share" [ref=f21e185] [cursor=pointer]:
+                        - generic [ref=f21e186]: 
+                      - menuitemcheckbox "Toggle filter" [ref=f21e190] [cursor=pointer]:
+                        - generic [ref=f21e191]: 
+                      - menuitem "List layout selected" [ref=f21e194] [cursor=pointer]
+                      - menuitemcheckbox "Toggle wide layout" [ref=f21e199] [cursor=pointer]:
+                        - generic [ref=f21e200]: 
+              - main [ref=f21e203]:
+                - grid "GOXGAE Typed Documents Dev" [ref=f21e210]:
+                  - rowgroup [ref=f21e212]:
+                    - row [selected] [ref=f21e213]:
+                      - columnheader [ref=f21e214]:
+                        - generic [ref=f21e215]:
+                          - button "Source Document No., sorted in Ascending order" [ref=f21e216] [cursor=pointer]: Source Document No.
+                          - img "Ascending" [ref=f21e218]
+                          - img "Filtered" [ref=f21e220]
+                        - button "Open menu for Source Document No." [ref=f21e221] [cursor=pointer]
+                        - button [ref=f21e222]
+                      - columnheader "More Options" [ref=f21e225]
+                      - columnheader [ref=f21e227]:
+                        - button "Population Status" [ref=f21e229] [cursor=pointer]
+                        - button "Open menu for Population Status" [ref=f21e230] [cursor=pointer]
+                        - button [ref=f21e231]
+                      - columnheader [ref=f21e234]:
+                        - button "Populated At" [ref=f21e236] [cursor=pointer]
+                        - button "Open menu for Populated At" [ref=f21e237] [cursor=pointer]
+                        - button [ref=f21e238]
+                      - columnheader [ref=f21e241]:
+                        - button "Unconverted Value Count" [ref=f21e243] [cursor=pointer]
+                        - button "Open menu for Unconverted Value Count" [ref=f21e244] [cursor=pointer]
+                        - button [ref=f21e245]
+                      - columnheader [ref=f21e248]:
+                        - button "Population Diagnostic Category" [ref=f21e250] [cursor=pointer]
+                        - button "Open menu for Population Diagnostic Category" [ref=f21e251] [cursor=pointer]
+                        - button [ref=f21e252]
+                      - columnheader [ref=f21e255]:
+                        - button "Population Diagnostic Message" [ref=f21e257] [cursor=pointer]
+                        - button "Open menu for Population Diagnostic Message" [ref=f21e258] [cursor=pointer]
+                        - button [ref=f21e259]
+                  - generic [ref=f21e262]:
+                    - rowgroup [ref=f21e263]:
+                      - row [ref=f21e264]:
+                        - columnheader [ref=f21e265]
+                        - columnheader [ref=f21e266]
+                        - columnheader [ref=f21e268]
+                        - columnheader [ref=f21e269]
+                        - columnheader [ref=f21e270]
+                        - columnheader [ref=f21e271]
+                        - columnheader [ref=f21e272]
+                    - row [selected] [ref=f21e273]:
+                      - gridcell [ref=f21e274]:
+                        - button "Source Document No., sorted in Ascending order GAEB0081" [active] [ref=f21e275] [cursor=pointer]: GAEB0081
+                      - gridcell [ref=f21e276]:
+                        - button "Show more options" [ref=f21e277] [cursor=pointer]
+                      - gridcell [ref=f21e278]:
+                        - textbox "Population Status" [ref=f21e279]
+                      - gridcell [ref=f21e280]:
+                        - textbox "Populated At" [ref=f21e281]
+                      - gridcell [ref=f21e282]:
+                        - textbox "Unconverted Value Count" [ref=f21e283]
+                      - gridcell [ref=f21e284]:
+                        - textbox "Population Diagnostic Category (Blank)" [ref=f21e285]
+                      - gridcell [ref=f21e286]:
+                        - textbox "Population Diagnostic Message (Blank)" [ref=f21e287]
+      - text: Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.
+      - paragraph [ref=f21e292]: List with title "Typed GAEB Documents (Dev)" now has one item
+      - paragraph [ref=f21e294]: Source Document No., sorted in Ascending order

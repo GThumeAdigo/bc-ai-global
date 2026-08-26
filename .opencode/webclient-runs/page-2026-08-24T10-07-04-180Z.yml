@@ -1,0 +1,9 @@
+- iframe [ref=f1e14]:
+  - alertdialog [ref=f2e3]:
+    - generic [ref=f2e8]:
+      - heading "Could not open the company." [level=1] [ref=f2e9]
+      - generic [ref=f2e10]: Could not open the "ADIGO GmbH Mitte Ost" company. The company "ADIGO GmbH Mitte Ost" does not exist.
+      - generic [ref=f2e11]: "Date and time: Mon, 24 Aug 2026 10:06:43 GMT"
+      - generic [ref=f2e12]: "Microsoft Entra tenant: 3b1b504a-1113-405d-9c1e-634652755d7f"
+      - generic [ref=f2e13]: "Operation: df88b565aa3543d0bf30324cb612d80a"
+      - button "Go back home" [ref=f2e14] [cursor=pointer]

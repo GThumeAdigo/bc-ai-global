@@ -1,0 +1,651 @@
+- generic [ref=f181e1]:
+  - banner [ref=f181e3]:
+    - button "App launcher" [ref=f181e6] [cursor=pointer]: 
+    - generic [ref=f181e12]:
+      - generic [ref=f181e13]: Dynamics 365 Business Central
+      - generic [ref=f181e18]:
+        - 'button "ADIGO GmbH Mitte Ost, Environment: GTHU" [ref=f181e22] [cursor=pointer]':
+          - generic [ref=f181e24]:
+            - generic [ref=f181e26]:
+              - generic [ref=f181e27]: GO
+              - generic [ref=f181e28]: OST
+            - generic [ref=f181e29]:
+              - generic [ref=f181e30]: "Environment:"
+              - generic [ref=f181e31]: GTHU
+        - button "Copilot" [ref=f181e34] [cursor=pointer]:
+          - generic [ref=f181e35]: 
+        - button "Search" [ref=f181e38] [cursor=pointer]:
+          - generic [ref=f181e39]: 
+        - button "Notifications" [ref=f181e42] [cursor=pointer]:
+          - generic [ref=f181e43]: 
+        - button "Settings" [ref=f181e46] [cursor=pointer]:
+          - generic [ref=f181e47]: 
+        - button "Help" [ref=f181e50] [cursor=pointer]:
+          - generic [ref=f181e51]: 
+    - generic [ref=f181e52]:
+      - button "Account manager for Gregor Thume" [ref=f181e54] [cursor=pointer]:
+        - generic [ref=f181e55]: GT
+      - generic: 
+  - iframe [active] [ref=f181e70]:
+    - generic [ref=f182e1]:
+      - generic [ref=f182e2]:
+        - generic:
+          - form "GAEB File":
+            - main:
+              - generic:
+                - button "Go to the previous document of the same type":
+                  - generic: 
+              - generic [ref=f182e4]:
+                - generic [ref=f182e7]:
+                  - button "Back" [ref=f182e10] [cursor=pointer]:
+                    - generic [ref=f182e11]: 
+                  - generic [ref=f182e13]:
+                    - heading "GAEB File" [level=1] [ref=f182e14]
+                    - generic [ref=f182e19]:
+                      - button "Make changes on the page" [disabled] [ref=f182e20]:
+                        - generic [ref=f182e21]: 
+                      - button "Share this page with other users or apps" [ref=f182e23] [cursor=pointer]:
+                        - generic [ref=f182e24]: 
+                      - button "Create a new entry." [disabled] [ref=f182e26]:
+                        - generic [ref=f182e27]: 
+                      - button "Delete the information" [disabled] [ref=f182e29]:
+                        - generic [ref=f182e30]: 
+                    - generic [ref=f182e32]:
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f182e35] [cursor=pointer]:
+                        - generic [ref=f182e36]: 
+                      - button "Toggle wide layout" [ref=f182e40] [cursor=pointer]:
+                        - generic [ref=f182e41]: 
+                    - heading "GAEB0138" [level=2] [ref=f182e44]
+                - menubar [ref=f182e54]:
+                  - generic [ref=f182e64]:
+                    - generic [ref=f182e68]:
+                      - menuitem "Show Project and Award Texts" [ref=f182e73] [cursor=pointer]
+                      - menuitem "Show Coverage Gaps" [ref=f182e84] [cursor=pointer]
+                      - menuitem "Populate Typed Data" [ref=f182e95] [cursor=pointer]
+                      - menuitem "GAEB Schema" [ref=f182e106] [cursor=pointer]
+                      - menuitem "GAEB Source Entries" [ref=f182e117] [cursor=pointer]
+                      - menuitem "Download Source XML" [ref=f182e128] [cursor=pointer]
+                      - menuitem "Show the rest" [ref=f182e137] [cursor=pointer]:
+                        - generic [ref=f182e138]: 
+                    - menuitemcheckbox "Toggle FactBox" [checked] [ref=f182e144] [cursor=pointer]:
+                      - generic [ref=f182e145]: 
+                - generic [ref=f182e150]:
+                  - generic [ref=f182e153]:
+                    - generic [ref=f182e154]:
+                      - generic [ref=f182e155]:
+                        - button [expanded] [ref=f182e157] [cursor=pointer]:
+                          - heading "General" [level=3] [ref=f182e158]
+                        - button "General, Show less" [ref=f182e159] [cursor=pointer]: Show less
+                      - generic [ref=f182e162]:
+                        - generic [ref=f182e163]:
+                          - button "Source Document No." [ref=f182e164] [cursor=pointer]
+                          - textbox "Source Document No. GAEB0138" [ref=f182e166]
+                        - generic [ref=f182e167]:
+                          - button "File Name" [ref=f182e168] [cursor=pointer]
+                          - textbox "File Name Bonner Wasserwerk (MWM-Muster) 8500 Ansätze-x31.xml" [ref=f182e170]
+                        - generic [ref=f182e171]:
+                          - button "Created At" [ref=f182e172] [cursor=pointer]
+                          - textbox "Created At 23.08.2026 18:13" [ref=f182e174]
+                        - generic [ref=f182e175]:
+                          - button "Source Size" [ref=f182e176] [cursor=pointer]
+                          - textbox "Source Size 1836440" [ref=f182e178]
+                        - generic [ref=f182e179]:
+                          - button "Entry Count" [ref=f182e180] [cursor=pointer]
+                          - textbox "Entry Count 41982" [ref=f182e182]
+                        - generic [ref=f182e183]:
+                          - button "Exchange Phase" [ref=f182e184] [cursor=pointer]
+                          - textbox "Exchange Phase" [ref=f182e186]
+                        - generic [ref=f182e187]:
+                          - button "Project Name" [ref=f182e188] [cursor=pointer]
+                          - textbox "Project Name (Blank)" [ref=f182e190]
+                        - generic [ref=f182e191]:
+                          - button "GAEB Project ID" [ref=f182e192] [cursor=pointer]
+                          - textbox "GAEB Project ID EB2FED4B583F4332AE6845301F38134A" [ref=f182e194]
+                        - generic [ref=f182e195]:
+                          - button "Derived From" [ref=f182e196] [cursor=pointer]
+                          - button "Derived From (Blank)" [ref=f182e198] [cursor=pointer]
+                        - generic [ref=f182e199]:
+                          - button "Archived" [ref=f182e200] [cursor=pointer]
+                          - checkbox "Archived" [disabled] [ref=f182e202]
+                        - generic [ref=f182e204]:
+                          - button "Superseded By" [ref=f182e205] [cursor=pointer]
+                          - button "Superseded By (Blank)" [ref=f182e207] [cursor=pointer]
+                        - generic [ref=f182e208]:
+                          - button "Correlation ID" [ref=f182e209] [cursor=pointer]
+                          - 'textbox "Correlation ID {8245efb7-5d7d-4505-adf2-a3735106001a}" [ref=f182e211]'
+                        - generic [ref=f182e212]:
+                          - button "Status" [ref=f182e213] [cursor=pointer]
+                          - textbox "Status Stored" [ref=f182e215]
+                        - generic [ref=f182e216]:
+                          - button "Created By" [ref=f182e217] [cursor=pointer]
+                          - 'textbox "Created By {57a6e36d-1702-482f-98c1-67afe3bd4dce}" [ref=f182e219]'
+                        - generic [ref=f182e220]:
+                          - button "Source Stored At" [ref=f182e221] [cursor=pointer]
+                          - textbox "Source Stored At 23.08.2026 18:13" [ref=f182e223]
+                        - generic [ref=f182e224]:
+                          - button "Project ID Backfilled" [ref=f182e225] [cursor=pointer]
+                          - checkbox "Project ID Backfilled" [checked] [disabled] [ref=f182e227]
+                        - generic [ref=f182e229]:
+                          - button "Project Diagnostic" [ref=f182e230] [cursor=pointer]
+                          - textbox "Project Diagnostic (Blank)" [ref=f182e232]
+                    - generic [ref=f182e233]:
+                      - generic [ref=f182e234]:
+                        - button [expanded] [ref=f182e236] [cursor=pointer]:
+                          - heading "Import" [level=3] [ref=f182e237]
+                        - button "Import, Show more" [ref=f182e238] [cursor=pointer]: Show more
+                      - generic [ref=f182e241]:
+                        - generic [ref=f182e242]:
+                          - button "Import State" [ref=f182e243] [cursor=pointer]
+                          - textbox "Import State Completed" [ref=f182e245]
+                        - generic [ref=f182e246]:
+                          - button "Import Stage" [ref=f182e247] [cursor=pointer]
+                          - textbox "Import Stage" [ref=f182e249]
+                        - generic [ref=f182e250]:
+                          - button "Import Progress %" [ref=f182e251] [cursor=pointer]
+                          - textbox "Import Progress % 100" [ref=f182e253]
+                        - generic [ref=f182e254]:
+                          - button "Failure Reason" [ref=f182e255] [cursor=pointer]
+                          - textbox "Failure Reason (Blank)" [ref=f182e257]
+                    - generic [ref=f182e258]:
+                      - generic [ref=f182e259]:
+                        - button [expanded] [ref=f182e261] [cursor=pointer]:
+                          - heading "Typed Population" [level=3] [ref=f182e262]
+                        - button "Typed Population, Show less" [ref=f182e263] [cursor=pointer]: Show less
+                      - generic [ref=f182e266]:
+                        - generic [ref=f182e267]:
+                          - button "PopulationStatus" [ref=f182e268] [cursor=pointer]
+                          - textbox "PopulationStatus Populated" [ref=f182e270]
+                        - generic [ref=f182e271]:
+                          - button "PopulatedAt" [ref=f182e272] [cursor=pointer]
+                          - textbox "PopulatedAt 23.08.2026 18:23" [ref=f182e274]
+                        - generic [ref=f182e275]:
+                          - button "UnconvertedValueCount" [ref=f182e276] [cursor=pointer]
+                          - button "UnconvertedValueCount 0" [ref=f182e278] [cursor=pointer]: "0"
+                        - generic [ref=f182e279]:
+                          - button "UnreachedElementCount" [ref=f182e280] [cursor=pointer]
+                          - button "UnreachedElementCount 3239" [ref=f182e282] [cursor=pointer]: "3239"
+                        - generic [ref=f182e283]:
+                          - button "PopulationDiagnosticCategory" [ref=f182e284] [cursor=pointer]
+                          - textbox "PopulationDiagnosticCategory (Blank)" [ref=f182e286]
+                        - generic [ref=f182e287]:
+                          - button "PopulationDiagnosticMessage" [ref=f182e288] [cursor=pointer]
+                          - textbox "PopulationDiagnosticMessage (Blank)" [ref=f182e290]
+                    - generic [ref=f182e291]:
+                      - menubar [ref=f182e301]:
+                        - heading [level=3] [ref=f182e306]:
+                          - button [ref=f182e307] [cursor=pointer]: Exchange Info
+                      - heading [level=3] [ref=f182e308]:
+                        - button "Exchange Info" [ref=f182e310] [cursor=pointer]
+                    - generic [ref=f182e311]:
+                      - menubar [ref=f182e321]:
+                        - heading [level=3] [ref=f182e326]:
+                          - button "Project Info" [ref=f182e327] [cursor=pointer]
+                      - generic [ref=f182e333]:
+                        - generic [ref=f182e334]:
+                          - button "NamePrj" [ref=f182e335] [cursor=pointer]
+                          - textbox "NamePrj (Blank)" [ref=f182e337]
+                        - generic [ref=f182e338]:
+                          - button "PrjID" [ref=f182e339] [cursor=pointer]
+                          - textbox "PrjID EB2FED4B583F4332AE6845301F38134A" [ref=f182e341]
+                        - generic [ref=f182e342]:
+                          - button "LblPrj" [ref=f182e343] [cursor=pointer]
+                          - textbox "LblPrj (Blank)" [ref=f182e345]
+                        - generic [ref=f182e346]:
+                          - button "Cur" [ref=f182e347] [cursor=pointer]
+                          - textbox "Cur (Blank)" [ref=f182e349]
+                        - generic [ref=f182e350]:
+                          - button "CurLbl" [ref=f182e351] [cursor=pointer]
+                          - textbox "CurLbl (Blank)" [ref=f182e353]
+                        - generic [ref=f182e354]:
+                          - button "UPFracDig" [ref=f182e355] [cursor=pointer]
+                          - textbox "UPFracDig (Blank)" [ref=f182e357]
+                        - generic [ref=f182e358]:
+                          - button "BidCommPerm" [ref=f182e359] [cursor=pointer]
+                          - textbox "BidCommPerm" [ref=f182e361]
+                        - generic [ref=f182e362]:
+                          - button "AlterBidPerm" [ref=f182e363] [cursor=pointer]
+                          - textbox "AlterBidPerm" [ref=f182e365]
+                    - generic [ref=f182e366]:
+                      - menubar [ref=f182e376]:
+                        - heading [level=3] [ref=f182e381]:
+                          - button [ref=f182e382] [cursor=pointer]: Award Info
+                      - heading [level=3] [ref=f182e383]:
+                        - button "Award Info" [ref=f182e385] [cursor=pointer]
+                    - generic [ref=f182e386]:
+                      - menubar [ref=f182e396]:
+                        - heading [level=3] [ref=f182e401]:
+                          - button [ref=f182e402] [cursor=pointer]: Parties and Sites
+                        - generic [ref=f182e413]:
+                          - menuitem [ref=f182e416] [cursor=pointer]:
+                            - generic [ref=f182e417]: 
+                          - menuitemcheckbox [ref=f182e421] [cursor=pointer]:
+                            - generic [ref=f182e422]: 
+                      - heading [level=3] [ref=f182e424]:
+                        - button "Parties and Sites" [ref=f182e426] [cursor=pointer]
+                    - generic [ref=f182e427]:
+                      - menubar [ref=f182e437]:
+                        - heading [level=3] [ref=f182e442]:
+                          - button [ref=f182e443] [cursor=pointer]: Additional Texts
+                        - generic [ref=f182e455]:
+                          - generic [ref=f182e459]:
+                            - menuitem [disabled] [ref=f182e464]:
+                              - generic [ref=f182e465]: Show Outline Text
+                            - menuitem [disabled] [ref=f182e475]:
+                              - generic [ref=f182e476]: Show Detail Text
+                            - menuitem [ref=f182e486] [cursor=pointer]:
+                              - generic [ref=f182e487]: Open with Texts
+                          - generic [ref=f182e493]:
+                            - menuitem [ref=f182e496] [cursor=pointer]:
+                              - generic [ref=f182e497]: 
+                            - menuitemcheckbox [ref=f182e501] [cursor=pointer]:
+                              - generic [ref=f182e502]: 
+                      - heading [level=3] [ref=f182e504]:
+                        - button "Additional Texts" [ref=f182e506] [cursor=pointer]
+                    - generic [ref=f182e507]:
+                      - menubar [ref=f182e517]:
+                        - heading [level=3] [ref=f182e522]:
+                          - button "Bill of Quantities" [ref=f182e523] [cursor=pointer]
+                        - generic [ref=f182e535]:
+                          - generic [ref=f182e539]:
+                            - menuitem "Show Outline Text" [disabled] [ref=f182e544]
+                            - menuitem "Show Detail Text" [disabled] [ref=f182e555]
+                            - menuitem "Show Category Label" [disabled] [ref=f182e566]
+                            - menuitem "Show the rest" [ref=f182e575] [cursor=pointer]:
+                              - generic [ref=f182e576]: 
+                          - generic [ref=f182e579]:
+                            - menuitem "Share" [ref=f182e582] [cursor=pointer]:
+                              - generic [ref=f182e583]: 
+                            - menuitemcheckbox "Toggle focus mode" [ref=f182e587] [cursor=pointer]:
+                              - generic [ref=f182e588]: 
+                      - generic [ref=f182e591]:
+                        - treegrid "Bill of Quantities" [ref=f182e593]:
+                          - rowgroup [ref=f182e595]:
+                            - row [ref=f182e596]:
+                              - columnheader "Error" [ref=f182e597]
+                              - columnheader "Ordinal No. Open menu for Ordinal No." [ref=f182e598]:
+                                - generic [ref=f182e599]: Ordinal No.
+                                - button "Open menu for Ordinal No." [ref=f182e600] [cursor=pointer]
+                                - button [ref=f182e601]
+                              - columnheader "More Options" [ref=f182e604]
+                              - columnheader "Node Kind Open menu for Node Kind" [ref=f182e606]:
+                                - generic [ref=f182e607]: Node Kind
+                                - button "Open menu for Node Kind" [ref=f182e608] [cursor=pointer]
+                                - button [ref=f182e609]
+                              - columnheader "Outline Text Open menu for Outline Text" [ref=f182e612]:
+                                - generic [ref=f182e613]: Outline Text
+                                - button "Open menu for Outline Text" [ref=f182e614] [cursor=pointer]
+                                - button [ref=f182e615]
+                              - columnheader "Quantity Open menu for Quantity" [ref=f182e618]:
+                                - generic [ref=f182e619]: Quantity
+                                - button "Open menu for Quantity" [ref=f182e620] [cursor=pointer]
+                                - button [ref=f182e621]
+                              - columnheader "Unit Open menu for Unit" [ref=f182e624]:
+                                - generic [ref=f182e625]: Unit
+                                - button "Open menu for Unit" [ref=f182e626] [cursor=pointer]
+                                - button [ref=f182e627]
+                              - columnheader "Mapped Unit Open menu for Mapped Unit" [ref=f182e630]:
+                                - generic [ref=f182e631]: Mapped Unit
+                                - button "Open menu for Mapped Unit" [ref=f182e632] [cursor=pointer]
+                                - button [ref=f182e633]
+                              - columnheader "Unit Price Open menu for Unit Price" [ref=f182e636]:
+                                - generic [ref=f182e637]: Unit Price
+                                - button "Open menu for Unit Price" [ref=f182e638] [cursor=pointer]
+                                - button [ref=f182e639]
+                              - columnheader "Item Total Open menu for Item Total" [ref=f182e642]:
+                                - generic [ref=f182e643]: Item Total
+                                - button "Open menu for Item Total" [ref=f182e644] [cursor=pointer]
+                                - button [ref=f182e645]
+                              - columnheader "Texts Open menu for Texts" [ref=f182e648]:
+                                - generic [ref=f182e649]: Texts
+                                - button "Open menu for Texts" [ref=f182e650] [cursor=pointer]
+                                - button [ref=f182e651]
+                          - generic [ref=f182e654]:
+                            - rowgroup [ref=f182e655]:
+                              - row [ref=f182e656]:
+                                - columnheader [ref=f182e657]
+                                - columnheader [ref=f182e658]
+                                - columnheader [ref=f182e659]
+                                - columnheader [ref=f182e661]
+                                - columnheader [ref=f182e662]
+                                - columnheader [ref=f182e663]
+                                - columnheader [ref=f182e664]
+                                - columnheader [ref=f182e665]
+                                - columnheader [ref=f182e666]
+                                - columnheader [ref=f182e667]
+                                - columnheader [ref=f182e668]
+                            - generic [ref=f182e669]: (There is nothing to show in this view)
+                        - generic [ref=f182e674]:
+                          - button "Total" [ref=f182e675] [cursor=pointer]
+                          - textbox "Total 0,00" [ref=f182e677]
+                  - generic [ref=f182e678]:
+                    - button "Resize the factbox area." [ref=f182e679]
+                    - generic [ref=f182e682]:
+                      - generic [ref=f182e692]:
+                        - generic "Expand summary" [ref=f182e693] [cursor=pointer]:
+                          - heading "Copilot generated page summary, preview feature." [level=3] [ref=f182e697]: Summary
+                          - generic "Preview" [ref=f182e698]
+                        - button "Expand summary" [ref=f182e701] [cursor=pointer]
+                      - tabpanel [ref=f182e707]:
+                        - generic [ref=f182e708]:
+                          - heading "Project and Award Texts" [level=3] [ref=f182e710]
+                          - iframe [ref=f182e715]:
+                            
+              - generic:
+                - button "Go to the next document of the same type":
+                  - generic: 
+        - generic:
+          - form "GAEB Schema":
+            - main:
+              - generic:
+                - button "Go to the previous document of the same type":
+                  - generic: 
+              - generic [ref=f182e717]:
+                - generic [ref=f182e720]:
+                  - button "Back" [ref=f182e723] [cursor=pointer]:
+                    - generic [ref=f182e724]: 
+                  - generic [ref=f182e726]:
+                    - heading "GAEB Schema" [level=1] [ref=f182e727]
+                    - generic [ref=f182e732]:
+                      - button "Make changes on the page" [disabled] [ref=f182e733]:
+                        - generic [ref=f182e734]: 
+                      - button "Share this page with other users or apps" [ref=f182e736] [cursor=pointer]:
+                        - generic [ref=f182e737]: 
+                      - button "Create a new entry." [disabled] [ref=f182e739]:
+                        - generic [ref=f182e740]: 
+                      - button "Delete the information" [disabled] [ref=f182e742]:
+                        - generic [ref=f182e743]: 
+                    - generic [ref=f182e745]:
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f182e748] [cursor=pointer]:
+                        - generic [ref=f182e749]: 
+                      - button "Toggle wide layout" [ref=f182e753] [cursor=pointer]:
+                        - generic [ref=f182e754]: 
+                    - heading "GAEB0138" [level=2] [ref=f182e757]
+                - menubar [ref=f182e767]:
+                  - generic [ref=f182e781]:
+                    - menuitem "All Typed Tables" [ref=f182e786] [cursor=pointer]
+                    - menuitem "Text Overlays" [ref=f182e797] [cursor=pointer]
+                    - menuitem "GAEB File Card" [ref=f182e808] [cursor=pointer]
+                    - menuitem "GAEB Source Entries" [ref=f182e819] [cursor=pointer]
+                    - menuitem "More options" [ref=f182e830] [cursor=pointer]
+                - generic [ref=f182e840]:
+                  - generic [ref=f182e841]:
+                    - generic [ref=f182e842]:
+                      - button [expanded] [ref=f182e844] [cursor=pointer]:
+                        - heading "Document" [level=3] [ref=f182e845]
+                      - button "Document, Show more" [ref=f182e846] [cursor=pointer]: Show more
+                    - generic [ref=f182e849]:
+                      - generic [ref=f182e850]:
+                        - button "Source Document No." [ref=f182e851] [cursor=pointer]
+                        - textbox "Source Document No. GAEB0138" [ref=f182e853]
+                      - generic [ref=f182e854]:
+                        - button "File Name" [ref=f182e855] [cursor=pointer]
+                        - textbox "File Name Bonner Wasserwerk (MWM-Muster) 8500 Ansätze-x31.xml" [ref=f182e857]
+                      - generic [ref=f182e858]:
+                        - button "Project Name" [ref=f182e859] [cursor=pointer]
+                        - textbox "Project Name (Blank)" [ref=f182e861]
+                      - generic [ref=f182e862]:
+                        - button "Exchange Phase" [ref=f182e863] [cursor=pointer]
+                        - textbox "Exchange Phase" [ref=f182e865]
+                      - generic [ref=f182e866]:
+                        - button "Population Status" [ref=f182e867] [cursor=pointer]
+                        - textbox "Population Status Populated" [ref=f182e869]
+                  - generic [ref=f182e870]:
+                    - menubar [ref=f182e880]:
+                      - heading [level=3] [ref=f182e885]:
+                        - button "Document Constructs" [ref=f182e886] [cursor=pointer]
+                      - generic [ref=f182e898]:
+                        - generic [ref=f182e902]:
+                          - menuitem "Open" [ref=f182e907] [cursor=pointer]
+                          - menuitem "Show Empty Relations" [ref=f182e918] [cursor=pointer]
+                        - generic [ref=f182e925]:
+                          - menuitem "Share" [ref=f182e928] [cursor=pointer]:
+                            - generic [ref=f182e929]: 
+                          - menuitemcheckbox "Toggle focus mode" [ref=f182e933] [cursor=pointer]:
+                            - generic [ref=f182e934]: 
+                    - grid "Document Constructs" [ref=f182e939]:
+                      - rowgroup [ref=f182e941]:
+                        - row [ref=f182e942]:
+                          - columnheader "Error" [ref=f182e943]
+                          - columnheader [ref=f182e944]:
+                            - generic [ref=f182e945]:
+                              - button "Related Table, sorted in Ascending order" [ref=f182e946] [cursor=pointer]: Related Table
+                              - img "Ascending" [ref=f182e948]
+                            - button "Open menu for Related Table" [ref=f182e949] [cursor=pointer]
+                            - button [ref=f182e950]
+                          - columnheader "More Options" [ref=f182e953]
+                          - columnheader [ref=f182e955]:
+                            - button "Description" [ref=f182e957] [cursor=pointer]
+                            - button "Open menu for Description" [ref=f182e958] [cursor=pointer]
+                            - button [ref=f182e959]
+                          - columnheader [ref=f182e962]:
+                            - button "Via Elements" [ref=f182e964] [cursor=pointer]
+                            - button "Open menu for Via Elements" [ref=f182e965] [cursor=pointer]
+                            - button [ref=f182e966]
+                          - columnheader [ref=f182e969]:
+                            - button "Relation" [ref=f182e971] [cursor=pointer]
+                            - button "Open menu for Relation" [ref=f182e972] [cursor=pointer]
+                            - button [ref=f182e973]
+                          - columnheader [ref=f182e976]:
+                            - generic [ref=f182e977]:
+                              - button "Links" [ref=f182e978] [cursor=pointer]
+                              - img "Filtered" [ref=f182e980]
+                            - button "Open menu for Links" [ref=f182e981] [cursor=pointer]
+                            - button [ref=f182e982]
+                      - generic [ref=f182e985]:
+                        - rowgroup [ref=f182e986]:
+                          - row [ref=f182e987]:
+                            - columnheader [ref=f182e988]
+                            - columnheader [ref=f182e989]
+                            - columnheader [ref=f182e990]
+                            - columnheader [ref=f182e992]
+                            - columnheader [ref=f182e993]
+                            - columnheader [ref=f182e994]
+                            - columnheader [ref=f182e995]
+                        - row [ref=f182e996]:
+                          - rowheader [ref=f182e997]
+                          - gridcell [ref=f182e998]:
+                            - textbox "Related Table, sorted in Ascending order GAEB Exchange Info" [ref=f182e999]
+                          - gridcell [ref=f182e1000]:
+                            - button "Show more options" [ref=f182e1001] [cursor=pointer]
+                          - gridcell [ref=f182e1002]:
+                            - textbox "Description MwmMfc 98, 10.12.21" [ref=f182e1003]
+                          - gridcell [ref=f182e1004]:
+                            - textbox "Via Elements GAEBInfo" [ref=f182e1005]
+                          - gridcell [ref=f182e1006]:
+                            - textbox "Relation Single" [ref=f182e1007]
+                          - gridcell [ref=f182e1008]:
+                            - button "Links 1" [ref=f182e1009] [cursor=pointer]: "1"
+                        - row [selected] [ref=f182e1010]:
+                          - rowheader [ref=f182e1011]
+                          - gridcell [ref=f182e1012]:
+                            - textbox "Related Table, sorted in Ascending order" [ref=f182e1013]
+                          - gridcell [ref=f182e1014]:
+                            - button "Show more options" [ref=f182e1015] [cursor=pointer]
+                          - gridcell [ref=f182e1016]:
+                            - textbox "Description" [ref=f182e1017]
+                          - gridcell [ref=f182e1018]:
+                            - textbox "Via Elements" [ref=f182e1019]
+                          - gridcell [ref=f182e1020]:
+                            - textbox "Relation" [ref=f182e1021]
+                          - gridcell [ref=f182e1022]:
+                            - button "Links 1" [ref=f182e1023] [cursor=pointer]: "1"
+                        - row [ref=f182e1024]:
+                          - rowheader [ref=f182e1025]
+                          - gridcell [ref=f182e1026]:
+                            - textbox "Related Table, sorted in Ascending order GAEB Quantity Determination Body" [ref=f182e1027]
+                          - gridcell [ref=f182e1028]:
+                            - button "Show more options" [ref=f182e1029] [cursor=pointer]
+                          - gridcell [ref=f182e1030]:
+                            - textbox "Description Quantity Determination Body" [ref=f182e1031]
+                          - gridcell [ref=f182e1032]:
+                            - textbox "Via Elements QtyDeterm" [ref=f182e1033]
+                          - gridcell [ref=f182e1034]:
+                            - textbox "Relation Single" [ref=f182e1035]
+                          - gridcell [ref=f182e1036]:
+                            - button "Links 1" [ref=f182e1037] [cursor=pointer]: "1"
+              - generic:
+                - button "Go to the next document of the same type":
+                  - generic: 
+        - generic:
+          - form "GAEB Quantity Determination Info":
+            - main:
+              - generic:
+                - button "Go to the previous document of the same type":
+                  - generic: 
+              - generic [ref=f182e1042]:
+                - generic [ref=f182e1045]:
+                  - button "Back" [ref=f182e1048] [cursor=pointer]:
+                    - generic [ref=f182e1049]: 
+                  - generic [ref=f182e1051]:
+                    - heading "GAEB Quantity Determination Info" [level=1] [ref=f182e1052]
+                    - generic [ref=f182e1057]:
+                      - button "Make changes on the page" [disabled] [ref=f182e1058]:
+                        - generic [ref=f182e1059]: 
+                      - button "Share this page with other users or apps" [ref=f182e1061] [cursor=pointer]:
+                        - generic [ref=f182e1062]: 
+                      - button "Create a new entry." [disabled] [ref=f182e1064]:
+                        - generic [ref=f182e1065]: 
+                      - button "Delete the information" [disabled] [ref=f182e1067]:
+                        - generic [ref=f182e1068]: 
+                    - generic [ref=f182e1070]:
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f182e1073] [cursor=pointer]:
+                        - generic [ref=f182e1074]: 
+                      - button "Toggle wide layout" [ref=f182e1078] [cursor=pointer]:
+                        - generic [ref=f182e1079]: 
+                    - heading "GAEB0138, 20" [level=2] [ref=f182e1082]
+                - menubar [ref=f182e1092]:
+                  - generic [ref=f182e1106]:
+                    - menuitem "Parent Row" [ref=f182e1242] [cursor=pointer]
+                    - menuitem "GAEB File Card" [ref=f182e1249] [cursor=pointer]
+                    - menuitem "GAEB Schema" [ref=f182e1256] [cursor=pointer]
+                    - menuitem "GAEB Source Entry" [ref=f182e1263] [cursor=pointer]
+                    - menuitem "More options" [ref=f182e1270] [cursor=pointer]
+                - generic [ref=f182e1166]:
+                  - button [expanded] [ref=f182e1169] [cursor=pointer]:
+                    - heading "General" [level=3] [ref=f182e1170]
+                  - generic [ref=f182e1173]:
+                    - generic [ref=f182e1174]:
+                      - button "MethodDescription" [ref=f182e1175] [cursor=pointer]
+                      - textbox "MethodDescription REB23003-2009" [ref=f182e1177]
+                    - generic [ref=f182e1178]:
+                      - button "OrdDescr" [ref=f182e1179] [cursor=pointer]
+                      - textbox "OrdDescr (Blank)" [ref=f182e1181]
+                    - generic [ref=f182e1182]:
+                      - button "ProjDescr" [ref=f182e1183] [cursor=pointer]
+                      - textbox "ProjDescr Bonner Wasserwerk (MWM-Muster)" [ref=f182e1185]
+                    - generic [ref=f182e1186]:
+                      - button "ServiceProvisionStartDate" [ref=f182e1187] [cursor=pointer]
+                      - textbox "ServiceProvisionStartDate (Blank)" [ref=f182e1189]
+                    - generic [ref=f182e1190]:
+                      - button "ServiceProvisionEndDate" [ref=f182e1191] [cursor=pointer]
+                      - textbox "ServiceProvisionEndDate (Blank)" [ref=f182e1193]
+                    - generic [ref=f182e1194]:
+                      - button "ID" [ref=f182e1195] [cursor=pointer]
+                      - textbox "ID (Blank)" [ref=f182e1197]
+                    - generic [ref=f182e1198]:
+                      - button "Creator Addresses" [ref=f182e1199] [cursor=pointer]
+                      - button "Creator Addresses k.A., k.A." [ref=f182e1201] [cursor=pointer]: k.A., k.A.
+                    - generic [ref=f182e1202]:
+                      - button "Inspector Addresses" [ref=f182e1203] [cursor=pointer]
+                      - button "Inspector Addresses k.A., k.A." [ref=f182e1205] [cursor=pointer]: k.A., k.A.
+                    - generic [ref=f182e1206]:
+                      - button "Catalogue Assignments" [ref=f182e1207] [cursor=pointer]
+                      - button "Catalogue Assignments (Blank)" [ref=f182e1209] [cursor=pointer]
+              - generic:
+                - button "Go to the next document of the same type":
+                  - generic: 
+        - generic:
+          - form "GAEB Address":
+            - main:
+              - button "Go to the previous document of the same type" [ref=f182e1274] [cursor=pointer]:
+                - generic [ref=f182e1275]: 
+              - generic [ref=f182e1277]:
+                - generic [ref=f182e1280]:
+                  - button "Back" [ref=f182e1283] [cursor=pointer]:
+                    - generic [ref=f182e1284]: 
+                  - generic [ref=f182e1286]:
+                    - heading "GAEB Address" [level=1] [ref=f182e1287]
+                    - generic [ref=f182e1292]:
+                      - button "Make changes on the page" [disabled] [ref=f182e1293]:
+                        - generic [ref=f182e1294]: 
+                      - button "Share this page with other users or apps" [ref=f182e1296] [cursor=pointer]:
+                        - generic [ref=f182e1297]: 
+                      - button "Create a new entry." [disabled] [ref=f182e1299]:
+                        - generic [ref=f182e1300]: 
+                      - button "Delete the information" [disabled] [ref=f182e1302]:
+                        - generic [ref=f182e1303]: 
+                    - generic [ref=f182e1305]:
+                      - button "This page will close in this window and it will open in a pop-up window." [ref=f182e1308] [cursor=pointer]:
+                        - generic [ref=f182e1309]: 
+                      - button "Toggle wide layout" [ref=f182e1313] [cursor=pointer]:
+                        - generic [ref=f182e1314]: 
+                    - heading "k.A., k.A." [level=2] [ref=f182e1317]
+                - menubar [ref=f182e1327]:
+                  - generic [ref=f182e1341]:
+                    - menuitem "Parent Row" [ref=f182e1346] [cursor=pointer]
+                    - menuitem "GAEB File Card" [ref=f182e1357] [cursor=pointer]
+                    - menuitem "GAEB Schema" [ref=f182e1368] [cursor=pointer]
+                    - menuitem "GAEB Source Entry" [ref=f182e1379] [cursor=pointer]
+                    - menuitem "More options" [ref=f182e1390] [cursor=pointer]
+                - generic [ref=f182e1401]:
+                  - button [expanded] [ref=f182e1404] [cursor=pointer]:
+                    - heading "General" [level=3] [ref=f182e1405]
+                  - generic [ref=f182e1408]:
+                    - generic [ref=f182e1409]:
+                      - button "Name1" [ref=f182e1410] [cursor=pointer]
+                      - textbox "Name1 k.A." [ref=f182e1412]
+                    - generic [ref=f182e1413]:
+                      - button "Name2" [ref=f182e1414] [cursor=pointer]
+                      - textbox "Name2 (Blank)" [ref=f182e1416]
+                    - generic [ref=f182e1417]:
+                      - button "Name3" [ref=f182e1418] [cursor=pointer]
+                      - textbox "Name3 (Blank)" [ref=f182e1420]
+                    - generic [ref=f182e1421]:
+                      - button "Name4" [ref=f182e1422] [cursor=pointer]
+                      - textbox "Name4 (Blank)" [ref=f182e1424]
+                    - generic [ref=f182e1425]:
+                      - button "Street" [ref=f182e1426] [cursor=pointer]
+                      - textbox "Street k.A." [ref=f182e1428]
+                    - generic [ref=f182e1429]:
+                      - button "PCode" [ref=f182e1430] [cursor=pointer]
+                      - textbox "PCode k.A." [ref=f182e1432]
+                    - generic [ref=f182e1433]:
+                      - button "City" [ref=f182e1434] [cursor=pointer]
+                      - textbox "City k.A." [ref=f182e1436]
+                    - generic [ref=f182e1437]:
+                      - button "Country" [ref=f182e1438] [cursor=pointer]
+                      - textbox "Country (Blank)" [ref=f182e1440]
+                    - generic [ref=f182e1441]:
+                      - button "ILN" [ref=f182e1442] [cursor=pointer]
+                      - textbox "ILN (Blank)" [ref=f182e1444]
+                    - generic [ref=f182e1445]:
+                      - button "Contact" [ref=f182e1446] [cursor=pointer]
+                      - textbox "Contact (Blank)" [ref=f182e1448]
+                    - generic [ref=f182e1449]:
+                      - button "Phone" [ref=f182e1450] [cursor=pointer]
+                      - textbox "Phone (Blank)" [ref=f182e1452]
+                    - generic [ref=f182e1453]:
+                      - button "Fax" [ref=f182e1454] [cursor=pointer]
+                      - textbox "Fax (Blank)" [ref=f182e1456]
+                    - generic [ref=f182e1457]:
+                      - button "Email" [ref=f182e1458] [cursor=pointer]
+                      - textbox "Email (Blank)" [ref=f182e1460]
+                    - generic [ref=f182e1461]:
+                      - button "VATID" [ref=f182e1462] [cursor=pointer]
+                      - textbox "VATID (Blank)" [ref=f182e1464]
+                    - generic [ref=f182e1465]:
+                      - button "Bank Accounts" [ref=f182e1466] [cursor=pointer]
+                      - button "Bank Accounts (Blank)" [active] [ref=f182e1468] [cursor=pointer]
+                    - generic [ref=f182e1469]:
+                      - button "Catalogue Assignments" [ref=f182e1470] [cursor=pointer]
+                      - button "Catalogue Assignments (Blank)" [ref=f182e1472] [cursor=pointer]
+              - button "Go to the next document of the same type" [ref=f182e1474] [cursor=pointer]:
+                - generic [ref=f182e1475]: 
+      - text: Use the Left and Right arrow keys to adjust the size. Use the Escape key to undo or the Enter key to accept.
+      - paragraph [ref=f182e1224]: GAEB0138. GAEB File
+      - paragraph [ref=f182e1229]: GAEB0138. GAEB Schema
+      - paragraph [ref=f182e1231]: List with title "Related Rows" now has 3 items
+      - paragraph [ref=f182e1233]: Related Table, sorted in Ascending order
+      - paragraph [ref=f182e1237]: Related Table, sorted in Ascending order
+      - paragraph [ref=f182e1241]: GAEB0138, 20. GAEB Quantity Determination Info
+      - paragraph [ref=f182e1480]: k.A., k.A.. GAEB Address
