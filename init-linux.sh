@@ -57,24 +57,84 @@ copy_app_local_path() {
     cp -R -- "$source_path" "$target_path"
 }
 
+extract_exclude_block() {
+    local exclude_path="$1"
+
+    awk -v start="$EXCLUDE_BLOCK_START" -v end="$EXCLUDE_BLOCK_END" '
+        $0 == end { inside = 0 }
+        inside { print }
+        $0 == start { inside = 1 }
+    ' "$exclude_path"
+}
+
+append_exclude_block() {
+    local exclude_path="$1"
+    local temporary_path
+
+    temporary_path="$(mktemp "${exclude_path}.XXXXXX")"
+    cat -- "$exclude_path" > "$temporary_path"
+    printf '\n%s\n' "$EXCLUDE_BLOCK_START" >> "$temporary_path"
+    cat -- "$SCRIPT_DIR/exclude" >> "$temporary_path"
+    printf '%s\n' "$EXCLUDE_BLOCK_END" >> "$temporary_path"
+    mv -- "$temporary_path" "$exclude_path"
+}
+
+# Rewrites the block in place, so template changes reach repositories that were
+# initialised earlier. Lines outside the markers, and the position of the block
+# itself, are preserved.
+resync_exclude_block() {
+    local exclude_path="$1"
+    local temporary_path
+
+    temporary_path="$(mktemp "${exclude_path}.XXXXXX")"
+    awk -v start="$EXCLUDE_BLOCK_START" -v end="$EXCLUDE_BLOCK_END" -v template="$SCRIPT_DIR/exclude" '
+        $0 == start {
+            print
+            while ((getline template_line < template) > 0) {
+                print template_line
+            }
+            close(template)
+            inside = 1
+            next
+        }
+        $0 == end && inside {
+            print
+            inside = 0
+            next
+        }
+        inside { next }
+        { print }
+    ' "$exclude_path" > "$temporary_path" || {
+        rm -f -- "$temporary_path"
+        return 1
+    }
+    mv -- "$temporary_path" "$exclude_path"
+}
+
 apply_local_excludes() {
     local repository_root="$1"
     local exclude_path="$repository_root/.git/info/exclude"
-    local temporary_path
 
     mkdir -p -- "$(dirname -- "$exclude_path")"
     touch -- "$exclude_path"
 
-    if grep -Fqx -- "$EXCLUDE_BLOCK_START" "$exclude_path"; then
+    if ! grep -Fqx -- "$EXCLUDE_BLOCK_START" "$exclude_path"; then
+        append_exclude_block "$exclude_path"
+        printf 'Added local excludes to %s\n' "$exclude_path"
         return
     fi
 
-    temporary_path="$(mktemp "${exclude_path}.XXXXXX")"
-    cat "$exclude_path" > "$temporary_path"
-    printf '\n%s\n' "$EXCLUDE_BLOCK_START" >> "$temporary_path"
-    cat "$SCRIPT_DIR/exclude" >> "$temporary_path"
-    printf '%s\n' "$EXCLUDE_BLOCK_END" >> "$temporary_path"
-    mv -- "$temporary_path" "$exclude_path"
+    if ! grep -Fqx -- "$EXCLUDE_BLOCK_END" "$exclude_path"; then
+        printf 'Refusing to touch a malformed exclude block (start marker without end marker): %s\n' "$exclude_path" >&2
+        return 1
+    fi
+
+    if diff -q -- <(extract_exclude_block "$exclude_path") "$SCRIPT_DIR/exclude" > /dev/null; then
+        return
+    fi
+
+    resync_exclude_block "$exclude_path"
+    printf 'Updated local excludes in %s\n' "$exclude_path"
 }
 
 initialise_repository() {
