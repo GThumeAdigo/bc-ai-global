@@ -44,7 +44,7 @@ Cite Microsoft's BCQuality knowledge corpus whenever a finding maps onto an exis
 
 Primary BCQuality folder for this agent:
 
-- `.opencode/bcquality/microsoft/knowledge/upgrade/` (InitValue does not update existing rows, upgrade tags vs version checks, DataTransfer for bulk init, obsoletion requires reason and tag, enum values additive at end, guard database reads, etc.)
+- `.opencode/BCQuality-ADIGO/microsoft/knowledge/upgrade/` (InitValue does not update existing rows, upgrade tags vs version checks, DataTransfer for bulk init, obsoletion requires reason and tag, enum values additive at end, guard database reads, etc.)
 
 When a finding maps onto a BCQuality rule, **cite it** via the `references[]` field with the rule's file as `rule` id. Do not paraphrase the rule from memory. When no BCQuality rule maps, use a `rule` slug prefixed `house:` and leave `references: []`.
 
@@ -77,7 +77,7 @@ Return strict JSON. Nothing else.
       "expected": "Upgrade codeunit step that sets `\"Status Code\" := \"Status Code\"::Draft` on every existing row, registered behind a fresh UpgradeTag.",
       "fix": "Add a procedure to the Upgrade codeunit's OnUpgradePerCompany trigger; gate it behind UpgradeTagMgt.HasUpgradeTag/SetUpgradeTag.",
       "references": [
-        { "path": ".opencode/bcquality/microsoft/knowledge/upgrade/initvalue-does-not-update-existing-rows.md" }
+        { "path": ".opencode/BCQuality-ADIGO/microsoft/knowledge/upgrade/initvalue-does-not-update-existing-rows.md" }
       ]
     }
   ],

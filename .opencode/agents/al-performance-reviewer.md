@@ -56,7 +56,7 @@ Cite a style guide finding as `rule: "house:styleguide-12-<slug>"` with
 **2. Microsoft's BCQuality knowledge corpus.** See `bcquality-integration` for
 the contract. Primary folder for this agent:
 
-- `.opencode/bcquality/microsoft/knowledge/performance/` (filter before find, get inside loops, CalcFields/CalcSums in loops, SetLoadFields ordering, partial records, key selection, commit boundaries, etc.)
+- `.opencode/BCQuality-ADIGO/microsoft/knowledge/performance/` (filter before find, get inside loops, CalcFields/CalcSums in loops, SetLoadFields ordering, partial records, key selection, commit boundaries, etc.)
 
 When a finding maps onto a BCQuality rule, **cite it** via the `references[]` field with the rule's file as `rule` id. Do not paraphrase the rule from memory. When the style guide and BCQuality disagree, the style guide wins and you cite the style guide. When a finding maps onto neither, use a `rule` slug prefixed `house:` and leave `references: []`.
 
@@ -92,7 +92,7 @@ Return strict JSON. Nothing else.
       "fix": "Pre-load the cache table into a Dictionary<Code[20], Record \"Sync Cache\"> outside the loop, then dictionary-lookup per row.",
       "scale_estimate": "50k vendors -> 50k extra queries today. With dictionary: 1 query.",
       "references": [
-        { "path": ".opencode/bcquality/microsoft/knowledge/performance/avoid-get-inside-loop-on-large-table.md" }
+        { "path": ".opencode/BCQuality-ADIGO/microsoft/knowledge/performance/avoid-get-inside-loop-on-large-table.md" }
       ]
     }
   ],

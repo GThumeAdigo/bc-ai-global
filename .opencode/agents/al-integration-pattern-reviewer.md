@@ -58,12 +58,12 @@ Some findings map onto vendored BCQuality rules. When they do, cite the
 BCQuality file in `references[]` and set `rule` to its slug rather than a
 `house:` slug. See `bcquality-integration` for the contract. Known mappings:
 
-- Commit inside an iteration: `.opencode/bcquality/microsoft/knowledge/performance/avoid-commit-inside-loops.md`.
-- Confirm or user prompt inside a posting transaction: `.opencode/bcquality/microsoft/knowledge/performance/avoid-user-prompts-inside-transactions.md`.
-- Business or integration event payload that leaks secrets: `.opencode/bcquality/microsoft/knowledge/security/integrationevent-must-not-expose-secrets.md`.
+- Commit inside an iteration: `.opencode/BCQuality-ADIGO/microsoft/knowledge/performance/avoid-commit-inside-loops.md`.
+- Confirm or user prompt inside a posting transaction: `.opencode/BCQuality-ADIGO/microsoft/knowledge/performance/avoid-user-prompts-inside-transactions.md`.
+- Business or integration event payload that leaks secrets: `.opencode/BCQuality-ADIGO/microsoft/knowledge/security/integrationevent-must-not-expose-secrets.md`.
 
 Do not paraphrase a rule you can cite. Never cite a path that does not exist
-under `.opencode/bcquality/`.
+under `.opencode/BCQuality-ADIGO/`.
 
 ## What you check
 

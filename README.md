@@ -138,7 +138,7 @@ The complete workflow and agent contract are in [AGENTS.md](AGENTS.md).
 - `.opencode/skills/`: OpenCode skills, including the SDD review gates.
 - `.opencode/skills/al-code-review/`: the ADIGO house rules (`SKILL.md`) and the AL style guide (`styleguide.md`), which agents read when writing and reviewing AL.
 - `.opencode/commands/`: OpenCode slash commands for the SDD workflow.
-- `.opencode/bcquality/`: vendored BCQuality knowledge and review skills.
+- `.opencode/BCQuality-ADIGO/`: vendored BCQuality knowledge and review skills.
 - `.opencode/plugins/`: OpenCode automation, including the post-build verifier reminder.
 - `opencode.json`: project-level OpenCode configuration.
 
@@ -179,7 +179,7 @@ rules themselves still apply.
 
 BCQuality supplies machine-readable Business Central guidance that agents cite in
 their findings. Runtime skills under `.opencode/skills/` point to the authoritative
-vendored content under `.opencode/bcquality/`. ADIGO-specific house rules remain in
+vendored content under `.opencode/BCQuality-ADIGO/`. ADIGO-specific house rules remain in
 `.opencode/skills/al-code-review/` and take precedence when rules conflict.
 
 ## Intended use
@@ -191,4 +191,4 @@ community template without first replacing those conventions.
 ## License
 
 The vendored BCQuality content carries its license under
-`.opencode/bcquality/LICENSE`.
+`.opencode/BCQuality-ADIGO/LICENSE`.

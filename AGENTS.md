@@ -113,7 +113,7 @@ review the constitution for completeness and consistency before any feature work
 - `.opencode/skills/`: invocable review skills, including the SDD review gates above.
   Most are thin pointers: the authoritative content lives in BCQuality
   (the single source of truth) as `action-skill` (review) files under
-  `.opencode/bcquality/custom/skills/<category>/`, and each pointer mirrors the
+  `.opencode/BCQuality-ADIGO/custom/skills/<category>/`, and each pointer mirrors the
   upstream skill's frontmatter (the BCQuality `kind`/`id`/`version`/`title`/
   `inputs`/`outputs` and dimension schema) plus the `name`/`description` the
   runtime needs to discover and trigger it.
@@ -123,7 +123,7 @@ review the constitution for completeness and consistency before any feature work
   rather than at BCQuality: its authoritative content ships with the Hunk CLI and
   is resolved at runtime through `hunk skill path`, so the local file holds only
   the repo-specific notes.
-- `.opencode/bcquality/`: a vendored, Microsoft-authored subset of the
+- `.opencode/BCQuality-ADIGO/`: a vendored, Microsoft-authored subset of the
   [BCQuality](https://github.com/EquerraNZ/community-BCQuality) knowledge corpus.
   Plain committed files; there is no submodule to initialise. The `custom/skills/`
   layer holds this project's reusable `action-skill` review skills; the runtime pointers in
@@ -184,16 +184,16 @@ so that findings are backed by a vetted rule rather than paraphrased from memory
 Read [`.opencode/skills/bcquality-integration/SKILL.md`](.opencode/skills/bcquality-integration/SKILL.md)
 for the full contract. The essentials:
 
-- **Where it lives.** `.opencode/bcquality/`. Knowledge files are under
-  `.opencode/bcquality/<layer>/knowledge/<domain>/`. The Microsoft layer vendors
+- **Where it lives.** `.opencode/BCQuality-ADIGO/`. Knowledge files are under
+  `.opencode/BCQuality-ADIGO/<layer>/knowledge/<domain>/`. The Microsoft layer vendors
   domains `performance`, `privacy`, `security`, `style`, `testing`, `ui`,
   `upgrade`. The `community/` layer adds `performance` and `security` rules, and
   the `custom/` layer adds `api`, `integration`, `operations`, `performance`,
   and `process` knowledge plus review and testing skills.
-- **How it is consumed.** An agent invokes `.opencode/bcquality/skills/entry.md`
+- **How it is consumed.** An agent invokes `.opencode/BCQuality-ADIGO/skills/entry.md`
   first. Entry returns a dispatch record naming the action skill(s) to run.
   Action skills follow the four-step pattern (Source, Relevance, Worklist,
-  Action) defined in `.opencode/bcquality/skills/do.md`, reading `read.md` on demand.
+  Action) defined in `.opencode/BCQuality-ADIGO/skills/do.md`, reading `read.md` on demand.
 - **Knowledge file format.** Atomic markdown with YAML frontmatter (`bc-version`,
   `domain`, `keywords`, `technologies`, `countries`, `application-area`). Each
   rule is `<slug>.md` with optional `<slug>.good.al` and `<slug>.bad.al` siblings.
@@ -204,7 +204,7 @@ Each verifier agent has a **Knowledge sources** section naming the BCQuality
 folder it sources from. When a finding maps onto a BCQuality knowledge file:
 
 - Set the finding `rule` (or `id`) to the knowledge file slug.
-- Populate `references` with `[{ "path": ".opencode/bcquality/microsoft/knowledge/<domain>/<slug>.md" }]`.
+- Populate `references` with `[{ "path": ".opencode/BCQuality-ADIGO/microsoft/knowledge/<domain>/<slug>.md" }]`.
 - Do not paraphrase a rule you can cite.
 
 When a finding maps onto a rule in the project style guide or the house-rule
@@ -220,7 +220,7 @@ skill instead:
 When a finding maps onto neither, use a `rule` slug prefixed `house:` (or the
 agent's own rule id, for example an `AS0xxx` AppSource rule) and leave
 `references: []`. The only citable paths are files that exist under
-`.opencode/bcquality/` or under `.opencode/skills/al-code-review/`. Never cite
+`.opencode/BCQuality-ADIGO/` or under `.opencode/skills/al-code-review/`. Never cite
 anything else.
 
 ## Agent-to-domain map
@@ -503,25 +503,53 @@ tools: `get_symbols_overview`, `find_symbol`, `find_referencing_symbols`,
 `replace_symbol_body`, `rename_symbol`, and `search_for_pattern`, plus project
 memories under `.serena/memories`.
 
-- The Serena project lives at the repo root (`.serena/project.yml`,
-  `language_servers: [al]`) and covers both AL apps. The AL language server
-  expects an `app.json` at the project root; this repo has none there, so the
-  `al/manifestMissing` warning on startup is expected and harmless. Symbol
-  extraction is per-file (each `.al` file is opened before symbol requests),
-  so document symbols and indexing work regardless.
+- The Serena project is the **workspace root**, one level above this app
+  folder, so it covers both AL apps and not just this one. There is
+  deliberately no `.serena/` inside an app folder; `--project-from-cwd` walks
+  up to find it. `project.yml` sets `language_servers: [al]`.
+- The AL language server expects an `app.json` at the project root and the
+  workspace root has none, so the `al/manifestMissing` warning on startup is
+  expected and harmless. Symbol extraction is per-file (each `.al` file is
+  opened before symbol requests), so document symbols and indexing work
+  regardless. `get_symbols_overview` on a non-AL file such as `app.json` errors
+  by design; that is not a misconfiguration.
 - The AL extension binaries come from the installed VS Code AL extension
   (`ms-dynamics-smb.al-*`); if that is absent, Serena downloads a pinned
   version to `~/.serena/ls_resources/`. Optional `AL_EXTENSION_PATH` override
   or `ls_specific_settings.al.al_extension_version` for a different version.
-- The index is pre-built (`serena project index`, 858 files) and Serena
-  refreshes it as files change. After a rebuild of the worktree or a large
-  branch switch, re-run `serena project index` from the repo root.
+- The index is pre-built and Serena refreshes it as files change. After a
+  rebuild of the worktree or a large branch switch, re-run
+  `serena project index` from the **workspace root**.
 - `.serena/` is listed in `.git/info/exclude`, matching the scaffolding
   policy. The global dashboard stays off (`web_dashboard_open_on_launch:
   false` in `~/.serena/serena_config.yml`) so MCP starts do not open a
   browser. Open it manually at `http://localhost:24282/dashboard/`.
-- Onboarding memories are project-local and untracked, same as the other
-  scaffolding.
+
+### Use it before reading files
+
+Serena is the cheap way to explore 580-odd AL files. Reach for
+`get_symbols_overview`, `find_symbol` (with `depth` and `include_body=False`
+first), `find_referencing_symbols`, and `search_for_pattern` instead of reading
+whole `.al` files. Note that Serena's line numbers are 0-based while the AL
+compiler and the analyzers report 1-based, so translate before citing a finding
+as `file:line`. Prefer `rename_symbol` and `safe_delete_symbol` over hand-edits
+when changing an existing symbol: they are reference-aware across both apps.
+
+### Memories
+
+Onboarding has been performed. The memory graph is project-local and untracked,
+same as the other scaffolding, and it is rooted at `core`. Read that first in a
+session that touches unfamiliar code; it links out to `tech_stack`,
+`suggested_commands`, `conventions`, `task_completion`, and the per-app
+`gaeb/core` and `construction/core`. `memory_maintenance` defines the style and
+reference conventions for writing new ones. `serena memories check` from the
+workspace root reports broken references.
+
+The memories are a **navigational summary**, not a second source of truth. This
+file and the house rules under `.opencode/skills/al-code-review/` remain
+authoritative for conventions and workflow; when the two disagree, fix the
+memory. Memories do carry one thing this file cannot: workspace-level facts
+covering `ADIGO.BAU.Projects.Construction`, which has no `AGENTS.md` of its own.
 
 ## Style
 

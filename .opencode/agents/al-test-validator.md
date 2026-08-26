@@ -52,7 +52,7 @@ Cite a style guide finding as `rule: "house:styleguide-<section>-<slug>"` with
 **2. Microsoft's BCQuality knowledge corpus.** See `bcquality-integration` for
 the contract. Primary folder for this agent:
 
-- `.opencode/bcquality/microsoft/knowledge/testing/` (test attributes, isolation, transaction model, assertion patterns)
+- `.opencode/BCQuality-ADIGO/microsoft/knowledge/testing/` (test attributes, isolation, transaction model, assertion patterns)
 
 When a finding maps onto a BCQuality rule, cite it via `references[]`. When the style guide and BCQuality disagree, the style guide wins. For project test conventions that live in neither (project helper codeunits, the local naming pattern), use a `rule` slug prefixed `house:` and leave `references: []`.
 
@@ -144,7 +144,7 @@ Return strict JSON. Nothing else.
       "test_procedure": "PostAndAssertNoChange",
       "detail": "Test posts a document but TransactionModel is not set. Posting will roll back at test end, hiding state-after-post assertions.",
       "references": [
-        { "path": ".opencode/bcquality/microsoft/knowledge/testing/transactionmodel-attribute-governs-test-transactions.md" }
+        { "path": ".opencode/BCQuality-ADIGO/microsoft/knowledge/testing/transactionmodel-attribute-governs-test-transactions.md" }
       ]
     }
   ],

@@ -59,8 +59,8 @@ correct.
 **2. Microsoft's BCQuality knowledge corpus.** See `bcquality-integration` for
 the contract. Primary folders for this agent:
 
-- `.opencode/bcquality/microsoft/knowledge/style/` (naming, labels, captions, layout, keyword casing, parentheses, declaration order, etc.)
-- `.opencode/bcquality/microsoft/knowledge/ui/` (page layout, action placement, tooltips)
+- `.opencode/BCQuality-ADIGO/microsoft/knowledge/style/` (naming, labels, captions, layout, keyword casing, parentheses, declaration order, etc.)
+- `.opencode/BCQuality-ADIGO/microsoft/knowledge/ui/` (page layout, action placement, tooltips)
 
 When a finding maps onto a BCQuality rule, cite it via the `references[]` field. Do not paraphrase. When the style guide and BCQuality disagree, the style guide wins and you cite the style guide. When a finding maps onto neither, use a `rule` slug prefixed `house:` and leave `references: []`.
 
@@ -127,7 +127,7 @@ Return strict JSON. Nothing else.
       "line": 42,
       "detail": "Label declaration on line 42 has no Comment attribute. Translators need one.",
       "references": [
-        { "path": ".opencode/bcquality/microsoft/knowledge/style/label-comment-explains-placeholders.md" }
+        { "path": ".opencode/BCQuality-ADIGO/microsoft/knowledge/style/label-comment-explains-placeholders.md" }
       ]
     }
   ],

@@ -60,9 +60,9 @@ foundation error handler, the local identifier is correct.
 **2. Microsoft's BCQuality knowledge corpus.** See `bcquality-integration` for
 the contract. Primary folders for this agent:
 
-- `.opencode/bcquality/microsoft/knowledge/performance/` (commit inside loops, redundant Get, RecordRef in hot loops, FindSet with CalcFields, atomic sub-operations, transaction boundaries, etc.)
-- `.opencode/bcquality/microsoft/knowledge/security/`
-- `.opencode/bcquality/microsoft/knowledge/privacy/`
+- `.opencode/BCQuality-ADIGO/microsoft/knowledge/performance/` (commit inside loops, redundant Get, RecordRef in hot loops, FindSet with CalcFields, atomic sub-operations, transaction boundaries, etc.)
+- `.opencode/BCQuality-ADIGO/microsoft/knowledge/security/`
+- `.opencode/BCQuality-ADIGO/microsoft/knowledge/privacy/`
 
 When a finding maps onto a BCQuality rule, **cite it** via the `references[]` field. Do not paraphrase the rule from memory. When the style guide and BCQuality disagree, the style guide wins and you cite the style guide. When a finding maps onto neither, use a `rule` slug prefixed `house:` and leave `references: []`.
 
@@ -147,7 +147,7 @@ Return strict JSON. Nothing else.
       "line": 88,
       "detail": "Commit() inside a foreach loop. Move outside or split the loop.",
       "references": [
-        { "path": ".opencode/bcquality/microsoft/knowledge/performance/avoid-commit-inside-loops.md" }
+        { "path": ".opencode/BCQuality-ADIGO/microsoft/knowledge/performance/avoid-commit-inside-loops.md" }
       ]
     }
   ],
@@ -176,7 +176,7 @@ Return strict JSON. Nothing else.
 Each finding **must** include a `references` array (possibly empty). Cite the
 style guide with its section number for house rules that live there, cite the
 BCQuality file for corpus rules, and leave `references: []` only for rules that
-exist in neither. The vendored BCQuality files live under `.opencode/bcquality/`
+exist in neither. The vendored BCQuality files live under `.opencode/BCQuality-ADIGO/`
 and the house-rule files under `.opencode/skills/al-code-review/`; tools that
 render findings resolve cited paths there. Cite nothing else.
 

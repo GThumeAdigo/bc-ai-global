@@ -18,7 +18,7 @@ application-area: [all]
 The authoritative content for this skill is maintained in BCQuality, the
 single source of truth, and vendored into this repo. Read and follow:
 
-`.opencode/bcquality/custom/skills/workflow/al-plan-feature.md`
+`.opencode/BCQuality-ADIGO/custom/skills/workflow/al-plan-feature.md`
 
 Do not edit the guidance inline here. Update the skill upstream in
 EquerraNZ/community-BCQuality, then re-vendor. This pointer exists only so the

@@ -54,7 +54,7 @@ findings against files that do not exist.
 ## Knowledge sources
 
 The rule source is the `azure-integration-review` knowledge vendored under
-`.opencode/bcquality/custom/skills/integration/al-azure-integration-review.md`. Emit
+`.opencode/BCQuality-ADIGO/custom/skills/integration/al-azure-integration-review.md`. Emit
 its slugs as `house:<slug>` (for example `house:az-receiver-stages-to-bc`) with
 empty `references[]`. There is no vendored BCQuality Azure domain, so every
 finding this agent emits uses a `house:` slug and leaves `references` empty.
