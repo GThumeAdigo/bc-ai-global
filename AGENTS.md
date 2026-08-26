@@ -125,7 +125,10 @@ review the constitution for completeness and consistency before any feature work
   the repo-specific notes.
 - `.opencode/BCQuality-ADIGO/`: a vendored, Microsoft-authored subset of the
   [BCQuality](https://github.com/EquerraNZ/community-BCQuality) knowledge corpus.
-  Plain committed files; there is no submodule to initialise. The `custom/skills/`
+  A git **submodule** (`GThumeAdigo/BCQuality-ADIGO`), pinned to a commit by the
+  parent repo. Run `git submodule update --init` if the folder is empty, and
+  never rename or move it, since `.gitmodules` maps it by path: correct the
+  references instead. The `custom/skills/`
   layer holds this project's reusable `action-skill` review skills; the runtime pointers in
   `.opencode/skills/` defer to them.
 
@@ -140,8 +143,19 @@ find . -maxdepth 3 -name app.json -not -path '*/node_modules/*' -not -path '*/.a
 ```
 
 When an MCP tool (alcops, al-mcp, nab-al-tools) requires an absolute
-`projectPath`, resolve it from the workspace root plus the discovered folder.
-Never reuse a project path from a previous session or repo.
+`projectPath`, resolve it from the discovered folder, never from a path used in
+a previous session or repo.
+
+Where the session is rooted matters, because the MCP servers inherit opencode's
+working directory. When the scaffolding sits in an app folder, the session is
+rooted there, `find .` discovers exactly that one app, and `al-mcp` resolves to
+it deterministically. When the scaffolding sits at a multi-app workspace root,
+`find .` returns several apps and any tool that picks the first match resolves
+non-deterministically, so pass `projectPath` explicitly. Serena is the exception:
+it activates the project at the **workspace root** regardless, so its
+`relative_path` values are prefixed with the app folder name while alcops and
+al-mcp paths are relative to the app. Do not paste a path from one into the
+other.
 
 ### Multi-app workspaces
 
@@ -441,18 +455,29 @@ which amendment supersedes it. The amendment carries the decision owner and
 date, what changed, why, what was rejected, and what was accepted as a loss.
 The reasoning is the durable artifact; the diff is not.
 
-### The agent scaffolding is not tracked here
+### The agent scaffolding is not tracked by the BC repo
 
 `.git/info/exclude` lists `AGENTS.md`, `CLAUDE.md`, `opencode.json`, `specs/`,
-and `.opencode/`. Everything that governs how agents work in this repo, and
-every spec, is therefore invisible to `git status`, `git stash -u`, and
-`git diff`. Only the AL apps are versioned.
+`.opencode/`, `DOCS/`, and `.serena/`. Everything that governs how agents work,
+and every spec, is therefore invisible to the BC repo's `git status`,
+`git stash -u`, and `git diff`. Only the AL apps are versioned there.
 
-Two consequences. A clean working tree does **not** mean the specs or the house
-rules are unedited, so verify an edit to any of those paths by reading the file
-back rather than by looking at the diff. And git will not protect that work:
-there is no commit to recover it from, so do not rely on stash or checkout
-around it.
+Untracked by the BC repo does not mean unversioned. `AGENTS.md`, `CLAUDE.md`,
+`opencode.json` and `.opencode/` are **symlinks into a shared scaffolding repo**
+(`bc-ai-global`), which tracks them and is where their history lives. Two
+consequences follow, and they pull in opposite directions:
+
+- **Editing any of them is global.** An agent, skill, or house-rule change lands
+  in every BC repo that links the same scaffolding, not just this one. Say so
+  when you make one. It is also recoverable: check `git status` **in the
+  scaffolding repo**, not here.
+- **`specs/`, `DOCS/` and `.serena/` are real local directories with no commit
+  behind them.** Git will not protect that work, so do not rely on stash or
+  checkout around it.
+
+Either way, a clean working tree in the BC repo says nothing about whether the
+specs or the house rules were edited. Verify an edit to any of those paths by
+reading the file back rather than by looking at the diff.
 
 ### Establish the baseline before you trust a tool result
 
