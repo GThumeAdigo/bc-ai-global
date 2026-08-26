@@ -1,4 +1,0 @@
-[    3607ms] [WARNING] Some icons were re-registered. Applications should only call registerIcons for any given icon once. Redefining what an icon is may have unintended consequences. Duplicates include: 
-GlobalNavButton, ChevronDown, ChevronUp, Edit, Add, Cancel, More, Settings, Mail, Filter (+ 1791 more) @ https://bc-cdn.dynamics.com/res/5deed97e458562768c2f64b07eb6e42d991a8bab2d384225c06b90b67d15ca1a/js/designer.js:0
-[    3970ms] [WARNING] Some icons were re-registered. Applications should only call registerIcons for any given icon once. Redefining what an icon is may have unintended consequences. Duplicates include: 
-GlobalNavButton, ChevronDown, ChevronUp, Edit, Add, Cancel, More, Settings, Mail, Filter (+ 1791 more) @ https://bc-cdn.dynamics.com/res/5deed97e458562768c2f64b07eb6e42d991a8bab2d384225c06b90b67d15ca1a/js/client.js:0
