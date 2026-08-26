@@ -1,0 +1,3 @@
+[submodule ".opencode/BCQuality-ADIGO"]
+	path = .opencode/BCQuality-ADIGO
+	url = https://github.com/GThumeAdigo/BCQuality-ADIGO.git
