@@ -1,15 +1,14 @@
 # AGENTS.md
 
-The contract between you and every agent that works in this repository. This is
-the canonical guidance file. opencode loads it automatically via `opencode.json`;
-`CLAUDE.md` is kept as a bridge for Claude Code sessions.
+The shared contract for agents working in AL apps initialized from this scaffold.
+It is symlinked from the shared scaffold and supplies reusable workflow,
+conventions, and quality gates. OpenCode loads it via `opencode.json`; `CLAUDE.md`
+is kept as a bridge for Claude Code sessions.
 
-## What this repo is
-
-An OpenCode-based prototype for agentic Business Central product development at
-ADIGO. It packages a curated set of AI agents, skills, and BCQuality guidance and
-is driven by Spec-Driven Development. It is not yet a production-ready template
-or a complete AL application.
+Every initialized app also has a local `APP_CONTEXT.md`, copied rather than
+symlinked. Read it first, then read the app's constitution under `specs/`. Do not
+put an app name, object range, namespace, sandbox detail, baseline finding, or
+other app-specific fact in this shared file.
 
 ## How we build here: Spec-Driven Development
 
@@ -20,6 +19,8 @@ the spec; the agent executes them.
 
 ### The constitution (read first, every session)
 
+- `APP_CONTEXT.md` — local app identity, conventions, dependencies, and
+  environment-specific verification facts.
 - `specs/brief.md` — customer requirements and business processes (the what and why).
 - `specs/tech-design.md` — implementation strategy: which standard BC modules to
   reuse, and where custom code is genuinely needed.
@@ -57,7 +58,7 @@ reading the constitution.
 
 ### Testing policy (tests are opt-in)
 
-Automated tests are **not** written by default in this repo. Every feature spec
+Automated tests are **not** written by default. Every feature spec
 and plan must record `Automated tests: yes | no`, the decision owner/date, and
 the reason. The plan must match the approved spec. If the decision is absent,
 the agent must ask the developer and update both artifacts before proceeding.
@@ -78,9 +79,9 @@ blocker/major" wording elsewhere in the workflow skills or templates.
 
 ### Deployment policy (nothing is in production yet)
 
-None of the apps in this repo are installed in a production tenant. Until that
-changes, **schema changes are free**. Treat a breaking schema change as a normal
-edit, not as an event that needs a migration path.
+Unless the local `APP_CONTEXT.md` says an app is installed in a production tenant,
+**schema changes are free**. Treat a breaking schema change as a normal edit, not
+as an event that needs a migration path.
 
 - Remove a field, table, enum value, or procedure outright when it is no longer
   needed. Do **not** mark it `ObsoleteState = Pending` first, and do not carry
@@ -455,21 +456,22 @@ which amendment supersedes it. The amendment carries the decision owner and
 date, what changed, why, what was rejected, and what was accepted as a loss.
 The reasoning is the durable artifact; the diff is not.
 
-### The agent scaffolding is not tracked by the BC repo
+### Shared and app-local scaffolding
 
-`.git/info/exclude` lists `AGENTS.md`, `CLAUDE.md`, `opencode.json`, `specs/`,
-`.opencode/`, `DOCS/`, and `.serena/`. Everything that governs how agents work,
-and every spec, is therefore invisible to the BC repo's `git status`,
+`.git/info/exclude` lists `AGENTS.md`, `APP_CONTEXT.md`, `CLAUDE.md`,
+`opencode.json`, `specs/`, `.opencode/`, `DOCS/`, and `.serena/`. Everything that
+governs how agents work, and every spec, is therefore invisible to the BC repo's `git status`,
 `git stash -u`, and `git diff`. Only the AL apps are versioned there.
 
 Untracked by the BC repo does not mean unversioned. `AGENTS.md`, `CLAUDE.md`,
 `opencode.json` and `.opencode/` are **symlinks into a shared scaffolding repo**
-(`bc-ai-global`), which tracks them and is where their history lives. Two
-consequences follow, and they pull in opposite directions:
+(`bc-ai-global`), which tracks them and is where their history lives.
+`APP_CONTEXT.md`, `specs/`, and `DOCS/` are copied into the app and are local.
+Two consequences follow, and they pull in opposite directions:
 
-- **Editing any of them is global.** An agent, skill, or house-rule change lands
-  in every BC repo that links the same scaffolding, not just this one. Say so
-  when you make one. It is also recoverable: check `git status` **in the
+- **Editing a symlinked file is global.** An agent, skill, or house-rule change
+  lands in every BC repo that links the same scaffolding, not just this one. Say
+  so when you make one. It is also recoverable: check `git status` **in the
   scaffolding repo**, not here.
 - **`specs/`, `DOCS/` and `.serena/` are real local directories with no commit
   behind them.** Git will not protect that work, so do not rely on stash or
@@ -486,11 +488,6 @@ verifier reports something odd, `git stash -u`, re-run the same command on the
 unmodified tree, then `git stash pop`. Most of the noise here is pre-existing.
 Known baseline, do not attempt to fix as part of an unrelated change:
 
-- `al_build` on `ADIGO.BAU.Interfaces.GAEB` reports `CompilationFailed` with
-  **zero** diagnostics. It reproduces on a clean checkout and is documented in
-  that feature's `validation.md`. Use `al_compile` for validation, which is
-  clean, and `al_build scope=all` when a package is actually needed. Do not
-  chase the failure; do not conclude your change broke the build.
 - LinterCop `LC0091` "missing translation" fires on fields that are fully
   translated, and the count moves when unrelated trans-units are added or
   removed. It matches positionally against a `.g.xlf` that only a successful

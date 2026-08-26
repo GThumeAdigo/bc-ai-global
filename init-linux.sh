@@ -12,6 +12,7 @@ readonly -a SCAFFOLD_PATHS=(
     "opencode.json"
 )
 readonly -a APP_LOCAL_PATHS=(
+    "APP_CONTEXT.md"
     "DOCS"
     "specs"
 )

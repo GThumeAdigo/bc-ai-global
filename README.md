@@ -46,11 +46,14 @@ agent path discovery less reliable.
    /path/to/bc-ai-global/init-linux.sh /path/to/MultiAppRepo/App1 /path/to/MultiAppRepo/App2
    ```
 
-   The script creates symlinks for the shared agent runtime, but copies `specs/`
-   and `DOCS/` as app-local starting points. You can create and edit
-   `specs/features/` and `DOCS/` from the app folder without changing this
-   template or any other app. Re-running the script leaves those existing local
-   directories untouched. It requires every supplied folder to contain an
+   The script creates symlinks for the shared agent runtime, but copies
+   `APP_CONTEXT.md`, `specs/`, and `DOCS/` as app-local starting points.
+   `APP_CONTEXT.md` holds each app's name, namespaces, object ranges,
+   dependencies, and verification environment; `AGENTS.md` remains a reusable
+   shared contract. Fill in the context file before feature work. You can create
+   and edit `specs/features/` and `DOCS/` from the app folder without changing
+   this template or any other app. Re-running the script leaves those existing
+   local paths untouched. It requires every supplied folder to contain an
    `app.json`.
 
    The initialized app folder should resemble:
@@ -61,6 +64,7 @@ agent path discovery less reliable.
    |-- App1/
    `-- App2/
    |-- .opencode/ -> /path/to/bc-ai-global/.opencode/
+   |-- APP_CONTEXT.md
    |-- DOCS/
    |-- specs/
    |-- AGENTS.md
@@ -76,8 +80,9 @@ agent path discovery less reliable.
 
 3. The installer uses `.git/info/exclude`, which is local to the clone and is
    never committed. It applies every rule from this template's [exclude](exclude)
-   file, including the app-local `specs/` and `DOCS/` content. This keeps feature
-   specifications and documentation private to the local app checkout.
+   file, including the app-local `APP_CONTEXT.md`, `specs/`, and `DOCS/`
+   content. This keeps app context, feature specifications, and documentation
+   private to the local app checkout.
 
 4. Fill in `specs/brief.md`, `specs/tech-design.md`, and `specs/roadmap.md` for
    the product. Do not start production AL work while these files still contain
