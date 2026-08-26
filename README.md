@@ -12,81 +12,82 @@ product features without treating chat history as the source of truth.
 
 ## Quick start with an existing BC repository
 
-The Business Central repository should remain the project root where OpenCode
-runs. Do not put the BC repository inside this template repository, and do not
-add this template as a Git submodule. Nested repositories make Git status, diffs,
-hooks, builds, and agent path discovery less reliable.
+Install the scaffold into the AL app folder that contains `app.json`. For a
+multi-app repository, select one app folder, not the Git repository root. Do not
+put the BC repository inside this template repository or add this template as a
+Git submodule. Nested repositories make Git status, diffs, hooks, builds, and
+agent path discovery less reliable.
 
-1. Clone this template beside the existing Business Central repository.
+1. Keep this template clone at a stable local path. It can live anywhere, but do
+   not move or delete it after installation because the app folder links to it.
 
    ```text
-   Repos/
-   |-- SDD_TEMPLATE/
-   `-- my-bc-product/
+   /path/to/bc-ai-global/
+   /path/to/MultiAppRepo/
+   |-- .git/
+   |-- App1/
+   `-- App2/
+       |-- app.json
+       `-- src/
    ```
 
-2. Copy the agentic scaffold into the root of the BC repository.
+2. Initialize the selected AL app folder. The script creates symlinks in that
+   folder and adds the template's local exclusions to the enclosing Git
+   repository's `.git/info/exclude`, so the AI scaffold does not appear in
+   commits.
 
    ```bash
-   cp -R ../SDD_TEMPLATE/.opencode .
-   cp -R ../SDD_TEMPLATE/specs .
-   cp ../SDD_TEMPLATE/AGENTS.md .
-   cp ../SDD_TEMPLATE/CLAUDE.md .
-   cp ../SDD_TEMPLATE/opencode.json .
+   /path/to/bc-ai-global/init-linux.sh /path/to/MultiAppRepo/App2
    ```
 
-   The resulting repository should resemble:
+   Pass multiple AL app folders to initialize several apps at once:
+
+   ```bash
+   /path/to/bc-ai-global/init-linux.sh /path/to/MultiAppRepo/App1 /path/to/MultiAppRepo/App2
+   ```
+
+   The script creates symlinks for the shared agent runtime, but copies `specs/`
+   and `DOCS/` as app-local starting points. You can create and edit
+   `specs/features/` and `DOCS/` from the app folder without changing this
+   template or any other app. Re-running the script leaves those existing local
+   directories untouched. It requires every supplied folder to contain an
+   `app.json`.
+
+   The initialized app folder should resemble:
 
    ```text
-   my-bc-product/
-   |-- app/
-   |   `-- app.json
-   |-- test/
-   |   `-- app.json
-   |-- .opencode/
+   MultiAppRepo/
+   |-- .git/
+   |-- App1/
+   `-- App2/
+   |-- .opencode/ -> /path/to/bc-ai-global/.opencode/
+   |-- DOCS/
    |-- specs/
    |-- AGENTS.md
    |-- CLAUDE.md
-   `-- opencode.json
+   |-- opencode.json
+   |-- app.json
+   `-- src/
    ```
 
-   Each app folder carries its own `app.json`, `.alpackages`, and analyzer
-   settings. A single-app repo may instead have `app.json` at the root. Agents
-   discover the app folders dynamically and compile each one separately; see the
-   AL project path section in `AGENTS.md`.
+   Each app folder carries its own `app.json`, `.alpackages`, analyzer settings,
+   and AI scaffold. Agents discover all app folders dynamically and compile each
+   one separately; see the AL project path section in `AGENTS.md`.
 
-3. Decide which scaffold files belong in the BC repository's Git history.
-   The recommended approach is to commit `AGENTS.md` and `specs/`, because they
-   contain durable product and architecture decisions, while keeping the
-   personal OpenCode runtime files local.
-
-   Copy this repository's ready-made `exclude` into place:
-
-   ```bash
-   cp ../SDD_TEMPLATE/exclude .git/info/exclude
-   ```
-
-   It excludes `.opencode/`, `CLAUDE.md`, and `opencode.json`. If the BC
-   repository already has a `.git/info/exclude`, append instead of overwriting:
-
-   ```bash
-   cat ../SDD_TEMPLATE/exclude >> .git/info/exclude
-   ```
-
-   `.git/info/exclude` behaves like `.gitignore` but is local to the clone and is
-   not committed. If none of the scaffold may be committed, uncomment the
-   `AGENTS.md` and `specs/` lines at the end of the file. Be aware that ignored
-   specs then exist only on the local machine and are not shared or protected by
-   the BC repository.
+3. The installer uses `.git/info/exclude`, which is local to the clone and is
+   never committed. It applies every rule from this template's [exclude](exclude)
+   file, including the app-local `specs/` and `DOCS/` content. This keeps feature
+   specifications and documentation private to the local app checkout.
 
 4. Fill in `specs/brief.md`, `specs/tech-design.md`, and `specs/roadmap.md` for
    the product. Do not start production AL work while these files still contain
    unresolved placeholders.
 
-5. Start OpenCode from the BC repository root, not from this template repository.
+5. Start OpenCode from the initialized AL app folder, not from this template
+   repository.
 
    ```bash
-   cd /path/to/my-bc-product
+   cd /path/to/MultiAppRepo/App2
    opencode
    ```
 
@@ -94,11 +95,10 @@ hooks, builds, and agent path discovery less reliable.
    `/al-spec-feature`, `/al-plan-feature`, and `/al-implement-feature`, stopping
    for human review between stages as required by `AGENTS.md`.
 
-7. Keep this template clone as the update source. Re-copy deliberate changes to
-   `.opencode/`, `opencode.json`, and `AGENTS.md` when the prototype evolves. Do
-   not overwrite populated constitution files or feature specs with blank
-   templates. A future installer or update script can automate this selective
-   synchronization without requiring a submodule.
+7. Keep this template clone as the update source. Changes to symlinked runtime
+   files take effect immediately. App-local `specs/` and `DOCS/` do not update
+   automatically, so deliberate template updates must be copied into an app only
+   when wanted.
 
 ## Prototype status
 
