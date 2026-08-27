@@ -211,7 +211,13 @@ for the full contract. The essentials:
   Action) defined in `.opencode/BCQuality-ADIGO/skills/do.md`, reading `read.md` on demand.
 - **Knowledge file format.** Atomic markdown with YAML frontmatter (`bc-version`,
   `domain`, `keywords`, `technologies`, `countries`, `application-area`). Each
-  rule is `<slug>.md` with optional `<slug>.good.al` and `<slug>.bad.al` siblings.
+  rule is `<slug>.md` with optional `<slug>.good.al.txt` and `<slug>.bad.al.txt` siblings.
+  The samples carry a `.txt` suffix on purpose. `.opencode/` is symlinked into the
+  AL project folder and `alc` compiles every `*.al` it finds there, following
+  symlinks, with no exclude mechanism anywhere in the toolchain. A sample named
+  `*.al` therefore lands in the app's build as a few hundred phantom warnings.
+  Keep the suffix when re-vendoring from upstream BCQuality, and rename any new
+  sample to match.
 
 ## How agents cite knowledge (the finding contract)
 
