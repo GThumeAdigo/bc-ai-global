@@ -553,15 +553,39 @@ memories under `.serena/memories`.
   false` in `~/.serena/serena_config.yml`) so MCP starts do not open a
   browser. Open it manually at `http://localhost:24282/dashboard/`.
 
-### Use it before reading files
+### Use it before grepping or reading files
 
-Serena is the cheap way to explore 580-odd AL files. Reach for
-`get_symbols_overview`, `find_symbol` (with `depth` and `include_body=False`
-first), `find_referencing_symbols`, and `search_for_pattern` instead of reading
-whole `.al` files. Note that Serena's line numbers are 0-based while the AL
-compiler and the analyzers report 1-based, so translate before citing a finding
-as `file:line`. Prefer `rename_symbol` and `safe_delete_symbol` over hand-edits
-when changing an existing symbol: they are reference-aware across both apps.
+Serena is the cheap way to explore 580-odd AL files, and it is the default
+navigation tool for AL, ahead of `grep`, `glob`, and shell `rg`. Reach for it
+first. A grep returns matching lines and leaves you to reconstruct the structure
+around them, which in practice means reading whole files to find out what a match
+belongs to. Serena returns the symbol, its container, and its references
+directly, so the same question costs fewer calls and far fewer tokens.
+
+Use `get_symbols_overview` to learn a file, `find_symbol` (with `depth` and
+`include_body=False` first) to locate a definition, `find_referencing_symbols` to
+find callers, and `search_for_pattern` when you genuinely need a text match
+rather than a symbol.
+
+Fall back to the plain search tools only for what Serena does not cover:
+non-AL files (`app.json`, `.xlf`, `.json`, `.ruleset`, markdown), file-name
+discovery, counting occurrences, and reading git or build output.
+
+**This outranks the Task-tool search default.** The general tool-usage guidance
+prefers handing file search to a subagent to save context. That decides *who*
+runs the search, not *which* tool it uses, so it is not a licence to grep. For
+AL, drive Serena yourself for anything a symbol lookup answers, and when you do
+delegate a broader exploration, state in the prompt that the subagent navigates
+AL with Serena and treats `grep`/`rg` as the fallback. Delegation remains right
+for genuinely open-ended, multi-round investigations and for chewing through
+large tool output, where a separate context is the point. Where the two still
+read as conflicting, this section wins, per "When sources conflict, house rules
+win."
+
+Note that Serena's line numbers are 0-based while the AL compiler and the
+analyzers report 1-based, so translate before citing a finding as `file:line`.
+Prefer `rename_symbol` and `safe_delete_symbol` over hand-edits when changing an
+existing symbol: they are reference-aware across both apps.
 
 ### Memories
 
