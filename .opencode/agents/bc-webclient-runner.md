@@ -1,6 +1,7 @@
 ---
 name: bc-webclient-runner
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent to drive the Business Central web client end-to-end through a documented user flow (typically USER_GUIDE.md) using a real browser. Complements `al-userguide-test-writer` + `al-test-runner`: the AL path exercises the platform via TestPage, this path exercises the rendered UI (page layout, action enable / disable, FactBox refresh, notification toasts, modal flow) that AL TestPage cannot see.
 

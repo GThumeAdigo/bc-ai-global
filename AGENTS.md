@@ -45,15 +45,20 @@ reading the constitution.
 3. **Implement.** Before writing any AL, read the house rules and style guide in
    `.opencode/skills/al-code-review/` (`SKILL.md` plus `styleguide.md`) and let
    them shape the code as you write it, not just at review. Work the tasks in
-   order, applying the house rules and citing BCQuality. Then run
-   `/al-implement-feature` to review the implementation against its spec, plan,
-   and tasks.
+   order, applying the house rules and citing BCQuality, dispatched to the
+   `custom-al-implementer` subagent, which pins a cheaper implementation model
+   while the coordinator and the verifier agents stay on the session's default
+   model. Then run `/al-implement-feature` to review the implementation against
+   its spec, plan, and tasks. The `custom-` prefix distinguishes the house
+   agents; the prefix is part of the name, so dispatch `custom-al-implementer`,
+   not `al-implementer`.
 4. **Test.** Building the app triggers the post-build hook, which prompts the
    mandatory verifier agents and a BCQuality review. Resolve every finding.
    Whether automated tests are written is governed by the **Testing policy**
-   below and recorded in the feature spec and plan. When the feature touches the
-   UI, also drive it in a live sandbox with `bc-webclient-runner`, see **Verify
-   in the web client** below.
+   below and recorded in the feature spec and plan. When a feature touches the
+   UI, the web-client run is **optional**: after implementation, ask the
+   developer whether to verify with `bc-webclient-runner` or by hand in the
+   client, see **Verify in the web client** below.
 5. **Docs and Merge.** Update the feature docs, tick the roadmap item, open a PR.
 
 ### Testing policy (tests are opt-in)
@@ -292,9 +297,18 @@ staging endpoint, a Job Queue sender, or any Azure integration artifact), run
 ## Verify in the web client
 
 `bc-webclient-runner` drives a real browser against a live sandbox and walks a
-user guide step by step. Use it. The compilers, the analyzers, and every verifier
-agent read source. They cannot see what the client actually renders, so a whole
-class of defect is invisible to them and shows up only at runtime:
+user guide step by step. **It is optional, not a mandatory gate.** When a
+feature touches the UI, ask the developer after implementation whether to run
+it, and say what it would check, or whether they prefer to click through the
+change by hand in the client. Do not run it unbidden; it is slow enough to be
+the developer's call per feature. When the developer opts in, it replaces
+them clicking through the app to confirm a change works, so close with a
+result rather than a request.
+
+The runners and its reasons for existing: the compilers, the analyzers, and
+every verifier agent read source. They cannot see what the client actually
+renders, so a whole class of defect is invisible to them and shows up only at
+runtime:
 
 - a caption that silently falls back to the control name
 - a list that does not refresh after an insert
@@ -304,14 +318,16 @@ class of defect is invisible to them and shows up only at runtime:
 - a page that throws on open
 
 **What it replaces.** The developer clicking through the app to confirm a change
-works. Do not close a UI-touching task with "please verify in the client". Run
-the runner, report what it observed, and hand over a result rather than a
-request. This is the point of the agent: verification moves off the human.
+works. Do not close a UI-touching task with "please verify in the client". Ask
+the developer, and if they say yes, run the runner, report what it observed,
+and hand over a result rather than a request. This is the point of the agent:
+verification moves off the human.
 
-**When to run it.** In the Test step, after the mandatory verifiers pass and the
-app is published to a sandbox. Run it whenever a change touches a page, an
-action, a caption, a style expression, a field's visibility, or a flow a user
-clicks through. A codeunit refactor with no UI surface does not need it.
+**When to run it, if the developer opted in.** In the Test step, after the
+mandatory verifiers pass and the app is published to a sandbox. Run it whenever
+a change touches a page, an action, a caption, a style expression, a field's
+visibility, or a flow a user clicks through. A codeunit refactor with no UI
+surface does not need it.
 
 **What it needs from you.**
 
