@@ -13,6 +13,7 @@ Critical constraints at a glance. Each links to its detailed section.
 3. **File name = object name**: `<ObjectName>.<ObjectType>.al`. (§2.2)
 4. **Namespace first**, then `using` statements, at the top of every file. (§3.3)
 5. **Organize by feature**, not object type; use `#region` blocks consistently. (§3.1, §3.2)
+5a. **Any object must be findable from folder names alone.** Number only the top-level feature spine, in data-flow order; subfolders are plain topic names. Subdivide a folder when it holds more than about five objects of one type **and** a real topic exists; if it does not, leave it flat and say why. (§3.1)
 6. **Declare variables** in type order (Record → Codeunit → … → simple types). (§4)
 7. **Table fields** own their `Caption` + `ToolTip`; pages inherit them — don't repeat on pages. (§5.2, §5.3)
 8. Set `ApplicationArea` **at page level only**. (§6.1)
@@ -159,7 +160,12 @@ Use descriptive suffixes to indicate the purpose of label variables:
 
 ### 3.1 Folder Structure
 
-Organize by **business feature**, not by object type:
+**A reader who does not know the app should find any object by reading folder
+names alone.** That is the whole test. Everything below serves it.
+
+Organize by **business feature**, not by object type. A feature folder holds the
+table, its pages, its enums and its codeunits together, because that is the unit
+a developer works on.
 
 ```
 src/
@@ -169,12 +175,85 @@ src/
 │   ├── Permissions/
 │   └── RoleCenter/
 ├── .Subscriber/              # Event subscriber codeunits
-└── OUT/                      # Feature: Outlook Interface
+└── OUT/                      # Feature area: Outlook Interface
     ├── 01 Setup/             # Setup table, page, install trigger
     ├── 02 Authentication/    # OAuth2 authentication
     ├── 03 OutlookEntry/      # Outlook entry table, pages, enums
     └── 04 GraphClient/       # Graph API client, helpers
 ```
+
+Folders prefixed with a dot sort to the top and hold what cuts across every
+feature: extensions, installation, subscribers.
+
+#### The numbered spine
+
+Number the **top-level feature folders** so they read in the order the data
+actually flows (receive, store, process, present, export), not alphabetically.
+The numbers are the app's story; a newcomer reads them top to bottom and learns
+the pipeline.
+
+- **Numbering stops at the spine.** Every folder below a numbered one is a plain
+  unnumbered topic name. Do not number subfolders: they have no delivery order
+  to express, and the numbers become a second thing to maintain.
+- **Leave gaps** (`01`, `02`, `04`) rather than renumbering when a stage is
+  removed. Renumbering rewrites paths across the repo and breaks every reference
+  in a spec or a commit message for no gain.
+
+#### When to add a subfolder
+
+Split a folder when **both** hold:
+
+1. It contains **more than about five objects of the same type**, and
+2. a topic is **genuinely findable** from the file names.
+
+The second condition is the one that gets skipped, and it is the one that
+matters. **If no honest topic exists, leave the folder flat.** A long list is
+merely tedious; a wrong grouping is actively harmful, because it sends a reader
+confidently to the wrong place and they conclude the object does not exist.
+
+When you leave a folder flat despite it being over the threshold, **say so and
+say why** in the app's context notes, so the next person does not redo the
+analysis or read it as an oversight.
+
+#### Subfolder patterns that work
+
+- **By topic**, the default. Group the objects that serve one job:
+  `Queue/`, `Job Queue Runners/`, `Intake/`, `Notifications/`.
+- **`Helpers/`** when a folder carries roughly four or more `… Helper`
+  codeunits (§7.2). This is the most common split in a mature app, because
+  helpers accumulate around a feature faster than anything else.
+- **By object type** when a folder is genuinely mixed and one type dominates:
+  a `Codeunits/` folder beside the tables and pages. Reach for this only when a
+  topic split is not available; type is a weaker organizing idea than purpose.
+- **By object shape** for large generated or schema-mirroring sets, where the
+  shape is unambiguous: `Cards/` and `Lists/`.
+- **Domain first, shape second** for a large mirrored object set: split by the
+  business domain the objects belong to, then by shape inside it. This scales
+  where a single axis does not.
+
+#### Deriving a grouping, not guessing it
+
+When the grouping is not obvious from the names, **derive it from the code**
+rather than inferring it from the identifier. For example, to file a set of
+enums by domain, find which table references each enum and take that table's
+domain. A derived grouping is defensible and reproducible; a grouping guessed
+from a name is the wrong-grouping failure above, arrived at with more
+confidence.
+
+If you cannot derive it cheaply, that is evidence the topic is not there. Leave
+it flat.
+
+#### Practical notes
+
+- **AL binds nothing to folders.** The compiler scans the source tree
+  recursively and namespaces are declared in the file (§3.3), so moving a file
+  between folders cannot break the build. Folder structure is purely for human
+  navigation, which means it is cheap to improve and there is no excuse for
+  leaving it bad.
+- **Move with `git mv`**, not delete-plus-add, so history follows the file.
+- **Revisit the structure after a refactor that adds objects.** The threshold
+  above is crossed silently: no build fails, no analyzer complains, and the
+  folder is simply harder to read every week.
 
 ### 3.2 Region-Based Code Structure
 

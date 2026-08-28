@@ -107,6 +107,86 @@ agent path discovery less reliable.
    automatically, so deliberate template updates must be copied into an app only
    when wanted.
 
+## Hands-on tutorial: build one small feature
+
+This example adds an optional customer reference to an existing document. Use
+your real paths, names, and object range.
+
+1. Initialize the AL app and start OpenCode from that folder:
+
+   ```bash
+   /path/to/bc-ai-global/init-linux.sh /path/to/MyBcRepo/MyApp
+   cd /path/to/MyBcRepo/MyApp
+   opencode
+   ```
+
+2. Replace every placeholder in `APP_CONTEXT.md`. Fill in `specs/brief.md` and
+   `specs/tech-design.md`, then add `001-customer-reference` with status `todo`
+   to `specs/roadmap.md`. Review this project constitution:
+
+   ```text
+   /al-spec-init
+   ```
+
+   Resolve every `block` and `warn`, then rerun the command.
+
+3. Draft and review the feature spec, including the durable test decision:
+
+   ```text
+   /sdd spec 001-customer-reference
+
+   Add an optional Customer Reference that a sales user can enter on the
+   document card. It remains visible after reopening the document.
+   Automated tests: no. Owner/date: <name>, <YYYY-MM-DD>.
+   Reason: verify this prototype with the sandbox manual recipe.
+   ```
+
+   Check `specs/features/001-customer-reference/spec.md`. Spec approval is a
+   hard stop:
+
+   ```text
+   I approve the feature spec. Continue to Plan.
+   ```
+
+4. Draft and review the technical plan:
+
+   ```text
+   /sdd plan 001-customer-reference
+   ```
+
+   Check `plan.md` and `tasks.md`. Verify that object IDs are in range, standard
+   BC is reused, and the task list matches the no-tests decision. Plan approval
+   is the second hard stop:
+
+   ```text
+   I approve the plan and tasks. Continue to Implement.
+   ```
+
+5. Implement the approved tasks and run the pre-Test semantic review:
+
+   ```text
+   /sdd implement 001-customer-reference
+   ```
+
+6. Compile and run the applicable verifiers:
+
+   ```text
+   Use the al-compile skill for this app and classify every diagnostic against
+   the existing baseline.
+   ```
+
+   For this no-tests example, run `al-code-quality-reviewer` and
+   `al-readability-checker` in parallel. Resolve their findings and run both
+   again. For a UI feature, ask for a quick manual recipe or, after publishing
+   to a non-production sandbox, opt into `bc-webclient-runner`.
+
+7. Record the result, update affected documentation, move the roadmap item to
+   `done`, and review the AL diff before creating the app repository's PR.
+
+`APP_CONTEXT.md`, `specs/`, and the scaffold are normally excluded from the app
+repository. Restart OpenCode whenever shared agents, commands, skills, plugins,
+or `opencode.json` change.
+
 ## Prototype status
 
 This repository is in the prototype stage. Its workflows, prompts, agents, and

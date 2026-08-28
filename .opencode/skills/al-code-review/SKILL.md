@@ -92,6 +92,7 @@ because they are not `GOX*`.
 - One object per `.al` file.
 - Namespace first, then `using`, at the top of every file (§3.3).
 - Folders follow the feature, not the object type, and objects use the standard `#region` layout (§3.1, §3.2).
+- Folder names alone must lead a stranger to any object. Numbers appear only on the top-level feature spine, ordered by data flow; subfolders are unnumbered topic names. A folder holding more than about five objects of one type wants a subfolder **only if a topic is genuinely findable** — flag the crowding, but do not invent a grouping, because a wrong one is worse than a long list. `Helpers/` is the usual split once a feature accrues four or more `… Helper` codeunits (§3.1, §7.2).
 
 ### Error handling
 
