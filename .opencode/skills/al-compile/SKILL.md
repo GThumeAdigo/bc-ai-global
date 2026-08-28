@@ -2,7 +2,7 @@
 name: al-compile
 kind: action-skill
 id: al-compile
-version: 1
+version: 2
 title: AL compile with the full analyzer set
 description: Compiles an AL app with alc.exe directly, running CodeCop, UICop, PerTenantExtensionCop and the full ALCops analyzer set against the shared ADIGO ruleset. Use when asked to build, compile, or check an app for analyzer warnings without going through al-mcp, when al-mcp fails to start, or when a baseline-vs-changed comparison of warnings is needed.
 inputs: [app-folder]
@@ -59,59 +59,58 @@ and report per app. Never pass the repo root as the project folder: it has no
 
 ## The command
 
-Run from the app folder (the one containing `app.json`):
+Run the script in `scripts/compile.sh` (relative to this skill's base
+directory). Do not retype the full `alc` invocation inline; retyping the long
+analyzer list is error-prone, and a mistyped or empty `/analyzer:` argument
+fails with `AL1007`.
 
 ```sh
-APP=<app folder returned by discovery>
-OUT=$(mktemp -d /tmp/alcompile.XXXXXX)
-
-time "$ALC" \
-  /project:"$APP" \
-  /packagecachepath:"$APP/.alpackages" \
-  /analyzer:"$ANALYZERS/Microsoft.Dynamics.Nav.CodeCop.dll" \
-  /analyzer:"$ANALYZERS/Microsoft.Dynamics.Nav.UICop.dll" \
-  /analyzer:"$ANALYZERS/Microsoft.Dynamics.Nav.PerTenantExtensionCop.dll" \
-  /analyzer:"$ANALYZERS/ALCops.ApplicationCop.dll" \
-  /analyzer:"$ANALYZERS/ALCops.DocumentationCop.dll" \
-  /analyzer:"$ANALYZERS/ALCops.FormattingCop.dll" \
-  /analyzer:"$ANALYZERS/ALCops.LinterCop.dll" \
-  /analyzer:"$ANALYZERS/ALCops.PlatformCop.dll" \
-  /analyzer:"$ANALYZERS/ALCops.TestAutomationCop.dll" \
-  /analyzer:"$ANALYZERS/ALCops.Common.dll" \
-  /ruleset:"$APP/../.codeAnalysis/ADIGO.ruleset.json" \
-  /out:"$OUT/$APP.app" \
-  > "$OUT/compile.log" 2>&1
-
-COMPILE_EXIT=$?
-printf 'exit=%s\n' "$COMPILE_EXIT"
-exit "$COMPILE_EXIT"
+bash .opencode/skills/al-compile/scripts/compile.sh "<app folder>"
 ```
 
-Notes on the flags:
+The script takes an optional second argument to override the ruleset. It
+resolves the newest installed AL extension, runs `alc` once with the full
+analyzer set and ruleset, writes the log and the `.app` to a fresh temp dir,
+and prints `app:`, `log:`, `output:`, and an `exit=<n> errors=<n>
+warnings=<n> infos=<n>` summary line. Its exit code is the compiler exit
+code. Infos are counted too: the house standard is zero infos, so a clean
+compile means 0 errors, 0 warnings, and 0 infos.
 
-- `/analyzer` is repeatable; every DLL gets its own flag. The order does not
-  matter, but keep the Microsoft cops first and the ALCops set after, matching
-  the workspace settings so output diffs stay stable.
-- The ruleset lives **one level above the app folder** (repo root), in
-  `.codeAnalysis/ADIGO.ruleset.json`. If a repo uses a different ruleset name,
-  check the `al.ruleSetPath` value in the workspace file first and use that.
-- `/packagecachepath` must point at the app's own `.alpackages`. A stale
-  package cache is the most common cause of phantom errors after a dependency
-  changed; if errors reference missing symbols from a workspace sibling app,
-  rebuild that app first and copy its `.app` into this `.alpackages`.
-- Write the log and the `.app` to a fresh temp dir, not into the repo. The
-  repo's `git status` stays clean and reruns do not mix outputs.
+In a multi-app workspace, compile **once per app folder**, in dependency order
+(read `dependencies` in each `app.json`), and report per app. Never pass the
+repo root as the project folder: it has no `app.json` and the compile silently
+does nothing.
+
+What the script does, for reference:
+
+- Analyzer set: the three Microsoft cops (CodeCop, UICop,
+  PerTenantExtensionCop) first, then the seven ALCops DLLs, matching the
+  workspace settings so output diffs stay stable. The script fails fast with a
+  clear message if the compiler or any analyzer DLL is missing.
+- Ruleset: defaults to `.codeAnalysis/ADIGO.ruleset.json` one level above the
+  app folder (repo root). If a repo uses a different ruleset name, the script
+  falls back to the `al.ruleSetPath` value in a sibling `.code-workspace`
+  file. Compiling without a ruleset prints a note and is not a valid CI-parity
+  check.
+- `/packagecachepath` points at the app's own `.alpackages`. A stale package
+  cache is the most common cause of phantom errors after a dependency changed;
+  if errors reference missing symbols from a workspace sibling app, rebuild
+  that app first and copy its `.app` into this `.alpackages`.
 
 ## Reading the result
 
+The script prints the log path in its `log:` line. Use it for the detail:
+
 ```sh
-wc -l "$OUT/compile.log"
-grep -cE "warning|error" "$OUT/compile.log"
-grep -E "error" "$OUT/compile.log"
+LOG=<log path from the script's log: line>
+grep -E ": error" "$LOG"
+grep -E ": warning" "$LOG"
+grep -E ": info" "$LOG"
 ```
 
 - `exit=0` with warnings is still a CI failure (`failOn: warning`). Report the
-  warning count, not just the exit code.
+  warning count, not just the exit code. Infos do not fail CI, but the house
+  standard is zero infos, so list and resolve them like warnings.
 - Diagnostic lines are `path(line,col): <severity> <RULE>: message`. Paths in
   the log are relative to the app folder; line numbers are **1-based** (Serena
   is 0-based, translate before jumping to a symbol).
@@ -126,12 +125,14 @@ When a warning count looks wrong, prove it is pre-existing before touching
 code:
 
 ```sh
+bash .opencode/skills/al-compile/scripts/compile.sh "<app folder>"
+OUT_A=<log path from the first run>
 git stash -u
-# run the compile command above into OUT_A
+bash .opencode/skills/al-compile/scripts/compile.sh "<app folder>"
+OUT_B=<log path from the second run>
 git stash pop
-# run the compile command above into OUT_B
-diff <(grep -oE "[A-Z]{2,}[0-9]{4}" "$OUT_A/compile.log" | sort | uniq -c) \
-     <(grep -oE "[A-Z]{2,}[0-9]{4}" "$OUT_B/compile.log" | sort | uniq -c)
+diff <(grep -oE "[A-Z]{2,}[0-9]{4}" "$OUT_A" | sort | uniq -c) \
+     <(grep -oE "[A-Z]{2,}[0-9]{4}" "$OUT_B" | sort | uniq -c)
 ```
 
 Report which rule counts are yours and which were already there.
