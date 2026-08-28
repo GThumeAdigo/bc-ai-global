@@ -27,7 +27,7 @@ Critical constraints at a glance. Each links to its detailed section.
 14. Raise errors via **`GOXFOU Error`** (`FOUError.Call(...)`), never bare `Error()`. (§11)
 15. Always set the **`RunTrigger`** parameter explicitly on `Insert`/`Modify`/`Delete`. (§12.1)
 16. Use **`SetLoadFields()`**, early filtering, and `CalcSums`/`Count` over manual loops. (§12.2)
-17. **XML-document** all public/internal procedures; avoid regular `//` comments — let names and structure explain the code. (§14)
+17. **XML-document** all public/internal procedures; avoid regular `//` comments — let names and structure explain the code. Summaries are **1–2 sentences**; never reference specs, features, or tasks in docs. (§14)
 18. **4-space indent**, lowercase keywords, compact `{ }` for property-less elements. (§15)
 19. Compile with **zero warnings** (CodeCop + LinterCop); enable `NoImplicitWith` + `TranslationFile` in `app.json`. (§1)
 20. `this` self-reference requires **runtime 13.0+** (BC 2024 wave 2). (§5.6)
@@ -1280,6 +1280,54 @@ interface "Time Entry Calculator"
 - Clearly explain the business purpose in the summary.
 - Describe all parameters and return values.
 
+#### Summary conciseness
+
+A summary is precise, not exhaustive. **One or two sentences** is the target;
+more is justified only when the procedure is genuinely complicated (a
+multi-step state transition, a non-obvious caller contract). Rule of thumb:
+under about 35 words; a hard case may reach three short sentences, never more.
+
+**Cut on sight:**
+
+- Restated parameter or return docs; the `<param>` and `<returns>` tags own
+  them.
+- Narration of what the next statement does.
+- Inventories of call sites, dependants, or affected callers. Stale the day a
+  caller is added. State the constraint instead.
+- A guard described on the wrong object; a publisher does not document its
+  caller's transition rules.
+- A sentence repeated on every procedure of an object; it belongs in the
+  object-level summary once, or nowhere.
+
+**Keep, compressed to one sentence:**
+
+- What the procedure does, in the caller's terms.
+- A constraint a caller can violate (must be idempotent, cannot run inside a
+  TryFunction, must commit first).
+- A platform behavior not inferable from the signature.
+- A named hazard with its consequence.
+
+#### No workflow artifacts in documentation
+
+Documentation comments must not reference the development process: feature
+numbers (`feature 023`), spec or plan file names (`spec.md`, `plan.md`,
+`tasks.md`, `validation.md`, `tech-design.md`, `specs/`, `roadmap.md`),
+acceptance-criterion or task identifiers (`AC 4`, `Task T12`, `D2/D4`). The
+specs are not part of the PR, so every one of these is a dangling pointer for a
+reviewer. State the fact without the citation:
+
+- `which feature 023 refused` becomes `which is not permitted`
+- `the ID window declared in specs/tech-design.md` becomes `the typed-table ID
+  window`
+- `feature 023 plan.md D2 and D4 hold the reasoning` becomes: delete the
+  clause, and move the reasoning into the feature's `plan.md` if it exists
+  nowhere else.
+
+`feature` is an ordinary domain word ("the specified feature of the project
+line" is not a spec reference), and `AC0032`-style ids inside pragma
+justifications are AppSourceCop rule ids, not acceptance criteria. Read each
+hit before editing it.
+
 ```al
 /// <summary>
 /// Creates an Outlook calendar event from the given Outlook Entry record via Microsoft Graph.
@@ -1424,7 +1472,25 @@ CreateEntry.Call(OutlookEntry);
 
 ---
 
-## 16. Additional Resources
+## 16. Commit Messages
+
+- Keep commit messages **short and precise**: a one-line subject that names the
+  change in imperative mood (for example `Cancel running imports from the file
+  card`). Add a short body only when a reviewer genuinely needs the why.
+- **No workflow artifacts in commit messages**: no feature numbers
+  (`feature 023`), no spec or plan file names (`spec.md`, `plan.md`,
+  `tasks.md`, `validation.md`, `tech-design.md`, `specs/`, `roadmap.md`), no
+  acceptance-criterion or task identifiers (`AC 4`, `Task T12`, `D2/D4`), and
+  no references to agent sessions or reviews. A commit message ships in the
+  repository history and a reviewer cannot open the artifacts it cites. State
+  the change and, when needed, the reason in domain terms.
+- The reasoning that motivated the change belongs in the feature `plan.md` or
+  the `///` block of the nearest internal procedure (§14.1), not in the commit
+  message.
+
+---
+
+## 17. Additional Resources
 
 - [alguidelines.dev](https://alguidelines.dev/) — Community design patterns and best practices
 - [alguidelines.dev Vibe Coding Rules](https://alguidelines.dev/docs/agentic-coding/vibe-coding-rules/) — AI-optimized AL coding rules
