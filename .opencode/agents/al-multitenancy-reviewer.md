@@ -1,6 +1,7 @@
 ---
 name: al-multitenancy-reviewer
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent to audit a Business Central AL extension (and any companion API) for multi-tenant safety. The failure mode is a query that returns the wrong tenant's data, an endpoint that resolves a record by primary key without scoping the tenant, or a job-queue codeunit that processes rows from the wrong company. These bugs do not surface in single-tenant dev sandboxes; they show up in SaaS as cross-tenant data leak.
 

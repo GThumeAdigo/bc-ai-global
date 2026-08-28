@@ -17,7 +17,9 @@ Critical constraints at a glance. Each links to its detailed section.
 7. **Table fields** own their `Caption` + `ToolTip`; pages inherit them — don't repeat on pages. (§5.2, §5.3)
 8. Set `ApplicationArea` **at page level only**. (§6.1)
 9. **Promoted actions**: `area(Promoted)` + `actionref` only — never deprecated `Promoted*` properties. (§6.3)
-10. **One codeunit = one purpose**, single public `Call(...)` entry point, `local` helpers below; extensible operations follow the `OnBefore`/`IsHandled`/`Do…`/`OnAfter` skeleton. (§7.1)
+10. **One codeunit = one purpose = exactly ONE public procedure**, `local` procedures below; extensible operations follow the `OnBefore`/`IsHandled`/`Do…`/`OnAfter` skeleton. The sole exception is a **helper** codeunit, which groups small related procedures for one topic and **must** carry the `Helper` suffix. (§7.1, §7.2)
+10a. **Never name a codeunit `… Mgt` / `… Management` / `… Utils`** or any other custody-of-a-topic word: name the job it does. `Helper` is the only permitted grouping suffix. (§2.1)
+10b. **Split codeunits over 600 lines**, by responsibility cluster and never at an arbitrary line count; 400–600 needs a justification. (§7.1)
 11. **Never hardcode UI strings** — use `Label` variables; every enum starts with `value(0; " ")` and no enum caption contains a comma. (§8, §9)
 12. Store secrets with `SecretText` + `IsolatedStorage`; never in plain fields. (§5.7, §9.3)
 13. Declare **explicit `Permissions`** (least privilege) on every codeunit that touches tables. (§10)
@@ -63,6 +65,40 @@ enum 87702 "GOXOUT Sensitivity"
 table 87700 "GOXOUT Setup Table Configuration"  // Too long
 page 87701 "GOXOUT OEList"                       // Too abbreviated
 ```
+
+#### Banned codeunit name suffixes
+
+A codeunit name states **the one job the codeunit does**. Names that describe a
+custodial relationship to a topic rather than an action are banned, because they
+name no boundary and so nothing is ever out of scope for them. In practice they
+become the file every new procedure gets appended to.
+
+- **Never** `Mgt`, `Mgt.`, `Management`, `Manager`, `Mngt`.
+- **Never** `Utils`, `Utilities`, `Misc`, `Common`, `General`, `Functions`,
+  `Library`, `Tools`, `Stuff`.
+- `Helper` is the **only** permitted grouping suffix, and it is not a
+  free pass: it carries the specific meaning defined in §7.2 and is allowed
+  only for codeunits that meet that definition.
+
+```al
+// Bad — names a topic to be curated, not a job to be done
+codeunit 87707 "GOXOUT Entry Mgt"
+codeunit 87708 "GOXOUT Outlook Management"
+codeunit 87709 "GOXOUT Graph Utils"
+
+// Good — names the job, one per codeunit
+codeunit 87707 "GOXOUT Create Entry"
+codeunit 87708 "GOXOUT Cancel Entry"
+codeunit 87709 "GOXOUT Entry Lineage"
+
+// Good — a genuine helper under §7.2, suffix required
+codeunit 87710 "GOXOUT Graph Client Helper"
+```
+
+Prefer a **verb-led or noun-phrase-of-one-job** name: `Create Entry`,
+`Cancel Import`, `Resolve Project`, `BoQ View Builder`, `Markup Renderer`.
+If you cannot name the codeunit without a banned suffix, that is the signal that
+it has more than one responsibility. Split it (§7.1) instead of naming around it.
 
 ### 2.2 File Names
 
@@ -534,10 +570,57 @@ end;
 
 Each codeunit has **ONE clear business purpose** with a single entry point:
 
-- **One public `procedure Call(...)`** as the entry point.
+- **Exactly ONE public procedure** as the entry point. Not "few", not "mostly
+  one": one. Name it `Call` when the operation has no better name, otherwise
+  name it for the job (`Enqueue`, `Resolve`, `BuildLines`).
 - **Only `local` procedures below** for breaking down complex logic.
-- Sort procedures in the order they are called, starting with `Call`.
-- Move small helper functions to separate helper codeunits.
+- Sort procedures in the order they are called, starting with the entry point.
+- Move small helper functions to separate helper codeunits (§7.2).
+
+The only codeunits allowed more than one public procedure are **helper
+codeunits**, which must carry the `Helper` suffix (§7.2). If a codeunit has two
+public procedures and is not a helper, one of three things is true, and the fix
+differs:
+
+1. **The extra procedure has no external caller.** Demote it to
+   `local procedure`. Check every call site before demoting; this is the most
+   common case and it costs nothing.
+2. **The extra procedure is a second job.** Move it to its own codeunit. Two
+   entry points mean two responsibilities, whatever the file name says.
+3. **The extra procedure is a variant of the first.** Merge them into one
+   procedure with a parameter, or make the caller's case the only case.
+
+A stateful builder that genuinely needs a `Set…`/`Build`/`Get…` lifecycle, or a
+`Codeunit.Run`-driven unit that needs a context setter beside `OnRun`, is a
+recognised exception. State the reason in the entry point's `///` block so the
+next reader does not have to rediscover it.
+
+#### Size budget
+
+A codeunit is a unit of comprehension, not a container. Treat these as review
+thresholds, not as hard compiler limits:
+
+| Lines | Verdict |
+|---|---|
+| under 200 | fine |
+| 200 to 400 | acceptable; look for a seam before adding to it |
+| 400 to 600 | a finding: name the clusters and say why they must stay together |
+| over 600 | split it |
+
+Length is the symptom, not the disease. Do not split a long codeunit at an
+arbitrary line count into `…Part1` / `…Part2`: find the **responsibility
+clusters** (groups of local procedures that only talk to each other and to one
+slice of the state) and give each cluster its own codeunit with a name that says
+what it does. If a cluster cannot be named without a banned suffix (§2.1), it is
+not a cluster.
+
+Two shapes are worth splitting on sight, because they hide in a line count:
+
+- **A wide dispatch `case`** over dozens of branches. Group the branches by
+  domain, give each group its own codeunit with the same entry-point signature,
+  and leave the parent as a short chain over the groups.
+- **A large block of pure lookups or predicates** with no access to the
+  surrounding state. That is a helper (§7.2) that has not been extracted yet.
 
 ```al
 codeunit 87707 "GOXOUT CreateEntry"
@@ -652,12 +735,48 @@ Rules for this skeleton:
 
 ### 7.2 Helper Codeunits
 
+A helper codeunit groups several **small, related** helping procedures that all
+serve one process or one topic, where each on its own would be too small to
+justify a codeunit. It is the single exception to the one-public-procedure rule
+of §7.1.
+
+**The `Helper` suffix is mandatory.** A codeunit with more than one public
+procedure and no `Helper` suffix is a finding, and so is a codeunit named
+`… Helper` that is not one. The suffix is the contract: it tells a reader that
+the several public procedures are deliberate, and it tells a reviewer that the
+one-public-procedure rule was considered rather than forgotten.
+
+A codeunit qualifies as a helper when **all** of these hold:
+
+- Its public procedures are small (roughly under 30 lines each) and each does
+  one narrow thing: a lookup, an accessor, a predicate, a format, a small write.
+- **None of them orchestrates the others.** There is no entry point, no sequence,
+  no "call this first". If one public procedure calls another, or the caller must
+  call them in a fixed order, that is an orchestrator with leaked internals
+  (§7.1 case 1), not a helper.
+- They belong to one named process or topic, and the name says which.
+- Removing any one of them would not change what the codeunit is for.
+
+Counter-examples, which look like helpers and are not:
+
+- A **state machine** (a set of `Mark…` / `Set…` transitions guarding an
+  invariant). It has one responsibility and a real contract; name it for that.
+- A **lifecycle** (`Open` / `Step` / `Close`, `SetContext` / `Run`). The order is
+  the point, so it is one job with several entry points; document the reason in
+  the `///` block per §7.1.
+- A **bag of leftovers** from several processes that happen to be read by the
+  same page. Split it by process; a shared consumer is not a shared topic.
+
+Other rules:
+
 - Set `Access = Internal` on helper codeunits that should only be used within the app.
-- Helper codeunits may have multiple `internal procedure` or `procedure` methods.
-- Each procedure should have a single, focused responsibility.
+- Helper codeunits use `internal procedure` or `procedure` methods.
+- Each procedure has a single, focused responsibility.
+- A helper is still bound by the §7.1 size budget. A helper over 400 lines is
+  usually two topics.
 
 ```al
-codeunit 87706 "GOXOUT GraphClient Helper"
+codeunit 87706 "GOXOUT Graph Client Helper"
 {
     Access = Internal;
 
@@ -994,10 +1113,19 @@ exit(CustLedgerEntry.Amount);
 
 ### 13.1 Single Responsibility (SRP)
 
-- Each codeunit has **ONE clear business purpose**.
+- Each codeunit has **ONE clear business purpose**, expressed as **exactly one
+  public procedure** (§7.1). The count of public procedures is the cheapest
+  measurable proxy for SRP in AL: two entry points are two responsibilities.
+- The one exception is a **helper codeunit**, which must carry the `Helper`
+  suffix (§7.2).
 - Each procedure has **ONE specific responsibility**.
 - Move helper functions to separate helper codeunits.
 - Table extensions serve as entity function gateways — delegate to focused codeunits.
+- The codeunit **name** is part of the principle: a name that describes custody
+  of a topic (`… Mgt`, `… Management`, `… Utils`) admits any responsibility and
+  is banned (§2.1). Name the job.
+- Respect the §7.1 size budget. A codeunit that has grown past 600 lines has
+  almost always acquired a second responsibility on the way.
 
 ### 13.2 Open/Closed (OCP)
 

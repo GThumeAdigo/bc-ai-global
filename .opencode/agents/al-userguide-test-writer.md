@@ -1,6 +1,7 @@
 ---
 name: al-userguide-test-writer
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent when a Business Central extension carries a USER_GUIDE.md (or similar end-user walkthrough) and you want machine-runnable AL test codeunits that cover every documented step. Reads the guide section by section, maps each step to a BC page + action + assertion, and emits `Subtype = Test` codeunits that script the flow using AL's TestPage library. Pair with `al-test-runner` to actually execute them in a container.
 

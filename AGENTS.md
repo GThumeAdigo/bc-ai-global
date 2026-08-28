@@ -10,107 +10,50 @@ symlinked. Read it first, then read the app's constitution under `specs/`. Do no
 put an app name, object range, namespace, sandbox detail, baseline finding, or
 other app-specific fact in this shared file.
 
-## How we build here: Spec-Driven Development
+## Spec-Driven Development
 
-**The spec is the brain, the agent is the muscle.** You do not write production
-AL until an approved spec exists for the feature. Specs are durable artifacts
-under `specs/`; a chat session is not. The developer architects the decisions in
-the spec; the agent executes them.
+**The spec is the brain, the agent is the muscle.** Production AL for a feature
+is written only against an approved spec. The full workflow lives in the `sdd`
+skill, not here: the constitution, the per-feature loop, the testing policy
+(opt-in), and the deployment policy. Load
+[`.opencode/skills/sdd/SKILL.md`](.opencode/skills/sdd/SKILL.md) (or run
+`/sdd`) before any feature work, and re-load it after every auto-compaction
+during feature work. Quick fixes and questions are not feature work and do not
+need it.
 
-### The constitution (read first, every session)
+### Model policy (which step runs on which model)
 
-- `APP_CONTEXT.md` — local app identity, conventions, dependencies, and
-  environment-specific verification facts.
-- `specs/brief.md` — customer requirements and business processes (the what and why).
-- `specs/tech-design.md` — implementation strategy: which standard BC modules to
-  reuse, and where custom code is genuinely needed.
-- `specs/roadmap.md` — ordered list of features with status.
-- `AGENTS.md` (this file) — conventions, quality gates, and the workflow.
+Models are pinned per step, not left to the session default, because the
+subscription's weekly limit tracks Opus separately from other models. The
+layout follows "plan with Opus, execute with Sonnet":
 
-### The per-feature loop
+- **Spec, plan, and constitution reviews run on Opus 5 medium.** One reviewer
+  subagent, `al-sdd-reviewer`, runs all three document gates
+  (`al-spec-feature`, `al-plan-feature`, `al-spec-init` skills) and pins
+  `anthropic/claude-opus-5#medium`, so the gate gets the strongest reasoning
+  no matter what model the calling session is on. One agent per model tier
+  keeps the pin in one place and lets several gates share one reading of the
+  constitution and feature artifacts when dispatched together. Spec and plan
+  *drafting* in the session still runs on the session model; switch the
+  session to Opus for the drafting itself when the feature is wide or hard.
+- **Implementation, implementation review, and all verifier agents run on
+  Sonnet 5.** The Sonnet-pinned subagents in `.opencode/agents/` are the
+  implementer `custom-al-implementer`, the implementation review gate
+  `al-implement-feature-reviewer`, the mandatory
+  verifiers, the test writers and validators, and the specialist auditors.
+  Verification is structured rule-checking against BCQuality and the style
+  guide, which Sonnet handles; reserving Opus for the spec and plan gates
+  keeps the weekly Opus bucket for work that actually needs it.
 
-For each feature: **Feature Spec -> Plan -> Implement -> Test -> Docs -> Merge**,
-then replan the next feature. Use one chat session per feature, and start it by
-reading the constitution.
+The SDD gate commands (`/al-spec-feature`, `/al-plan-feature`,
+`/al-implement-feature`, `/al-spec-init`) are thin dispatchers: their
+frontmatter names the reviewer agent and carries no model pin. The agent
+frontmatter is the single place to change a gate's model or permissions; do
+not reintroduce pins on the commands.
 
-1. **Spec.** Draft `specs/features/<id>/spec.md`: the problem, the users, scope,
-   acceptance criteria, what is out of scope, and the durable automated-test
-   decision. Then run `/al-spec-feature` to review it against the constitution
-   and confirm the acceptance criteria are testable. Stop for human review. No
-   code yet.
-2. **Plan.** Draft `plan.md` and `tasks.md` next to the spec: the BC objects to
-   add or extend, the object ID range, the data model, integration points, and an
-   ordered task list. Then run `/al-plan-feature` to review them against the
-   approved spec. Stop for human review.
-3. **Implement.** Before writing any AL, read the house rules and style guide in
-   `.opencode/skills/al-code-review/` (`SKILL.md` plus `styleguide.md`) and let
-   them shape the code as you write it, not just at review. Work the tasks in
-   order, applying the house rules and citing BCQuality, dispatched to the
-   `custom-al-implementer` subagent, which pins a cheaper implementation model
-   while the coordinator and the verifier agents stay on the session's default
-   model. Then run `/al-implement-feature` to review the implementation against
-   its spec, plan, and tasks. The `custom-` prefix distinguishes the house
-   agents; the prefix is part of the name, so dispatch `custom-al-implementer`,
-   not `al-implementer`.
-4. **Test.** Building the app triggers the post-build hook, which prompts the
-   mandatory verifier agents and a BCQuality review. Resolve every finding.
-   Whether automated tests are written is governed by the **Testing policy**
-   below and recorded in the feature spec and plan. When a feature touches the
-   UI, the web-client run is **optional**: after implementation, ask the
-   developer whether to verify with `bc-webclient-runner` or by hand in the
-   client, see **Verify in the web client** below.
-5. **Docs and Merge.** Update the feature docs, tick the roadmap item, open a PR.
-
-### Testing policy (tests are opt-in)
-
-Automated tests are **not** written by default. Every feature spec
-and plan must record `Automated tests: yes | no`, the decision owner/date, and
-the reason. The plan must match the approved spec. If the decision is absent,
-the agent must ask the developer and update both artifacts before proceeding.
-Chat history alone is not a durable testing decision.
-
-- If the developer says **no** (the default when unstated): skip all test
-  writing. A missing test is **not** a finding. `al-test-writer`,
-  `al-userguide-test-writer`, `al-test-coverage-validator/-enforcer`,
-  `al-test-validator`, and `al-test-runner` are not run. The plan states that no
-  automated test artifacts or test verifiers apply, and test tasks are removed.
-- If the developer says **yes**: the full test discipline applies. Every
-  acceptance criterion gets a covering test, and the test verifiers run as part
-  of the mandatory set.
-
-This is a house rule and, per "When sources conflict, house rules win," it
-overrides any "test per acceptance criterion" or "missing test is a
-blocker/major" wording elsewhere in the workflow skills or templates.
-
-### Deployment policy (nothing is in production yet)
-
-Unless the local `APP_CONTEXT.md` says an app is installed in a production tenant,
-**schema changes are free**. Treat a breaking schema change as a normal edit, not
-as an event that needs a migration path.
-
-- Remove a field, table, enum value, or procedure outright when it is no longer
-  needed. Do **not** mark it `ObsoleteState = Pending` first, and do not carry
-  `ObsoleteReason` or `ObsoleteTag` for the sake of process.
-- Do **not** write an upgrade codeunit for existing data. Rows written by an
-  earlier version may be left stale, unreadable, or orphaned. Re-import or
-  re-create the data instead.
-- A missing obsolete marking and a missing upgrade path are **not** findings.
-  `al-obsolete-tracker` and `al-upgrade-checker` are not part of any mandatory
-  set. If one is run anyway, downgrade its migration findings to info.
-- Do still **record** the breaking change in the feature plan: what breaks, what
-  a consumer must do, and why it was taken. The reasoning is the durable part,
-  the migration code is not.
-
-This is a house rule and it overrides any obsolete-discipline or
-upgrade-safety wording in the agents, skills, or BCQuality `upgrade` domain.
-Revisit it the moment the first app ships to a production tenant, because every
-bullet above inverts at that point.
-
-### Bootstrapping
-
-At the start of a project (or when the high-level requirements change), draft
-`brief.md`, `tech-design.md`, and `roadmap.md`, then run `/al-spec-init` once to
-review the constitution for completeness and consistency before any feature work.
+Do not unpin an agent ad hoc for a single run. If a verifier systematically
+misses a class of finding on Sonnet, that is a reason to change the pin in the
+agent file (globally, in the scaffolding repo), not to override it per session.
 
 ## Layout
 
@@ -124,8 +67,12 @@ review the constitution for completeness and consistency before any feature work
   `inputs`/`outputs` and dimension schema) plus the `name`/`description` the
   runtime needs to discover and trigger it.
   Edit the skill upstream in EquerraNZ/community-BCQuality and re-vendor, not the
-  pointer. Two skills are exceptions. `al-code-review` stays a full local skill
-  because it carries this project's house rules. `hunk-review` points outward
+  pointer. Four skills are exceptions. `al-code-review` stays a full local skill
+  because it carries this project's house rules. `al-compile` stays a full local
+  skill because it encodes this house's analyzer set, ruleset location, and
+  baseline handling. `sdd` stays a full local skill because it is the house
+  workflow (constitution, per-feature loop, testing and deployment policies);
+  AGENTS.md points at it instead of duplicating it. `hunk-review` points outward
   rather than at BCQuality: its authoritative content ships with the Hunk CLI and
   is resolved at runtime through `hunk skill path`, so the local file holds only
   the repo-specific notes.
@@ -196,6 +143,33 @@ When more than one `app.json` is found:
 
 If the app in scope is ambiguous, ask which app folder to work in rather than
 guessing.
+
+## Building and compiling
+
+Three tools touch builds, and they are not interchangeable. Pick by job:
+
+- **Compile with analyzers: use the `al-compile` skill.** It runs `alc.exe`
+  from the installed VS Code AL extension directly, with the full house
+  analyzer set (CodeCop, UICop, PerTenantExtensionCop plus the seven ALCops
+  DLLs) and the workspace ruleset, and writes output to a temp dir so the repo
+  stays clean. This is the default way to build. It works even when al-mcp is
+  down, and it is the only way to do a clean baseline comparison (stash,
+  compile, pop, compile, diff). Read
+  [`.opencode/skills/al-compile/SKILL.md`](.opencode/skills/al-compile/SKILL.md)
+  before running it: the analyzer list, the ruleset resolution, and the
+  baseline recipe live there.
+- **al-mcp earns its place for what alc cannot do:** `al_run_tests`,
+  `al_symbolsearch` (searching inside compiled base-app packages), and
+  `al_downloadsymbols`. Reach for al-mcp when the task is tests, base-app
+  symbol lookup, or symbol download, not when it is a plain compile.
+- **Serena never builds.** It is a language server: navigation and symbolic
+  edits only. Do not ask it to compile, and do not treat its diagnostics as a
+  build result.
+
+A compile is not done when `alc` exits 0. CI fails on warnings
+(`failOn: warning`), so report the warning count and classify findings against
+the baseline (see "Establish the baseline" below). After any successful build,
+the post-build hook prompts the mandatory verifier set; run it.
 
 ## BCQuality: the knowledge source agents cite
 
@@ -280,8 +254,8 @@ complete, run these four verifiers in parallel and resolve their findings:
 
 - `al-code-quality-reviewer`
 - `al-readability-checker`
-- `al-test-coverage-validator` (only when tests are opted in, see the Testing policy)
-- `al-test-validator` (only when tests are opted in, see the Testing policy)
+- `al-test-coverage-validator` (only when tests are opted in, see the Testing policy in the `sdd` skill)
+- `al-test-validator` (only when tests are opted in, see the Testing policy in the `sdd` skill)
 
 When tests are not opted in for the feature, the mandatory set is just the first
 two verifiers; the two test verifiers are skipped.
@@ -297,102 +271,45 @@ staging endpoint, a Job Queue sender, or any Azure integration artifact), run
 ## Verify in the web client
 
 `bc-webclient-runner` drives a real browser against a live sandbox and walks a
-user guide step by step. **It is optional, not a mandatory gate.** When a
-feature touches the UI, ask the developer after implementation whether to run
-it, and say what it would check, or whether they prefer to click through the
-change by hand in the client. Do not run it unbidden; it is slow enough to be
-the developer's call per feature. When the developer opts in, it replaces
-them clicking through the app to confirm a change works, so close with a
-result rather than a request.
+user guide step by step. **It is optional, not a mandatory gate.** After
+implementation, once the app can be published to a sandbox, offer the
+developer the choice from the `sdd` skill's Test step: a quick manual test
+recipe to click through by hand, or an autonomous verification run with the
+runner. Do not run it unbidden. When the developer opts in, the runner
+replaces them clicking through the app, so close with a result rather than a
+request.
 
-The runners and its reasons for existing: the compilers, the analyzers, and
-every verifier agent read source. They cannot see what the client actually
-renders, so a whole class of defect is invisible to them and shows up only at
-runtime:
+The coordinator's obligations are short:
 
-- a caption that silently falls back to the control name
-- a list that does not refresh after an insert
-- a `StyleExpr` that never turns red
-- an action whose enabled state is wrong for the selected row
-- a lookup that opens empty
-- a page that throws on open
-
-**What it replaces.** The developer clicking through the app to confirm a change
-works. Do not close a UI-touching task with "please verify in the client". Ask
-the developer, and if they say yes, run the runner, report what it observed,
-and hand over a result rather than a request. This is the point of the agent:
-verification moves off the human.
-
-**When to run it, if the developer opted in.** In the Test step, after the
-mandatory verifiers pass and the app is published to a sandbox. Run it whenever
-a change touches a page, an action, a caption, a style expression, a field's
-visibility, or a flow a user clicks through. A codeunit refactor with no UI
-surface does not need it.
-
-**What it needs from you.**
-
-- A published app on a non-production sandbox and its URL. The agent refuses an
-  environment named Production. Leave `?company=` off unless you know the
-  company; BC falls back to the user's default and the agent reports where it
-  landed.
-- A signed-in persistent browser profile. The one-time interactive sign-in is a
-  human step. If the agent reports a Microsoft login screen, ask for a sign-in
-  rather than entering credentials.
-- A user guide, or an explicit list of steps with expected outcomes. Without
-  documented expectations the run has nothing to assert against and degrades into
+- Run it in the Test step, after the mandatory verifiers pass and the app is
+  published to a sandbox. Never against a production environment.
+- Give it a user guide (or explicit steps with expected outcomes) and absolute
+  paths for any file the flow uploads. Without expectations it degrades into
   screenshots.
-- Absolute paths for any file the flow uploads, plus the value to compare against
-  where one exists (a byte count, a row count). The Playwright MCP refuses paths
-  outside the workspace, so copy a fixture from `/tmp` into a git-excluded folder
-  under the repo before pointing the agent at it.
-- `continue_on_fail: true` on a first run, so one pass yields the full picture
-  instead of stopping at the first mismatch.
+- The one-time browser sign-in is a human step: if the agent reports a
+  Microsoft login screen, ask for a sign-in rather than entering credentials.
+- Classify mismatches rather than assuming the app is wrong: a single wrong
+  caption is usually a guide error, a coherent block of them is usually an app
+  defect. Confirm against the AL source before reporting a defect.
 
-**Classify every mismatch, do not assume the app is wrong.** A user guide that
-has never been executed is unverified in both directions. For each mismatch the
-agent states whether it is *possibly-wrong-app*, *possibly-wrong-guide*, or
-*unclear*, and why. Captions, field ordering, **Show more** placement, and part
-or FactBox names are the details a hand-written guide most often gets wrong, so a
-single wrong caption is usually a guide error. A whole coherent block of them is
-usually an app defect. Confirm the call against the AL source before reporting it
-as a defect: the runner sees symptoms, the source gives the mechanism, and the
-two together turn an observation into an actionable fix.
-
-**Do not assert file-dependent numbers.** Tell the agent which values vary with
-the input (counts, sizes, totals) and have it capture them and assert their shape
-and their relationships to each other instead of fixed values.
+Everything else (inputs, the JSON finding shape, delayed-insert and lookup
+probing, the environment details) lives in the runner agent's own definition,
+`.opencode/agents/bc-webclient-runner.md`.
 
 ## Show diffs in Hunk
 
 [Hunk](https://hunk.dev) is an interactive terminal diff viewer running in the
-developer's own terminal. When there is a diff worth looking at, put it in Hunk
-instead of pasting patch text into the chat. The developer gets a real viewer
-with syntax highlighting and navigation, and your review notes land pinned to the
-lines that provoked them rather than scrolling away in a transcript.
+developer's own terminal. When there is a diff worth looking at (after an
+implementation task, before a PR, when reporting findings that carry a
+file and a line), put it in Hunk instead of pasting patch text into the chat.
 
 Load [`.opencode/skills/hunk-review/SKILL.md`](.opencode/skills/hunk-review/SKILL.md)
-before driving a session. It resolves the authoritative instructions that ship
-with the CLI (`hunk skill path`) and carries the repo-specific details: `hunk` is
-absent from the agent PATH, this checkout is a git worktree, and how to turn
-verifier findings into a single pinned `comment apply` batch.
-
-**When to reach for it.** After finishing an implementation task, before opening
-a PR, when reporting verifier findings that carry a file and a line, and any time
-the developer asks to review, walk through, or look at changes. Prefer it to a
-`git diff` dump in the response.
-
-**When not to.** No code changed, or the task is a question rather than an edit.
-Do not open the TUI yourself: `hunk diff` and `hunk show` are the developer's
-commands. Agents drive an existing session through `hunk session *`.
-
-**When no session is live.** `hunk session list` returning nothing means the
-developer has not launched Hunk. Say so and carry on with the normal response.
-Ask them to launch it if the diff is the point of the exchange. This is a
-graceful fallback, not a blocker: never stall a task waiting for a viewer.
-
-Hunk is a presentation layer over the diff. It does not compile, run the
-analyzers, or see what the web client renders, so it neither replaces the
-mandatory verifier set nor `bc-webclient-runner`.
+before driving a session. The skill is authoritative: `hunk` is absent from
+the agent PATH, this checkout is a git worktree, `hunk diff` and `hunk show`
+are the developer's commands while agents drive an existing session through
+`hunk session *`, and a missing session is a graceful fallback, never a
+blocker. Hunk is a presentation layer: it does not compile, run the
+analyzers, or replace the mandatory verifier set.
 
 ## House rules
 
@@ -537,6 +454,38 @@ the same verifier again with the previous findings and the fix applied to each
 listed in the prompt. The second pass confirms resolution and catches the common
 failure where a fix moved the problem instead of removing it. Do not mark work
 complete on the first pass.
+
+### Read specs by section, not by whole file
+
+Specs are durable and on disk, which means they survive compaction and can be
+re-read at any time. Treat the context window as scarce and the spec folder as
+the source of truth that outlives it:
+
+- Read the constitution files that govern the task at hand, not all of them by
+  habit. Implementing a feature needs its `spec.md`, `plan.md`, and `tasks.md`
+  plus `APP_CONTEXT.md`; it rarely needs `brief.md` again once the spec is
+  approved.
+- When a spec is long, grep for the section header you need and read from
+  there instead of loading the whole file. The acceptance criteria and the
+  task list are the usual targets.
+- After auto-compaction, do not reconstruct context from memory. Re-read the
+  one spec section the current task depends on. That is cheaper and more
+  accurate than a summary of a summary.
+- Keep specs structured so this works: one feature per folder, stable section
+  headers, amendments appended rather than woven in. The agent can only read
+  selectively when the document advertises where things are.
+
+### Delegate open-ended exploration
+
+The main session holds the spec and the plan; that context is expensive. When
+a question needs more than two or three lookups to answer ("how does X work
+across these objects?", "where is Y used?"), hand it to a subagent and say in
+the prompt that it navigates AL with Serena and treats `grep`/`rg` as the
+fallback, per the Serena section below. The subagent's exploration transcript
+stays out of the main context; only the answer returns. This is the same
+reason `custom-al-implementer` pins a cheaper model: the coordinator's context
+is the bottleneck, not the tokens spent elsewhere. Direct Serena use from the
+main session remains the default for anything a single symbol lookup answers.
 
 ## Serena (semantic symbol MCP server)
 

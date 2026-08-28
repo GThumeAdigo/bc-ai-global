@@ -1,6 +1,7 @@
 ---
 name: al-event-subscriber-auditor
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent to audit AL event subscribers in a Business Central extension. Verifies that each subscriber binds to a publisher that still exists, matches the publisher's signature exactly, handles the `IsHandled` contract correctly when applicable, and follows the project's subscriber discipline (small, focused, thin handlers, no business logic inline).
 

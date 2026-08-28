@@ -1,6 +1,7 @@
 ---
 name: al-test-writer
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent to generate new Business Central AL test codeunits for a target production object. Produces AL source ready to drop into the project's test app, plus a list of asserted behaviours. Use it during TDD (the red step) and after coverage gaps surface. Trigger this agent:
 

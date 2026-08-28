@@ -1,6 +1,7 @@
 ---
 name: al-translation-auditor
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent to audit translation coverage on a Business Central AL extension. Compares every `Label`, `Caption`, `ToolTip`, `Comment`, and `Description` string in the AL source against the xliff files under `Translations/`, against the `supportedCountries` declared in `AppSourceCop.json`, and against the locales the customer actually deploys to. Catches the silent failure where an extension claims to support AU and NZ but only the en-US xliff has been generated.
 

@@ -64,13 +64,18 @@ because they are not `GOX*`.
 3. Capture telemetry on every protected operation using the project's standard telemetry pattern.
 4. All user-facing labels go through `Label` declarations. Populate `Comment` whenever the label carries placeholders (`%1`, `%2`) or the meaning is ambiguous out of context, and set `Locked = true` on non-translatable text such as URLs and API field names (§9.1).
 5. Raise errors through the foundation error handler (`GOXFOU Error`, `FOUError.Call(...)`), not bare `Error()` (§11).
-6. Avoid regular comments (`//`, `/* */`). The code explains itself through its structure and its object, procedure, and variable names; extract a named `local procedure` or a named variable instead of commenting. Required `///` XML documentation on internal and global procedures is exempt and must be left in place; a `local procedure` gets no `///` block at all (§14.1). Narrow exceptions: a genuine *why* (platform workaround, business or legal constraint, deliberate deviation) and compiler pragmas. A `#pragma warning disable` must itself carry a comment justifying the suppression and be closed with `#pragma warning restore`. Never leave commented-out code (§14.2).
+6. **One codeunit, one responsibility, exactly one public procedure.** A codeunit with two or more public (`procedure` / `internal procedure`) members is a finding unless it is a *helper* codeunit. Fix it by demoting the publics that have no external caller, by moving a second job to its own codeunit, or by merging variants of the same procedure (§7.1).
+7. **A helper codeunit must carry the `Helper` name suffix, and only a helper may.** A helper groups small, related helping procedures for one process or topic where each alone is too small for its own codeunit; none of them orchestrates the others. A multi-public codeunit without the suffix is a finding, and so is a `… Helper` that is really a state machine, a lifecycle, or a bag of leftovers from several processes (§7.2).
+8. **Banned codeunit name suffixes: `Mgt`, `Mgt.`, `Management`, `Manager`, `Utils`, `Utilities`, `Misc`, `Common`, `General`, `Functions`, `Library`, `Tools`.** They name custody of a topic instead of a job, so nothing is ever out of scope for them. Name the job (`Create Entry`, `Cancel Import`, `Resolve Project`). `Helper` is the only permitted grouping suffix (§2.1).
+9. **Codeunit size budget:** over 600 lines is a finding, split it; 400 to 600 needs a stated justification. Split by responsibility cluster with a name per cluster, never at an arbitrary line count into `…Part1`/`…Part2`. A wide dispatch `case` and a large block of stateless lookups are the two shapes that most often hide inside a long codeunit (§7.1).
+10. Avoid regular comments (`//`, `/* */`). The code explains itself through its structure and its object, procedure, and variable names; extract a named `local procedure` or a named variable instead of commenting. Required `///` XML documentation on internal and global procedures is exempt and must be left in place; a `local procedure` gets no `///` block at all (§14.1). Narrow exceptions: a genuine *why* (platform workaround, business or legal constraint, deliberate deviation) and compiler pragmas. A `#pragma warning disable` must itself carry a comment justifying the suppression and be closed with `#pragma warning restore`. Never leave commented-out code (§14.2).
 
 ## Core checks
 
 ### Naming
 
 - Tables, pages, codeunits, and reports: PascalCase, descriptive, prefixed (§2.1).
+- A codeunit name states the one job it does. Banned suffixes: `Mgt`, `Management`, `Manager`, `Utils`, `Misc`, `Common`, `General`, `Functions`, `Library`, `Tools`. `Helper` is permitted only on a genuine helper (§2.1, §7.2).
 - Variables: PascalCase, no Hungarian notation, suffixed with the object name, `Temp` prefix on temporary records (§2.3).
 - Procedures: PascalCase, verb first ("CalculateAmount" not "AmountCalculation"). Business operation codeunits use the single `Call(...)` entry point instead (§7.1).
 - File name equals object name: `<ObjectName>.<ObjectType>.al` (§2.2).
@@ -79,6 +84,8 @@ because they are not `GOX*`.
 
 - Pages have a single purpose. Master, List, Card, Document, Worksheet, RoleCenter.
 - Business logic lives in codeunits, not page triggers.
+- One codeunit exposes exactly one public procedure, unless it is a `… Helper` (§7.1, §7.2). Count the `procedure` / `internal procedure` members at 4-space indent; that count is the cheapest SRP proxy in AL (§13.1).
+- A codeunit over 600 lines is split by responsibility cluster; 400 to 600 is justified in writing (§7.1).
 - One object per `.al` file.
 - Namespace first, then `using`, at the top of every file (§3.3).
 - Folders follow the feature, not the object type, and objects use the standard `#region` layout (§3.1, §3.2).

@@ -1,6 +1,7 @@
 ---
 name: al-permission-set-auditor
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent to audit a Business Central AL extension's permission sets against the objects the extension actually defines. The most common cause of AppSource rejection and tenant install failures is a new table, page, codeunit, or report that the developer forgot to add to the permission set. This agent walks the object inventory, walks the permission set, and reports the gap.
 

@@ -1,6 +1,7 @@
 ---
 name: al-test-runner
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent to execute Business Central AL test codeunits and return a structured result the other test agents can consume. Wraps the AL-Go test runner or a local Docker BC sandbox; chooses the right invocation based on what the project provides. Trigger this agent:
 

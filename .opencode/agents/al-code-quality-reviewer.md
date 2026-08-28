@@ -1,6 +1,7 @@
 ---
 name: al-code-quality-reviewer
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent to review Business Central AL code for design quality, testability, and anti-patterns. Distinct from `al-readability-checker` (which is about clarity to a fresh reader); this agent is about whether the code is well-designed, testable, and free of structural problems that will hurt later. One of the four mandatory parallel verifiers; run before completing any AL development task. Trigger this agent:
 

@@ -1,6 +1,7 @@
 ---
 name: al-performance-reviewer
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent to find common performance anti-patterns in Business Central AL: N+1 query patterns, missing keys for filter combinations, FlowField overuse on list pages, lack of SetLoadFields, FindFirst on growing tables, and other patterns the AL compiler will not warn about but which compound badly under tenant data scale.
 

@@ -1,7 +1,7 @@
 ---
 name: custom-al-implementer
 mode: subagent
-description: Executes the Implement step of an approved AL feature (the tasks.md task list) by writing and mechanically editing AL. Dispatched on a cheaper pinned model (Anthropic Sonnet 5 via the opencode-with-claude proxy) to cut implementation cost; verifiers and spec/plan drafting stay on the session's default model. Trigger this agent on implementation work over an approved plan.
+description: Executes the Implement step of an approved AL feature (the tasks.md task list) by writing and mechanically editing AL. Dispatched on a cheaper pinned model (Anthropic Sonnet 5 via the opencode-with-claude proxy) to cut implementation cost. All verifier agents are pinned to Sonnet 5 as well; the spec, plan, and constitution review gates run on Opus 5 medium. Trigger this agent on implementation work over an approved plan.
 model: anthropic/claude-sonnet-5
 ---
 

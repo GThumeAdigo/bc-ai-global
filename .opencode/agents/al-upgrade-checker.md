@@ -1,6 +1,7 @@
 ---
 name: al-upgrade-checker
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent when a Business Central AL extension's schema changes (new required field, table rename, enum value reorder, obsoleted column, changed PK) to verify the upgrade codeunit handles existing-tenant data. The failure mode is a clean install on the dev sandbox, then `Install-NAVApp` errors on production tenants because there's existing data the upgrade path doesn't migrate.
 

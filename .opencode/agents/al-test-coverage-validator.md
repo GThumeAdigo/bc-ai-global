@@ -1,6 +1,7 @@
 ---
 name: al-test-coverage-validator
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent when you need to validate test coverage completeness for AL code. One of the four mandatory parallel verifiers (alongside `al-code-quality-reviewer`, `al-readability-checker`, and `al-test-validator`); runs in parallel before any BC development task is marked complete. Reports coverage shape; the harder blocking decision lives in `al-test-coverage-enforcer`. Trigger this agent:
 

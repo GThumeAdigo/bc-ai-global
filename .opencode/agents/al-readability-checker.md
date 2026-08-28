@@ -1,6 +1,7 @@
 ---
 name: al-readability-checker
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent to verify a Business Central AL change is readable by a human reviewer who has never seen the file before. Returns structured findings (block / warn / info) with file:line citations. One of the mandatory parallel verifiers; run it before completing any AL development task. Trigger this agent:
 

@@ -1,6 +1,7 @@
 ---
 name: al-test-validator
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent to validate that Business Central AL test codeunits are well-formed and meaningful. Reads test AL and reports tests with no assertions, missing edge cases, weak names, improper isolation, and tests that exercise implementation instead of behaviour. One of the four mandatory parallel verifiers; runs alongside `al-code-quality-reviewer`, `al-readability-checker`, and `al-test-coverage-validator`. Trigger this agent:
 

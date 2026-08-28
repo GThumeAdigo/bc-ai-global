@@ -1,6 +1,7 @@
 ---
 name: al-obsolete-tracker
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent to audit `Obsolete` markings on a Business Central AL extension. Every object, field, procedure, or enum value marked `ObsoleteState = Pending` should have a clear `ObsoleteReason`, an `ObsoleteTag` carrying a target removal version, and a planned removal path. This agent reports orphans (Pending with no clear plan), broken removals (Removed without a prior Pending cycle), and abandoned obsolescence (Pending for many versions with no progress).
 

@@ -1,6 +1,7 @@
 ---
 name: al-integration-pattern-reviewer
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent to validate a Business Central app build against the modern integration patterns: staging via the Integration Message, idempotency on both sides, framing records for polling, Business Events versioning, correlation propagation, staged pipelines, and the hard anti-patterns (HTTP calls from posting, synchronous wait loops in API handlers, direct posting from a webhook or poll handler).
 

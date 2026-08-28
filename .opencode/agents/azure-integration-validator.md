@@ -1,6 +1,7 @@
 ---
 name: azure-integration-validator
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent to validate an Azure component build for a Business Central integration: the webhook receivers (Functions, Logic Apps, APIM), Service Bus topics and queues, Durable Functions, and the Bicep / ARM / Terraform that provisions them. It checks the integration-plane rules that BC depends on: receivers stage to BC and acknowledge fast, idempotency keys and correlation ids flow on every hop, retry and dead-letter live in the plane, secrets live in Key Vault, and subscription health is monitored.
 

@@ -1,6 +1,7 @@
 ---
 name: al-table-refactorer
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent to refactor a Business Central AL table for clarity, performance, and project house rules. Outputs the refactored table AL plus a structured rationale for each change. Run as one of the mandatory parallel verifiers when a `.al` file with a `table` object has been changed. Trigger this agent:
 

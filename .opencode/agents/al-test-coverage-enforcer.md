@@ -1,6 +1,7 @@
 ---
 name: al-test-coverage-enforcer
 mode: subagent
+model: anthropic/claude-sonnet-5
 description: |
   Use this agent as a hard gate before any BC development task is marked complete. It returns PASS only if the AL test coverage for the changed code meets the project's threshold; otherwise FAIL with the specific uncovered paths. Unlike `al-test-coverage-validator` (which reports), this agent blocks. Trigger this agent:
 
