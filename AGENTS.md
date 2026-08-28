@@ -21,6 +21,24 @@ skill, not here: the constitution, the per-feature loop, the testing policy
 during feature work. Quick fixes and questions are not feature work and do not
 need it.
 
+Every governance gate is iterative: resolve its findings and rerun the same gate
+to `outcome: pass` before human Spec or Plan approval, and before Test entry for
+the implementation gate. Persist review and approval evidence in the feature's
+separate app-local `approvals.md`: reviewer/date and full-file SHA-256, followed
+by human approver/date and the same digest. Spec uses one digest; Plan uses
+separate `plan.md` and `tasks.md` digests. A gate never requires its own
+not-yet-written evidence. Downstream gates recompute and compare approved
+digests, and any edit invalidates the affected approval. Roadmap states
+advance `todo -> spec` on Spec draft, `spec -> planned` on Plan draft, `planned
+-> in-progress` after Plan approval, and `in-progress -> done` only after Test
+and Docs pass.
+
+Compatibility is also app-local. `APP_CONTEXT.md` explicitly records deployment
+status, whether production/persisted-data compatibility is required, and the
+trusted released baseline ref. The yes/no compatibility field is authoritative;
+a release tag alone never enables compatibility. When compatibility is `yes`, a
+missing trusted baseline makes upgrade/obsolete review partial.
+
 ### Model policy (which step runs on which model)
 
 Models are pinned per step, not left to the session default, because the
@@ -55,8 +73,8 @@ agent file (globally, in the scaffolding repo), not to override it per session.
   reviews are thin runtime pointers whose authoritative content is in
   `action-skill` files under
   `.opencode/BCQuality-ADIGO/custom/skills/<category>/`. Each pointer keeps only
-  the `name` and `description` OpenCode needs for discovery; action metadata
-  remains authoritative in the vendored skill.
+  discovery metadata and the required Entry/index-preparation handoff to its
+  exact action; action metadata remains authoritative in the vendored skill.
   To change reusable review policy, update the custom action skill in
   `GThumeAdigo/BCQuality-ADIGO`, merge it there, then bump the submodule commit.
   Full scaffold-local skills are a separate category: the four SDD governance
@@ -155,7 +173,7 @@ Three tools touch builds, and they are not interchangeable. Pick by job:
 A compile is not done when `alc` exits 0. CI fails on warnings
 (`failOn: warning`), so report the warning count and classify findings against
 the baseline (see "Establish the baseline" below). After any successful build,
-the post-build hook prompts the mandatory verifier set; run it.
+the post-build hook prompts the remaining Test sequence; follow it exactly.
 
 ## BCQuality: the knowledge source agents cite
 
@@ -171,8 +189,9 @@ for the full contract. The essentials:
   the `custom/` layer adds `api`, `integration`, `operations`, `performance`,
   and `process` knowledge plus review and testing skills.
 - **How it is consumed.** An adapter invokes
-  `.opencode/BCQuality-ADIGO/skills/entry.md` first, including its index
-  preparation. Entry routes to an action skill. The selected action skill uses
+  `.opencode/BCQuality-ADIGO/skills/entry.md` first with a
+  `requested-skill-id`, including its index preparation. Entry takes that exact
+  route rather than fuzzy-selecting a predetermined target. The action skill uses
   READ (`skills/read.md`) for applicability and precedence, follows Source,
   Relevance, Worklist, and Action, then emits DO (`skills/do.md`) output.
 - **Knowledge file format.** Atomic markdown with YAML frontmatter (`bc-version`,
@@ -201,23 +220,36 @@ rule. An adapter that applies both sources returns the action skill's DO report
 and, only when needed, a separately labelled local report.
 
 Runtime agents with corresponding custom action skills are thin adapters. They
-run Entry/index preparation, follow the selected exact action skill and READ/DO,
+build complete task context in memory or a temporary path outside the workspace,
+then run `.opencode/BCQuality-ADIGO/tools/route_entry.py` directly, or through
+`python3` when it is not executable, with an exact `requested-skill-id`. They
+never create a workspace context file or fuzzy-route. Each follows only its
+routed action skill and READ/DO,
 load the local house-rule overlay when their role requires it, and do not carry
 duplicate review checklists or legacy JSON contracts in their prompts.
 
 ## Mandatory verifier set
 
 During Test, after semantic implementation conformance passes and the app
-builds, run the applicable mandatory verifiers in parallel and resolve their
-findings:
+builds, dispatch `al-test-runner` first when automated tests are opted in. Any
+failed test count, runner failure or partial outcome, or unexecuted required test
+blocks Test regardless of finding severity. Fix the cause and rerun the full
+required test selection. Only then run the applicable mandatory verifiers in
+parallel and resolve their findings:
 
 - `al-code-quality-reviewer`
 - `al-readability-checker`
 - `al-test-coverage-validator` (only when tests are opted in, see the Testing policy in `.opencode/skills/sdd/SKILL.md`)
 - `al-test-validator` (only when tests are opted in, see the Testing policy in `.opencode/skills/sdd/SKILL.md`)
 
+Each applicable verifier owns that exact router/READ/DO execution. There is no
+extra generic BCQuality action run.
+
 When tests are not opted in for the feature, the mandatory set is just the first
-two verifiers; the two test verifiers are skipped.
+two verifiers; the runner and two test verifiers are skipped. Run the exact
+applicable verifier set twice: resolve every first-pass finding or persist a
+durable approved waiver with explicit owner and date, then rerun the same set.
+An acknowledged finding is neither resolved nor waived.
 
 After an AL build or compile, the post-build hook reminds the agent to run the
 applicable verifier set.
@@ -225,7 +257,16 @@ applicable verifier set.
 When an integration is touched (an inbound or outbound flow, a Business Event, a
 staging endpoint, a Job Queue sender, or any Azure integration artifact), run
 `al-integration-pattern-reviewer`, `azure-integration-validator`, and
-`al-event-subscriber-auditor` in parallel.
+`al-event-subscriber-auditor` in parallel in both verifier passes.
+
+If a Test fix changes production behavior, rerun the Opus
+`al-implement-feature-reviewer`, resolve its findings, and rerun it to
+`outcome: pass` before Test closes. Record compile/baseline evidence, test runs,
+both verifier passes, semantic reruns, waivers, and the executed manual or
+web-client result in the feature's `validation.md`. Also record the initial
+pre-Test semantic gate reviewer/date, outcome, and implementation revision.
+Record later semantic reruns separately. For opted-in tests, preserve the
+runner's BCQuality outcome and `summary.execution.status` verbatim.
 
 ## Verify in the web client
 
@@ -322,11 +363,11 @@ to its role. The ownership map is:
 | `al-readability-checker` | 2 naming, 3 organization, 4 declaration order, 9 labels, 14 documentation and comments, 15 formatting |
 | `al-code-quality-reviewer` | 5 tables, 6 pages, 7 codeunits, 10 permissions, 11 error handling, 13 SOLID |
 | `al-performance-reviewer` | 12 performance |
-| `al-table-refactorer` | 5 tables, 3.2 regions, 14 documentation and comments |
+| `al-table-refactorer` | 2 naming, 3.2 regions, 4 declaration order, 5 tables, 14 documentation and comments, 15 formatting |
 | `al-event-subscriber-auditor` | 7.3 subscriber codeunits |
 | `al-permission-set-auditor` | 10 permissions |
 | `al-translation-auditor` | 8 enums, 9 labels |
-| `al-test-writer`, `al-userguide-test-writer`, `al-test-validator` | 2 naming, 3.2 regions, 9 labels, 15 formatting, applied to test AL |
+| `al-test-writer`, `al-userguide-test-writer`, `al-test-validator` | 2 naming, 3.2 regions, 3.3 namespace/using order, 4 declaration order, 9 labels, 15 formatting, applied to test AL |
 
 The style guide contains project placeholders (the `GOX`/`GOXOUT` object prefix,
 the `GOXFOU Error` handler, the `ADIGO.ITS.*` namespaces). When a repo uses a

@@ -72,6 +72,14 @@ because they are not `GOX*`.
 8. **Banned codeunit name suffixes: `Mgt`, `Mgt.`, `Management`, `Manager`, `Utils`, `Utilities`, `Misc`, `Common`, `General`, `Functions`, `Library`, `Tools`.** They name custody of a topic instead of a job, so nothing is ever out of scope for them. Name the job (`Create Entry`, `Cancel Import`, `Resolve Project`). `Helper` is the only permitted grouping suffix (§2.1).
 9. **Codeunit size budget:** over 600 lines is a finding, split it; 400 to 600 needs a stated justification. Split by responsibility cluster with a name per cluster, never at an arbitrary line count into `…Part1`/`…Part2`. A wide dispatch `case` and a large block of stateless lookups are the two shapes that most often hide inside a long codeunit (§7.1).
 10. Avoid regular comments (`//`, `/* */`). The code explains itself through its structure and its object, procedure, and variable names; extract a named `local procedure` or a named variable instead of commenting. Required `///` XML documentation on internal and global procedures is exempt and must be left in place; a `local procedure` gets no `///` block at all (§14.1). The only regular-comment exception is a comment that justifies a compiler pragma. A `#pragma warning disable` must carry that justification and be closed with `#pragma warning restore`. Put other rationale in the feature plan or the nearest permitted `///` block. Never leave commented-out code (§14.2).
+11. **Procedure complexity thresholds:** flag cyclomatic complexity above 10,
+    more than 80 lines, nesting at five levels or deeper, or fan-out to more than
+    ten codeunits. The plan must name a testable responsibility seam before
+    implementation when the proposed design is likely to cross a threshold.
+12. **Telemetry must have an assertion seam.** Protected operations must route
+    telemetry through a boundary that AL tests or the platform test telemetry
+    facility can observe and assert. A direct, unobservable logging call does not
+    satisfy the telemetry testability rule.
 
 ## Core checks
 

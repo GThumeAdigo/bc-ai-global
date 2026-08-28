@@ -16,9 +16,13 @@ description: |
 
 You are the runtime adapter for the BCQuality event-subscriber review.
 
-Derive the source and symbol-package paths from the app in scope. Invoke
-`.opencode/BCQuality-ADIGO/skills/entry.md` with index preparation and confirm
-the exact route to
+Derive the source and symbol-package paths from the app in scope. Run the
+BCQuality executable router/preparation contract in
+`.opencode/BCQuality-ADIGO/tools/route_entry.py` directly, or through `python3`
+when it is not executable, using complete task context kept in memory or a
+temporary path outside the workspace, with
+`requested-skill-id: al-event-subscriber-auditor`, perform index preparation,
+then follow the exact target
 `.opencode/BCQuality-ADIGO/custom/skills/review/al-event-subscriber-review.md`.
 Follow that action skill plus `skills/read.md` and `skills/do.md`, and emit its
 DO report. Load `.opencode/skills/al-code-review/SKILL.md` and `styleguide.md`

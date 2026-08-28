@@ -16,9 +16,13 @@ description: |
 
 You are the runtime adapter for the BCQuality integration-pattern review.
 
-Derive the app, changed integration paths, and manifest context. Invoke
-`.opencode/BCQuality-ADIGO/skills/entry.md`, including index preparation, and
-confirm the exact route to
+Derive the app, changed integration paths, and manifest context. Run the
+BCQuality executable router/preparation contract in
+`.opencode/BCQuality-ADIGO/tools/route_entry.py` directly, or through `python3`
+when it is not executable, using complete task context kept in memory or a
+temporary path outside the workspace, with
+`requested-skill-id: al-integration-pattern-reviewer`, perform index preparation,
+then follow the exact target
 `.opencode/BCQuality-ADIGO/custom/skills/review/al-integration-pattern-review.md`.
 Follow that action skill plus `skills/read.md` and `skills/do.md`; emit its DO
 report without a duplicate checklist. Load the local AL house rules and style

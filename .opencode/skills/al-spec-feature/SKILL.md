@@ -24,7 +24,8 @@ emit the BCQuality DO shape.
 Resolve the repository and feature from the invocation. Read `APP_CONTEXT.md`,
 `AGENTS.md`, `specs/brief.md`, `specs/tech-design.md`, `specs/roadmap.md`, and
 `specs/features/<id>/spec.md`. The spec gate does not require `plan.md` or
-`tasks.md`; their presence or absence is outside this review.
+`tasks.md`, and it must not require its own not-yet-written review or approval
+metadata in `approvals.md`.
 
 ## Checks
 
@@ -69,3 +70,9 @@ Return only:
 `outcome` is `fail` when any `block` or `warn` remains. Local governance
 findings do not carry BCQuality `references`; cite the governing scaffold file
 directly in `message` only when useful.
+
+Human approval may be requested only after this same gate has been rerun with
+`outcome: pass`. With `spec.md` unchanged after that run, calculate its full-file
+SHA-256 and write the passing review, reviewer/date, digest, human approver/date,
+and the same approved digest to `approvals.md`. Chat-only approval is not
+durable. This gate emits the pass; it does not require that evidence beforehand.

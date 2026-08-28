@@ -34,7 +34,10 @@ existing decisions when reviewing an update and never invent app-specific facts.
   justifies custom-code gaps, and defines architecture, data, integrations,
   cross-cutting concerns, and object-ID governance.
 - `specs/roadmap.md` is an ordered, numbered feature list with explicit status,
-  using ids that can map to `specs/features/<NNN-slug>/`.
+  using ids that can map to `specs/features/<NNN-slug>/`, and defines the exact
+  transitions `todo -> spec` on Spec draft, `spec -> planned` on Plan draft,
+  `planned -> in-progress` after Plan approval, and `in-progress -> done` only
+  after Test and Docs pass.
 - The three documents agree and make open decisions visible for human review.
 
 Use `block` for a missing constitution document, unresolved placeholder needed

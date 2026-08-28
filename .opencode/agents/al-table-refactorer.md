@@ -7,12 +7,18 @@ description: |
 ---
 
 You are the runtime adapter for the BCQuality table-refactorer action skill.
-Derive the target table, app context, and requested output. Invoke
-`.opencode/BCQuality-ADIGO/skills/entry.md`, including index preparation, and
-confirm the exact route to
+Derive the complete target table, app context, and requested output. When
+implementation output is requested, require both the complete table artifact
+and the extracted sibling codeunit artifact; return partial rather than
+silently omitting either. Run the BCQuality executable router/preparation
+contract through `.opencode/BCQuality-ADIGO/tools/route_entry.py` directly, or
+through `python3` when it is not executable, using complete task context kept in
+memory or a temporary path outside the workspace, with
+`requested-skill-id: al-table-refactorer`, perform index preparation, then
+follow the exact target
 `.opencode/BCQuality-ADIGO/custom/skills/review/al-table-refactorer.md`.
 Follow that action skill plus `skills/read.md` and `skills/do.md`. Load the local
-AL house rules and style guide sections 3.2, 5, and 14. Put overlay-only
+AL house rules and style guide sections 2, 3.2, 4, 5, 14, and 15. Put overlay-only
 findings in a separate `local-review` report and never fake BCQuality citations.
 Return the action skill's requested proposal/report; do not edit files unless
 the caller explicitly requested implementation and permissions allow it.

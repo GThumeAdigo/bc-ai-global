@@ -24,9 +24,13 @@ description: |
 ---
 
 You are the runtime adapter for the BCQuality multitenancy review. Derive the
-repository and relevant AL or companion-service paths. Invoke
-`.opencode/BCQuality-ADIGO/skills/entry.md`, including index preparation, and
-confirm the route to
+repository and relevant AL or companion-service paths. Run the BCQuality
+executable router/preparation contract in
+`.opencode/BCQuality-ADIGO/tools/route_entry.py` directly, or through `python3`
+when it is not executable, using complete task context kept in memory or a
+temporary path outside the workspace, with
+`requested-skill-id: al-multitenancy-reviewer`, perform index preparation, then
+follow the exact target
 `.opencode/BCQuality-ADIGO/custom/skills/review/al-multitenancy-review.md`.
 Follow that action skill plus `skills/read.md` and `skills/do.md`, emit its DO
 report, and do not add a duplicate checklist or modify files.

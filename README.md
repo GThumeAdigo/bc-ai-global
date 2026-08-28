@@ -21,6 +21,12 @@ agent path discovery less reliable.
 1. Keep this template clone at a stable local path. It can live anywhere, but do
    not move or delete it after installation because the app folder links to it.
 
+   Initialize the vendored BCQuality submodule before installing the scaffold:
+
+   ```bash
+   git -C /path/to/bc-ai-global submodule update --init
+   ```
+
    ```text
    /path/to/bc-ai-global/
    /path/to/MultiAppRepo/
@@ -52,9 +58,10 @@ agent path discovery less reliable.
    dependencies, and verification environment; `AGENTS.md` remains a reusable
    shared contract. Fill in the context file before feature work. You can create
    and edit `specs/features/` and `DOCS/` from the app folder without changing
-   this template or any other app. Re-running the script leaves those existing
-   local paths untouched. It requires every supplied folder to contain an
-   `app.json`.
+   this template or any other app. Re-running the script adds newly introduced
+   scaffold files under existing `specs/` and `DOCS/` directories without
+   overwriting local files; an existing `APP_CONTEXT.md` remains untouched. It
+   requires every supplied folder to contain an `app.json`.
 
    The initialized app folder should resemble:
 
@@ -82,11 +89,18 @@ agent path discovery less reliable.
    never committed. It applies every rule from this template's [exclude](exclude)
    file, including the app-local `APP_CONTEXT.md`, `specs/`, and `DOCS/`
    content. This keeps app context, feature specifications, and documentation
-   private to the local app checkout.
+   private to the local app checkout. The installer resolves this file through
+   `git rev-parse --git-path info/exclude`, so normal repositories and linked
+   worktrees update the correct common Git exclusion file before scaffold paths
+   are created. This also means app-local `specs/` and
+   `DOCS/` are Git-excluded and are not protected by commits, stash, checkout,
+   or ordinary Git recovery. Back them up deliberately.
 
-4. Fill in `specs/brief.md`, `specs/tech-design.md`, and `specs/roadmap.md` for
-   the product. Do not start production AL work while these files still contain
-   unresolved placeholders.
+4. Fill in `APP_CONTEXT.md`, including the explicit deployment status,
+   production/persisted-data compatibility yes/no decision, and trusted released
+   baseline ref. Fill in `specs/brief.md`, `specs/tech-design.md`, and
+   `specs/roadmap.md`. A release tag alone does not enable compatibility. Do not
+   start production AL work while these files still contain unresolved placeholders.
 
 5. Start OpenCode from the initialized AL app folder, not from this template
    repository.
@@ -96,16 +110,26 @@ agent path discovery less reliable.
    opencode
    ```
 
-6. Run `/al-spec-init` and resolve its findings. For each feature, continue with
-   `/al-spec-feature`, `/al-plan-feature`, and `/al-implement-feature`, stopping
-   for human review between stages as required by `AGENTS.md`.
+6. Run `/al-spec-init`, resolve its findings, and rerun it to pass. For each
+   feature, use `/sdd spec <id>`, `/sdd plan <id>`, and `/sdd implement <id>`.
+   The `/al-spec-feature`, `/al-plan-feature`, and `/al-implement-feature`
+   commands are review-only gates invoked by those stages; they do not draft or
+   implement the feature. Resolve findings and rerun each gate to pass before
+   the required human approval or Test entry.
 
 7. Keep this template clone as the update source. Symlinked runtime files are
    updated on disk immediately, but OpenCode loads configuration-time files only
    at startup. Quit and restart OpenCode after changes to `opencode.json`,
    agents, commands, skills, or plugins. App-local `specs/` and `DOCS/` do not update
    automatically, so deliberate template updates must be copied into an app only
-   when wanted.
+    when wanted.
+
+Before compilation, install the Microsoft AL Language extension, download the
+Business Central symbols required by `app.json` into the app's `.alpackages`,
+make every declared dependency available in dependency order, and ensure the
+workspace analyzer ruleset and analyzer DLLs referenced by `al-compile` exist.
+In a multi-app workspace, compile shared apps first and copy their fresh `.app`
+packages into each dependent app's `.alpackages`.
 
 ## Hands-on tutorial: build one small feature
 
@@ -115,6 +139,7 @@ your real paths, names, and object range.
 1. Initialize the AL app and start OpenCode from that folder:
 
    ```bash
+   git -C /path/to/bc-ai-global submodule update --init
    /path/to/bc-ai-global/init-linux.sh /path/to/MyBcRepo/MyApp
    cd /path/to/MyBcRepo/MyApp
    opencode
@@ -128,7 +153,7 @@ your real paths, names, and object range.
    /al-spec-init
    ```
 
-   Resolve every `block` and `warn`, then rerun the command.
+    Resolve every `block` and `warn`, then rerun the command to `outcome: pass`.
 
 3. Draft and review the feature spec, including the durable test decision:
 
@@ -141,12 +166,19 @@ your real paths, names, and object range.
    Reason: verify this prototype with the sandbox manual recipe.
    ```
 
-   Check `specs/features/001-customer-reference/spec.md`. Spec approval is a
-   hard stop:
+   Check `specs/features/001-customer-reference/spec.md`. Create `approvals.md`
+   from `specs/templates/feature-approvals.md`. Resolve findings and rerun the
+   Spec gate to pass. Without changing `spec.md`, run `sha256sum spec.md` and
+   record the review outcome, reviewer/date, and digest in `approvals.md`. Spec
+   approval is a hard stop:
 
    ```text
    I approve the feature spec. Continue to Plan.
    ```
+
+   Record the human approver/date and repeat the exact same Spec digest in
+   `approvals.md`. Recompute it before Plan; a mismatch invalidates approval and
+   requires review, hashing, and approval again.
 
 4. Draft and review the technical plan:
 
@@ -155,12 +187,18 @@ your real paths, names, and object range.
    ```
 
    Check `plan.md` and `tasks.md`. Verify that object IDs are in range, standard
-   BC is reused, and the task list matches the no-tests decision. Plan approval
-   is the second hard stop:
+   BC is reused, and the task list matches the no-tests decision. Resolve
+   findings and rerun the Plan gate to pass. Without changing either file, run
+   `sha256sum plan.md tasks.md` and record the review, reviewer/date, and the two
+   separate digests in `approvals.md`. Plan approval is the second hard stop:
 
    ```text
    I approve the plan and tasks. Continue to Implement.
    ```
+
+   Record the human approver/date and repeat both exact digests in
+   `approvals.md`. Recompute all approved digests before implementation. Any
+   later edit invalidates the affected review and approval evidence.
 
 5. Implement the approved tasks and run the pre-Test semantic review:
 
@@ -168,20 +206,33 @@ your real paths, names, and object range.
    /sdd implement 001-customer-reference
    ```
 
-6. Compile and run the applicable verifiers:
+6. Create `specs/features/001-customer-reference/validation.md` from
+   `specs/templates/feature-validation.md`, then compile and run the applicable
+   verifiers:
 
    ```text
    Use the al-compile skill for this app and classify every diagnostic against
    the existing baseline.
    ```
 
-   For this no-tests example, run `al-code-quality-reviewer` and
+   Record the initial pre-Test semantic reviewer/date, outcome, and
+   implementation revision in `validation.md`. For this no-tests example, run `al-code-quality-reviewer` and
    `al-readability-checker` in parallel. Resolve their findings and run both
-   again. For a UI feature, ask for a quick manual recipe or, after publishing
-   to a non-production sandbox, opt into `bc-webclient-runner`.
+   again. For an opted-in test feature, run `al-test-runner` immediately after
+   compile and require every selected test to execute and pass before the test
+   coverage and quality verifiers. The runtime runner may use AL MCP
+   `al_run_tests`. `tests=no` means no runner; `tests=yes` with no runner is a
+   blocking failure or partial result, not a skip. Preserve the runner's
+   BCQuality outcome and `summary.execution.status` verbatim. For a UI feature, choose a quick manual
+   recipe or, after publishing to a non-production sandbox, opt into
+   `bc-webclient-runner`.
 
-7. Record the result, update affected documentation, move the roadmap item to
-   `done`, and review the AL diff before creating the app repository's PR.
+7. Execute the selected manual or web-client verification and record a passing
+   result in `validation.md`. Complete both verifier runs and record post-Test-fix
+   semantic reruns separately from the initial gate
+   after production fixes, update affected documentation, then move the roadmap
+   item to `done` and review the AL diff before creating the app repository's
+   PR. A recipe that was offered but not executed is not a passing Test result.
 
 `APP_CONTEXT.md`, `specs/`, and the scaffold are normally excluded from the app
 repository. Restart OpenCode whenever shared agents, commands, skills, plugins,
@@ -207,13 +258,17 @@ review work.
 Each feature follows this sequence:
 
 1. **Feature spec:** define the problem, scope, user flow, acceptance criteria,
-   and the durable automated-test decision.
-2. **Plan:** define the standard BC functionality to reuse, custom AL objects,
-   object IDs, data model, integrations, risks, and test strategy.
+   and the durable automated-test decision; bind review and human approval to
+   the full-file SHA-256 in `approvals.md`.
+2. **Plan:** validate the approved Spec digest, define the standard BC
+   functionality to reuse, custom AL objects, object IDs, data model,
+   integrations, risks, and test strategy, then bind Plan and tasks approval to
+   separate full-file SHA-256 values.
 3. **Implement:** write AL only after the spec and plan have been reviewed and
    approved.
-4. **Test:** build the app and run the applicable code-quality, readability,
-   integration, upgrade, and optional test verifiers.
+4. **Test:** build the app; run opted-in tests; run the exact applicable
+   verifier set twice; rerun semantic conformance after production fixes; and
+   execute a passing manual or web-client check, all recorded in `validation.md`.
 5. **Document:** update feature documentation and the roadmap.
 6. **Merge:** review closeout and prepare the PR when requested.
 
@@ -237,7 +292,8 @@ and describe the Business Central product or feature to develop. OpenCode loads
 `AGENTS.md`, the local skills, agents, commands, and plugins through
 `opencode.json`.
 
-The main review commands are:
+The main workflow command is `/sdd spec|plan|implement <feature-id>`. The
+following `/al-*` commands are review-only gates:
 
 - `/al-spec-init`: review `specs/brief.md`, `specs/tech-design.md`, and `specs/roadmap.md`.
 - `/al-spec-feature`: review a feature specification against the constitution.

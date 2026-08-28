@@ -50,11 +50,21 @@ copy_app_local_path() {
     local source_path="$SCRIPT_DIR/$local_path"
     local target_path="$app_root/$local_path"
 
-    if [[ -e "$target_path" || -L "$target_path" ]]; then
+    if [[ -L "$target_path" ]]; then
         return
     fi
 
-    cp -R -- "$source_path" "$target_path"
+    if [[ -d "$source_path" ]]; then
+        mkdir -p -- "$target_path"
+        cp -R --no-clobber -- "$source_path"/. "$target_path"/
+        return
+    fi
+
+    if [[ -e "$target_path" ]]; then
+        return
+    fi
+
+    cp -- "$source_path" "$target_path"
 }
 
 extract_exclude_block() {
@@ -112,8 +122,7 @@ resync_exclude_block() {
 }
 
 apply_local_excludes() {
-    local repository_root="$1"
-    local exclude_path="$repository_root/.git/info/exclude"
+    local exclude_path="$1"
 
     mkdir -p -- "$(dirname -- "$exclude_path")"
     touch -- "$exclude_path"
@@ -140,6 +149,7 @@ apply_local_excludes() {
 initialise_repository() {
     local app_argument="$1"
     local app_root
+    local exclude_path
     local repository_root
     local scaffold_path
     local app_local_path
@@ -159,6 +169,14 @@ initialise_repository() {
         return 1
     }
 
+    exclude_path="$(git -C "$app_root" rev-parse --path-format=absolute --git-path info/exclude 2>/dev/null)" || {
+        printf 'Cannot resolve Git exclusion path for: %s\n' "$app_root" >&2
+        return 1
+    }
+    exclude_path="$(realpath -m -- "$exclude_path")"
+
+    apply_local_excludes "$exclude_path"
+
     for scaffold_path in "${SCAFFOLD_PATHS[@]}"; do
         link_scaffold_path "$app_root" "$scaffold_path"
     done
@@ -167,7 +185,6 @@ initialise_repository() {
         copy_app_local_path "$app_root" "$app_local_path"
     done
 
-    apply_local_excludes "$repository_root"
     printf 'Initialized %s (Git repository: %s)\n' "$app_root" "$repository_root"
 }
 

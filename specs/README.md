@@ -17,6 +17,8 @@ specs/
       spec.md       # requirements, scope, acceptance criteria
       plan.md       # technical plan: objects/structure, ID range, data model
       tasks.md      # ordered, checkable implementation tasks
+      approvals.md  # digest-bound Spec and Plan review/approval evidence
+      validation.md # compile, tests, two verifier runs, client result, Test outcome
 ```
 
 ## Workflow (Spec-Driven Development)
@@ -24,12 +26,21 @@ specs/
 At each stage you draft the artifact, with the agent's help, then run the
 matching skill as a review gate before moving on:
 
-1. `/al-spec-init`: reviews `brief.md`, `tech-design.md`, `roadmap.md` (once per project).
-2. `/al-spec-feature`: reviews `features/<id>/spec.md` for the next roadmap item.
-3. `/al-plan-feature`: reviews `plan.md` and `tasks.md` against the approved spec.
-4. `/al-implement-feature`: reviews semantic implementation conformance before Test.
-5. Test: compiles and runs the applicable verifier agents and BCQuality action skills.
-6. Docs and Merge: records validation, updates documentation and roadmap, then prepares the PR when requested.
+1. `/sdd spec`: drafts the spec, then `/al-spec-feature` reviews it. Resolve findings and rerun to pass. Hash the unchanged full `spec.md`; record review and human approval against that same digest in `approvals.md`.
+2. `/sdd plan`: first validates the approved Spec digest, then drafts and reviews the plan and tasks. Resolve findings and rerun to pass. Hash unchanged full `plan.md` and `tasks.md` separately; record review and human approval against those same digests in `approvals.md`.
+3. `/sdd implement`: implements approved work, then `/al-implement-feature` reviews semantic conformance. Resolve findings and rerun to pass before Test.
+4. Test: record compile/baseline evidence in `validation.md`; when opted in, execute tests before coverage/quality validation; run the applicable verifier set twice; rerun semantic conformance after production fixes; and record a passing manual or web-client result.
+5. Docs and Merge: complete validation and documentation, move the roadmap item to done, then prepare the PR when requested.
+
+The `/al-*` commands are review-only gates. Use `/sdd spec|plan|implement` to
+perform workflow stages. Copy `templates/feature-approvals.md` to each feature as
+`approvals.md`, and copy `templates/feature-validation.md` as `validation.md`
+when Test starts. Use `sha256sum spec.md` and `sha256sum plan.md tasks.md` from
+the feature folder. Any edit after hashing invalidates the affected approval.
+
+Roadmap transitions are `todo -> spec` on Spec draft, `spec -> planned` on Plan
+draft, `planned -> in-progress` after Plan approval, and `in-progress -> done`
+after Test and Docs pass.
 
 One feature, one chat session. Always start by reading the constitution.
 

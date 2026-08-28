@@ -42,8 +42,8 @@ External calls, events subscribed/published, APIs. Note idempotency and auth.
 - Permissions: which permission set entries.
 - Telemetry: which operations emit, and the event ids.
 - Schema and compatibility: what changes, what existing consumers must do, and
-  whether `APP_CONTEXT.md` establishes released or production data that requires
-  an upgrade codeunit. Do not infer a migration requirement for unreleased data.
+  the explicit compatibility decision and trusted baseline from `APP_CONTEXT.md`.
+  A release tag alone never enables compatibility requirements.
 - Performance: hot paths to watch (filters, loops, FlowFields on lists).
 
 ## Risks and decisions

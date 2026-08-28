@@ -8,7 +8,7 @@ const BUILD_PATTERNS = [
   /(?:^|[\n;&|])\s*(?:time\s+)?(?:"?\$ALC"?|"?(?:[^"\s]*\/)?alc(?:\.exe)?"?)\s+(?:\\\s*)?\/project:/im,
 ]
 
-function looksLikeBuild(cmd: string): boolean {
+export function looksLikeBuild(cmd: string): boolean {
   return BUILD_PATTERNS.some((re) => re.test(cmd))
 }
 
@@ -41,7 +41,7 @@ function metadataTimedOut(metadata: unknown): boolean {
   return metadataTimedOut(value.structured)
 }
 
-function buildSucceeded(output: ToolOutput): boolean {
+export function buildSucceeded(output: ToolOutput): boolean {
   if (metadataTimedOut(output.metadata)) return false
 
   if (
@@ -86,24 +86,33 @@ export default (async () => {
         "Per repo policy (AGENTS.md), before treating this feature's Test step",
         "complete you MUST:",
         "",
-        "  1. Run the mandatory verifier agents IN PARALLEL:",
-        "     al-code-quality-reviewer, al-readability-checker.",
-        "     Tests are opt-in (.opencode/skills/sdd/SKILL.md): only if tests were",
-        "     opted in for this feature, also run al-test-coverage-validator and",
-        "     al-test-validator. Otherwise skip them and do not treat a missing",
-        "     test as a finding.",
-        "  2. Apply the house rules and the AL style guide:",
+        "  1. If Automated tests=yes, dispatch al-test-runner now, before test",
+        "     coverage or quality validation. Any failed count, runner failure or",
+        "     partial result, or unexecuted required test blocks Test. Fix and rerun",
+        "     the full required selection. If tests=no, skip the runner.",
+        "  2. Run the exact applicable verifier set IN PARALLEL:",
+        "     always al-code-quality-reviewer and al-readability-checker; when",
+        "     tests=yes also al-test-coverage-validator and al-test-validator; when",
+        "     integration is touched also al-integration-pattern-reviewer,",
+        "     azure-integration-validator, and al-event-subscriber-auditor.",
+        "     Resolve findings or record a durable approved waiver with explicit",
+        "     owner and date, then rerun this exact applicable set. Acknowledgement",
+        "     alone is not resolution.",
+        "     Each verifier owns its exact tools/route_entry.py requested-skill-id and",
+        "     routed READ/DO execution; do not run an unspecified or fuzzy action.",
+        "  3. Apply the house rules and the AL style guide:",
         "     .opencode/skills/al-code-review/SKILL.md and",
         "     .opencode/skills/al-code-review/styleguide.md.",
         "     Read them, do not review from memory. House rules outrank BCQuality.",
         "     Emit overlay-only house findings in the separate local reviewer",
         "     shape; do not put scaffold paths in BCQuality DO references.",
-        "  3. Run the BCQuality action-skill flow over the changed AL. Start at",
-        "     .opencode/BCQuality-ADIGO/skills/entry.md, follow READ and DO, and",
-        "     emit the selected action skill's findings report.",
         "",
-        "Do not consider the task done until these have run and their findings are",
-        "resolved or explicitly acknowledged.",
+        "If any Test fix changes production behavior, rerun the Opus semantic",
+        "implementation gate, resolve findings, and rerun it to outcome pass.",
+        "Record the initial semantic gate, compile/baseline evidence, test",
+        "execution, both verifier runs, semantic reruns, waivers, and the executed",
+        "client result in validation.md. Preserve the runner BCQuality outcome and",
+        "summary.execution.status verbatim.",
         "",
       ].join("\n")
 

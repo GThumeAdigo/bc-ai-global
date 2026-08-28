@@ -3,15 +3,24 @@
 # .git/info/exclude behaves like .gitignore but is local to the clone and is
 # not committed.
 
-*/AGENTS.md
-*/APP_CONTEXT.md
-*/CLAUDE.md
-*/opencode.json
-*/specs/
-*/.opencode
+**/AGENTS.md
+/AGENTS.md
+**/APP_CONTEXT.md
+/APP_CONTEXT.md
+**/CLAUDE.md
+/CLAUDE.md
+**/opencode.json
+/opencode.json
+**/specs/
+/specs/
+**/.opencode
+/.opencode
 *.xsd
-*/prompt.md
-*/verification.md
-*/DOCS/*
+**/prompt.md
+/prompt.md
+**/verification.md
+/verification.md
+**/DOCS/*
+/DOCS/*
 *.png
 .serena/

@@ -22,9 +22,13 @@ action skill and must not duplicate mechanical verifier work.
 ## Inputs
 
 Resolve the repository and feature from the invocation. Read `APP_CONTEXT.md`,
-`AGENTS.md`, the approved `spec.md`, `plan.md`, `tasks.md`, and every source file
+`AGENTS.md`, the approved `spec.md`, `plan.md`, `tasks.md`, `approvals.md`, and every source file
 identified by the plan's object inventory and tasks. A diff is useful supporting
 evidence but is not a required hidden input and is not the full review scope.
+Recompute the full-file SHA-256 for `spec.md`, `plan.md`, and `tasks.md`.
+`approvals.md` must show passing Spec and Plan reviews, human approvals, and
+matching review/approval/current digests for all three files. Require roadmap
+status `in-progress`; otherwise implementation or Test entry is blocked.
 
 ## Checks
 
@@ -47,3 +51,8 @@ for a material plan/task divergence that does not yet prove wrong behavior. Use
 `info` sparingly. Return the local governance shape defined by
 `al-spec-feature`, with `gate: "al-implement-feature"`; do not emit BCQuality
 DO references.
+
+`outcome` must be `fail` while any `block` or `warn` remains. Resolve findings
+and rerun this same gate to `outcome: pass` before Test. If Test fixes production
+behavior, rerun this gate again against the resulting implementation before Test
+closes.

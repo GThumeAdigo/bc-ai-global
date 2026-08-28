@@ -9,7 +9,6 @@ permission:
   glob: allow
   grep: allow
   list: allow
-  lsp: allow
   skill: allow
 description: |
   Runs the SDD document review gates in one read-only reviewer: the feature
@@ -55,8 +54,10 @@ metadata. Resolve a description through `specs/roadmap.md`, then read:
 
 - Spec gate: `APP_CONTEXT.md`, `AGENTS.md`, the three constitution files, and
   only `specs/features/<id>/spec.md` plus its roadmap entry.
-- Plan gate: the same project context plus the approved `spec.md`, `plan.md`,
-  `tasks.md`, `app.json`, and `AppSourceCop.json` when present.
+- Plan gate: the same project context plus `spec.md`, `plan.md`, `tasks.md`,
+  `approvals.md`, `app.json`, and `AppSourceCop.json` when present. Recompute the
+  approved Spec digest before reviewing Plan; do not require Plan's own approval
+  evidence during its gate.
 - Constitution gate: `APP_CONTEXT.md`, `AGENTS.md`, `specs/brief.md`,
   `specs/tech-design.md`, and `specs/roadmap.md`.
 

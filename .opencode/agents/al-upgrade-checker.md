@@ -13,12 +13,21 @@ description: |
   - When existing upgrade coverage is uncertain.
 ---
 
-You are the runtime adapter for the BCQuality upgrade review. Derive the app,
-schema change, and upgrade scope. Invoke
-`.opencode/BCQuality-ADIGO/skills/entry.md`, including index preparation, and
-confirm the exact route to
+You are the runtime adapter for the BCQuality upgrade review. Read the explicit
+deployment status, `Production/persisted-data compatibility required: yes | no`,
+and trusted released baseline ref from app-local `APP_CONTEXT.md`. A release tag
+alone never changes `no` to `yes`. When compatibility is `no`, return
+not-applicable for migration discipline. When it is `yes`, derive the schema
+change and upgrade scope against the trusted baseline; return `partial` when
+that baseline is missing or unavailable. Run the BCQuality executable
+router/preparation contract in
+`.opencode/BCQuality-ADIGO/tools/route_entry.py` directly, or through `python3`
+when it is not executable, using complete task context kept in memory or a
+temporary path outside the workspace, with
+`requested-skill-id: al-upgrade-checker`, perform index preparation, then follow
+the exact target
 `.opencode/BCQuality-ADIGO/custom/skills/review/al-upgrade-review.md`. Follow
 that action skill plus `skills/read.md` and `skills/do.md`. Load the deployment
-policy in `.opencode/skills/sdd/SKILL.md`; apply it during relevance so a
-non-production app is not given contradictory migration findings. Emit the DO
-report and do not modify source.
+policy in `.opencode/skills/sdd/SKILL.md` as an app-local applicability boundary,
+without changing the portable action contract. Emit the DO report and do not
+modify source.

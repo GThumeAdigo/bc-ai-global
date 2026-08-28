@@ -6,7 +6,7 @@ version: 1
 title: Spec-Driven Development workflow
 description: The house Spec-Driven Development workflow for AL features, the constitution, the per-feature loop (Spec, Plan, Implement, Test, Docs, Merge), the testing policy (opt-in), and the deployment policy (schema changes free). Use when starting, continuing, or reviewing feature work, when asked to run a feature through the SDD loop, and before writing any production AL for a feature. Do not load for quick fixes that are not feature work.
 inputs: [feature-id, feature-path]
-outputs: [spec, plan, tasks, validation, implementation]
+outputs: [spec, plan, tasks, approvals, validation, implementation]
 bc-version: [all]
 technologies: [al]
 countries: [w1]
@@ -53,10 +53,13 @@ The main session coordinates and delegates substantial specialist work.
   `/al-implement-feature`, which dispatch the reviewer subagents), the
   mandatory verifier set, `al-compile`, and the house rules in
   `al-code-review` all exist for this loop.
-- **Approval gates are hard stops.** After the spec review and after the plan
-  review, the loop waits for the developer's explicit approval. Never dispatch
-  the implementer before the plan is approved, and never draft the next step's
-  artifacts while an earlier gate is still open.
+- **Approval gates are hard stops.** Resolve every finding and rerun the same
+  gate to `outcome: pass` before requesting the developer's Spec or Plan
+  approval. Persist review and approval evidence in the app-local feature
+  `approvals.md`, never inside the files being hashed. Never enter Plan without
+  a matching approved full `spec.md` SHA-256, dispatch the implementer without
+  matching approved full `plan.md` and `tasks.md` SHA-256 values, or enter Test
+  until semantic implementation conformance has passed.
 - **Be precise and efficient in conversation.** One topic per message, short
   questions, short answers, findings with `file:line` references instead of
   prose. Batch clarifying questions into one round trip rather than trickling
@@ -80,17 +83,29 @@ then replan the next feature. Use one chat session per feature, and start it by
 reading the complete constitution. Later steps re-read only the relevant
 sections and approved feature artifacts.
 
-1. **Spec.** Draft `specs/features/<id>/spec.md`: the problem, the users, scope,
+1. **Spec.** Move the roadmap item from `todo` to `spec` when drafting
+   `specs/features/<id>/spec.md`: the problem, the users, scope,
    acceptance criteria, what is out of scope, and the durable automated-test
    decision. Then dispatch `al-sdd-reviewer` with the spec gate (or run
    `/al-spec-feature`, which dispatches the same agent) to review the spec
    against the constitution and confirm the acceptance criteria are testable.
-   Stop for human review. No code yet.
-2. **Plan.** Draft `plan.md` and `tasks.md` next to the spec: the BC objects to
+   Create `approvals.md` from the feature approvals template. Resolve all
+   findings and rerun the gate to pass. Without changing `spec.md`, run
+   `sha256sum spec.md`, record the pass, reviewer/date, and full-file digest in
+   `approvals.md`, then stop for human approval. The approver records name/date
+   and repeats that same digest. No code yet.
+2. **Plan.** After Spec approval, move the roadmap item from `spec` to `planned`
+   when drafting `plan.md` and `tasks.md` next to the spec: the BC objects to
    add or extend, the object ID range, the data model, integration points, and an
    ordered task list. Then dispatch `al-sdd-reviewer` with the plan gate (or
    run `/al-plan-feature`, which dispatches the same agent) to review them
-   against the approved spec. Stop for human review.
+   against the approved spec. The gate first recomputes the approved spec digest.
+   Resolve all findings and rerun the Plan gate to pass. Without changing
+   `plan.md` or `tasks.md`, run `sha256sum plan.md tasks.md`, record the pass,
+   reviewer/date, and separate full-file digests in `approvals.md`, then stop for
+   human approval. The approver records name/date and repeats both digests. Move
+   `planned` to `in-progress` only after Plan approval. Any later edit invalidates
+   the affected evidence and requires the gate, hash, and approval sequence again.
 3. **Implement.** Before writing any AL, read the house rules and style guide in
    `.opencode/skills/al-code-review/` (`SKILL.md` plus `styleguide.md`) and let
    them shape the code as you write it, not just at review. Work the tasks in
@@ -102,16 +117,33 @@ sections and approved feature artifacts.
    implementation semantically against its spec, plan, tasks, and acceptance
    criteria. This is a pre-Test conformance gate only: it does not compile,
    duplicate mechanical verifier checks, inspect test results, or require docs,
-   roadmap, or PR closeout. The `custom-` prefix
+   roadmap, or PR closeout. Resolve all findings and rerun this same gate to
+   `outcome: pass` before entering Test. The `custom-` prefix
    distinguishes the house agents; the prefix is part of the name, so dispatch
    `custom-al-implementer`, not `al-implementer`.
-4. **Test.** Compile the app with analyzers. A successful Bash-detected build
+4. **Test.** Create or update `validation.md` from the feature validation
+   template. Compile the app with analyzers and record the command, result,
+   warning count, and baseline classification. A successful Bash-detected build
    triggers the post-build reminder, but the coordinator remains responsible
-   for running the applicable mandatory verifier agents (see AGENTS.md) and the
-   BCQuality action-skill flow. Resolve every finding, apply fixes, and run the
-   same verifier set again to confirm resolution. Whether automated tests are written
-   is governed by the **Testing policy** below and recorded in the feature spec
-   and plan. When the app can be published to a sandbox, close the step by
+   for the remaining sequence. When automated tests are `yes`, dispatch
+   `al-test-runner` immediately after compile and before test coverage or quality
+   validation. Any failed test count, runner failure or partial outcome, or
+   required test left unexecuted blocks Test regardless of finding severity.
+   Resolve the cause and rerun the tests after every relevant fix until the full
+   required selection passes. Then run the applicable mandatory verifier agents
+   (see AGENTS.md) in parallel, including the integration trio when applicable.
+   Each verifier owns its own execution of
+   `.opencode/BCQuality-ADIGO/tools/route_entry.py` with an exact
+   `requested-skill-id`, followed by its routed action's READ/DO flow. Use the
+   `python3` fallback when the router is not executable. Never add a generic or
+   fuzzy aggregate BCQuality run. Resolve every finding or record a durable,
+   explicitly approved waiver with owner and date, then rerun the exact same
+   applicable verifier set to confirm resolution. A casual acknowledgement is
+   not resolution. If any Test fix changes production behavior, rerun the Opus
+   `al-implement-feature-reviewer` semantic gate, resolve its findings, and rerun
+   it to `outcome: pass` before Test closes. Record both verifier runs and every
+   rerun in `validation.md`. When the app can be published to a sandbox, close
+   the step by
    offering the developer two verification paths and asking which they want:
    - **A quick manual test recipe** for this change: which page to open, which
      steps to click, and what to expect at each, so they can verify by hand in
@@ -121,9 +153,11 @@ sections and approved feature artifacts.
      structured findings. Its thin agent adapter points to the authoritative
      BCQuality action skill; app environment values come from `APP_CONTEXT.md`.
    Do not run the runner unbidden; it is the developer's call per feature.
-5. **Docs.** Record validation results in the feature artifacts, update end-user
-   or technical documentation affected by the change, and set the roadmap item
-   to `done` only after Test passes.
+   Execute the selected manual recipe or web-client run and record a passing
+   result; offering the paths without a result does not close Test.
+5. **Docs.** Complete `validation.md`, update end-user or technical documentation
+   affected by the change, and move the roadmap item from `in-progress` to
+   `done` only after both Test and Docs pass.
 6. **Merge.** Review the final diff and closeout state, then create or update the
    PR when requested. The PR references the feature id and summarizes validation.
    Do not treat the pre-Test implementation review as a merge-readiness gate.
@@ -144,18 +178,24 @@ Chat history alone is not a durable testing decision.
   `al-test-validator`, and `al-test-runner` are not run. The plan states that no
   automated test artifacts or test verifiers apply, and test tasks are removed.
 - If the developer says **yes**: the full test discipline applies. Every
-  acceptance criterion gets a covering test, and the test verifiers run as part
-  of the mandatory set.
+  acceptance criterion gets a covering test. After compile, `al-test-runner`
+  executes every required test before coverage and test-quality validation. A
+  zero-failure result is insufficient if the runner is partial or any required
+  test was not executed. Tests rerun after fixes, and the test verifiers run in
+  both mandatory verifier passes.
 
 This is a house rule and, per "When sources conflict, house rules win," it
 overrides any "test per acceptance criterion" or "missing test is a
 blocker/major" wording elsewhere in the workflow skills or templates.
 
-## Deployment policy (nothing is in production yet)
+## Deployment and compatibility policy
 
-Unless the local `APP_CONTEXT.md` says an app is installed in a production tenant,
-**schema changes are free**. Treat a breaking schema change as a normal edit, not
-as an event that needs a migration path.
+The explicit `Production/persisted-data compatibility required: yes | no` field
+in local `APP_CONTEXT.md` is the authority. Deployment status and release tags
+are evidence, not overrides. A tag alone never changes `no` to `yes`.
+
+When compatibility is `no`, **schema changes are free**. Treat a breaking schema
+change as a normal edit, not as an event that needs a migration path.
 
 - Remove a field, table, enum value, or procedure outright when it is no longer
   needed. Do **not** mark it `ObsoleteState = Pending` first, and do not carry
@@ -170,10 +210,11 @@ as an event that needs a migration path.
   a consumer must do, and why it was taken. The reasoning is the durable part,
   the migration code is not.
 
-This is a house rule and it overrides any obsolete-discipline or
-upgrade-safety wording in the agents, skills, or BCQuality `upgrade` domain.
-Revisit it the moment the first app ships to a production tenant, because every
-bullet above inverts at that point.
+When compatibility is `yes`, `APP_CONTEXT.md` must provide a trusted released
+baseline ref. Plan and specialist compatibility adapters compare against that
+baseline. If it is missing or unavailable, return a partial compatibility result
+instead of guessing. This is an app-local house boundary; it does not modify the
+portable BCQuality action contract.
 
 ## Bootstrapping
 

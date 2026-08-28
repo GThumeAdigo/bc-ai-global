@@ -9,7 +9,13 @@ permission:
   glob: allow
   grep: allow
   list: allow
-  lsp: allow
+  serena_get_symbols_overview: allow
+  serena_find_symbol: allow
+  serena_find_referencing_symbols: allow
+  serena_search_for_pattern: allow
+  serena_get_diagnostics_for_file: allow
+  serena_find_declaration: allow
+  serena_find_implementations: allow
   skill: allow
 description: |
   Reviews a Business Central feature implementation against its approved spec,
@@ -40,7 +46,8 @@ or description. Do not assume the dispatcher supplied hidden paths or a diff.
 Resolve a description through `specs/roadmap.md`, then read:
 
 - `APP_CONTEXT.md`, `AGENTS.md`, and `specs/features/<id>/spec.md`, `plan.md`,
-  and `tasks.md`.
+  `tasks.md`, and `approvals.md`. Recompute and validate all three approved
+  full-file SHA-256 values before reviewing implementation.
 - The implemented source files derived from the plan's object inventory and
   the task list. Use an available diff only as supporting evidence.
 

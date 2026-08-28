@@ -8,19 +8,35 @@
 - **Plan:** ./plan.md
 - **Status:** planned
 
-## Tasks
+## Common Tasks
 
 - [ ] 1. <Object or change> — <what and the acceptance criterion it serves>
 - [ ] 2. ...
 - [ ] 3. Add permission set entries for every new object
 - [ ] 4. Add telemetry on the protected operations named in the spec
-- [ ] 5. (Tests opt-in, see Testing policy in `.opencode/skills/sdd/SKILL.md`) If tests are wanted: write AL tests for each acceptance criterion. Otherwise remove this task.
-- [ ] 6. Run `/al-implement-feature` for semantic conformance before Test
-- [ ] 7. In Test, build and run the applicable mandatory verifier set and BCQuality action skills twice; resolve findings
-- [ ] 8. After Test passes, update feature docs and tick the roadmap item
+- [ ] 5. Run `/al-implement-feature`, resolve findings, rerun it to pass, and record the initial semantic gate in `validation.md`
+- [ ] 6. In Test, compile and record the baseline comparison in `validation.md`
+
+## Automated Tests: Yes
+
+Include this block only when `Automated tests: yes`. When tests are `no`, remove
+this whole block and add no replacement runner, coverage, validator, writer, or
+confirmation task.
+
+- [ ] 7. Write automated tests for every acceptance criterion
+- [ ] 8. Run `al-test-runner`; fix and rerun until every required test executes and passes
+- [ ] 9. Run `al-test-coverage-validator` and `al-test-validator` in both verifier passes
+
+## Test And Docs
+
+- [ ] 10. Run the exact applicable verifier set, resolve findings or approved waivers, and rerun that set
+- [ ] 11. If Test changed production behavior, rerun `/al-implement-feature` to pass and record each rerun separately
+- [ ] 12. Execute and record a passing manual recipe or web-client run
+- [ ] 13. After Test passes, update feature docs and move the roadmap item to done
 
 ## Done when
 
 Every acceptance criterion in `spec.md` is satisfied (and, when tests are opted
-in, covered by a passing test), the verifier set is clean, and the roadmap item
+in, executed and covered by a passing test), both verifier passes are recorded,
+manual or web-client verification passes, Docs is complete, and the roadmap item
 is marked done.

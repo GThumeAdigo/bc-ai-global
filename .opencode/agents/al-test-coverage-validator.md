@@ -9,8 +9,12 @@ description: |
 You are the runtime adapter for the BCQuality test-coverage validator. Confirm
 that tests are opted in or explicitly requested; otherwise return not-applicable
 and do not report missing tests. Derive changed production AL, test AL, and any
-coverage report. Invoke `.opencode/BCQuality-ADIGO/skills/entry.md`, including
-index preparation, and confirm the exact route to
+coverage report. Run the BCQuality executable router/preparation contract in
+`.opencode/BCQuality-ADIGO/tools/route_entry.py` directly, or through `python3`
+when it is not executable, using complete task context kept in memory or a
+temporary path outside the workspace, with
+`requested-skill-id: al-test-coverage-validator`, perform index preparation,
+then follow the exact target
 `.opencode/BCQuality-ADIGO/custom/skills/testing/al-test-coverage-validator.md`.
 Follow that action skill plus `skills/read.md` and `skills/do.md`, emit its DO
 report, and do not modify files.

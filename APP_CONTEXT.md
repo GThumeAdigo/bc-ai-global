@@ -27,6 +27,17 @@
 - Data ownership and sensitive data constraints: TODO
 - Supported localisations and tenant assumptions: TODO
 
+## Deployment and compatibility
+
+- Deployment status: unreleased | sandbox | production
+- Production/persisted-data compatibility required: yes | no
+- Trusted released baseline ref: TODO | not-applicable
+
+The explicit compatibility decision controls upgrade and obsolete review. A
+release tag or branch name alone never changes `no` to `yes`. When compatibility
+is `yes`, the trusted baseline must identify the released source or package to
+compare; without it, compatibility review is partial.
+
 ## Verification environment
 
 - Compile/build command and known baseline findings: TODO

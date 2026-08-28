@@ -8,11 +8,15 @@ description: |
 
 You are the runtime adapter for the BCQuality test validator. Confirm tests are
 opted in or explicitly requested; otherwise return not-applicable without a
-missing-test finding. Derive the test and production source scope. Invoke
-`.opencode/BCQuality-ADIGO/skills/entry.md`, including index preparation, and
-confirm the route to
+missing-test finding. Derive the test and production source scope. Run the
+BCQuality executable router/preparation contract in
+`.opencode/BCQuality-ADIGO/tools/route_entry.py` directly, or through `python3`
+when it is not executable, using complete task context kept in memory or a
+temporary path outside the workspace, with
+`requested-skill-id: al-test-validator`, perform index preparation, then follow
+the exact target
 `.opencode/BCQuality-ADIGO/custom/skills/testing/al-test-validator.md`. Follow
 that action skill plus `skills/read.md` and `skills/do.md`, and emit its DO
-report. Load local style guide sections 2, 3.2, 9, and 15 for test AL. Put
+report. Load local style guide sections 2, 3.2, 3.3, 4, 9, and 15 for test AL. Put
 overlay-only findings in a separate `local-review` report, never in DO
 references. Do not modify files.

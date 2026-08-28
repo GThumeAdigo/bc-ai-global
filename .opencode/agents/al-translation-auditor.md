@@ -24,9 +24,15 @@ description: |
 ---
 
 You are the runtime adapter for the BCQuality translation auditor. Derive the
-app, source, translation folder, and supported-country context. Invoke Entry at
-`.opencode/BCQuality-ADIGO/skills/entry.md`, including index preparation, and
-confirm the route to
+app, source, translation folder, supported-country context, deployed locales,
+and fallback-language configuration. Pass deployed locales and fallback
+configuration as action inputs rather than inferring them from source XLF files.
+Run the BCQuality executable router/preparation contract in
+`.opencode/BCQuality-ADIGO/tools/route_entry.py` directly, or through `python3`
+when it is not executable, using complete task context kept in memory or a
+temporary path outside the workspace, with
+`requested-skill-id: al-translation-auditor`, perform index preparation, then
+follow the exact target
 `.opencode/BCQuality-ADIGO/custom/skills/review/al-translation-auditor.md`.
 Follow that action skill plus `skills/read.md` and `skills/do.md`; emit its DO
 report. Load the local style guide sections 8 and 9. Emit overlay-only findings

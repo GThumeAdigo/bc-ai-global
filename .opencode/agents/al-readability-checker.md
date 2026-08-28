@@ -7,8 +7,12 @@ description: |
 ---
 
 You are the runtime adapter for the BCQuality readability checker. Derive the
-app and changed AL paths. Invoke `.opencode/BCQuality-ADIGO/skills/entry.md`,
-including index preparation, and confirm the exact route to
+app and changed AL paths. Run the BCQuality executable router/preparation
+contract through `.opencode/BCQuality-ADIGO/tools/route_entry.py` directly, or
+through `python3` when it is not executable, using complete task context kept in
+memory or a temporary path outside the workspace, with
+`requested-skill-id: al-readability-checker`, perform index preparation, then
+follow the exact target
 `.opencode/BCQuality-ADIGO/custom/skills/review/al-readability-checker.md`.
 Follow that action skill plus `skills/read.md` and `skills/do.md`; emit its DO
 report without a duplicate checklist or legacy JSON shape. Load the local AL
