@@ -27,7 +27,9 @@ matching skill as a review gate before moving on:
 1. `/al-spec-init`: reviews `brief.md`, `tech-design.md`, `roadmap.md` (once per project).
 2. `/al-spec-feature`: reviews `features/<id>/spec.md` for the next roadmap item.
 3. `/al-plan-feature`: reviews `plan.md` and `tasks.md` against the approved spec.
-4. `/al-implement-feature`: reviews the implementation, then the verifier agents and a BCQuality review run.
+4. `/al-implement-feature`: reviews semantic implementation conformance before Test.
+5. Test: compiles and runs the applicable verifier agents and BCQuality action skills.
+6. Docs and Merge: records validation, updates documentation and roadmap, then prepares the PR when requested.
 
 One feature, one chat session. Always start by reading the constitution.
 

@@ -109,8 +109,8 @@ Rewrite each hit to state the fact without the citation:
 | `the ID window declared in specs/tech-design.md` | `the typed-table ID window` |
 | `validation.md records their shared md5` | `compare their md5` |
 
-**False positives to leave alone.** `feature` is an ordinary domain word: the
-Construction app's "the specified feature of the project line" is not a spec
+**False positives to leave alone.** `feature` is an ordinary domain word:
+"the specified feature of the project line" is not necessarily a spec
 reference. `AC0017`, `AC0032` and friends are AppSourceCop rule ids inside
 pragmas, not acceptance criteria. Read each hit before editing it.
 
@@ -149,10 +149,8 @@ git stash pop
 ```
 
 3. Compare the two diagnostic sets. Report which findings are yours and which
-   were already there. This repo has known baseline noise: `al_build` on the
-   GAEB app reports `CompilationFailed` with zero diagnostics, LinterCop
-   `LC0091` fires on fully translated fields, and `PC0037`/`LC0052` are
-   pre-existing. Do not chase them.
+   were already there. Read app-specific known baseline findings from
+   `APP_CONTEXT.md`; this shared skill carries no consumer-app warning list.
 
 `al-readability-checker` owns style guide section 14, documentation and
 comments. Run it on the touched files when the pass was large or the developer

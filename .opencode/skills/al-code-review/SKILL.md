@@ -1,12 +1,12 @@
 ---
 name: al-code-review
-kind: action-skill
+kind: governance-skill
 id: al-code-review
 version: 1
 title: AL code review (house rules)
 description: Review AL code for Business Central extensions against project and Microsoft conventions, including the AL performance checklist and Copilot PromptDialog rules.
 inputs: [pr-diff, file-path]
-outputs: [findings-report]
+outputs: [local-review]
 bc-version: [all]
 technologies: [al]
 countries: [w1]
@@ -46,10 +46,13 @@ Precedence, highest first:
 4. `alguidelines.dev` and Microsoft guidance
 
 Where a check below restates a style guide rule, the style guide's wording is
-the one that binds, and the finding cites the style guide section.
+the one that binds, and the local finding names the style guide section.
 
-Cite style guide findings as `rule: "house:styleguide-<section>-<slug>"` with
-`references: [{ "path": ".opencode/skills/al-code-review/styleguide.md", "section": "<section>" }]`.
+Emit style-guide and house-rule findings in a separate local reviewer report
+with `severity: block | warn | info`, a
+`house:styleguide-<section>-<slug>` rule, message, and location. Do not put
+scaffold paths in BCQuality DO `references`; this local skill does not emit the
+BCQuality DO shape.
 
 The style guide uses this project's identifiers as examples (the `GOX`/`GOXOUT`
 object prefix, the `GOXFOU Error` handler, the `ADIGO.ITS.*` namespace root).
@@ -68,7 +71,7 @@ because they are not `GOX*`.
 7. **A helper codeunit must carry the `Helper` name suffix, and only a helper may.** A helper groups small, related helping procedures for one process or topic where each alone is too small for its own codeunit; none of them orchestrates the others. A multi-public codeunit without the suffix is a finding, and so is a `… Helper` that is really a state machine, a lifecycle, or a bag of leftovers from several processes (§7.2).
 8. **Banned codeunit name suffixes: `Mgt`, `Mgt.`, `Management`, `Manager`, `Utils`, `Utilities`, `Misc`, `Common`, `General`, `Functions`, `Library`, `Tools`.** They name custody of a topic instead of a job, so nothing is ever out of scope for them. Name the job (`Create Entry`, `Cancel Import`, `Resolve Project`). `Helper` is the only permitted grouping suffix (§2.1).
 9. **Codeunit size budget:** over 600 lines is a finding, split it; 400 to 600 needs a stated justification. Split by responsibility cluster with a name per cluster, never at an arbitrary line count into `…Part1`/`…Part2`. A wide dispatch `case` and a large block of stateless lookups are the two shapes that most often hide inside a long codeunit (§7.1).
-10. Avoid regular comments (`//`, `/* */`). The code explains itself through its structure and its object, procedure, and variable names; extract a named `local procedure` or a named variable instead of commenting. Required `///` XML documentation on internal and global procedures is exempt and must be left in place; a `local procedure` gets no `///` block at all (§14.1). Narrow exceptions: a genuine *why* (platform workaround, business or legal constraint, deliberate deviation) and compiler pragmas. A `#pragma warning disable` must itself carry a comment justifying the suppression and be closed with `#pragma warning restore`. Never leave commented-out code (§14.2).
+10. Avoid regular comments (`//`, `/* */`). The code explains itself through its structure and its object, procedure, and variable names; extract a named `local procedure` or a named variable instead of commenting. Required `///` XML documentation on internal and global procedures is exempt and must be left in place; a `local procedure` gets no `///` block at all (§14.1). The only regular-comment exception is a comment that justifies a compiler pragma. A `#pragma warning disable` must carry that justification and be closed with `#pragma warning restore`. Put other rationale in the feature plan or the nearest permitted `///` block. Never leave commented-out code (§14.2).
 
 ## Core checks
 

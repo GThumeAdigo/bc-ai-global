@@ -62,7 +62,7 @@ and report per app. Never pass the repo root as the project folder: it has no
 Run from the app folder (the one containing `app.json`):
 
 ```sh
-APP=<app folder from find, e.g. ADIGO.BAU.Interfaces.GAEB>
+APP=<app folder returned by discovery>
 OUT=$(mktemp -d /tmp/alcompile.XXXXXX)
 
 time "$ALC" \
@@ -82,7 +82,9 @@ time "$ALC" \
   /out:"$OUT/$APP.app" \
   > "$OUT/compile.log" 2>&1
 
-echo "exit=$?"
+COMPILE_EXIT=$?
+printf 'exit=%s\n' "$COMPILE_EXIT"
+exit "$COMPILE_EXIT"
 ```
 
 Notes on the flags:
@@ -113,12 +115,10 @@ grep -E "error" "$OUT/compile.log"
 - Diagnostic lines are `path(line,col): <severity> <RULE>: message`. Paths in
   the log are relative to the app folder; line numbers are **1-based** (Serena
   is 0-based, translate before jumping to a symbol).
-- Classify findings before reporting: which are new, which are baseline. The
-  known baseline for this house (LC0091 false positives, pre-existing PC0037
-  and LC0052) is documented in `AGENTS.md` under "Establish the baseline".
-  Suppressed with justification and never to be "fixed": `AS0051`, `AS0052`,
-  `AS0081`, `AS0084`, `AS0092`, `PTE0012`, `AL1025`, `PC0037`, `DC0007`,
-  `DC0009`.
+- Classify findings before reporting: which are new and which are baseline.
+  Read known app-specific warnings and justified suppressions from
+  `APP_CONTEXT.md`, the app's ruleset, and analyzer configuration. This shared
+  skill does not define a consumer-app baseline or suppression list.
 
 ## Baseline comparison recipe
 

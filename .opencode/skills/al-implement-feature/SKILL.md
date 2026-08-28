@@ -1,25 +1,49 @@
 ---
 name: al-implement-feature
-kind: action-skill
-id: implement-feature
+kind: governance-skill
+id: al-implement-feature
 version: 1
 title: Feature Implementation Review
-description: Reviews a Business Central feature implementation against its approved spec, plan, and tasks, the house rules, and acceptance-criteria coverage, and emits a findings report.
-inputs: [pr-diff, repository]
-outputs: [findings-report]
+description: Reviews a Business Central feature implementation for semantic conformance with its approved spec, plan, tasks, and acceptance criteria before testing.
+inputs: [repository, feature-id, implementation]
+outputs: [governance-findings]
 bc-version: [all]
 technologies: [al]
 countries: [w1]
 application-area: [all]
 ---
 
-# al-implement-feature
+# Feature Implementation Conformance Review
 
-The authoritative content for this skill is maintained in BCQuality, the
-single source of truth, and vendored into this repo. Read and follow:
+This scaffold-local semantic gate runs after implementation and before Test.
+It compares approved intent with the implemented source. It is not a BCQuality
+action skill and must not duplicate mechanical verifier work.
 
-`.opencode/BCQuality-ADIGO/custom/skills/workflow/al-implement-feature.md`
+## Inputs
 
-Do not edit the guidance inline here. Update the skill upstream in
-EquerraNZ/community-BCQuality, then re-vendor. This pointer exists only so the
-skill stays discoverable and invocable in this repo.
+Resolve the repository and feature from the invocation. Read `APP_CONTEXT.md`,
+`AGENTS.md`, the approved `spec.md`, `plan.md`, `tasks.md`, and every source file
+identified by the plan's object inventory and tasks. A diff is useful supporting
+evidence but is not a required hidden input and is not the full review scope.
+
+## Checks
+
+- Every implemented behavior satisfies the acceptance criteria and preserves
+  the approved scope, business rules, user flow, and explicit non-goals.
+- The implementation matches the planned object responsibilities, data model,
+  integration contracts, state transitions, permissions intent, telemetry
+  intent, and accepted trade-offs.
+- Every implementation task is represented in source, and no material
+  unplanned behavior or object was introduced without an approved amendment.
+- When automated tests are opted in, the planned test artifacts exist. Their
+  execution and quality are checked in Test, not here.
+
+Do not compile, run analyzers, invoke BCQuality review agents, assess test
+quality or coverage, require verifier results, inspect documentation/roadmap
+closeout, or inspect a PR. Those occur after this gate in Test, Docs, and Merge.
+
+Use `block` for behavior that contradicts or omits approved intent. Use `warn`
+for a material plan/task divergence that does not yet prove wrong behavior. Use
+`info` sparingly. Return the local governance shape defined by
+`al-spec-feature`, with `gate: "al-implement-feature"`; do not emit BCQuality
+DO references.

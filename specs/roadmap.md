@@ -1,7 +1,7 @@
 # Roadmap
 
 > Constitution document. The ordered feature list with status. `/al-spec-feature`
-> picks the next feature; `/al-implement-feature` ticks it off when merged.
+> picks the next feature. The Docs step moves it to `done` after Test passes.
 >
 > Status legend: `todo` | `spec` (spec written) | `planned` (plan + tasks ready)
 > | `in-progress` | `done` | `parked`.

@@ -1,25 +1,16 @@
 ---
 name: al-go-environment-onboarding
-kind: action-skill
-id: al-go-environment-onboarding
-version: 1
-title: AL-Go Environment Onboarding Review
 description: Reviews how a Business Central environment is wired into an AL-Go repo for deployment and emits a findings report.
-inputs: [repository, file-path]
-outputs: [findings-report]
-bc-version: [all]
-technologies: [al, powershell]
-countries: [w1]
-application-area: [all]
 ---
 
 # al-go-environment-onboarding
 
-The authoritative content for this skill is maintained in BCQuality, the
-single source of truth, and vendored into this repo. Read and follow:
+The authoritative content for this reusable action skill is maintained in the
+`GThumeAdigo/BCQuality-ADIGO` custom layer and vendored here. Microsoft-authored
+corpus content has `microsoft/BCQuality` as its canonical upstream. Read and follow:
 
 `.opencode/BCQuality-ADIGO/custom/skills/pipelines/al-go-environment-onboarding.md`
 
-Do not edit the guidance inline here. Update the skill upstream in
-EquerraNZ/community-BCQuality, then re-vendor. This pointer exists only so the
-skill stays discoverable and invocable in this repo.
+Do not edit guidance inline here. Update and merge the custom action skill in
+`GThumeAdigo/BCQuality-ADIGO`, then bump this scaffold's submodule commit. This
+pointer only makes the skill discoverable.

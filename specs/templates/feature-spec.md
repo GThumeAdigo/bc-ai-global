@@ -1,6 +1,6 @@
 # Feature Spec: <feature name>
 
-> Produced by `/al-spec-feature`. The what and why for one feature. No AL, no object
+> Reviewed by `/al-spec-feature`. The what and why for one feature. No AL, no object
 > names yet (those belong in `plan.md`). Stop for human review before planning.
 
 - **Feature id:** <NNN-slug>

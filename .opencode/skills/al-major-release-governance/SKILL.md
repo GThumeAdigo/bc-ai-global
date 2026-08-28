@@ -1,25 +1,16 @@
 ---
 name: al-major-release-governance
-kind: action-skill
-id: al-major-release-governance
-version: 1
-title: Major version upgrade readiness review
 description: Reviews Business Central major-version upgrade governance, NextMajor branching, compatibility testing, and app.json version bumps, and emits a findings report.
-inputs: [pr-diff, repository]
-outputs: [findings-report]
-bc-version: [all]
-technologies: [al]
-countries: [w1]
-application-area: [all]
 ---
 
 # al-major-release-governance
 
-The authoritative content for this skill is maintained in BCQuality, the
-single source of truth, and vendored into this repo. Read and follow:
+The authoritative content for this reusable action skill is maintained in the
+`GThumeAdigo/BCQuality-ADIGO` custom layer and vendored here. Microsoft-authored
+corpus content has `microsoft/BCQuality` as its canonical upstream. Read and follow:
 
 `.opencode/BCQuality-ADIGO/custom/skills/appsource/al-major-release-governance.md`
 
-Do not edit the guidance inline here. Update the skill upstream in
-EquerraNZ/community-BCQuality, then re-vendor. This pointer exists only so the
-skill stays discoverable and invocable in this repo.
+Do not edit guidance inline here. Update and merge the custom action skill in
+`GThumeAdigo/BCQuality-ADIGO`, then bump this scaffold's submodule commit. This
+pointer only makes the skill discoverable.

@@ -1,6 +1,6 @@
 # Feature Plan: <feature name>
 
-> Produced by `/al-plan-feature` from an approved `spec.md`. The how. Inherits from
+> Reviewed by `/al-plan-feature` after drafting from an approved `spec.md`. The how. Inherits from
 > `specs/tech-design.md` and the house rules and style guide in
 > `.opencode/skills/al-code-review/` (`SKILL.md` and `styleguide.md`).
 > Stop for human review before implementing.
@@ -41,7 +41,9 @@ External calls, events subscribed/published, APIs. Note idempotency and auth.
 
 - Permissions: which permission set entries.
 - Telemetry: which operations emit, and the event ids.
-- Upgrade/migration: any schema change that needs an upgrade codeunit step.
+- Schema and compatibility: what changes, what existing consumers must do, and
+  whether `APP_CONTEXT.md` establishes released or production data that requires
+  an upgrade codeunit. Do not infer a migration requirement for unreleased data.
 - Performance: hot paths to watch (filters, loops, FlowFields on lists).
 
 ## Risks and decisions

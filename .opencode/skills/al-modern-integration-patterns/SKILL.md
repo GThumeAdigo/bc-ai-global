@@ -1,25 +1,16 @@
 ---
 name: al-modern-integration-patterns
-kind: action-skill
-id: modern-integration-patterns
-version: 1
-title: Modern BC Integration Patterns Review
 description: Reviews Business Central integration code on the inbound, outbound, long-running, and manual arrows against the modern-integration house rules, and emits a findings report.
-inputs: [pr-diff, file-path]
-outputs: [findings-report]
-bc-version: [all]
-technologies: [al]
-countries: [w1]
-application-area: [all]
 ---
 
 # al-modern-integration-patterns
 
-The authoritative content for this skill is maintained in BCQuality, the
-single source of truth, and vendored into this repo. Read and follow:
+The authoritative content for this reusable action skill is maintained in the
+`GThumeAdigo/BCQuality-ADIGO` custom layer and vendored here. Microsoft-authored
+corpus content has `microsoft/BCQuality` as its canonical upstream. Read and follow:
 
 `.opencode/BCQuality-ADIGO/custom/skills/integration/al-modern-integration-patterns.md`
 
-Do not edit the guidance inline here. Update the skill upstream in
-EquerraNZ/community-BCQuality, then re-vendor. This pointer exists only so the
-skill stays discoverable and invocable in this repo.
+Do not edit guidance inline here. Update and merge the custom action skill in
+`GThumeAdigo/BCQuality-ADIGO`, then bump this scaffold's submodule commit. This
+pointer only makes the skill discoverable.

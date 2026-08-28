@@ -1,6 +1,6 @@
 # Feature Tasks: <feature name>
 
-> Produced by `/al-plan-feature` alongside `plan.md`. An ordered, checkable list the
+> Reviewed by `/al-plan-feature` alongside `plan.md`. An ordered, checkable list the
 > Implement step works top to bottom. Keep tasks small and verifiable. Tick each
 > as it lands.
 
@@ -14,9 +14,10 @@
 - [ ] 2. ...
 - [ ] 3. Add permission set entries for every new object
 - [ ] 4. Add telemetry on the protected operations named in the spec
-- [ ] 5. (Tests opt-in, see Testing policy in AGENTS.md) If tests are wanted: write AL tests for each acceptance criterion. Otherwise remove this task.
-- [ ] 6. Build, then run the mandatory verifier set and a BCQuality review; resolve findings
-- [ ] 7. Update feature docs and tick the roadmap item
+- [ ] 5. (Tests opt-in, see Testing policy in `.opencode/skills/sdd/SKILL.md`) If tests are wanted: write AL tests for each acceptance criterion. Otherwise remove this task.
+- [ ] 6. Run `/al-implement-feature` for semantic conformance before Test
+- [ ] 7. In Test, build and run the applicable mandatory verifier set and BCQuality action skills twice; resolve findings
+- [ ] 8. After Test passes, update feature docs and tick the roadmap item
 
 ## Done when
 

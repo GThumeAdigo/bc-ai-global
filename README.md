@@ -100,8 +100,10 @@ agent path discovery less reliable.
    `/al-spec-feature`, `/al-plan-feature`, and `/al-implement-feature`, stopping
    for human review between stages as required by `AGENTS.md`.
 
-7. Keep this template clone as the update source. Changes to symlinked runtime
-   files take effect immediately. App-local `specs/` and `DOCS/` do not update
+7. Keep this template clone as the update source. Symlinked runtime files are
+   updated on disk immediately, but OpenCode loads configuration-time files only
+   at startup. Quit and restart OpenCode after changes to `opencode.json`,
+   agents, commands, skills, or plugins. App-local `specs/` and `DOCS/` do not update
    automatically, so deliberate template updates must be copied into an app only
    when wanted.
 
@@ -130,9 +132,10 @@ Each feature follows this sequence:
    object IDs, data model, integrations, risks, and test strategy.
 3. **Implement:** write AL only after the spec and plan have been reviewed and
    approved.
-4. **Verify:** build the app and run the applicable code-quality, readability,
+4. **Test:** build the app and run the applicable code-quality, readability,
    integration, upgrade, and optional test verifiers.
 5. **Document:** update feature documentation and the roadmap.
+6. **Merge:** review closeout and prepare the PR when requested.
 
 The complete workflow and agent contract are in [AGENTS.md](AGENTS.md).
 
@@ -183,9 +186,18 @@ rules themselves still apply.
 ## BCQuality
 
 BCQuality supplies machine-readable Business Central guidance that agents cite in
-their findings. Runtime skills under `.opencode/skills/` point to the authoritative
-vendored content under `.opencode/BCQuality-ADIGO/`. ADIGO-specific house rules remain in
+their findings. Reusable runtime review pointers under `.opencode/skills/` point
+to authoritative vendored content under `.opencode/BCQuality-ADIGO/`. Full local
+governance skills remain in the scaffold. ADIGO-specific house rules remain in
 `.opencode/skills/al-code-review/` and take precedence when rules conflict.
+
+The canonical upstream corpus is
+[`microsoft/BCQuality`](https://github.com/microsoft/BCQuality). This scaffold
+pins the [`GThumeAdigo/BCQuality-ADIGO`](https://github.com/GThumeAdigo/BCQuality-ADIGO)
+fork as a submodule because its `custom/` layer is authoritative for ADIGO's
+reusable action skills. Update corpus or custom guidance in that fork, merge it
+there, then bump the submodule commit in this scaffold. Never edit the vendored
+submodule in place as part of a scaffold change.
 
 ## Intended use
 

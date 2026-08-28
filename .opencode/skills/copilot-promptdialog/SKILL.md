@@ -1,25 +1,16 @@
 ---
 name: copilot-promptdialog
-kind: action-skill
-id: al-copilot-promptdialog
-version: 1
-title: Copilot PromptDialog Page Review
 description: Reviews Business Central Copilot UX implemented with the PromptDialog page type and emits a findings report.
-inputs: [pr-diff, file-path]
-outputs: [findings-report]
-bc-version: [all]
-technologies: [al]
-countries: [w1]
-application-area: [all]
 ---
 
 # copilot-promptdialog
 
-The authoritative content for this skill is maintained in BCQuality, the
-single source of truth, and vendored into this repo. Read and follow:
+The authoritative content for this reusable action skill is maintained in the
+`GThumeAdigo/BCQuality-ADIGO` custom layer and vendored here. Microsoft-authored
+corpus content has `microsoft/BCQuality` as its canonical upstream. Read and follow:
 
 `.opencode/BCQuality-ADIGO/custom/skills/copilot/al-copilot-promptdialog.md`
 
-Do not edit the guidance inline here. Update the skill upstream in
-EquerraNZ/community-BCQuality, then re-vendor. This pointer exists only so the
-skill stays discoverable and invocable in this repo.
+Do not edit guidance inline here. Update and merge the custom action skill in
+`GThumeAdigo/BCQuality-ADIGO`, then bump this scaffold's submodule commit. This
+pointer only makes the skill discoverable.

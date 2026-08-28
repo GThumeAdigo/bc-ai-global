@@ -30,24 +30,24 @@ The workflow must stay in context for the whole feature loop:
 - Load this skill at the start of feature work and after every auto-compaction.
   Re-loading after compaction is mandatory, not optional: a summary of the
   workflow is not the workflow.
-- One chat session per feature. Start the session by reading the constitution
-  below, then this skill stays loaded while the loop runs.
+- One chat session per feature. On the first pass, read the complete constitution
+  listed below. During later steps and after compaction, selectively re-read the
+  sections that govern the current task rather than loading every file again.
 - Not every task is a feature. Bug fixes, tweaks, and questions do not need
   this skill; do not create spec artifacts for them.
 
 ## Keep the main session small
 
-The main session coordinates; subagents do the work.
+The main session coordinates and delegates substantial specialist work.
 
-- **Run all tasks in subagents.** Implementation goes to `custom-al-implementer`,
-  the document review gates (spec, plan, constitution) to `al-sdd-reviewer`,
-  the implementation review gate to `al-implement-feature-reviewer`, other
-  reviews to the verifier agents, open-ended exploration to a general subagent
-  instructed to navigate AL with Serena (see AGENTS.md). The main session
-  dispatches and reports; it does not read source files wholesale or run long
-  tool output itself. Each gate agent reads and follows its skill in
-  `.opencode/skills/`, which defers to BCQuality; the agent frontmatter owns
-  the model pin, so change models there, not in the commands.
+- **Delegate where it reduces context or needs a pin.** Implementation goes to
+  `custom-al-implementer`; document gates go to `al-sdd-reviewer`; semantic
+  implementation conformance goes to `al-implement-feature-reviewer`; and
+  mechanical reviews go to verifier agents. Open-ended exploration can go to a
+  general subagent instructed to navigate AL with Serena. The coordinator may
+  route, draft artifacts, ask decisions, perform short lookups, update status,
+  and synthesise results. Each gate agent follows its full local governance
+  skill in `.opencode/skills/`; its frontmatter owns the model pin.
 - **Reuse the house agents and skills where handy** instead of improvising:
   the review gates (`/al-spec-feature`, `/al-plan-feature`,
   `/al-implement-feature`, which dispatch the reviewer subagents), the
@@ -63,7 +63,7 @@ The main session coordinates; subagents do the work.
   them. The conversation history is resent on every turn, so a session that
   wanders pays for the wandering all feature long.
 
-## The constitution (read first, every feature)
+## The constitution (initial read, every feature)
 
 - `APP_CONTEXT.md`: local app identity, conventions, dependencies, and
   environment-specific verification facts.
@@ -77,7 +77,8 @@ The main session coordinates; subagents do the work.
 
 For each feature: **Feature Spec -> Plan -> Implement -> Test -> Docs -> Merge**,
 then replan the next feature. Use one chat session per feature, and start it by
-reading the constitution.
+reading the complete constitution. Later steps re-read only the relevant
+sections and approved feature artifacts.
 
 1. **Spec.** Draft `specs/features/<id>/spec.md`: the problem, the users, scope,
    acceptance criteria, what is out of scope, and the durable automated-test
@@ -98,12 +99,17 @@ reading the constitution.
    (Sonnet 5) while the coordinator stays on the session's default model.
    Then dispatch `al-implement-feature-reviewer` (or run
    `/al-implement-feature`, which dispatches the same agent) to review the
-   implementation against its spec, plan, and tasks. The `custom-` prefix
+   implementation semantically against its spec, plan, tasks, and acceptance
+   criteria. This is a pre-Test conformance gate only: it does not compile,
+   duplicate mechanical verifier checks, inspect test results, or require docs,
+   roadmap, or PR closeout. The `custom-` prefix
    distinguishes the house agents; the prefix is part of the name, so dispatch
    `custom-al-implementer`, not `al-implementer`.
-4. **Test.** Building the app triggers the post-build hook, which prompts the
-   mandatory verifier agents (see the mandatory verifier set in AGENTS.md) and a
-   BCQuality review. Resolve every finding. Whether automated tests are written
+4. **Test.** Compile the app with analyzers. A successful Bash-detected build
+   triggers the post-build reminder, but the coordinator remains responsible
+   for running the applicable mandatory verifier agents (see AGENTS.md) and the
+   BCQuality action-skill flow. Resolve every finding, apply fixes, and run the
+   same verifier set again to confirm resolution. Whether automated tests are written
    is governed by the **Testing policy** below and recorded in the feature spec
    and plan. When the app can be published to a sandbox, close the step by
    offering the developer two verification paths and asking which they want:
@@ -112,20 +118,27 @@ reading the constitution.
      the client in a few minutes.
    - **An autonomous verification run** with `bc-webclient-runner`, which walks
      a documented user guide section by section in a real browser and reports
-     structured findings. The runner agent's own definition carries the
-     operational detail (inputs, environment, JSON shape).
+     structured findings. Its thin agent adapter points to the authoritative
+     BCQuality action skill; app environment values come from `APP_CONTEXT.md`.
    Do not run the runner unbidden; it is the developer's call per feature.
-5. **Docs and Merge.** Update the feature docs, tick the roadmap item, open a PR.
+5. **Docs.** Record validation results in the feature artifacts, update end-user
+   or technical documentation affected by the change, and set the roadmap item
+   to `done` only after Test passes.
+6. **Merge.** Review the final diff and closeout state, then create or update the
+   PR when requested. The PR references the feature id and summarizes validation.
+   Do not treat the pre-Test implementation review as a merge-readiness gate.
 
 ## Testing policy (tests are opt-in)
 
-Automated tests are **not** written by default. Every feature spec
+Automated tests are **not** written without an explicit `yes`. This is an
+execution default, not permission to infer `no`: an absent decision is a hard
+question for the developer. Every feature spec
 and plan must record `Automated tests: yes | no`, the decision owner/date, and
 the reason. The plan must match the approved spec. If the decision is absent,
 the agent must ask the developer and update both artifacts before proceeding.
 Chat history alone is not a durable testing decision.
 
-- If the developer says **no** (the default when unstated): skip all test
+- If the developer says **no**: skip all test
   writing. A missing test is **not** a finding. `al-test-writer`,
   `al-userguide-test-writer`, `al-test-coverage-validator/-enforcer`,
   `al-test-validator`, and `al-test-runner` are not run. The plan states that no
@@ -165,6 +178,6 @@ bullet above inverts at that point.
 ## Bootstrapping
 
 At the start of a project (or when the high-level requirements change), draft
-`brief.md`, `tech-design.md`, and `roadmap.md`, then run `/al-spec-init` once
+`specs/brief.md`, `specs/tech-design.md`, and `specs/roadmap.md`, then run `/al-spec-init` once
 (dispatches `al-sdd-reviewer` with the constitution gate) to review the
 constitution for completeness and consistency before any feature work.
