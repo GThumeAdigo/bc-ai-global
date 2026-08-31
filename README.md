@@ -85,6 +85,17 @@ agent path discovery less reliable.
    and AI scaffold. Agents discover all app folders dynamically and compile each
    one separately; see the AL project path section in `AGENTS.md`.
 
+   The script also creates a single-app workspace file at the repository root
+   when at least one existing `*.code-workspace` file is present there. For an
+   app named `ADIGO.BAU.Interfaces.GAEB` it creates `SDD-Interfaces.GAEB.code-workspace`
+   (the last two dot-separated segments of the app name, prefixed with `SDD-`).
+   The copy keeps every setting from the source workspace file but lists only
+   the initialized app in its `folders`, so opening it scopes the editor and
+   agents down to exactly one app. The source file is picked as the first
+   workspace file that references the app folder, or the only one present, and
+   the target is overwritten on re-runs. The file name pattern is added to the
+   Git exclusion block, so it is never tracked. Creating it requires `jq`.
+
 3. The installer uses `.git/info/exclude`, which is local to the clone and is
    never committed. It applies every rule from this template's [exclude](exclude)
    file, including the app-local `APP_CONTEXT.md`, `specs/`, and `DOCS/`

@@ -16,6 +16,7 @@ readonly -a APP_LOCAL_PATHS=(
     "DOCS"
     "specs"
 )
+readonly SDD_WORKSPACE_PREFIX="SDD-"
 
 usage() {
     printf 'Usage: %s <AL-app-folder> [<AL-app-folder> ...]\n' "$(basename "$0")"
@@ -146,6 +147,80 @@ apply_local_excludes() {
     printf 'Updated local excludes in %s\n' "$exclude_path"
 }
 
+# Creates a single-app workspace file next to the existing workspace files at
+# the repository root. The copy keeps every setting from the source file but
+# limits the folder list to the initialized app, so agents opening it scope
+# down to exactly one app. Requires jq.
+create_sdd_workspace() {
+    local app_root="$1"
+    local repository_root="$2"
+
+    if ! command -v jq >/dev/null 2>&1; then
+        printf 'jq is not installed; no SDD workspace file was created\n' >&2
+        return 1
+    fi
+
+    local app_name
+    app_name="$(basename -- "$app_root")"
+
+    if [[ "$app_name" != *.* && -f "$app_root/app.json" ]]; then
+        local app_json_name
+        app_json_name="$(jq -r '.name // empty' "$app_root/app.json")"
+        if [[ -n "$app_json_name" ]]; then
+            app_name="$app_json_name"
+        fi
+    fi
+
+    local app_relative
+    app_relative="$(realpath -m --relative-to="$repository_root" "$app_root")"
+
+    local candidate
+    local -a candidates=()
+    while IFS= read -r candidate; do
+        candidates+=("$candidate")
+    done < <(find "$repository_root" -maxdepth 1 -name '*.code-workspace' \
+        ! -name "${SDD_WORKSPACE_PREFIX}*" | sort)
+
+    if (( ${#candidates[@]} == 0 )); then
+        printf 'No existing workspace file at %s; no SDD workspace file created\n' "$repository_root"
+        return 0
+    fi
+
+    local source_path=""
+    for candidate in "${candidates[@]}"; do
+        if jq -e --arg path "$app_relative" \
+            'any(.folders[]?; ((.path? // .) == $path))' "$candidate" >/dev/null 2>&1; then
+            source_path="$candidate"
+            break
+        fi
+    done
+
+    if [[ -z "$source_path" ]]; then
+        if (( ${#candidates[@]} == 1 )); then
+            source_path="${candidates[0]}"
+        else
+            printf 'No workspace file references %s and there are several candidates: %s\n' \
+                "$app_relative" "${candidates[*]}" >&2
+            return 1
+        fi
+    fi
+
+    local short_name="$app_name"
+    local name_tail="${app_name##*.}"
+    local name_rest="${app_name%.*}"
+    if [[ "$name_rest" != "$app_name" ]]; then
+        short_name="${name_rest##*.}.${name_tail}"
+    fi
+
+    local target_path="$repository_root/${SDD_WORKSPACE_PREFIX}${short_name}.code-workspace"
+
+    jq --arg path "$app_relative" '.folders = [ { path: $path } ]' \
+        "$source_path" > "$target_path"
+
+    printf 'Created %s from %s (folder: %s)\n' \
+        "$target_path" "$(basename -- "$source_path")" "$app_relative"
+}
+
 initialise_repository() {
     local app_argument="$1"
     local app_root
@@ -176,6 +251,8 @@ initialise_repository() {
     exclude_path="$(realpath -m -- "$exclude_path")"
 
     apply_local_excludes "$exclude_path"
+
+    create_sdd_workspace "$app_root" "$repository_root"
 
     for scaffold_path in "${SCAFFOLD_PATHS[@]}"; do
         link_scaffold_path "$app_root" "$scaffold_path"

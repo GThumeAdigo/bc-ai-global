@@ -24,3 +24,5 @@
 /DOCS/*
 *.png
 .serena/
+**/SDD-*.code-workspace
+/SDD-*.code-workspace
