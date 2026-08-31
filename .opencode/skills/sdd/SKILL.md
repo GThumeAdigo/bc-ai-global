@@ -44,9 +44,11 @@ The main session coordinates and delegates substantial specialist work.
   `custom-al-implementer`; document gates go to `al-sdd-reviewer`; semantic
   implementation conformance goes to `al-implement-feature-reviewer`; and
   mechanical reviews go to verifier agents. Open-ended exploration can go to a
-  general subagent instructed to navigate AL with Serena. The coordinator may
-  route, draft artifacts, ask decisions, perform short lookups, update status,
-  and synthesise results. Each gate agent follows its full local governance
+  general subagent instructed to navigate AL with Serena. The spec, plan and
+  task artifacts are also authored by the delegated implementer, not by the
+  coordinator (see the per-feature loop). The coordinator may route, ask
+  decisions, perform short lookups, update status, and synthesise results.
+  Each gate agent follows its full local governance
   skill in `.opencode/skills/`; its frontmatter owns the model pin.
 - **Reuse the house agents and skills where handy** instead of improvising:
   the review gates (`/al-spec-feature`, `/al-plan-feature`,
@@ -83,24 +85,42 @@ then replan the next feature. Use one chat session per feature, and start it by
 reading the complete constitution. Later steps re-read only the relevant
 sections and approved feature artifacts.
 
-1. **Spec.** Move the roadmap item from `todo` to `spec` when drafting
-   `specs/features/<id>/spec.md`: the problem, the users, scope,
-   acceptance criteria, what is out of scope, and the durable automated-test
-   decision. Then dispatch `al-sdd-reviewer` with the spec gate (or run
-   `/al-spec-feature`, which dispatches the same agent) to review the spec
-   against the constitution and confirm the acceptance criteria are testable.
+1. **Spec.** The coordinator does not write the spec itself: dispatch
+   `custom-al-implementer` to draft `specs/features/<id>/spec.md` from the
+   constitution, the approved design inputs, and the owner's rulings; the
+   coordinator supplies the inputs, sets the roadmap item from `todo` to
+   `spec`, and reviews the draft, but the artifact is authored by the
+   delegated agent. **The drafting dispatch must include the matching gate
+   skill** (`.opencode/skills/al-spec-feature/SKILL.md`) **as a drafting
+   checklist**, require the drafter to check every design input against
+   `brief.md` and `tech-design.md` and surface any constitution conflict as
+   an open question in the draft rather than inheriting it, and require a
+   self-check against that checklist before the draft is returned (see
+   `custom-al-implementer.md`, document-drafting mode). The spec carries: the
+   problem, the users, scope, acceptance criteria, what is out of scope, and
+   the durable automated-test decision. Then dispatch `al-sdd-reviewer` with
+   the spec gate (or run `/al-spec-feature`, which dispatches the same agent)
+   to review the spec against the constitution and confirm the acceptance
+   criteria are testable.
    Create `approvals.md` from the feature approvals template. Resolve all
-   findings and rerun the gate to pass. Without changing `spec.md`, run
+   findings per "Resolving gate findings" below and rerun the gate to pass.
+   Without changing `spec.md`, run
    `sha256sum spec.md`, record the pass, reviewer/date, and full-file digest in
    `approvals.md`, then stop for human approval. The approver records name/date
    and repeats that same digest. No code yet.
-2. **Plan.** After Spec approval, move the roadmap item from `spec` to `planned`
-   when drafting `plan.md` and `tasks.md` next to the spec: the BC objects to
-   add or extend, the object ID range, the data model, integration points, and an
-   ordered task list. Then dispatch `al-sdd-reviewer` with the plan gate (or
+2. **Plan.** After Spec approval, drafted the same way as the spec: dispatch
+   `custom-al-implementer` to write `plan.md` and `tasks.md` next to the
+   spec; the coordinator sets the roadmap item from `spec` to `planned` and
+   supplies the approved spec and design inputs, **the plan gate skill**
+   (`.opencode/skills/al-plan-feature/SKILL.md`) **as a drafting checklist**,
+   and the drafter self-checks against it before returning. The plan carries:
+   the BC objects to add or extend, the object ID range, the data model,
+   integration points, and an ordered task list. Then dispatch
+   `al-sdd-reviewer` with the plan gate (or
    run `/al-plan-feature`, which dispatches the same agent) to review them
    against the approved spec. The gate first recomputes the approved spec digest.
-   Resolve all findings and rerun the Plan gate to pass. Without changing
+   Resolve all findings per "Resolving gate findings" below and rerun the Plan
+   gate to pass. Without changing
    `plan.md` or `tasks.md`, run `sha256sum plan.md tasks.md`, record the pass,
    reviewer/date, and separate full-file digests in `approvals.md`, then stop for
    human approval. The approver records name/date and repeats both digests. Move
@@ -161,6 +181,50 @@ sections and approved feature artifacts.
 6. **Merge.** Review the final diff and closeout state, then create or update the
    PR when requested. The PR references the feature id and summarizes validation.
    Do not treat the pre-Test implementation review as a merge-readiness gate.
+
+## Resolving gate findings
+
+This section governs how the spec and plan gates are rerun. It exists because
+a twelve-round spec loop showed three failure modes: the drafter never saw the
+gate's checklist, the reviewer deepened its source verification across rounds
+instead of front-loading it, and fix applications moved problems rather than
+removing them. The rules below attack each mode; they apply to the spec gate,
+the plan gate, and the implementation conformance gate alike.
+
+- **One dispatch applies all findings.** The implementing agent receives every
+  finding of the failed run in a single dispatch, with the coordinator's
+  resolution per finding (owner ruling, mechanical fix, or accepted with
+  reason). Never spread one run's findings over several dispatches.
+- **Global consistency sweep, not local edits.** For every finding that
+  changes a rule, a name, an enumeration, or a routing decision, the applying
+  agent must find and update EVERY statement of that rule in the artifact,
+  not only the cited line, and must also re-check the statements adjacent to
+  each fix for contradictions the fix introduces. The dominant historical
+  failure is a pass-1 fix whose residue the next pass finds.
+- **Statements-touched list.** The applying agent returns, per finding, the
+  confirmation and the list of artifact locations the fix touched. The rerun
+  dispatch passes this list to the reviewer so it verifies exactly where a
+  moved problem would hide.
+- **Decisions are batched, not trickled.** After the first failed run, the
+  coordinator extracts every finding that needs an owner ruling or a design
+  decision and asks for all of them in one round before dispatching fixes.
+  Mechanical fixes proceed without waiting.
+- **Round budget and escalation.** Target: the gate reaches `pass` within
+  three runs. A rerun may find (a) fix residues and (b) new facts from source
+  verification the earlier pass had not reached; both are normal. If a run
+  fails on neither, stop iterating and diagnose the process with the owner
+  instead of dispatching round 4.
+- **Accepted findings are recorded, not silently dropped.** A non-blocking
+  finding the owner or coordinator declines is written into `approvals.md`
+  with the reason at the pass record, so the next reader sees it was
+  considered.
+- **No unverified design calls from the coordinator.** A resolution that
+  changes a design decision — a routing rule, a data-model shape, a
+  mechanism, a name the artifact carries — is either verified against AL
+  source by the applying agent as part of the fix dispatch, or presented to
+  the owner as named options. The coordinator never settles such a finding
+  by its own unverified reasoning, because an invented resolution becomes
+  the next run's block.
 
 ## Testing policy (tests are opt-in)
 

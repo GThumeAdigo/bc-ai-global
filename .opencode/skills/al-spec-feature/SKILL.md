@@ -42,6 +42,30 @@ metadata in `approvals.md`.
   does not guess them away.
 - The spec states what and why without prescribing AL object names or IDs.
 
+## Source verification (do it in the first pass)
+
+Source-verification depth is a first-pass duty, not something later runs
+discover. On the FIRST run of a gate, verify against the AL source every
+load-bearing claim the spec makes, including: cited object ids and the actual
+field-id tail of each touched table; enum ordinals and their free slots; gate
+flags, commit points and call paths the design rests on (read the actual
+procedures, do not infer from names); interactions with sweeping or cascading
+mechanisms (delete sweeps, re-population gates, upload filters); permission
+and DataClassification patterns of the touched tables; and each acceptance
+criterion's reachability through the product as it ships today. The findings
+report must state which claims were verified in source and which could not be
+reached, so a later pass cannot silently deepen what the first pass asserted.
+
+## Rerun discipline
+
+On a rerun, verify the prior resolutions and the areas the fixes touched (the
+coordinator supplies a statements-touched list), and re-verify any source
+claim a fix invalidated. Do not expand the review to fresh scope beyond what
+the fixes reach; new scope belongs to the first pass. The one exception that
+justifies a new finding on a rerun is a contradiction a fix itself introduced
+or a source fact a fix invalidated, and the finding must say which fix
+surfaced it.
+
 ## Findings
 
 Use `block` for a missing or contradictory foundation, an absent test decision,

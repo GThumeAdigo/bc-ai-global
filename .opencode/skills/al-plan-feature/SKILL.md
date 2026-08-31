@@ -60,6 +60,30 @@ those files rather than assuming dispatcher-provided values.
   Test-step build and applicable verifiers, then Docs and roadmap closeout.
 - The roadmap status is `planned` while the plan is under review.
 
+## Source verification (do it in the first pass)
+
+Source-verification depth is a first-pass duty, not something later runs
+discover. On the FIRST run of a gate, verify against the AL source and the
+declared metadata every load-bearing claim the plan makes, including: that
+each allocated object id is genuinely free for its type (`rg` over `src` plus
+a compile probe where cheap); the actual field-id tails of every extended
+table; band-map claims against `tech-design.md`; rename and reference counts
+the plan asserts; interaction points (call sites, events, page areas) the plan
+names; and the permission/sweep/upgrade consequences of every schema change.
+The findings report must state which claims were verified in source and which
+could not be reached, so a later pass cannot silently deepen what the first
+pass asserted.
+
+## Rerun discipline
+
+On a rerun, verify the prior resolutions and the areas the fixes touched (the
+coordinator supplies a statements-touched list), and re-verify any source
+claim a fix invalidated. Do not expand the review to fresh scope beyond what
+the fixes reach; new scope belongs to the first pass. The one exception that
+justifies a new finding on a rerun is a contradiction a fix itself introduced
+or a source fact a fix invalidated, and the finding must say which fix
+surfaced it.
+
 ## Findings
 
 Use `block` for an unapproved or contradictory spec, unresolved required

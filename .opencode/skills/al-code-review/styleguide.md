@@ -151,6 +151,8 @@ Use descriptive suffixes to indicate the purpose of label variables:
 ### 2.5 Interface and Implementation Naming
 
 - Prefix interfaces with `I` (e.g., `IItemPriceCalculator`).
+- In apps with a mandatory object prefix, the object prefix comes first and the
+  `I` joins the name without a space (e.g., `GOXGAE IFormatImport`).
 - Use `Impl` suffix for implementation codeunits (e.g., `Item Price Calc. Impl`).
 - Keep interface and implementation names closely related.
 
