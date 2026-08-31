@@ -35,13 +35,19 @@ The workflow must stay in context for the whole feature loop:
   sections that govern the current task rather than loading every file again.
 - Not every task is a feature. Bug fixes, tweaks, and questions do not need
   this skill; do not create spec artifacts for them.
+- On resume, whether after compaction or in a fresh session, read
+  `specs/roadmap.md` and the feature's `approvals.md` Loop State section
+  first. Resume from the recorded stage instead of reconstructing state from
+  chat history.
 
 ## Keep the main session small
 
 The main session coordinates and delegates substantial specialist work.
 
 - **Delegate where it reduces context or needs a pin.** Implementation goes to
-  `custom-al-implementer`; document gates go to `al-sdd-reviewer`; semantic
+  `custom-al-implementer`; document gates go to `al-sdd-reviewer`, with the
+  plan gate's mechanical stage going to `al-sdd-mechanical-reviewer` first;
+  semantic
   implementation conformance goes to `al-implement-feature-reviewer`; and
   mechanical reviews go to verifier agents. Open-ended exploration can go to a
   general subagent instructed to navigate AL with Serena. The spec, plan and
@@ -62,6 +68,10 @@ The main session coordinates and delegates substantial specialist work.
   a matching approved full `spec.md` SHA-256, dispatch the implementer without
   matching approved full `plan.md` and `tasks.md` SHA-256 values, or enter Test
   until semantic implementation conformance has passed.
+- **Keep the Loop State current.** The coordinator updates the `Loop State`
+  section at the top of `approvals.md` at every stage transition and after
+  every gate run. It is the resume point for a fresh or compacted session, so
+  a stale state misdirects the next session.
 - **Be precise and efficient in conversation.** One topic per message, short
   questions, short answers, findings with `file:line` references instead of
   prose. Batch clarifying questions into one round trip rather than trickling
@@ -115,14 +125,20 @@ sections and approved feature artifacts.
    (`.opencode/skills/al-plan-feature/SKILL.md`) **as a drafting checklist**,
    and the drafter self-checks against it before returning. The plan carries:
    the BC objects to add or extend, the object ID range, the data model,
-   integration points, and an ordered task list. Then dispatch
-   `al-sdd-reviewer` with the plan gate (or
-   run `/al-plan-feature`, which dispatches the same agent) to review them
-   against the approved spec. The gate first recomputes the approved spec digest.
-   Resolve all findings per "Resolving gate findings" below and rerun the Plan
-   gate to pass. Without changing
+   integration points, and an ordered task list. Then run the plan gate in two
+   stages, mechanical first. Dispatch `al-sdd-mechanical-reviewer` with
+   `.opencode/skills/al-plan-mechanical/SKILL.md` for the deterministic
+   checks: approved Spec digest, object-ID range and freeness, test-policy
+   match, task-list shape, and grep-able hard rules. Only on a mechanical
+   `pass`, dispatch `al-sdd-reviewer` with the semantic plan gate (or run
+   `/al-plan-feature`, which dispatches the same agent) to review the plan
+   against the approved spec; that gate recomputes the approved spec digest as
+   defense in depth. On any rerun, mechanical first again. Resolve all
+   findings per "Resolving gate findings" below and rerun both stages to pass.
+   Without changing
    `plan.md` or `tasks.md`, run `sha256sum plan.md tasks.md`, record the pass,
-   reviewer/date, and separate full-file digests in `approvals.md`, then stop for
+   both reviewers/dates, and separate full-file digests in `approvals.md`,
+   then stop for
    human approval. The approver records name/date and repeats both digests. Move
    `planned` to `in-progress` only after Plan approval. Any later edit invalidates
    the affected evidence and requires the gate, hash, and approval sequence again.
@@ -210,7 +226,9 @@ the plan gate, and the implementation conformance gate alike.
   decision and asks for all of them in one round before dispatching fixes.
   Mechanical fixes proceed without waiting.
 - **Round budget and escalation.** Target: the gate reaches `pass` within
-  three runs. A rerun may find (a) fix residues and (b) new facts from source
+  three runs. For the plan gate this budget counts semantic runs; mechanical
+  failures are fixed before a semantic run is spent and do not consume it. A
+  rerun may find (a) fix residues and (b) new facts from source
   verification the earlier pass had not reached; both are normal. If a run
   fails on neither, stop iterating and diagnose the process with the owner
   instead of dispatching round 4.
@@ -225,6 +243,72 @@ the plan gate, and the implementation conformance gate alike.
   the owner as named options. The coordinator never settles such a finding
   by its own unverified reasoning, because an invented resolution becomes
   the next run's block.
+
+## Amending approved artifacts
+
+Findings resolution corrects execution detail without changing approved
+intent. When approved intent itself turns out to be wrong or superseded, that
+is an amendment. Artifacts are **current-only**: a spec, plan, or tasks file
+never carries appended amendment sections or superseded text, because every
+later reader, gate, and subagent pays for stale statements. The past lives in
+git history and in the feature's `approvals.md` change log.
+
+Triggers: an owner decision, or a Test, verifier, or gate finding that reveals
+the approved spec or plan is wrong rather than the implementation drifting
+from it. If a fix would change what the spec says, it is an amendment, not a
+fix.
+
+Procedure, in order:
+
+1. The owner rules the change in one batched round, as with gate findings.
+2. Dispatch `custom-al-implementer` in document-drafting mode to rewrite the
+   artifact in place and delete the superseded content. The dispatch names the
+   governing gate skill as the drafting checklist.
+3. Append a change-log entry to `approvals.md`: decision owner and date, what
+   changed, why, what was rejected, and any accepted loss. This entry is the
+   durable reasoning; the superseded text is not.
+4. Rerun the affected gate or gates to `pass`, mechanical stage first for the
+   plan gate. A spec amendment re-opens the Spec gate; a plan amendment
+   re-opens the plan gate. If the amendment invalidates later stages, say so
+   explicitly rather than letting them stand silently.
+5. Recompute the full-file digests, replace the affected approval evidence in
+   `approvals.md`, and stop for human re-approval. A changed spec or plan is a
+   hard stop again; prior approval does not survive a digest change.
+6. Update the roadmap status only if the amendment regresses the stage.
+
+The same rule applies to features already marked `done`: rewrite in place,
+delete superseded text, and record the change in the change log. Git history
+preserves the old version; no artifact carries it forward.
+
+## Dispatch contracts
+
+Every dispatch to a subagent uses one of the standard contracts below. The
+core rule: **pass paths and digests, never paste file contents.** Subagents
+read from disk; the coordinator's context carries decisions, not documents.
+Batch inputs; a dispatch that trickles information guarantees a second run.
+
+- **Draft dispatch** (spec, plan, or tasks): feature id; artifact path to
+  write; the design inputs as paths (`APP_CONTEXT.md`, constitution files,
+  approved spec) plus the owner's rulings and resolved open questions verbatim
+  in the prompt; the governing gate skill path as a drafting checklist. The
+  return contract: the written file, one line per checklist item confirming it
+  was checked, the design-input overrides list, and remaining open questions.
+- **Gate dispatch**: feature id and the gate name. The agent derives its own
+  inputs per its skill. The return contract: the gate's structured findings
+  report and nothing else.
+- **Findings-fix dispatch**: feature id; artifact path; every finding of the
+  failed run with the coordinator's resolution per finding (owner ruling,
+  mechanical fix, or accepted with reason). The return contract: per finding,
+  the confirmation plus the statements-touched list.
+- **Implement dispatch**: feature id and the tasks in scope. The agent already
+  carries the house rules and style guide. The return contract: per task, what
+  was done with 1-based `file:line` references, then an open-questions list.
+  No pasted diffs or file contents.
+
+The coordinator reads return reports, never subagent transcripts. When a
+return would be large (an open-ended exploration, a long log), the dispatch
+directs the subagent to write it to a file outside the workspace and return
+the path plus a short summary.
 
 ## Testing policy (tests are opt-in)
 

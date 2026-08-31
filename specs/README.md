@@ -17,7 +17,8 @@ specs/
       spec.md       # requirements, scope, acceptance criteria
       plan.md       # technical plan: objects/structure, ID range, data model
       tasks.md      # ordered, checkable implementation tasks
-      approvals.md  # digest-bound Spec and Plan review/approval evidence
+      approvals.md  # loop state, digest-bound review/approval evidence,
+                    # change log, accepted findings
       validation.md # compile, tests, two verifier runs, client result, Test outcome
 ```
 
@@ -27,7 +28,7 @@ At each stage you draft the artifact, with the agent's help, then run the
 matching skill as a review gate before moving on:
 
 1. `/sdd spec`: drafts the spec, then `/al-spec-feature` reviews it. Resolve findings and rerun to pass. Hash the unchanged full `spec.md`; record review and human approval against that same digest in `approvals.md`.
-2. `/sdd plan`: first validates the approved Spec digest, then drafts and reviews the plan and tasks. Resolve findings and rerun to pass. Hash unchanged full `plan.md` and `tasks.md` separately; record review and human approval against those same digests in `approvals.md`.
+2. `/sdd plan`: first validates the approved Spec digest, then drafts and reviews the plan and tasks. The plan gate runs in two stages: `al-plan-mechanical` (deterministic: digests, object IDs, test-policy match, task-list shape) before `al-plan-feature` (semantic, Opus). Resolve findings and rerun to pass. Hash unchanged full `plan.md` and `tasks.md` separately; record review and human approval against those same digests in `approvals.md`.
 3. `/sdd implement`: implements approved work, then `/al-implement-feature` reviews semantic conformance. Resolve findings and rerun to pass before Test.
 4. Test: record compile/baseline evidence in `validation.md`; when opted in, execute tests before coverage/quality validation; run the applicable verifier set twice; rerun semantic conformance after production fixes; and record a passing manual or web-client result.
 5. Docs and Merge: complete validation and documentation, move the roadmap item to done, then prepare the PR when requested.
@@ -37,6 +38,17 @@ perform workflow stages. Copy `templates/feature-approvals.md` to each feature a
 `approvals.md`, and copy `templates/feature-validation.md` as `validation.md`
 when Test starts. Use `sha256sum spec.md` and `sha256sum plan.md tasks.md` from
 the feature folder. Any edit after hashing invalidates the affected approval.
+
+Specs, plans, and task lists are current-only. A change to approved intent is
+an amendment: rewrite the artifact in place, delete the superseded text,
+record what changed and why in the `approvals.md` change log, rerun the
+affected gate, recompute the digests, and stop for human re-approval. Nothing
+superseded is ever appended to an artifact; git history and the change log
+carry the past.
+
+Keep the `Loop State` section of `approvals.md` updated at every stage
+transition. A fresh or compacted session resumes from it and the roadmap, not
+from chat history.
 
 Roadmap transitions are `todo -> spec` on Spec draft, `spec -> planned` on Plan
 draft, `planned -> in-progress` after Plan approval, and `in-progress -> done`

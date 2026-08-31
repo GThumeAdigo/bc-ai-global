@@ -7,11 +7,14 @@ feature from the arguments (a feature id, a path under `specs/features/`, or a
 short description that maps to the roadmap); if none is given, read
 `specs/roadmap.md`, propose the next feature, and confirm before starting.
 
-Use pinned subagents for the work assigned to them: `al-sdd-reviewer` for each
-document gate, `custom-al-implementer` for approved implementation tasks,
-`al-implement-feature-reviewer` for pre-Test semantic conformance, and the
+Use pinned subagents for the work assigned to them: `al-sdd-mechanical-reviewer`
+for the mechanical stage of the plan gate, `al-sdd-reviewer` for each semantic
+document gate, `custom-al-implementer` for drafting governed documents and for
+approved implementation tasks, `al-implement-feature-reviewer` for pre-Test
+semantic conformance, and the
 applicable verifier agents during Test. The coordinator may do short routing,
-artifact drafting, status updates, and result synthesis itself. The approval
+status updates, and result synthesis itself; spec, plan, and task artifacts are
+drafted by the delegated implementer, never by the coordinator. The approval
 gates after spec and plan review are hard stops, so normal flow does not share
 reviewer context across them.
 

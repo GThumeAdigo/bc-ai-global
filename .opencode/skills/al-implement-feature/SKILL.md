@@ -38,7 +38,8 @@ status `in-progress`; otherwise implementation or Test entry is blocked.
   integration contracts, state transitions, permissions intent, telemetry
   intent, and accepted trade-offs.
 - Every implementation task is represented in source, and no material
-  unplanned behavior or object was introduced without an approved amendment.
+  unplanned behavior or object was introduced without an approved amendment
+  recorded in `approvals.md`.
 - When automated tests are opted in, the planned test artifacts exist. Their
   execution and quality are checked in Test, not here.
 

@@ -26,6 +26,13 @@ implementation tasks, do not self-review against the plan; the verifier agents
 handle that. If you find a fact in the spec or plan wrong at source, say so
 rather than implementing against it.
 
+## Return contract (all modes)
+
+- Return the report blocks only. Never paste diffs, file contents, or
+  transcript excerpts; the coordinator reads the report, not your transcript.
+- Reference changes as files with 1-based line ranges.
+- End every report with an open-questions list, or `none`.
+
 ## Document-drafting and findings-resolution mode
 
 When the dispatch asks you to draft or amend a governed document (a spec,

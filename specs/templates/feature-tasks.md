@@ -1,6 +1,6 @@
 # Feature Tasks: <feature name>
 
-> Reviewed by `/al-plan-feature` alongside `plan.md`. An ordered, checkable list the
+> Reviewed by the plan gate (mechanical stage, then `/al-plan-feature`) alongside `plan.md`. An ordered, checkable list the
 > Implement step works top to bottom. Keep tasks small and verifiable. Tick each
 > as it lands.
 

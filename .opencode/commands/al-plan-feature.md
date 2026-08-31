@@ -3,7 +3,10 @@ description: Review a feature plan and task list against its approved spec, obje
 agent: al-sdd-reviewer
 ---
 
-Run the plan gate (the `al-plan-feature` skill) for $ARGUMENTS. Resolve the
+Run the semantic plan gate (the `al-plan-feature` skill) for $ARGUMENTS. The
+mechanical stage (`al-plan-mechanical`) must already have passed for the
+current revision; if there is no passing mechanical report, stop and dispatch
+`al-sdd-mechanical-reviewer` first. Resolve the
 repository root, feature id, `spec.md`, `plan.md`, `tasks.md`, `approvals.md`,
 project context, manifest, and object-range configuration from the current checkout.
 Recompute the full `spec.md` SHA-256 and require it to match both Spec review and

@@ -46,14 +46,16 @@ subscription's weekly limit tracks Opus separately from other models. Semantic
 intent review uses Opus; execution and mechanical verification use Sonnet:
 
 - **Semantic SDD reviews run on Opus 5 high.** `al-sdd-reviewer` runs the
-  specification, plan, and constitution gates. `al-implement-feature-reviewer`
+  specification, semantic plan, and constitution gates.
+  `al-implement-feature-reviewer`
   compares approved intent with implemented behavior before Test. Both agents
   pin `model: anthropic/claude-opus-5` and `variant: high`. Normal hard-stop
   flow dispatches fresh gates and does not imply shared subagent context.
-- **Implementation and mechanical verifiers run on Sonnet 5.** These include
-  `custom-al-implementer`, the mandatory verifiers, test writers and validators,
-  and specialist auditors. Their work is execution or structured rule-checking
-  rather than semantic intent reconciliation.
+- **Implementation and mechanical checks run on Sonnet 5.** These include
+  `custom-al-implementer`, `al-sdd-mechanical-reviewer` (the deterministic
+  stage of the plan gate), the mandatory verifiers, test writers and
+  validators, and specialist auditors. Their work is execution or structured
+  rule-checking rather than semantic intent reconciliation.
 
 The SDD gate commands (`/al-spec-feature`, `/al-plan-feature`,
 `/al-implement-feature`, `/al-spec-init`) are thin dispatchers: their
@@ -385,16 +387,23 @@ expensive mistakes are decisions, not typos. Surface them as explicit questions
 first, then write. For a change to stored data the recurring three are: how wide
 is the change (everywhere, or only in one branch of the data), what happens to
 the schema the old behavior needed, and what happens to rows already written.
-Asking costs one round trip. Guessing costs a rewrite plus a spec amendment.
+Asking costs one round trip. Guessing costs a rewrite and a re-approval.
 
-### Amend a closed feature, do not rewrite it
+### Amend a feature by rewriting it, not by appending
 
-A feature marked `done` keeps its history. Add a dated amendment section to
-`spec.md` and `plan.md`, add a new numbered task to `tasks.md`, and add a
-validation block to `validation.md`. Leave the superseded text in place and say
-which amendment supersedes it. The amendment carries the decision owner and
-date, what changed, why, what was rejected, and what was accepted as a loss.
-The reasoning is the durable artifact; the diff is not.
+A feature is changed by rewriting its artifacts in place and deleting the
+superseded content. `spec.md`, `plan.md`, and `tasks.md` are current-only:
+they never carry dated amendment sections or superseded text, because every
+later reader, gate, and subagent pays for stale statements. This holds for
+open features and for features marked `done`.
+
+The past lives in two durable places: git history and the feature's
+`approvals.md` change log, which records the decision owner and date, what
+changed, why, what was rejected, and what was accepted as a loss. A change to
+approved spec or plan intent invalidates the affected digest and requires the
+gate, hash, and approval sequence again. The full procedure lives in the
+`Amending approved artifacts` section of the `sdd` skill. The reasoning is the
+durable artifact; the superseded text is not.
 
 ### Shared and app-local scaffolding
 
@@ -463,8 +472,9 @@ the source of truth that outlives it:
   one spec section the current task depends on. That is cheaper and more
   accurate than a summary of a summary.
 - Keep specs structured so this works: one feature per folder, stable section
-  headers, amendments appended rather than woven in. The agent can only read
-  selectively when the document advertises where things are.
+  headers, and current-only content, with history in the approvals change log
+  and git. The agent can only read selectively when the document advertises
+  where things are.
 
 ### Delegate open-ended exploration
 

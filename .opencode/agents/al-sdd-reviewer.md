@@ -14,9 +14,11 @@ description: |
   Runs the SDD document review gates in one read-only reviewer: the feature
   specification gate (al-spec-feature skill), the feature plan gate
   (al-plan-feature skill), and the constitution gate (al-spec-init skill).
-  Emits the local governance skill's findings report. Runs on Opus 5 with the
-  high Anthropic variant. Dispatch it from the main session with the `sdd`
-  skill loaded. Normal SDD hard stops dispatch one gate at a time.
+  The plan gate is the semantic stage and presupposes a passing mechanical
+  stage (al-sdd-mechanical-reviewer, al-plan-mechanical skill) for the current
+  revision. Emits the local governance skill's findings report. Runs on Opus 5
+  with the high Anthropic variant. Dispatch it from the main session with the
+  `sdd` skill loaded. Normal SDD hard stops dispatch one gate at a time.
   Trigger this agent:
 
   - In the Spec step of the SDD loop, after drafting
@@ -55,9 +57,11 @@ metadata. Resolve a description through `specs/roadmap.md`, then read:
 - Spec gate: `APP_CONTEXT.md`, `AGENTS.md`, the three constitution files, and
   only `specs/features/<id>/spec.md` plus its roadmap entry.
 - Plan gate: the same project context plus `spec.md`, `plan.md`, `tasks.md`,
-  `approvals.md`, `app.json`, and `AppSourceCop.json` when present. Recompute the
-  approved Spec digest before reviewing Plan; do not require Plan's own approval
-  evidence during its gate.
+  `approvals.md`, `app.json`, and `AppSourceCop.json` when present. Run it only
+  after the mechanical stage (`al-plan-mechanical`) has passed for the current
+  revision; do not redo its deterministic checks. Recompute the approved Spec
+  digest before reviewing Plan; do not require Plan's own approval evidence
+  during its gate.
 - Constitution gate: `APP_CONTEXT.md`, `AGENTS.md`, `specs/brief.md`,
   `specs/tech-design.md`, and `specs/roadmap.md`.
 

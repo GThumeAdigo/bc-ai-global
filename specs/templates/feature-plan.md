@@ -1,6 +1,6 @@
 # Feature Plan: <feature name>
 
-> Reviewed by `/al-plan-feature` after drafting from an approved `spec.md`. The how. Inherits from
+> Reviewed by the plan gate (mechanical stage, then `/al-plan-feature`) after drafting from an approved `spec.md`. The how. Inherits from
 > `specs/tech-design.md` and the house rules and style guide in
 > `.opencode/skills/al-code-review/` (`SKILL.md` and `styleguide.md`).
 > Stop for human review before implementing.

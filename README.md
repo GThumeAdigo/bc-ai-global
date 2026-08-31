@@ -114,8 +114,10 @@ agent path discovery less reliable.
    feature, use `/sdd spec <id>`, `/sdd plan <id>`, and `/sdd implement <id>`.
    The `/al-spec-feature`, `/al-plan-feature`, and `/al-implement-feature`
    commands are review-only gates invoked by those stages; they do not draft or
-   implement the feature. Resolve findings and rerun each gate to pass before
-   the required human approval or Test entry.
+   implement the feature. The plan gate runs in two stages: a mechanical
+   review (`al-plan-mechanical`, Sonnet) before the semantic review
+   (`/al-plan-feature`, Opus). Resolve findings and rerun each gate to pass
+   before the required human approval or Test entry.
 
 7. Keep this template clone as the update source. Symlinked runtime files are
    updated on disk immediately, but OpenCode loads configuration-time files only
@@ -187,9 +189,12 @@ your real paths, names, and object range.
    ```
 
    Check `plan.md` and `tasks.md`. Verify that object IDs are in range, standard
-   BC is reused, and the task list matches the no-tests decision. Resolve
-   findings and rerun the Plan gate to pass. Without changing either file, run
-   `sha256sum plan.md tasks.md` and record the review, reviewer/date, and the two
+   BC is reused, and the task list matches the no-tests decision. The mechanical
+   stage checks the deterministic parts first; resolve findings and rerun the
+   Plan gate (mechanical, then semantic) to pass. Without changing either file,
+   run
+   `sha256sum plan.md tasks.md` and record the review, reviewers/dates, and the
+   two
    separate digests in `approvals.md`. Plan approval is the second hard stop:
 
    ```text
@@ -297,7 +302,7 @@ following `/al-*` commands are review-only gates:
 
 - `/al-spec-init`: review `specs/brief.md`, `specs/tech-design.md`, and `specs/roadmap.md`.
 - `/al-spec-feature`: review a feature specification against the constitution.
-- `/al-plan-feature`: review a feature plan and task list against its specification.
+- `/al-plan-feature`: review a feature plan and task list against its specification. It is the semantic stage; the deterministic stage (`al-plan-mechanical`, agent and skill, no slash command) runs first.
 - `/al-implement-feature`: review an implementation against its approved artifacts.
 
 OpenCode may also select the matching skill or verifier from a natural-language
