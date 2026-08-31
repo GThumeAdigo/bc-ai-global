@@ -10,6 +10,61 @@
     ".opencode/plugins/post-build-verify.ts"
   ],
   "mcp": {
+    "al-mcp": {
+      "type": "local",
+      "command": [
+        "sh",
+        "-c",
+        "al launchmcpserver \"$(find . -maxdepth 2 -name app.json -not -path '*/node_modules/*' -not -path '*/.alpackages/*' -exec dirname {} \\; -quit)\" --transport stdio"
+      ],
+      "cwd": ".",
+      "enabled": true
+    },
+    "microsoft-learn": {
+      "type": "remote",
+      "url": "https://learn.microsoft.com/api/mcp",
+      "enabled": true
+    },
+    "alcops": {
+      "type": "local",
+      "command": [
+        "alcops-mcp"
+      ],
+      "cwd": ".",
+      "enabled": true
+    },
+    "al-dependency": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "al-mcp-server"
+      ],
+      "cwd": ".",
+      "enabled": true
+    },
+    "nab-al-tools": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@nabsolutions/nab-al-tools-mcp"
+      ],
+      "cwd": ".",
+      "enabled": true
+    },
+    "serena": {
+      "type": "local",
+      "command": [
+        "/home/greg/.local/bin/serena",
+        "start-mcp-server",
+        "--context",
+        "ide",
+        "--project-from-cwd"
+      ],
+      "cwd": ".",
+      "enabled": true
+    },
     "playwright": {
       "type": "local",
       "command": [

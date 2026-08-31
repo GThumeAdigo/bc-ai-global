@@ -395,9 +395,12 @@ for platform API behavior; verify before relying, the same way.
 
 ## Serena infrastructure
 
-Serena is wired in as an opencode MCP server (registered globally under
-`~/.config/opencode/opencode.json` with `--context ide --project-from-cwd`, so
-it applies to every AL repo on this machine). It provides LSP-backed AL symbol
+Serena is wired in as an opencode MCP server in this scaffold's project-level
+`opencode.json` (which is symlinked into every initialized AL app) with
+`--context ide --project-from-cwd`, so it applies to every AL repo initialized
+from this scaffold. The other AL MCP servers (`al-mcp`, `microsoft-learn`,
+`alcops`, `al-dependency`, `nab-al-tools`, `playwright`) are registered in the
+same file, so non-AL sessions start without them. It provides LSP-backed AL symbol
 tools plus project memories under `.serena/memories`.
 
 - The AL extension binaries come from the installed VS Code AL extension
