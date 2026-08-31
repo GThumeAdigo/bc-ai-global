@@ -83,7 +83,8 @@ export default (async () => {
       const reminder = [
         "",
         "A successful Business Central build/compile was detected in Bash.",
-        "Per repo policy (AGENTS.md), before treating this feature's Test step",
+        "Per repo policy (the `sdd` skill Test step; outside SDD, AGENTS.md",
+        "\"Outside the SDD loop\"), before treating this build's work as",
         "complete you MUST:",
         "",
         "  1. If Automated tests=yes, dispatch al-test-runner now, before test",

@@ -26,7 +26,8 @@ the loop and full control over output paths.
 - A build is needed and `al-mcp` is not running, fails to start (it needs a
   valid `app.json` and `.alpackages` present), or returns something odd.
 - A baseline comparison is needed: stash, compile, pop, compile, diff the
-  warning lists. See "Establish the baseline" in `AGENTS.md`.
+  warning lists. The recipe is in this skill under "Baseline comparison
+  recipe".
 - CI parity: the pipeline fails on warnings (`failOn: warning`), so the exact
   analyzer set matters. A compile without the ALCops set is not a valid check.
 
@@ -117,7 +118,12 @@ grep -E ": info" "$LOG"
 - Classify findings before reporting: which are new and which are baseline.
   Read known app-specific warnings and justified suppressions from
   `APP_CONTEXT.md`, the app's ruleset, and analyzer configuration. This shared
-  skill does not define a consumer-app baseline or suppression list.
+  skill does not define a consumer-app baseline or suppression list. When a
+  build, analyzer, or verifier reports something odd, compare the same command
+  on the unmodified tree when it is safe to do so (the recipe below). Record
+  app-specific known warnings, analyzer quirks, and baseline counts in
+  `APP_CONTEXT.md`, not in the shared contract, and state which findings are
+  new and which are baseline.
 
 ## Baseline comparison recipe
 
@@ -139,7 +145,9 @@ Report which rule counts are yours and which were already there.
 
 ## After the compile
 
-A successful build triggers the post-build hook, which prompts the mandatory
-verifier set from `AGENTS.md` (`al-code-quality-reviewer` and
-`al-readability-checker`, plus the test verifiers when tests are opted in).
-Run them. The compile alone is not the quality gate.
+A successful build triggers the post-build hook, which prompts the remaining
+verifier work: during the SDD Test step that is the mandatory verifier set
+defined there (`al-code-quality-reviewer` and `al-readability-checker`, plus
+the test verifiers when tests are opted in); outside the SDD loop it is the
+two always-on reviewers per "Outside the SDD loop" in `AGENTS.md`. Run them.
+The compile alone is not the quality gate.

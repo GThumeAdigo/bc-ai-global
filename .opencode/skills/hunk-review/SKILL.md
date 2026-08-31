@@ -87,8 +87,9 @@ discussion, and say which slice you loaded.
 ### Turn verifier findings into pinned notes
 
 This is the highest-value use of Hunk in this repo. The mandatory verifiers
-(`al-code-quality-reviewer`, `al-readability-checker`, and the rest of the set in
-`AGENTS.md`) emit findings that already carry a file, a line, a rule slug, and a
+(`al-code-quality-reviewer`, `al-readability-checker`, and the rest of the set
+in the `sdd` skill's Test step) emit findings that already carry a file, a
+line, a rule slug, and a
 citation. Do not flatten that into a chat list. Batch it into one
 `comment apply` so each finding lands on the line that triggered it:
 
@@ -102,9 +103,9 @@ printf '%s' '{"comments":[
 
 Put the rule slug and the BCQuality or style guide path in `rationale`, and
 prefer one batch over many single `comment add` calls. Findings that are
-informational or pre-existing baseline noise (see the baseline list in
-`AGENTS.md`) should say so in the note, so the developer is not sent chasing
-them.
+informational or pre-existing baseline noise (the app's baseline list in
+`APP_CONTEXT.md`) should say so in the note, so the developer is not sent
+chasing them.
 
 ### Write the notes in German, and keep them short
 

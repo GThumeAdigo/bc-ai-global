@@ -1,9 +1,12 @@
 # AGENTS.md
 
 The shared contract for agents working in AL apps initialized from this scaffold.
-It is symlinked from the shared scaffold and supplies reusable workflow,
-conventions, and quality gates. OpenCode loads it via `opencode.json`; `CLAUDE.md`
-is kept as a bridge for Claude Code sessions.
+It is symlinked from the shared scaffold and carries the operational rules every
+session needs: how to find the AL project, how to build, and where the
+specialized workflow, review, and knowledge content lives. OpenCode loads it via
+`opencode.json`; `CLAUDE.md` is kept as a bridge for Claude Code sessions.
+OpenCode loads this file into the main session only; subagents get their
+contract from their own files under `.opencode/agents/` and the dispatch prompt.
 
 Every initialized app also has a local `APP_CONTEXT.md`, copied rather than
 symlinked. Read it first, then read the app's constitution under `specs/`. Do not
@@ -13,83 +16,29 @@ other app-specific fact in this shared file.
 ## Spec-Driven Development
 
 **The spec is the brain, the agent is the muscle.** Production AL for a feature
-is written only against an approved spec. The full workflow lives in the `sdd`
-skill, not here: the constitution, the per-feature loop, the testing policy
-(opt-in), and the deployment policy. Load
+is written only against an approved spec. The authoritative workflow lives in
+the `sdd` skill, not here: the constitution, the per-feature loop (Spec, Plan,
+Implement, Test, Docs, Merge), the approval hard stops with digest-bound
+evidence in `approvals.md`, the model policy, the testing policy (opt-in), the
+deployment and compatibility policy (decided app-local in `APP_CONTEXT.md`), the
+amendment procedure, and the dispatch contracts. Load
 [`.opencode/skills/sdd/SKILL.md`](.opencode/skills/sdd/SKILL.md) (or run
 `/sdd`) before any feature work, and re-load it after every auto-compaction
-during feature work. Quick fixes and questions are not feature work and do not
-need it.
-
-Every governance gate is iterative: resolve its findings and rerun the same gate
-to `outcome: pass` before human Spec or Plan approval, and before Test entry for
-the implementation gate. Persist review and approval evidence in the feature's
-separate app-local `approvals.md`: reviewer/date and full-file SHA-256, followed
-by human approver/date and the same digest. Spec uses one digest; Plan uses
-separate `plan.md` and `tasks.md` digests. A gate never requires its own
-not-yet-written evidence. Downstream gates recompute and compare approved
-digests, and any edit invalidates the affected approval. Roadmap states
-advance `todo -> spec` on Spec draft, `spec -> planned` on Plan draft, `planned
--> in-progress` after Plan approval, and `in-progress -> done` only after Test
-and Docs pass.
-
-Compatibility is also app-local. `APP_CONTEXT.md` explicitly records deployment
-status, whether production/persisted-data compatibility is required, and the
-trusted released baseline ref. The yes/no compatibility field is authoritative;
-a release tag alone never enables compatibility. When compatibility is `yes`, a
-missing trusted baseline makes upgrade/obsolete review partial.
-
-### Model policy (which step runs on which model)
-
-Models are pinned per step, not left to the session default, because the
-subscription's weekly limit tracks Opus separately from other models. Semantic
-intent review uses Opus; execution and mechanical verification use Sonnet:
-
-- **Semantic SDD reviews run on Opus 5 high.** `al-sdd-reviewer` runs the
-  specification, semantic plan, and constitution gates.
-  `al-implement-feature-reviewer`
-  compares approved intent with implemented behavior before Test. Both agents
-  pin `model: anthropic/claude-opus-5` and `variant: high`. Normal hard-stop
-  flow dispatches fresh gates and does not imply shared subagent context.
-- **Implementation and mechanical checks run on Sonnet 5.** These include
-  `custom-al-implementer`, `al-sdd-mechanical-reviewer` (the deterministic
-  stage of the plan gate), the mandatory verifiers, test writers and
-  validators, and specialist auditors. Their work is execution or structured
-  rule-checking rather than semantic intent reconciliation.
-
-The SDD gate commands (`/al-spec-feature`, `/al-plan-feature`,
-`/al-implement-feature`, `/al-spec-init`) are thin dispatchers: their
-frontmatter names the reviewer agent and carries no model pin. The agent
-frontmatter is the single place to change a gate's model or permissions; do
-not reintroduce pins on the commands.
-
-Do not unpin an agent ad hoc for a single run. If a verifier systematically
-misses a class of finding on Sonnet, that is a reason to change the pin in the
-agent file (globally, in the scaffolding repo), not to override it per session.
+during feature work. Quick fixes and questions are not feature work; use
+"Outside the SDD loop" below.
 
 ## Layout
 
 - `specs/`: the constitution and per-feature specs (the source of truth for what to build).
 - `.opencode/agents/`: focused reviewer and verifier subagents for AL code.
-- `.opencode/skills/`: invocable review and workflow skills. Reusable BCQuality
-  reviews are thin runtime pointers whose authoritative content is in
-  `action-skill` files under
-  `.opencode/BCQuality-ADIGO/custom/skills/<category>/`. Each pointer keeps only
-  discovery metadata and the required Entry/index-preparation handoff to its
-  exact action; action metadata remains authoritative in the vendored skill.
-  To change reusable review policy, update the custom action skill in
-  `GThumeAdigo/BCQuality-ADIGO`, merge it there, then bump the submodule commit.
-  Full scaffold-local skills are a separate category: the four SDD governance
-  gates, `sdd`, `al-code-review`, `al-compile`, and `al-pre-pr-cleanup`.
-  `hunk-review` is an external runtime bridge whose authority ships with Hunk.
+- `.opencode/skills/`: invocable review and workflow skills: the four SDD
+  governance gates, `sdd`, `al-code-review`, `al-compile`, and
+  `al-pre-pr-cleanup`. Reusable BCQuality reviews are thin runtime pointers
+  whose authoritative content lives in the vendored submodule.
 - `.opencode/BCQuality-ADIGO/`: a git submodule pinned to the
   [`GThumeAdigo/BCQuality-ADIGO`](https://github.com/GThumeAdigo/BCQuality-ADIGO)
-  fork. [`microsoft/BCQuality`](https://github.com/microsoft/BCQuality) is the
-  canonical upstream for the Microsoft-authored corpus; the fork's `custom/`
-  layer is authoritative for ADIGO reusable action skills. Run
-  `git submodule update --init` when empty. To update it, make and merge changes
-  in the appropriate upstream repository, update the fork, then bump the
-  submodule pointer in this scaffold. Never edit vendored files in place.
+  fork. See the BCQuality section of `README.md` for the corpus layout and the
+  update procedure. Never edit vendored files in place.
 
 ## AL project path
 
@@ -158,12 +107,10 @@ Three tools touch builds, and they are not interchangeable. Pick by job:
   from the installed VS Code AL extension directly, with the full house
   analyzer set (CodeCop, UICop, PerTenantExtensionCop plus the seven ALCops
   DLLs) and the workspace ruleset, and writes output to a temp dir so the repo
-  stays clean. This is the default way to build. It works even when al-mcp is
-  down, and it is the only way to do a clean baseline comparison (stash,
-  compile, pop, compile, diff). Read
-  [`.opencode/skills/al-compile/SKILL.md`](.opencode/skills/al-compile/SKILL.md)
-  before running it: the analyzer list, the ruleset resolution, and the
-  baseline recipe live there.
+  stays clean. It is the default way to build, it works even when al-mcp is
+  down, and it is the only way to do a clean baseline comparison. Read its
+  skill before running it: the analyzer list, the ruleset resolution, the
+  baseline discipline, and the baseline recipe live there.
 - **al-mcp earns its place for what alc cannot do:** `al_run_tests`,
   `al_symbolsearch` (searching inside compiled base-app packages), and
   `al_downloadsymbols`. Reach for al-mcp when the task is tests, base-app
@@ -174,238 +121,61 @@ Three tools touch builds, and they are not interchangeable. Pick by job:
 
 A compile is not done when `alc` exits 0. CI fails on warnings
 (`failOn: warning`), so report the warning count and classify findings against
-the baseline (see "Establish the baseline" below). After any successful build,
-the post-build hook prompts the remaining Test sequence; follow it exactly.
+the baseline; the `al-compile` skill owns that discipline. After any successful
+build, the post-build hook prompts the remaining verifier work; outside the SDD
+loop that means the two always-on reviewers, see "Outside the SDD loop" below.
 
-## BCQuality: the knowledge source agents cite
+## BCQuality and Microsoft Learn
 
 BCQuality is a remedial, machine-readable knowledge base for BC. Agents cite it
-so that findings are backed by a vetted rule rather than paraphrased from memory.
-Read [`.opencode/skills/bcquality-integration/SKILL.md`](.opencode/skills/bcquality-integration/SKILL.md)
-for the full contract. The essentials:
+so that findings are backed by a vetted rule rather than paraphrased from
+memory, in SDD and non-SDD sessions alike. The `microsoft-learn` MCP server is
+the companion source for platform API behavior: verify before relying on an
+API's name (house rule 13 in `.opencode/skills/al-code-review/SKILL.md`).
 
-- **Where it lives.** `.opencode/BCQuality-ADIGO/`. Knowledge files are under
-  `.opencode/BCQuality-ADIGO/<layer>/knowledge/<domain>/`. The Microsoft layer vendors
-  domains `performance`, `privacy`, `security`, `style`, `testing`, `ui`,
-  `upgrade`. The `community/` layer adds `performance` and `security` rules, and
-  the `custom/` layer adds `api`, `integration`, `operations`, `performance`,
-  and `process` knowledge plus review and testing skills.
-- **How it is consumed.** An adapter invokes
-  `.opencode/BCQuality-ADIGO/skills/entry.md` first with a
-  `requested-skill-id`, including its index preparation. Entry takes that exact
-  route rather than fuzzy-selecting a predetermined target. The action skill uses
-  READ (`skills/read.md`) for applicability and precedence, follows Source,
-  Relevance, Worklist, and Action, then emits DO (`skills/do.md`) output.
-- **Knowledge file format.** Atomic markdown with YAML frontmatter (`bc-version`,
-  `domain`, `keywords`, `technologies`, `countries`, `application-area`). Each
-  rule is `<slug>.md` with optional `<slug>.good.al.txt` and `<slug>.bad.al.txt` siblings.
-  The samples carry a `.txt` suffix on purpose. `.opencode/` is symlinked into the
-  AL project folder and `alc` compiles every `*.al` it finds there, following
-  symlinks, with no exclude mechanism anywhere in the toolchain. A sample named
-  `*.al` therefore lands in the app's build as a few hundred phantom warnings.
-  Keep the suffix when re-vendoring from upstream BCQuality, and rename any new
-  sample to match.
-
-## How agents cite knowledge (the finding contract)
-
-BCQuality action skills emit the DO findings shape. For a knowledge-backed
-finding, set `id` equal to the primary reference's corpus-relative path, for
-example `microsoft/knowledge/<domain>/<slug>.md`. Keep every
-`references[].path` corpus-relative to `.opencode/BCQuality-ADIGO/`; do not
-prefix it with the checkout path. Do not paraphrase a rule you can cite.
-
-House-policy findings are not BCQuality knowledge findings. Emit them in a
-separate local governance/reviewer report with `severity: block | warn | info`,
-a `house:` rule, message, and location. Do not place scaffold paths in a
-BCQuality DO `references` array and do not invent a corpus citation for a house
-rule. An adapter that applies both sources returns the action skill's DO report
-and, only when needed, a separately labelled local report.
-
-Runtime agents with corresponding custom action skills are thin adapters. They
-build complete task context in memory or a temporary path outside the workspace,
-then run `.opencode/BCQuality-ADIGO/tools/route_entry.py` directly, or through
-`python3` when it is not executable, with an exact `requested-skill-id`. They
-never create a workspace context file or fuzzy-route. Each follows only its
-routed action skill and READ/DO,
-load the local house-rule overlay when their role requires it, and do not carry
-duplicate review checklists or legacy JSON contracts in their prompts.
-
-## Mandatory verifier set
-
-During Test, after semantic implementation conformance passes and the app
-builds, dispatch `al-test-runner` first when automated tests are opted in. Any
-failed test count, runner failure or partial outcome, or unexecuted required test
-blocks Test regardless of finding severity. Fix the cause and rerun the full
-required test selection. Only then run the applicable mandatory verifiers in
-parallel and resolve their findings:
-
-- `al-code-quality-reviewer`
-- `al-readability-checker`
-- `al-test-coverage-validator` (only when tests are opted in, see the Testing policy in `.opencode/skills/sdd/SKILL.md`)
-- `al-test-validator` (only when tests are opted in, see the Testing policy in `.opencode/skills/sdd/SKILL.md`)
-
-Each applicable verifier owns that exact router/READ/DO execution. There is no
-extra generic BCQuality action run.
-
-When tests are not opted in for the feature, the mandatory set is just the first
-two verifiers; the runner and two test verifiers are skipped. Run the exact
-applicable verifier set twice: resolve every first-pass finding or persist a
-durable approved waiver with explicit owner and date, then rerun the same set.
-An acknowledged finding is neither resolved nor waived.
-
-After an AL build or compile, the post-build hook reminds the agent to run the
-applicable verifier set.
-
-When an integration is touched (an inbound or outbound flow, a Business Event, a
-staging endpoint, a Job Queue sender, or any Azure integration artifact), run
-`al-integration-pattern-reviewer`, `azure-integration-validator`, and
-`al-event-subscriber-auditor` in parallel in both verifier passes.
-
-If a Test fix changes production behavior, rerun the Opus
-`al-implement-feature-reviewer`, resolve its findings, and rerun it to
-`outcome: pass` before Test closes. Record compile/baseline evidence, test runs,
-both verifier passes, semantic reruns, waivers, and the executed manual or
-web-client result in the feature's `validation.md`. Also record the initial
-pre-Test semantic gate reviewer/date, outcome, and implementation revision.
-Record later semantic reruns separately. For opted-in tests, preserve the
-runner's BCQuality outcome and `summary.execution.status` verbatim.
-
-## Verify in the web client
-
-`bc-webclient-runner` drives a real browser against a live sandbox and walks a
-user guide step by step. **It is optional, not a mandatory gate.** After
-implementation, once the app can be published to a sandbox, offer the
-developer the choice from the `sdd` skill's Test step: a quick manual test
-recipe to click through by hand, or an autonomous verification run with the
-runner. Do not run it unbidden. When the developer opts in, the runner
-replaces them clicking through the app, so close with a result rather than a
-request.
-
-The coordinator's obligations are short:
-
-- Run it in the Test step, after the mandatory verifiers pass and the app is
-  published to a sandbox. Never against a production environment.
-- Give it a user guide (or explicit steps with expected outcomes) and absolute
-  paths for any file the flow uploads. Without expectations it degrades into
-  screenshots.
-- The one-time browser sign-in is a human step: if the agent reports a
-  Microsoft login screen, ask for a sign-in rather than entering credentials.
-- Classify mismatches rather than assuming the app is wrong: a single wrong
-  caption is usually a guide error, a coherent block of them is usually an app
-  defect. Confirm against the AL source before reporting a defect.
-
-Everything else (inputs, the DO findings shape, delayed-insert and lookup
-probing) lives in the authoritative BCQuality action skill referenced by the
-thin `.opencode/agents/bc-webclient-runner.md` adapter. Environment values live
-in the consuming app's `APP_CONTEXT.md`.
-
-## Show diffs in Hunk
-
-[Hunk](https://hunk.dev) is an interactive terminal diff viewer running in the
-developer's own terminal. When there is a diff worth looking at (after an
-implementation task, before a PR, when reporting findings that carry a
-file and a line), put it in Hunk instead of pasting patch text into the chat.
-
-Load [`.opencode/skills/hunk-review/SKILL.md`](.opencode/skills/hunk-review/SKILL.md)
-before driving a session. The skill is authoritative: `hunk` is absent from
-the agent PATH, this checkout is a git worktree, `hunk diff` and `hunk show`
-are the developer's commands while agents drive an existing session through
-`hunk session *`, and a missing session is a graceful fallback, never a
-blocker. Hunk is a presentation layer: it does not compile, run the
-analyzers, or replace the mandatory verifier set.
+The runtime contract (entry routing, DO findings, corpus-relative citations,
+house-report separation) is owned by the thin adapter agents under
+`.opencode/agents/`. The corpus layout, knowledge file format, citation
+contract, and submodule update procedure are documented in the BCQuality
+section of `README.md`.
 
 ## House rules
 
 Project-specific AL conventions (the `house:` rules) live in
 [`.opencode/skills/al-code-review/SKILL.md`](.opencode/skills/al-code-review/SKILL.md),
 and the project AL style guide lives beside it in
-[`.opencode/skills/al-code-review/styleguide.md`](.opencode/skills/al-code-review/styleguide.md).
+[`styleguide.md`](.opencode/skills/al-code-review/styleguide.md).
 Both are the authority at two moments: while **authoring** AL (read them before
-writing, see the Implement step) and while **reviewing** it. They are applied in
+writing) and while **reviewing** it. They are applied in
 addition to BCQuality, not instead of it. When sources conflict, house rules win.
 
-There is exactly one copy of each. Do not duplicate the style guide elsewhere in
-the repo; link to it.
+There is exactly one copy of each; link to them, do not duplicate. The comment
+policy is styleguide §14.2. Each agent file under `.opencode/agents/` names the
+style guide sections that agent enforces.
 
-### Comment policy (no prose comments in AL)
+## Outside the SDD loop
 
-We do not want comments in the codebase. Exactly two things are allowed:
+A bug fix, a compile-error cleanup, or a small change does not need the `sdd`
+skill or spec artifacts. The path is:
 
-- **XML documentation (`///`) on `internal` and global procedures.** That is the
-  object's callable surface, and it is required there. Never on a
-  `local procedure`, a trigger, `OnRun`, or an event subscriber.
-- **A comment that justifies a pragma.** A `#pragma warning disable` must say
-  why the suppression is justified, and the scope must be reopened with
-  `#pragma warning restore`.
+1. Discover the app folder (above), read `APP_CONTEXT.md`, and read the house
+   rules and style guide before editing anything.
+2. Dispatch `custom-al-implementer` for anything beyond a trivial one-line
+   edit; it runs in quick-fix mode, consults BCQuality and Microsoft Learn, and
+   reports per its return contract. Single-symbol lookups and one-line edits
+   the coordinator may do itself, with Serena first.
+3. Compile with the `al-compile` skill and classify findings against the
+   baseline.
+4. Run `al-code-quality-reviewer` and `al-readability-checker` in parallel on
+   the changed AL, resolve every finding or justify it explicitly, then rerun
+   the same reviewers with the findings and fixes listed to confirm
+   resolution. An acknowledged finding is neither resolved nor waived; do not
+   mark the work complete on the first pass.
+5. If the change reveals that behavior an approved feature specified is wrong,
+   that is not a quick fix: load the `sdd` skill and use its amendment
+   procedure.
 
-Everything else goes. No `//` banner, no step-by-step narration, no
-commented-out code, and no "genuine why" prose comment either. When you feel the
-urge to explain something in AL:
-
-- **Name the thing.** Extract the block into a `local procedure` whose name says
-  what the comment would have said.
-- **Name the value.** Replace the magic value or opaque expression with a named
-  local variable or a `Label`.
-- **Put the reasoning in the spec.** A rationale that genuinely cannot be
-  expressed in code (a platform quirk, a rejected alternative, an accepted
-  trade-off) belongs in the feature `plan.md` amendment or in the `///` block of
-  the nearest internal procedure, where it is durable and reviewable. It does not
-  belong inline next to the statement.
-
-This matches style guide §14.2: pragma justification is the only regular-comment
-exception. Where the two disagree, this section wins.
-
-### Which agents read the style guide
-
-Every agent that writes or reviews AL loads the style-guide overlay appropriate
-to its role. The ownership map is:
-
-| Agent | Style guide sections it enforces |
-|---|---|
-| `al-readability-checker` | 2 naming, 3 organization, 4 declaration order, 9 labels, 14 documentation and comments, 15 formatting |
-| `al-code-quality-reviewer` | 5 tables, 6 pages, 7 codeunits, 10 permissions, 11 error handling, 13 SOLID |
-| `al-performance-reviewer` | 12 performance |
-| `al-table-refactorer` | 2 naming, 3.2 regions, 4 declaration order, 5 tables, 14 documentation and comments, 15 formatting |
-| `al-event-subscriber-auditor` | 7.3 subscriber codeunits |
-| `al-permission-set-auditor` | 10 permissions |
-| `al-translation-auditor` | 8 enums, 9 labels |
-| `al-test-writer`, `al-userguide-test-writer`, `al-test-validator` | 2 naming, 3.2 regions, 3.3 namespace/using order, 4 declaration order, 9 labels, 15 formatting, applied to test AL |
-
-The style guide contains project placeholders (the `GOX`/`GOXOUT` object prefix,
-the `GOXFOU Error` handler, the `ADIGO.ITS.*` namespaces). When a repo uses a
-different prefix, namespace root, or foundation app, the rule still applies; only
-the identifier changes. Agents enforce the pattern, not the literal name.
-
-## Working efficiently in this repo
-
-Learned the hard way. Read this before a session that changes existing AL.
-
-### Settle the design before writing code
-
-When a request changes behavior that an approved feature already specified, the
-expensive mistakes are decisions, not typos. Surface them as explicit questions
-first, then write. For a change to stored data the recurring three are: how wide
-is the change (everywhere, or only in one branch of the data), what happens to
-the schema the old behavior needed, and what happens to rows already written.
-Asking costs one round trip. Guessing costs a rewrite and a re-approval.
-
-### Amend a feature by rewriting it, not by appending
-
-A feature is changed by rewriting its artifacts in place and deleting the
-superseded content. `spec.md`, `plan.md`, and `tasks.md` are current-only:
-they never carry dated amendment sections or superseded text, because every
-later reader, gate, and subagent pays for stale statements. This holds for
-open features and for features marked `done`.
-
-The past lives in two durable places: git history and the feature's
-`approvals.md` change log, which records the decision owner and date, what
-changed, why, what was rejected, and what was accepted as a loss. A change to
-approved spec or plan intent invalidates the affected digest and requires the
-gate, hash, and approval sequence again. The full procedure lives in the
-`Amending approved artifacts` section of the `sdd` skill. The reasoning is the
-durable artifact; the superseded text is not.
-
-### Shared and app-local scaffolding
+## Shared and app-local scaffolding
 
 `.git/info/exclude` lists `AGENTS.md`, `APP_CONTEXT.md`, `CLAUDE.md`,
 `opencode.json`, `specs/`, `.opencode/`, `DOCS/`, and `.serena/`. Everything that
@@ -430,140 +200,49 @@ Either way, a clean working tree in the BC repo says nothing about whether the
 specs or the house rules were edited. Verify an edit to any of those paths by
 reading the file back rather than by looking at the diff.
 
-### Establish the baseline before you trust a tool result
-
-When a build, analyzer, or verifier reports something odd, compare the same
-command on the unmodified tree when it is safe to do so. Record app-specific
-known warnings, analyzer quirks, and baseline counts in `APP_CONTEXT.md`, not in
-this shared file. State which findings are new and which are baseline.
-
-### Verify platform API assumptions, do not reason from the name
-
-An AL platform API often does less than its name promises. The example that cost
-a review round: `XmlReadOptions.PreserveWhitespace(false)` does **not** remove
-all whitespace, because the parser still reports whitespace-only CDATA and
-anything under `xml:space="preserve"` as significant. Confirm behavior against
-Microsoft Learn (`microsoft_docs_search`, `microsoft_docs_fetch`) before writing
-a guarantee into a spec, and add the backstop in code when the platform only
-gets you part of the way.
-
-### Run the verifiers twice
-
-The mandatory verifiers earn their cost. Run them, apply the findings, then run
-the same verifier again with the previous findings and the fix applied to each
-listed in the prompt. The second pass confirms resolution and catches the common
-failure where a fix moved the problem instead of removing it. Do not mark work
-complete on the first pass.
-
-### Read specs by section, not by whole file
-
-Specs are durable and on disk, which means they survive compaction and can be
-re-read at any time. Treat the context window as scarce and the spec folder as
-the source of truth that outlives it:
-
-- The first pass for a feature reads the full constitution as required by the
-  `sdd` skill. Later steps read only the constitution sections that govern the
-  task. Implementing a feature needs its approved `spec.md`, `plan.md`, and
-  `tasks.md` plus `APP_CONTEXT.md`; it rarely needs the full brief again.
-- When a spec is long, grep for the section header you need and read from
-  there instead of loading the whole file. The acceptance criteria and the
-  task list are the usual targets.
-- After auto-compaction, do not reconstruct context from memory. Re-read the
-  one spec section the current task depends on. That is cheaper and more
-  accurate than a summary of a summary.
-- Keep specs structured so this works: one feature per folder, stable section
-  headers, and current-only content, with history in the approvals change log
-  and git. The agent can only read selectively when the document advertises
-  where things are.
-
-### Delegate open-ended exploration
-
-The main session holds the spec and the plan; that context is expensive. When
-a question needs more than two or three lookups to answer ("how does X work
-across these objects?", "where is Y used?"), hand it to a subagent and say in
-the prompt that it navigates AL with Serena and treats `grep`/`rg` as the
-fallback, per the Serena section below. The subagent's exploration transcript
-stays out of the main context; only the answer returns. This is the same
-reason `custom-al-implementer` pins a cheaper model: the coordinator's context
-is the bottleneck, not the tokens spent elsewhere. Direct Serena use from the
-main session remains the default for anything a single symbol lookup answers.
-
 ## Serena (semantic symbol MCP server)
 
-Serena is wired in as an opencode MCP server (registered globally under
-`~/.config/opencode/opencode.json` with `--context ide --project-from-cwd`, so
-it applies to every AL repo on this machine). It provides LSP-backed AL symbol
-tools: `get_symbols_overview`, `find_symbol`, `find_referencing_symbols`,
-`replace_symbol_body`, `rename_symbol`, and `search_for_pattern`, plus project
-memories under `.serena/memories`.
+Serena provides LSP-backed AL symbol tools: `get_symbols_overview`,
+`find_symbol`, `find_referencing_symbols`, `replace_symbol_body`,
+`rename_symbol`, and `search_for_pattern`, plus project memories under
+`.serena/memories`. Setup and infrastructure facts (registration, language
+server binaries, startup warnings, index rebuilds, dashboard) are in the Serena
+section of `README.md`.
 
-- Serena activates the nearest configured workspace root. In a multi-app
-  checkout, its relative paths may therefore include an app-folder prefix;
-  confirm the active root rather than assuming a fixed layout.
-- The AL language server expects an `app.json` at the project root and the
-  workspace root has none, so the `al/manifestMissing` warning on startup is
-  expected and harmless. Symbol extraction is per-file (each `.al` file is
-  opened before symbol requests), so document symbols and indexing work
-  regardless. `get_symbols_overview` on a non-AL file such as `app.json` errors
-  by design; that is not a misconfiguration.
-- The AL extension binaries come from the installed VS Code AL extension
-  (`ms-dynamics-smb.al-*`); if that is absent, Serena downloads a pinned
-  version to `~/.serena/ls_resources/`. Optional `AL_EXTENSION_PATH` override
-  or `ls_specific_settings.al.al_extension_version` for a different version.
-- The index is pre-built and Serena refreshes it as files change. After a
-  rebuild of the worktree or a large branch switch, re-run
-  `serena project index` from the **workspace root**.
-- `.serena/` is listed in `.git/info/exclude`, matching the scaffolding
-  policy. The global dashboard stays off (`web_dashboard_open_on_launch:
-  false` in `~/.serena/serena_config.yml`) so MCP starts do not open a
-  browser. Open it manually at `http://localhost:24282/dashboard/`.
-
-### Use it before grepping or reading files
-
-Serena is the cheap way to explore a large AL workspace, and it is the default
-navigation tool for AL, ahead of `grep`, `glob`, and shell `rg`. Reach for it
-first. A grep returns matching lines and leaves you to reconstruct the structure
-around them, which in practice means reading whole files to find out what a match
-belongs to. Serena returns the symbol, its container, and its references
-directly, so the same question costs fewer calls and far fewer tokens.
-
-Use `get_symbols_overview` to learn a file, `find_symbol` (with `depth` and
-`include_body=False` first) to locate a definition, `find_referencing_symbols` to
-find callers, and `search_for_pattern` when you genuinely need a text match
-rather than a symbol.
-
-Fall back to the plain search tools only for what Serena does not cover:
-non-AL files (`app.json`, `.xlf`, `.json`, `.ruleset`, markdown), file-name
-discovery, counting occurrences, and reading git or build output.
-
-**This outranks the Task-tool search default.** The general tool-usage guidance
-prefers handing file search to a subagent to save context. That decides *who*
-runs the search, not *which* tool it uses, so it is not a licence to grep. For
-AL, drive Serena yourself for anything a symbol lookup answers, and when you do
-delegate a broader exploration, state in the prompt that the subagent navigates
-AL with Serena and treats `grep`/`rg` as the fallback. Delegation remains right
-for genuinely open-ended, multi-round investigations and for chewing through
-large tool output, where a separate context is the point. Where the two still
-read as conflicting, this section wins, per "When sources conflict, house rules
-win."
-
-Note that Serena's line numbers are 0-based while the AL compiler and the
-analyzers report 1-based, so translate before citing a finding as `file:line`.
-Prefer `rename_symbol` and `safe_delete_symbol` over hand-edits when changing an
-existing symbol: they are reference-aware across the active workspace.
-
-### Memories
-
-When onboarding has been performed, the memory graph is project-local and
-untracked. Read its root memory first in a session that touches unfamiliar code.
-Keep per-app facts in app-local memories or `APP_CONTEXT.md`; use
-`serena memories check` from the active workspace root to report broken links.
-
-The memories are a **navigational summary**, not a second source of truth. This
-file and the house rules under `.opencode/skills/al-code-review/` remain
-authoritative for conventions and workflow; when the two disagree, fix the
-memory. Memories may carry workspace navigation facts that do not belong in
-this shared contract.
+- Serena is the default navigation tool for AL, ahead of `grep`, `glob`, and
+  shell `rg`. A grep returns matching lines and leaves you to reconstruct the
+  structure around them; Serena returns the symbol, its container, and its
+  references directly, so the same question costs fewer calls and far fewer
+  tokens. Use `get_symbols_overview` to learn a file, `find_symbol` (with
+  `depth` and `include_body=False` first) to locate a definition,
+  `find_referencing_symbols` to find callers, and `search_for_pattern` when you
+  genuinely need a text match rather than a symbol. Fall back to the plain
+  search tools only for what Serena does not cover: non-AL files (`app.json`,
+  `.xlf`, `.json`, `.ruleset`, markdown), file-name discovery, counting
+  occurrences, and reading git or build output.
+- **This outranks the Task-tool search default.** The general tool-usage
+  guidance prefers handing file search to a subagent to save context. That
+  decides *who* runs the search, not *which* tool it uses, so it is not a
+  licence to grep. For AL, drive Serena yourself for anything a single symbol
+  lookup answers, and when you do delegate a broader exploration, state in the
+  prompt that the subagent navigates AL with Serena and treats `grep`/`rg` as
+  the fallback. Delegation remains right for genuinely open-ended, multi-round
+  investigations and for chewing through large tool output, where a separate
+  context is the point.
+- In a multi-app checkout, Serena activates the workspace root, so its relative
+  paths may include an app-folder prefix; confirm the active root rather than
+  assuming a fixed layout.
+- Serena's line numbers are 0-based while the AL compiler and the analyzers
+  report 1-based, so translate before citing a finding as `file:line`. Prefer
+  `rename_symbol` and `safe_delete_symbol` over hand-edits when changing an
+  existing symbol: they are reference-aware across the active workspace.
+- Memories: when onboarding has been performed, read the root memory first in a
+  session that touches unfamiliar code. Keep per-app facts in app-local
+  memories or `APP_CONTEXT.md`; use `serena memories check` from the active
+  workspace root to report broken links. Memories are a **navigational
+  summary**, not a second source of truth: this file and the house rules under
+  `.opencode/skills/al-code-review/` remain authoritative, and when the two
+  disagree, fix the memory.
 
 ## Runtime reloads
 

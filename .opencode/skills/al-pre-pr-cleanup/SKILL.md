@@ -121,7 +121,8 @@ report which hits were in excluded paths.
 
 ## Pass 3: house comment policy
 
-Per AGENTS.md, AL carries exactly two kinds of comment. Flag violations found on
+Per the AL style guide §14.2, AL carries exactly two kinds of comment. Flag
+violations found on
 the way past, and fix the cheap ones:
 
 - `///` XML documentation on `internal` and global procedures. Not on a

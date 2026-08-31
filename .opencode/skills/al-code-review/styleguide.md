@@ -1404,8 +1404,8 @@ One narrow exception, and only one:
 A "genuine why" is **not** an exception in this repo. A rationale that cannot be
 expressed through a name (a platform quirk, a rejected alternative, an accepted
 trade-off) goes in the feature `plan.md` or in the `///` block of the nearest
-internal procedure, where it is durable and reviewable. See the comment policy in
-`AGENTS.md`, which governs.
+internal procedure, where it is durable and reviewable. This section is the
+authority for the comment policy.
 
 ```al
 // Bad - a naked suppression, nobody can tell whether it is still needed

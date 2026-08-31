@@ -39,6 +39,16 @@ The workflow must stay in context for the whole feature loop:
   `specs/roadmap.md` and the feature's `approvals.md` Loop State section
   first. Resume from the recorded stage instead of reconstructing state from
   chat history.
+- Read specs by section, not by whole file. Specs are durable and on disk, so
+  they survive compaction and can be re-read at any time; treat the context
+  window as scarce. When a spec is long, grep for the section header you need
+  and read from there; the acceptance criteria and the task list are the usual
+  targets. After auto-compaction, re-read the one section the current task
+  depends on rather than reconstructing context from memory. Implementing a
+  feature needs its approved `spec.md`, `plan.md`, and `tasks.md` plus
+  `APP_CONTEXT.md`; it rarely needs the full brief again. Keep specs
+  structured so this works: one feature per folder, stable section headers,
+  and current-only content, with history in the approvals change log and git.
 
 ## Keep the main session small
 
@@ -78,6 +88,34 @@ The main session coordinates and delegates substantial specialist work.
   them. The conversation history is resent on every turn, so a session that
   wanders pays for the wandering all feature long.
 
+## Model policy (which step runs on which model)
+
+Models are pinned per step, not left to the session default, because the
+subscription's weekly limit tracks Opus separately from other models. Semantic
+intent review uses Opus; execution and mechanical verification use Sonnet:
+
+- **Semantic SDD reviews run on Opus 5 high.** `al-sdd-reviewer` runs the
+  specification, semantic plan, and constitution gates.
+  `al-implement-feature-reviewer`
+  compares approved intent with implemented behavior before Test. Both agents
+  pin `model: anthropic/claude-opus-5` and `variant: high`. Normal hard-stop
+  flow dispatches fresh gates and does not imply shared subagent context.
+- **Implementation and mechanical checks run on Sonnet 5.** These include
+  `custom-al-implementer`, `al-sdd-mechanical-reviewer` (the deterministic
+  stage of the plan gate), the mandatory verifiers, test writers and
+  validators, and specialist auditors. Their work is execution or structured
+  rule-checking rather than semantic intent reconciliation.
+
+The SDD gate commands (`/al-spec-feature`, `/al-plan-feature`,
+`/al-implement-feature`, `/al-spec-init`) are thin dispatchers: their
+frontmatter names the reviewer agent and carries no model pin. The agent
+frontmatter is the single place to change a gate's model or permissions; do
+not reintroduce pins on the commands.
+
+Do not unpin an agent ad hoc for a single run. If a verifier systematically
+misses a class of finding on Sonnet, that is a reason to change the pin in the
+agent file (globally, in the scaffolding repo), not to override it per session.
+
 ## The constitution (initial read, every feature)
 
 - `APP_CONTEXT.md`: local app identity, conventions, dependencies, and
@@ -86,7 +124,8 @@ The main session coordinates and delegates substantial specialist work.
 - `specs/tech-design.md`: implementation strategy: which standard BC modules to
   reuse, and where custom code is genuinely needed.
 - `specs/roadmap.md`: ordered list of features with status.
-- `AGENTS.md`: conventions, quality gates, and the model policy.
+- `AGENTS.md`: the shared operational contract: project discovery, building,
+  house-rule pointers, and the non-SDD path.
 
 ## The per-feature loop
 
@@ -166,31 +205,56 @@ sections and approved feature artifacts.
    validation. Any failed test count, runner failure or partial outcome, or
    required test left unexecuted blocks Test regardless of finding severity.
    Resolve the cause and rerun the tests after every relevant fix until the full
-   required selection passes. Then run the applicable mandatory verifier agents
-   (see AGENTS.md) in parallel, including the integration trio when applicable.
-   Each verifier owns its own execution of
-   `.opencode/BCQuality-ADIGO/tools/route_entry.py` with an exact
-   `requested-skill-id`, followed by its routed action's READ/DO flow. Use the
-   `python3` fallback when the router is not executable. Never add a generic or
-   fuzzy aggregate BCQuality run. Resolve every finding or record a durable,
-   explicitly approved waiver with owner and date, then rerun the exact same
-   applicable verifier set to confirm resolution. A casual acknowledgement is
-   not resolution. If any Test fix changes production behavior, rerun the Opus
-   `al-implement-feature-reviewer` semantic gate, resolve its findings, and rerun
-   it to `outcome: pass` before Test closes. Record both verifier runs and every
-   rerun in `validation.md`. When the app can be published to a sandbox, close
-   the step by
-   offering the developer two verification paths and asking which they want:
-   - **A quick manual test recipe** for this change: which page to open, which
-     steps to click, and what to expect at each, so they can verify by hand in
-     the client in a few minutes.
-   - **An autonomous verification run** with `bc-webclient-runner`, which walks
-     a documented user guide section by section in a real browser and reports
-     structured findings. Its thin agent adapter points to the authoritative
-     BCQuality action skill; app environment values come from `APP_CONTEXT.md`.
-   Do not run the runner unbidden; it is the developer's call per feature.
-   Execute the selected manual recipe or web-client run and record a passing
-   result; offering the paths without a result does not close Test.
+    required selection passes. Then run the applicable mandatory verifier agents
+    in parallel and resolve their findings:
+    - `al-code-quality-reviewer`
+    - `al-readability-checker`
+    - `al-test-coverage-validator` (only when tests are opted in)
+    - `al-test-validator` (only when tests are opted in)
+    When tests are not opted in, the mandatory set is just the first two
+    verifiers. When an integration is touched (an inbound or outbound flow, a
+    Business Event, a staging endpoint, a Job Queue sender, or any Azure
+    integration artifact), run `al-integration-pattern-reviewer`,
+    `azure-integration-validator`, and `al-event-subscriber-auditor` in
+    parallel in both verifier passes.
+    Each verifier owns its own execution of
+    `.opencode/BCQuality-ADIGO/tools/route_entry.py` with an exact
+    `requested-skill-id`, followed by its routed action's READ/DO flow. Use the
+    `python3` fallback when the router is not executable. Never add a generic or
+    fuzzy aggregate BCQuality run. Resolve every finding or record a durable,
+    explicitly approved waiver with owner and date, then rerun the exact same
+    applicable verifier set to confirm resolution. A casual acknowledgement is
+    not resolution. If any Test fix changes production behavior, rerun the Opus
+    `al-implement-feature-reviewer` semantic gate, resolve its findings, and rerun
+    it to `outcome: pass` before Test closes. Record both verifier passes and
+    every rerun in `validation.md`, each semantic rerun separately from the
+    initial pre-Test gate's reviewer/date, outcome, and implementation revision.
+    For opted-in tests, preserve the runner's BCQuality outcome and
+    `summary.execution.status` verbatim. When the app can be published to a
+    sandbox, close
+    the step by
+    offering the developer two verification paths and asking which they want:
+    - **A quick manual test recipe** for this change: which page to open, which
+      steps to click, and what to expect at each, so they can verify by hand in
+      the client in a few minutes.
+    - **An autonomous verification run** with `bc-webclient-runner`, which walks
+      a documented user guide section by section in a real browser and reports
+      structured findings. Its thin agent adapter points to the authoritative
+      BCQuality action skill; app environment values come from `APP_CONTEXT.md`.
+      The coordinator's obligations when the developer opts in: run it in this
+      step, after the mandatory verifiers pass and the app is published to a
+      non-production sandbox; give it a user guide (or explicit steps with
+      expected outcomes) and absolute paths for any file the flow uploads,
+      because without expectations it degrades into screenshots; treat the
+      one-time browser sign-in as a human step, so if the agent reports a
+      Microsoft login screen, ask for a sign-in rather than entering
+      credentials; and classify mismatches rather than assuming the app is
+      wrong, since a single wrong caption is usually a guide error while a
+      coherent block of them is usually an app defect, confirmed against the
+      AL source before reporting a defect.
+    Do not run the runner unbidden; it is the developer's call per feature.
+    Execute the selected manual recipe or web-client run and record a passing
+    result; offering the paths without a result does not close Test.
 5. **Docs.** Complete `validation.md`, update end-user or technical documentation
    affected by the change, and move the roadmap item from `in-progress` to
    `done` only after both Test and Docs pass.
@@ -243,6 +307,15 @@ the plan gate, and the implementation conformance gate alike.
   the owner as named options. The coordinator never settles such a finding
   by its own unverified reasoning, because an invented resolution becomes
   the next run's block.
+
+## Settle the design before writing code
+
+When a request changes behavior that an approved feature already specified, the
+expensive mistakes are decisions, not typos. Surface them as explicit questions
+first, then write. For a change to stored data the recurring three are: how wide
+is the change (everywhere, or only in one branch of the data), what happens to
+the schema the old behavior needed, and what happens to rows already written.
+Asking costs one round trip. Guessing costs a rewrite and a re-approval.
 
 ## Amending approved artifacts
 

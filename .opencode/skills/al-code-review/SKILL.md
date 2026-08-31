@@ -80,6 +80,15 @@ because they are not `GOX*`.
     telemetry through a boundary that AL tests or the platform test telemetry
     facility can observe and assert. A direct, unobservable logging call does not
     satisfy the telemetry testability rule.
+13. **Verify platform API assumptions, do not reason from the name.** An AL
+    platform API often does less than its name promises. The example that cost a
+    review round: `XmlReadOptions.PreserveWhitespace(false)` does **not** remove
+    all whitespace, because the parser still reports whitespace-only CDATA and
+    anything under `xml:space="preserve"` as significant. When authoring,
+    confirm behavior against Microsoft Learn (`microsoft_docs_search`,
+    `microsoft_docs_fetch`) before relying on it, and add the backstop in code
+    when the platform only gets you part of the way. When reviewing, flag any
+    guarantee that rests on unverified platform behavior.
 
 ## Core checks
 
