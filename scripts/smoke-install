@@ -41,6 +41,7 @@ def main():
         command = [sys.executable, str(ROOT / "scripts/install"), "--revision", args.revision, "--store", str(root / "data"), "--backup-root", str(root / "backups")]
         run([*command, str(apps[0]), str(apps[1])])
         config = json.loads((apps[0] / "opencode.json").read_text())
+        assert "@APP@" not in json.dumps(config) and "@RELEASE@" not in json.dumps(config)
         assert config["agent"]["al-change-reviewer"]["variant"] == "high"
         assert not config["mcp"]["playwright"]["enabled"]
         assert not (apps[0] / ".opencode").is_symlink()

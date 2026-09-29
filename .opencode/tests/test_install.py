@@ -49,6 +49,11 @@ class InstallTests(unittest.TestCase):
         self.assertTrue((self.app / ".opencode/skills").is_symlink())
         self.assertEqual(json.loads((self.app / "opencode.json").read_text())["path"], str(self.app))
 
+    def test_permission_path_keys_are_rendered(self):
+        value = {"permission": {"edit": {"@RELEASE@/**": "deny"}}}
+        rendered = installer.render(value, {"@RELEASE@": "/isolated/release"})
+        self.assertEqual(rendered["permission"]["edit"], {"/isolated/release/**": "deny"})
+
     def test_idempotence_and_private_files_preserved(self):
         self.run_install()
         (self.app / "specs/brief.md").write_text("owner decision")
