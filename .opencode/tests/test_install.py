@@ -99,6 +99,29 @@ class InstallTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "symlink"):
             self.run_install()
 
+    def test_workspace_suffix_collision_is_avoided(self):
+        second = self.repo / "other" / self.app.name
+        second.mkdir(parents=True)
+        (second / "app.json").write_text('{}')
+        workspace = self.repo / "main.code-workspace"
+        workspace.write_text('{"folders": []}')
+        self.run_install("--workspace", str(workspace), apps=[self.app, second])
+        self.assertEqual(len(list(self.repo.glob("SDD-*.code-workspace"))), 2)
+
+    def test_failure_restores_already_applied_paths(self):
+        original = (self.repo / ".git/info/exclude").read_bytes()
+        real_put = installer.put
+        def fail(path, state):
+            if path.name == "CLAUDE.md" and state["kind"] == "link":
+                raise OSError("injected write failure")
+            real_put(path, state)
+        with patch.object(installer, "put", side_effect=fail):
+            with self.assertRaisesRegex(OSError, "injected"):
+                self.run_install()
+        self.assertEqual((self.repo / ".git/info/exclude").read_bytes(), original)
+        self.assertFalse((self.app / "AGENTS.md").exists())
+        self.assertFalse((self.app / ".agent-state/install.json").exists())
+
     def test_legacy_link_requires_explicit_migration(self):
         legacy = self.root / "legacy"
         (legacy / ".opencode").mkdir(parents=True)
