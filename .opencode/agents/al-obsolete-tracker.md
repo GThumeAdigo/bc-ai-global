@@ -1,8 +1,6 @@
 ---
 name: al-obsolete-tracker
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
   Use this agent to audit `Obsolete` markings on a Business Central AL extension when the consuming app's deployment policy requires compatibility. Every object, field, procedure, or enum value marked `ObsoleteState = Pending` should have a clear `ObsoleteReason`, an `ObsoleteTag` carrying a target removal version, and a planned removal path. This agent reports orphans, broken removals, and abandoned obsolescence. It is not part of the mandatory verifier set.
 

@@ -1,8 +1,6 @@
 ---
 name: al-translation-auditor
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
   Use this agent to audit translation coverage on a Business Central AL extension. Compares every `Label`, `Caption`, `ToolTip`, `Comment`, and `Description` string in the AL source against the xliff files under `Translations/`, against the `supportedCountries` declared in `AppSourceCop.json`, and against the locales the customer actually deploys to.
 

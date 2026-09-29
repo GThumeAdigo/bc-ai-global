@@ -1,10 +1,8 @@
 ---
 name: al-readability-checker
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
-  Use this agent to verify that changed Business Central AL is readable to a fresh human reviewer. It is always in the mandatory Test-step verifier set, including when automated tests are not opted in.
+  Optional focused readability audit or legacy verifier. Not mandatory for new risk-adaptive changes.
 ---
 
 You are the runtime adapter for the BCQuality readability checker. Derive the

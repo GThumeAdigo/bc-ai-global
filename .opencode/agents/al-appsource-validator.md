@@ -1,8 +1,6 @@
 ---
 name: al-appsource-validator
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
   Use this agent before submitting a Business Central AL extension to AppSource. Walks the AppSourceCop ruleset, the `app.json` metadata, the screenshot manifest, the EULA / privacy links, and the dependency chain. Reports every gate the AppSource validation will reject so the developer fixes them locally rather than after a multi-day Microsoft review cycle.
 

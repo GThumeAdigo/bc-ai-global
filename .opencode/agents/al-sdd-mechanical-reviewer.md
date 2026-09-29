@@ -1,8 +1,6 @@
 ---
 name: al-sdd-mechanical-reviewer
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 permission:
   "*": deny
   read: allow

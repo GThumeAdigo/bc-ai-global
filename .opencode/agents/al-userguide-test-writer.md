@@ -1,8 +1,6 @@
 ---
 name: al-userguide-test-writer
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
   Use this agent to generate Business Central TestPage tests from an end-user guide only when automated tests are opted in or the user explicitly requests guide-derived tests.
 ---

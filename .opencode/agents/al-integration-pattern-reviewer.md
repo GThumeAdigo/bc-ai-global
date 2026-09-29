@@ -1,8 +1,6 @@
 ---
 name: al-integration-pattern-reviewer
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
   Use this agent to review changed Business Central integration flows against the authoritative BCQuality integration-pattern action skill.
 

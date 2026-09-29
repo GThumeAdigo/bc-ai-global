@@ -1,8 +1,6 @@
 ---
 name: al-test-runner
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
   Use this agent to execute Business Central AL tests when automated tests are opted in or the user explicitly asks to run tests. It detects the repository's supported runner and returns the BCQuality action skill's run report.
 ---

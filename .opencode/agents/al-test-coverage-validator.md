@@ -1,8 +1,6 @@
 ---
 name: al-test-coverage-validator
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
   Use this agent to validate Business Central AL test coverage only when automated tests are opted in for the feature or the user explicitly requests coverage review. In that case it joins the mandatory Test-step verifier set.
 ---

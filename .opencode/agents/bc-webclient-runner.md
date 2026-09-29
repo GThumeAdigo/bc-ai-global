@@ -1,8 +1,6 @@
 ---
 name: bc-webclient-runner
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
   Use this agent, only when the developer opts in, to drive a Business Central sandbox through a documented user flow in a real browser and report rendered-UI mismatches. It is optional and is not part of the mandatory verifier set.
 ---

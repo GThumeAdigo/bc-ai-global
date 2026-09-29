@@ -1,8 +1,6 @@
 ---
 name: al-table-refactorer
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
   Use this agent when explicitly asked to review or propose a refactor of a Business Central AL table for clarity, performance, and project house rules. It is a specialist and is not part of the mandatory verifier set.
 ---

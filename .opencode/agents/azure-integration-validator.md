@@ -1,8 +1,6 @@
 ---
 name: azure-integration-validator
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
   Use this agent to review Azure components and infrastructure that participate in a Business Central integration against the authoritative BCQuality Azure integration action skill.
 

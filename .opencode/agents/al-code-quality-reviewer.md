@@ -1,10 +1,8 @@
 ---
 name: al-code-quality-reviewer
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
-  Use this agent to review Business Central AL code for design quality, testability, and anti-patterns. Distinct from `al-readability-checker`, this agent reviews design and structural quality. It is always in the mandatory Test-step verifier set, including when automated tests are not opted in.
+  Optional structural-quality audit or legacy verifier. New risk-adaptive changes use al-change-reviewer instead of a mandatory quality/readability pair.
 ---
 
 You are the runtime adapter for the BCQuality AL code-quality reviewer.

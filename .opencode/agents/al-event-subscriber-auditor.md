@@ -1,8 +1,6 @@
 ---
 name: al-event-subscriber-auditor
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
   Use this agent to review changed AL event subscribers against the authoritative BCQuality event-subscriber action skill and the local subscriber-style overlay.
 

@@ -40,6 +40,11 @@ compare; without it, compatibility review is partial.
 
 ## Verification environment
 
+- New automated test authoring default: yes | no | ask (explicit owner decision)
+- Relevant existing test runner/command and scope: TODO
+- Selected toolchain/analyzer profile and supported BC runtime: TODO
+- Installation revision and runtime state: `.agent-state/install.json`
+
 - Compile/build command and known baseline findings: TODO
 - Sandbox URL and publishing prerequisites: TODO
 - Web-client verification prerequisites: TODO

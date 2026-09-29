@@ -1,0 +1,22 @@
+#!/usr/bin/env python3
+"""Launch the selected ALTool with explicit project paths, never first-match discovery."""
+import argparse
+import os
+from pathlib import Path
+import shutil
+import sys
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("projects", nargs="+", type=Path)
+parser.add_argument("--tool", default=os.environ.get("ALTOOL_PATH", "al"))
+args = parser.parse_args()
+projects = [str(path.resolve()) for path in args.projects]
+for project in projects:
+    if not (Path(project) / "app.json").is_file():
+        parser.error(f"project requires app.json: {project}")
+tool = shutil.which(args.tool) or (str(Path(args.tool).resolve()) if Path(args.tool).is_file() else None)
+if not tool:
+    parser.error("selected ALTool is unavailable; set ALTOOL_PATH or --tool")
+command = ["dotnet", tool] if tool.endswith(".dll") else [tool]
+command += ["launchmcpserver", *projects, "--transport", "stdio"]
+os.execvp(command[0], command)

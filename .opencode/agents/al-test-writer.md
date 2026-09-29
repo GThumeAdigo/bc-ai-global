@@ -1,8 +1,6 @@
 ---
 name: al-test-writer
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
   Use this agent to generate Business Central AL tests only when automated tests are opted in for the feature or the user explicitly requests a regression or TDD test.
 ---

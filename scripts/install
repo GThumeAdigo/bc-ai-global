@@ -102,7 +102,7 @@ def release(source, revision, store):
     target.parent.mkdir(parents=True, exist_ok=True)
     staging = Path(tempfile.mkdtemp(prefix=".release-", dir=target.parent))
     try:
-        unpack(source, sha, staging, ["runtime", "templates", ".opencode/agents", ".opencode/skills", ".opencode/commands", ".opencode/serena-al"])
+        unpack(source, sha, staging, ["runtime", "templates", "scripts", ".opencode/agents", ".opencode/skills", ".opencode/commands", ".opencode/serena-al"])
         corpus_root = staging / ".opencode/BCQuality-ADIGO"
         corpus_root.mkdir(parents=True, exist_ok=True)
         unpack(source / ".opencode/BCQuality-ADIGO", corpus, corpus_root)
@@ -183,9 +183,15 @@ def prepare(app, selected, args, exclude_updates):
                 raise ValueError(f"unmanaged or edited entry point: {path}")
         if name == "opencode.json":
             config = json.loads((selected / "runtime" / name).read_text())
+            policy_path = selected / "runtime/model-policy.json"
+            if policy_path.exists():
+                model_policy = json.loads(policy_path.read_text())
+                config.setdefault("agent", {})
+                for agent in (selected / ".opencode/agents").glob("*.md"):
+                    config["agent"].setdefault(agent.stem, {}).update(model_policy)
             # Tokens are rendered from this installation, never personal paths.
             config = render(config, {"@APP@": str(app), "@RELEASE@": str(selected)})
-            optional = {"browser": "playwright", "translation": "nab-al-tools"}
+            optional = {"browser": "playwright", "translation": "nab-al-tools", "dependency": "al-dependency", "analyzer-fixes": "alcops"}
             for profile, server in optional.items():
                 if server in config.get("mcp", {}):
                     config["mcp"][server]["enabled"] = profile in args.profile
@@ -268,7 +274,7 @@ def main():
     parser.add_argument("--source", type=Path, default=ROOT)
     parser.add_argument("--store", type=Path, default=Path(os.environ.get("XDG_DATA_HOME", str(Path.home() / ".local/share"))) / "bc-ai-global")
     parser.add_argument("--backup-root", type=Path, default=Path(os.environ.get("XDG_STATE_HOME", str(Path.home() / ".local/state"))) / "bc-ai-global/backups")
-    parser.add_argument("--profile", action="append", choices=["browser", "translation"], default=[])
+    parser.add_argument("--profile", action="append", choices=["browser", "translation", "dependency", "analyzer-fixes"], default=[])
     parser.add_argument("--workspace")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--migrate-legacy", action="store_true")

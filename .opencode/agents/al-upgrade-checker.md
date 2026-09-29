@@ -1,8 +1,6 @@
 ---
 name: al-upgrade-checker
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
   Use this agent when a Business Central AL extension's schema changes to verify upgrade handling for existing-tenant data, but only when the consuming app's deployment policy requires compatibility. Relevant changes include required fields, table renames, enum changes, removed columns, type or length changes, and primary-key changes. It is specialist and not part of the mandatory verifier set.
 

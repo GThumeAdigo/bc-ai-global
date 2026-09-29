@@ -6,7 +6,7 @@ import { join } from "node:path"
 import { fileURLToPath } from "node:url"
 import { spawnSync } from "node:child_process"
 
-import postBuildVerify, { buildSucceeded, looksLikeBuild } from "../plugins/post-build-verify.ts"
+import postBuildVerify, { buildSucceeded, looksLikeBuild } from "../legacy/post-build-verify.ts"
 
 test("recognizes supported AL compile commands", () => {
   assert.equal(looksLikeBuild('"$ALC" /project:"/tmp/app"'), true)

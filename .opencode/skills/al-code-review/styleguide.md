@@ -738,9 +738,11 @@ codeunit 87707 "GOXOUT CreateEntry"
     #region Work
 
     local procedure ValidateSetupEnabled(Setup: Record "GOXOUT Setup")
+    var
+        FOUError: Codeunit "GOXFOU Error";
     begin
         if not Setup.Enabled then
-            Error(this.SetupNotEnabledErr);
+            FOUError.Call(this.SetupNotEnabledErr);
     end;
 
     #endregion Work

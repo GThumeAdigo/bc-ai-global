@@ -1,8 +1,6 @@
 ---
 name: al-test-coverage-enforcer
 mode: subagent
-model: openai/gpt-6-sol
-variant: high
 description: |
   Use this agent as a blocking coverage gate only when automated tests are opted in for the feature or the user explicitly requests it. It is not part of the no-test mandatory set.
 ---
