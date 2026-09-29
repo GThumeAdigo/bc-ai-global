@@ -1,0 +1,338 @@
+#!/usr/bin/env python3
+"""Install revision-pinned content. Only explicitly managed paths may be replaced."""
+import argparse
+import base64
+import hashlib
+import importlib.util
+import io
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tarfile
+import tempfile
+import time
+
+ROOT = Path(__file__).resolve().parents[1]
+spec = importlib.util.spec_from_file_location("rulesets", ROOT / ".opencode/skills/al-compile/scripts/resolve_ruleset.py")
+rulesets = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(rulesets)
+START = "# BEGIN bc-ai-global local excludes"
+END = "# END bc-ai-global local excludes"
+
+
+def git(root, *args):
+    return subprocess.check_output(["git", "-C", str(root), *args], stderr=subprocess.PIPE)
+
+
+def digest(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def capture(path):
+    if path.is_symlink():
+        return {"kind": "link", "target": os.readlink(path)}
+    if path.is_file():
+        data = path.read_bytes()
+        return {"kind": "file", "data": base64.b64encode(data).decode(), "mode": path.stat().st_mode & 0o777}
+    if path.exists():
+        return {"kind": "directory"}
+    return {"kind": "absent"}
+
+
+def put(path, state):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if state["kind"] == "absent":
+        if path.is_symlink() or path.is_file():
+            path.unlink()
+        return
+    if state["kind"] == "directory":
+        if path.is_symlink():
+            path.unlink()
+        path.mkdir(exist_ok=True)
+        return
+    temporary = path.with_name(path.name + ".bc-ai-tmp")
+    if temporary.exists() or temporary.is_symlink():
+        raise ValueError(f"temporary path conflict: {temporary}")
+    try:
+        if state["kind"] == "link":
+            temporary.symlink_to(state["target"])
+        else:
+            temporary.write_bytes(base64.b64decode(state["data"]))
+            temporary.chmod(state.get("mode", 0o644))
+        temporary.replace(path)
+    finally:
+        if temporary.exists() or temporary.is_symlink():
+            temporary.unlink()
+
+
+def text_state(text):
+    return {"kind": "file", "data": base64.b64encode(text.encode()).decode(), "mode": 0o644}
+
+
+def render(value, replacements):
+    if isinstance(value, str):
+        for key, replacement in replacements.items():
+            value = value.replace(key, replacement)
+        return value
+    if isinstance(value, dict):
+        return {key: render(item, replacements) for key, item in value.items()}
+    if isinstance(value, list):
+        return [render(item, replacements) for item in value]
+    return value
+
+
+def unpack(root, revision, destination, paths=None):
+    archive = git(root, "archive", revision, *(paths or []))
+    with tarfile.open(fileobj=io.BytesIO(archive)) as tar:
+        tar.extractall(destination, filter="data")
+
+
+def release(source, revision, store):
+    sha = git(source, "rev-parse", revision + "^{commit}").decode().strip()
+    corpus = git(source, "ls-tree", sha, ".opencode/BCQuality-ADIGO").decode().split()[2]
+    target = store / "releases" / sha
+    if target.exists():
+        metadata = json.loads((target / "release.json").read_text())
+        if metadata != {"revision": sha, "corpus": corpus}:
+            raise ValueError("release identity mismatch")
+        return target
+    target.parent.mkdir(parents=True, exist_ok=True)
+    staging = Path(tempfile.mkdtemp(prefix=".release-", dir=target.parent))
+    try:
+        unpack(source, sha, staging, ["runtime", "templates", ".opencode/agents", ".opencode/skills", ".opencode/commands", ".opencode/serena-al"])
+        corpus_root = staging / ".opencode/BCQuality-ADIGO"
+        corpus_root.mkdir(parents=True, exist_ok=True)
+        unpack(source / ".opencode/BCQuality-ADIGO", corpus, corpus_root)
+        # The corpus owns index generation. Generate before freezing the release.
+        subprocess.run([sys.executable, str(corpus_root / "tools/build_knowledge_index.py"), "--root", str(corpus_root)], check=True, stdout=subprocess.DEVNULL)
+        (staging / "release.json").write_text(json.dumps({"revision": sha, "corpus": corpus}))
+        for path in staging.rglob("*"):
+            if not path.is_symlink():
+                path.chmod((path.stat().st_mode & 0o777) & ~0o222)
+        staging.chmod(0o555)
+        staging.rename(target)
+    finally:
+        if staging.exists():
+            for path in staging.rglob("*"):
+                if not path.is_symlink():
+                    path.chmod(0o755 if path.is_dir() else 0o644)
+            staging.chmod(0o755)
+            shutil.rmtree(staging)
+    return target
+
+
+def exclusions(original, app, repository):
+    if original.count(START) != original.count(END) or original.count(START) > 1:
+        raise ValueError("malformed legacy exclusion block")
+    key = digest(str(app).encode())[:16]
+    start, end = f"# BEGIN bc-ai-global {key}", f"# END bc-ai-global {key}"
+    if original.count(start) != original.count(end) or original.count(start) > 1:
+        raise ValueError("malformed managed exclusion block")
+    relative = app.relative_to(repository).as_posix()
+    prefix = "" if relative == "." else relative + "/"
+    # Escape Git ignore metacharacters in real directory names.
+    prefix = "".join("\\" + c if c in "\\*?[]#! " else c for c in prefix)
+    lines = ["/" + prefix + p for p in ("AGENTS.md", "CLAUDE.md", "opencode.json", "APP_CONTEXT.md", "specs/", "DOCS/", ".opencode/", ".agent-state/")]
+    block = start + "\n" + "\n".join(lines) + "\n" + end
+    if start in original:
+        before, rest = original.split(start)
+        _, after = rest.split(end)
+        return before + block + after
+    # Leave a legacy shared block intact: it may protect other installed apps.
+    return original + ("\n" if original and not original.endswith("\n") else "") + block + "\n"
+
+
+def prepare(app, selected, args, exclude_updates):
+    if not (app / "app.json").is_file():
+        raise ValueError(f"app.json missing: {app}")
+    rulesets.read_jsonc(app / "app.json")
+    repository = Path(git(app, "rev-parse", "--show-toplevel").decode().strip())
+    state = app / ".agent-state"
+    if state.is_symlink():
+        raise ValueError(f"runtime state must not be a symlink: {state}")
+    manifest = state / "install.json"
+    old = json.loads(manifest.read_text()) if manifest.exists() else None
+    if old and old.get("app") != str(app):
+        raise ValueError("installation manifest belongs to another checkout")
+    actions = []
+    managed = {}
+    old_managed = (old or {}).get("managed", {})
+    runtime = app / ".opencode"
+    legacy = runtime.is_symlink()
+    if legacy:
+        if not args.migrate_legacy:
+            raise ValueError("whole-directory legacy link requires --migrate-legacy")
+        actions.append({"path": str(runtime), "before": capture(runtime), "after": {"kind": "directory"}})
+    desired = {name: {"kind": "link", "target": str(selected / ".opencode" / name)} for name in ("agents", "skills", "commands", "BCQuality-ADIGO", "serena-al")}
+    for name, after in desired.items():
+        path = runtime / name
+        before = {"kind": "absent"} if legacy else capture(path)
+        if before["kind"] != "absent" and before != old_managed.get(str(path)):
+            raise ValueError(f"unmanaged or edited runtime path: {path}")
+        actions.append({"path": str(path), "before": before, "after": after})
+        managed[str(path)] = after
+    for name in ("AGENTS.md", "CLAUDE.md", "opencode.json"):
+        path = app / name
+        before = capture(path)
+        if before["kind"] != "absent" and before != old_managed.get(str(path)):
+            legacy_source = runtime.resolve().parent / name if legacy else None
+            if not legacy_source or not path.is_symlink() or path.resolve() != legacy_source:
+                raise ValueError(f"unmanaged or edited entry point: {path}")
+        if name == "opencode.json":
+            config = json.loads((selected / "runtime" / name).read_text())
+            # Tokens are rendered from this installation, never personal paths.
+            config = render(config, {"@APP@": str(app), "@RELEASE@": str(selected)})
+            optional = {"browser": "playwright", "translation": "nab-al-tools"}
+            for profile, server in optional.items():
+                if server in config.get("mcp", {}):
+                    config["mcp"][server]["enabled"] = profile in args.profile
+            after = text_state(json.dumps(config, indent=2) + "\n")
+        else:
+            after = {"kind": "link", "target": str(selected / "runtime" / name)}
+        actions.append({"path": str(path), "before": before, "after": after})
+        managed[str(path)] = after
+    if args.workspace:
+        source = Path(args.workspace).resolve()
+        workspace = rulesets.read_jsonc(source)
+        for folder in workspace.get("folders", []):
+            if not isinstance(folder, dict) or "path" not in folder:
+                raise ValueError("workspace folders must have local paths")
+        target = repository / ("SDD-" + app.name + "-" + digest(str(app).encode())[:8] + ".code-workspace")
+        workspace["folders"] = [{"path": os.path.relpath(app, repository)}]
+        if source.parent != repository:
+            raise ValueError("workspace source must be at the repository root to preserve relative settings")
+        before = capture(target)
+        if before["kind"] != "absent" and before != old_managed.get(str(target)):
+            raise ValueError(f"workspace output is unmanaged or edited: {target}")
+        after = text_state(json.dumps(workspace, indent=2) + "\n")
+        actions.append({"path": str(target), "before": before, "after": after})
+        managed[str(target)] = after
+    # Paths not regenerated on update remain managed, never silently orphaned.
+    managed = {**old_managed, **managed}
+    exclude = Path(git(app, "rev-parse", "--path-format=absolute", "--git-path", "info/exclude").decode().strip())
+    original = exclude_updates.get(exclude, exclude.read_text() if exclude.exists() else "")
+    exclude_updates[exclude] = exclusions(original, app, repository)
+    if args.workspace:
+        workspace_rule = "/" + target.name
+        if workspace_rule not in exclude_updates[exclude].splitlines():
+            exclude_updates[exclude] += workspace_rule + "\n"
+    copies = []
+    for source in (selected / "templates").rglob("*"):
+        if not source.is_file():
+            continue
+        target = app / source.relative_to(selected / "templates")
+        if any(p.is_symlink() for p in (target, *target.parents) if p != app and app in p.parents):
+            raise ValueError(f"app-local template path follows a symlink: {target}")
+        if target.exists() and not target.is_file():
+            raise ValueError(f"template target is not a file: {target}")
+        if not target.exists():
+            copies.append((source, target))
+    return {"app": app, "manifest": manifest, "old": old, "actions": actions, "managed": managed, "copies": copies}
+
+
+def restore_actions(actions):
+    for action in reversed(actions):
+        path = Path(action["path"])
+        if action["after"]["kind"] == "directory" and action["before"]["kind"] == "link":
+            path.rmdir()
+        put(path, action["before"])
+
+
+def rollback(app):
+    path = app / ".agent-state/install.json"
+    manifest = json.loads(path.read_text())
+    journal = json.loads(Path(manifest["journal"]).read_text())
+    for action in journal["actions"]:
+        current = capture(Path(action["path"]))
+        if current != action["after"]:
+            raise ValueError(f"rollback conflict: {action['path']}")
+        if current["kind"] == "directory":
+            expected = {Path(a["path"]).name for a in journal["actions"] if Path(a["path"]).parent == Path(action["path"])}
+            if set(p.name for p in Path(action["path"]).iterdir()) - expected:
+                raise ValueError("rollback would discard unowned runtime artifacts")
+    restore_actions(journal["actions"])
+    if journal["old"]:
+        path.write_text(json.dumps(journal["old"], indent=2))
+    else:
+        path.unlink()
+    print(f"Rolled back {app}; private app files and backups retained")
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("apps", nargs="+")
+    parser.add_argument("--revision", default="HEAD")
+    parser.add_argument("--source", type=Path, default=ROOT)
+    parser.add_argument("--store", type=Path, default=Path(os.environ.get("XDG_DATA_HOME", str(Path.home() / ".local/share"))) / "bc-ai-global")
+    parser.add_argument("--backup-root", type=Path, default=Path(os.environ.get("XDG_STATE_HOME", str(Path.home() / ".local/state"))) / "bc-ai-global/backups")
+    parser.add_argument("--profile", action="append", choices=["browser", "translation"], default=[])
+    parser.add_argument("--workspace")
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--migrate-legacy", action="store_true")
+    parser.add_argument("--rollback", action="store_true")
+    args = parser.parse_args()
+    apps = list(dict.fromkeys(Path(p).resolve() for p in args.apps))
+    if args.rollback:
+        if len(apps) != 1 or args.dry_run:
+            raise ValueError("rollback accepts one app and no dry-run")
+        rollback(apps[0])
+        return
+    selected = release(args.source.resolve(), args.revision, args.store.resolve())
+    excludes = {}
+    plans = [prepare(app, selected, args, excludes) for app in apps]
+    print(json.dumps({"release": str(selected), "apps": [str(p["app"]) for p in plans], "dry_run": args.dry_run}))
+    if args.dry_run:
+        return
+    # A shared exclusion file is written once. A whole batch has a common journal
+    # so rollback cannot accidentally erase another app's exclusion changes.
+    if len(plans) > 1:
+        for plan in plans:
+            if plan["old"]:
+                raise ValueError("update existing installations one app at a time")
+    exclude_actions = [{"path": str(path), "before": capture(path), "after": text_state(text)} for path, text in excludes.items()]
+    applied = []
+    manifests = []
+    try:
+        for action in exclude_actions:
+            put(Path(action["path"]), action["after"])
+            applied.append(action)
+        for plan in plans:
+            app = plan["app"]
+            backup = args.backup_root.resolve() / digest(str(app).encode())[:16] / str(time.time_ns())
+            backup.mkdir(parents=True)
+            for name in ("APP_CONTEXT.md", "specs", "DOCS"):
+                origin = app / name
+                if origin.is_file():
+                    shutil.copy2(origin, backup / name)
+                elif origin.is_dir():
+                    shutil.copytree(origin, backup / name, symlinks=True)
+            # Shared excludes are retained on single-app rollback of a batch.
+            actions = plan["actions"] + (exclude_actions if len(plans) == 1 else [])
+            journal = backup / "journal.json"
+            journal.write_text(json.dumps({"old": plan["old"], "actions": actions}, indent=2))
+            for action in plan["actions"]:
+                put(Path(action["path"]), action["after"])
+                applied.append(action)
+            for source, target in plan["copies"]:
+                target.parent.mkdir(parents=True, exist_ok=True)
+                with target.open("xb") as output:
+                    output.write(source.read_bytes())
+            manifest = {"version": 1, "app": str(app), "release": str(selected), "managed": plan["managed"], "journal": str(journal)}
+            put(plan["manifest"], text_state(json.dumps(manifest, indent=2) + "\n"))
+            manifests.append(plan)
+    except Exception:
+        restore_actions(applied)
+        for plan in manifests:
+            put(plan["manifest"], text_state(json.dumps(plan["old"])) if plan["old"] else {"kind": "absent"})
+        raise
+
+
+if __name__ == "__main__":
+    try:
+        main()
+    except (ValueError, OSError, subprocess.CalledProcessError) as error:
+        print(f"Installation failed: {error}", file=sys.stderr)
+        sys.exit(1)

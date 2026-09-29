@@ -3,7 +3,7 @@
 set -euo pipefail
 
 readonly REPOSITORY_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/../.." && pwd -P)"
-readonly INITIALIZER="$REPOSITORY_ROOT/init-linux.sh"
+readonly INITIALIZER="$REPOSITORY_ROOT/scripts/legacy/init-linux.sh"
 readonly FIXTURE_ROOT="$(mktemp -d /tmp/opencode/init-linux-tests.XXXXXX)"
 
 cleanup() {

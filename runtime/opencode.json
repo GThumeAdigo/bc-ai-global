@@ -1,0 +1,220 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": [
+    "AGENTS.md"
+  ],
+  "skills": {
+    "paths": [".opencode/skills"]
+  },
+  "permission": {
+    "external_directory": {
+      "*": "ask",
+      "/tmp": "allow",
+      "/tmp/**": "allow",
+      "~/.hunk/skills/**": "allow",
+      "*/.opencode/BCQuality-ADIGO": "allow",
+      "*/.opencode/BCQuality-ADIGO/**": "allow",
+      "*/.vscode": "allow",
+      "*/.vscode/**": "allow"
+    },
+    "read": {
+      "/tmp/**": "allow",
+      "*/.opencode/BCQuality-ADIGO/**": "allow",
+      "*/.vscode/**": "allow"
+    },
+    "edit": {
+      "/tmp/**": "allow",
+      "*/.opencode/BCQuality-ADIGO/**": "deny"
+    },
+    "bash": {
+      "*": "ask",
+      "ls": "allow",
+      "ls *": "allow",
+      "pwd": "allow",
+      "pwd *": "allow",
+      "cd *": "allow",
+      "cat *": "allow",
+      "head *": "allow",
+      "tail *": "allow",
+      "wc *": "allow",
+      "which *": "allow",
+      "command -v *": "allow",
+      "find *": "allow",
+      "grep *": "allow",
+      "rg *": "allow",
+      "sed *": "allow",
+      "awk *": "allow",
+      "sort *": "allow",
+      "uniq *": "allow",
+      "cut *": "allow",
+      "tr *": "allow",
+      "tee *": "allow",
+      "xargs *": "allow",
+      "diff *": "allow",
+      "cmp *": "allow",
+      "file *": "allow",
+      "stat *": "allow",
+      "readlink *": "allow",
+      "realpath *": "allow",
+      "dirname *": "allow",
+      "basename *": "allow",
+      "du *": "allow",
+      "df": "allow",
+      "df *": "allow",
+      "date": "allow",
+      "date *": "allow",
+      "uname *": "allow",
+      "echo *": "allow",
+      "printf *": "allow",
+      "test *": "allow",
+      "[ *": "allow",
+      "true": "allow",
+      "false": "allow",
+      "mkdir *": "allow",
+      "rmdir *": "allow",
+      "touch *": "allow",
+      "cp *": "allow",
+      "mv *": "allow",
+      "rm *": "allow",
+      "ln *": "allow",
+      "chmod *": "allow",
+      "mktemp": "allow",
+      "mktemp *": "allow",
+      "tar *": "allow",
+      "zip *": "allow",
+      "unzip *": "allow",
+      "gzip *": "allow",
+      "gunzip *": "allow",
+      "sha256sum *": "allow",
+      "sha512sum *": "allow",
+      "md5sum *": "allow",
+      "jq *": "allow",
+      "curl *": "allow",
+      "wget *": "allow",
+      "git": "allow",
+      "git *": "allow",
+      "gh": "allow",
+      "gh *": "allow",
+      "python": "allow",
+      "python *": "allow",
+      "python3": "allow",
+      "python3 *": "allow",
+      "./tools/route_entry.py *": "allow",
+      ".opencode/BCQuality-ADIGO/tools/route_entry.py *": "allow",
+      "*/.opencode/BCQuality-ADIGO/tools/route_entry.py *": "allow",
+      "/usr/bin/python": "allow",
+      "/usr/bin/python *": "allow",
+      "/usr/bin/python3": "allow",
+      "/usr/bin/python3 *": "allow",
+      "pip *": "allow",
+      "pip3 *": "allow",
+      "uv *": "allow",
+      "hunk skill path": "allow",
+      "hunk session *": "allow",
+      "hunk markup *": "allow",
+      "*/.hunk/bin/hunk skill path": "allow",
+      "*/.hunk/bin/hunk session *": "allow",
+      "*/.hunk/bin/hunk markup *": "allow",
+      "\"*/.hunk/bin/hunk\" skill path": "allow",
+      "\"*/.hunk/bin/hunk\" session *": "allow",
+      "\"*/.hunk/bin/hunk\" markup *": "allow",
+      "fish": "allow",
+      "fish *": "allow",
+      "/usr/bin/fish": "allow",
+      "/usr/bin/fish *": "allow",
+      "/bin/fish": "allow",
+      "/bin/fish *": "allow",
+      "/tmp/*": "allow",
+      "bash /tmp/*": "allow",
+      "sh /tmp/*": "allow",
+      "bash .opencode/skills/al-compile/scripts/compile.sh*": "allow"
+    }
+  },
+  "plugin": [
+    ".opencode/plugins/post-build-verify.ts"
+  ],
+  "mcp": {
+    "al-mcp": {
+      "type": "local",
+      "command": [
+        "sh",
+        "-c",
+        "al launchmcpserver \"$(find . -maxdepth 2 -name app.json -not -path '*/node_modules/*' -not -path '*/.alpackages/*' -exec dirname {} \\; -quit)\" --transport stdio"
+      ],
+      "cwd": ".",
+      "enabled": true
+    },
+    "microsoft-learn": {
+      "type": "remote",
+      "url": "https://learn.microsoft.com/api/mcp",
+      "enabled": true
+    },
+    "alcops": {
+      "type": "local",
+      "command": [
+        "alcops-mcp"
+      ],
+      "cwd": ".",
+      "enabled": true
+    },
+    "al-dependency": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "al-mcp-server"
+      ],
+      "cwd": ".",
+      "enabled": true
+    },
+    "nab-al-tools": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@nabsolutions/nab-al-tools-mcp"
+      ],
+      "cwd": ".",
+      "enabled": true
+    },
+    "serena": {
+      "type": "local",
+      "command": [
+        "/home/greg/.local/bin/serena",
+        "start-mcp-server",
+        "--context",
+        "ide",
+        "--project-from-cwd"
+      ],
+      "environment": {
+        "AL_EXTENSION_PATH": "/home/greg/Repos/AI/bc-ai-global/.opencode/serena-al"
+      },
+      "cwd": ".",
+      "enabled": true
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@playwright/mcp@latest",
+        "--browser",
+        "chromium",
+        "--user-data-dir",
+        "/home/greg/.cache/opencode-bc-webclient/profile",
+        "--output-dir",
+        ".opencode/webclient-runs",
+        "--viewport-size",
+        "1920x1080",
+        "--console-level",
+        "warning",
+        "--timeout-navigation",
+        "120000",
+        "--timeout-settle",
+        "1500"
+      ],
+      "cwd": ".",
+      "enabled": true
+    }
+  }
+}
