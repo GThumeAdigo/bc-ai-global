@@ -34,13 +34,18 @@ APP=$(cd -- "$APP" && pwd) || exit 2
 SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd) || exit 2
 RULESET=$(python3 "$SCRIPT_DIR/resolve_ruleset.py" "$APP" "${@:2}") || exit 2
 
-ALEXT=$(ls -d ~/.vscode/extensions/ms-dynamics-smb.al-* | sort -V | tail -1)
+ALEXT="${AL_COMPILER_EXTENSION_PATH:-}"
+if [ -z "$ALEXT" ]; then
+    ALEXT=$(ls -d ~/.vscode/extensions/ms-dynamics-smb.al-* | sort -V | tail -1)
+fi
 ALC="$ALEXT/bin/linux/alc"
 ANALYZERS="$ALEXT/bin/Analyzers"
 if [ -x "$ALC" ]; then
     COMPILER=("$ALC")
+    COMPILER_FILE="$ALC"
 elif [ -f "$ALEXT/bin/alc.dll" ] && command -v dotnet >/dev/null 2>&1; then
     COMPILER=(dotnet "$ALEXT/bin/alc.dll")
+    COMPILER_FILE="$ALEXT/bin/alc.dll"
     ANALYZERS="$ALEXT/bin"
 else
     echo "error: no runnable AL compiler found under $ALEXT/bin" >&2
@@ -60,6 +65,12 @@ ANALYZER_DLLS=(
     ALCops.Common.dll
 )
 
+if [ -n "${AL_ANALYZER_PROFILE:-}" ]; then
+    PROFILE=$(python3 -c 'import json,sys; from pathlib import Path; x=json.load(open(sys.argv[1]))["analyzers"]; assert isinstance(x,list) and x and all(isinstance(n,str) and Path(n).name == n and n.endswith(".dll") for n in x); print("\n".join(x))' "$AL_ANALYZER_PROFILE") || exit 2
+    mapfile -t ANALYZER_DLLS <<< "$PROFILE"
+fi
+ANALYZER_PATHS=()
+
 ARGS=(
     /project:"$APP"
     /packagecachepath:"$APP/.alpackages"
@@ -70,6 +81,7 @@ for dll in "${ANALYZER_DLLS[@]}"; do
         exit 2
     fi
     ARGS+=("/analyzer:$ANALYZERS/$dll")
+    ANALYZER_PATHS+=("$ANALYZERS/$dll")
 done
 
 ARGS+=("/ruleset:$RULESET")
@@ -88,5 +100,11 @@ echo "app:    $APP"
 echo "log:    $OUT/compile.log"
 echo "output: $APPFILE"
 echo "exit=$COMPILE_EXIT errors=$ERRORS warnings=$WARNINGS infos=$INFOS"
+
+python3 "$SCRIPT_DIR/build_evidence.py" "$APP" "$OUT" "$COMPILER_FILE" "$RULESET" "$COMPILE_EXIT" "${ANALYZER_PATHS[@]}"
+EVIDENCE_EXIT=$?
+if [ "$COMPILE_EXIT" -eq 0 ] && [ "$EVIDENCE_EXIT" -ne 0 ]; then
+    exit "$EVIDENCE_EXIT"
+fi
 
 exit "$COMPILE_EXIT"

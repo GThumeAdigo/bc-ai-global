@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+"""Validate source configurations against the published OpenCode schema."""
+import argparse
+import hashlib
+import json
+from pathlib import Path
+import urllib.request
+import jsonschema
+
+parser = argparse.ArgumentParser(description=__doc__)
+parser.add_argument("configs", nargs="+", type=Path)
+parser.add_argument("--schema", type=Path, help="Use a previously captured schema for offline reproducibility")
+args = parser.parse_args()
+request = urllib.request.Request("https://opencode.ai/config.json", headers={"User-Agent": "Mozilla/5.0"})
+raw = args.schema.read_bytes() if args.schema else urllib.request.urlopen(request, timeout=20).read()
+schema = json.loads(raw)
+# Model availability is a runtime/provider fact, not a static public catalog
+# guarantee. Validate model IDs as strings without fetching a changing catalog.
+def localize(value):
+    if isinstance(value, dict):
+        return {k: localize(v) for k, v in value.items() if not (k == "$ref" and isinstance(v, str) and v.startswith("https://models.dev/"))}
+    if isinstance(value, list):
+        return [localize(v) for v in value]
+    return value
+validator = jsonschema.Draft202012Validator(localize(schema))
+for path in args.configs:
+    validator.validate(json.loads(path.read_text()))
+print(json.dumps({"status": "pass", "configs": [str(p) for p in args.configs], "schema_sha256": hashlib.sha256(raw).hexdigest(), "model_availability": "untested"}))

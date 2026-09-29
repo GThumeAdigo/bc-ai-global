@@ -67,6 +67,26 @@ class CompileTests(unittest.TestCase):
         self.assertEqual(sum(arg.startswith("/analyzer:") for arg in args), 10)
         self.assertIn(f"/project:{self.app}", args)
 
+    def test_strict_mode_rejects_new_warning(self):
+        self.local(str(self.write(self.root / "strict.ruleset.json")))
+        self.env["FAKE_DIAGNOSTICS"] = "a.al(1,2): warning AA0001: new warning"
+        self.env["AL_VERIFY_NEW_DIAGNOSTICS"] = "1"
+        result = self.run_compile(success=False)
+        self.assertEqual(result.returncode, 3)
+
+    def test_explicit_analyzer_profile(self):
+        self.local(str(self.write(self.root / "profile.ruleset.json")))
+        profile = self.write(self.root / "analyzers.json", json.dumps({"analyzers": [ANALYZERS[0]]}))
+        self.env["AL_ANALYZER_PROFILE"] = str(profile)
+        self.run_compile()
+        self.assertEqual(sum(arg.startswith("/analyzer:") for arg in self.capture.read_text().splitlines()), 1)
+
+    def test_missing_profile_analyzer_fails(self):
+        self.local(str(self.write(self.root / "profile.ruleset.json")))
+        profile = self.write(self.root / "analyzers.json", json.dumps({"analyzers": ["Missing.dll"]}))
+        self.env["AL_ANALYZER_PROFILE"] = str(profile)
+        self.run_compile(success=False)
+
     def test_local_jsonc_beats_workspace_and_convention(self):
         expected = self.write(self.root / "repo/rules // folder/local.ruleset.json")
         self.write(self.app / ".vscode/settings.json", '''{
