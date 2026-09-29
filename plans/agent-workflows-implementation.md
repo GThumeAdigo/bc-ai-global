@@ -19,6 +19,97 @@ Owner approved option B and section 12 defaults on 2026-09-29.
 ## Progress
 
 - M0: baseline ref and isolated worktree created; approval recorded.
-- M1–M5: pending.
-- M6: infrastructure validation pending. Product task comparisons and live pilot
-  await selection of authorized apps/tasks and an execution budget.
+- M1: aggregate suites, dependency locks, reference/model/permission contracts,
+  installer/approval/build fixtures and schema checker implemented.
+- M2: committed release export, prebuilt corpus index, read-only checksummed
+  snapshots, explicit profiles, app-local runtime, backups and rollback implemented.
+- M3: Direct/Compact/Critical routing, compact artifacts and approval snapshots
+  implemented. Old artifacts remain legacy; no automatic approval conversion.
+- M4: new design/change/test review roles, main-session implementation, centralized
+  model policy, narrowed authoring overlay and optional Hunk implemented.
+- M5: explicit AL project launcher, optional pinned MCPs, capability doctor,
+  compiler/analyzer profile selection and JSON baseline evidence implemented.
+- M6 infrastructure: passing checks below. Product comparisons and live pilot
+  remain **pending**, requiring authorized apps/task refs and an execution budget.
+
+## Executed validation, 2026-09-29
+
+Functional candidate verified: `da31f3c` (the full commit is available on
+`refactor/agent-workflows`). Later evidence-only commits do not change these inputs.
+
+| Command/check | Actual result |
+|---|---|
+| `python3 scripts/verify-scaffold` | Four suites passed: 36 infrastructure tests, 28 compile/evidence fixtures, seven legacy plugin tests, six legacy installer fixture functions |
+| `.venv/bin/python scripts/check-config opencode.json runtime/opencode.json` | Both source configurations passed published-schema validation |
+| Published schema digest | `e8cb6e287a3852ee3403f4803be5ad6b19db94948037eaa9672125c333427922` |
+| `python3 scripts/smoke-install --host` | Committed release installed in two temporary apps; update/rollback of one preserved the other's config; no maintainer plans or auto-loaded post-build plugin installed |
+| Isolated OpenCode 1.18.33 loader | `al-change-reviewer` loaded with `gpt-6-sol` / `high`; native SDD skill found; external sentinel skill excluded |
+| `scripts/doctor` with installed extension ALTool 18 and `--probe-mcp` | Initialize/tools-list passed; 16 advertised tools, including `al_run_tests`; no behavioral invocation |
+| `git diff --check` | Passed |
+| npm lock creation with scripts disabled | Completed; dependency lock tracked |
+
+The schema check deliberately validates model identifiers as strings and does
+not mistake a public catalog for proof of provider availability. The host loader
+test proves effective configuration, not execution by the selected model.
+
+## Defects caught during implementation
+
+- Installer permission keys also needed placeholder rendering, not only values.
+  Added a regression test and an installed-config unresolved-token assertion.
+- The doctor initially parsed `v24.18.1` as `18.1`. Corrected version extraction
+  and added a regression fixture.
+- Full OpenCode debug inventories were truncated when captured through a pipe.
+  Capturing them through a regular temporary file provided complete parseable
+  output. The host smoke test now uses that path and validates actual skill names.
+- Rollback/write-failure tests cover already-applied paths, user edits, legacy
+  links, quoted app paths, workspace suffix collisions and private template symlinks.
+- Build baseline comparison now reports external un-hashed source directories
+  as incomplete rather than claiming full input identity.
+
+## Deliberate compatibility choices
+
+- Native paths and legacy named agents/gates remain available during migration.
+  The old workflow is retained as an unloaded reference. Full legacy feature
+  execution belongs to its recorded baseline runtime until explicit migration.
+- The old hook and installer are retained under legacy paths and tested, not
+  auto-loaded or used as the new installation default.
+- Existing legacy exclusion blocks are not removed automatically: unregistered
+  consumers may still depend on them. New exclusions are app-scoped.
+- Individual rollback of an initial multi-app batch retains shared exclusion
+  entries to avoid exposing another app's private files. A single-app rollback
+  refuses an externally changed exclusion file rather than overwriting it.
+- `--dry-run` may create a checksummed release cache, but does not mutate apps.
+- Doctor multi-app input uses repeated `--app`; it does not guess a selected
+  workspace. Workspace output is an explicit installer option.
+- ALTool/Serena replacement is deferred until a real-app semantic and runtime
+  parity test. The fallback bridge remains; no submodule source was changed.
+- The compact rule overlay replaces redundant generic checklists. The detailed
+  style guide remains a scoped reference, with legacy examples largely preserved;
+  this migration does not restyle product AL.
+
+## Limits and remaining rollout gates
+
+- No real AL product was compiled, no BC runtime test executed, no model task
+  benchmark run, and no live consumer migrated. Build tests use fake compiler
+  fixtures and are not a substitute for product execution.
+- Core reviewer permissions are deny-by-default and their configuration is
+  tested. Actual attempted tool writes and all retained specialist permissions
+  have not been exercised in paid agent runs or an OS sandbox. Do not describe
+  prompt-only legacy review restrictions as an OS security boundary.
+- Risk routing, relevance selection and repair budgets remain explicit agent
+  instructions. There is no new scheduler enforcing model turns. The supplied
+  routing cases are evaluation inputs, not measured classifier accuracy.
+- The universal mechanical model gate is absent from new paths. Approval
+  freshness is executable; object/range diagnostics come from actual compile or
+  symbol checks, not a new bespoke AL parser.
+- Baseline global/npm state was observed, not fully frozen. Before A/B runs,
+  provision matching explicit dependency/model/tool versions and retain the
+  loaded-source inventories for both arms. Do not compare an accidentally broken
+  baseline against a repaired candidate as workflow evidence.
+- Success criteria concerning active human time, repeated task correctness,
+  review precision and live-app compatibility are **not yet evaluated**.
+- No matching Hunk session for this worktree was used; no notes published.
+
+Next owner inputs: an authorized pilot app/clone and task/base refs, plus a
+budget for the proposed paired comparisons. Until then this is a verified
+infrastructure candidate, not an empirically validated replacement for all apps.

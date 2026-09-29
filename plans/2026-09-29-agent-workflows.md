@@ -8,6 +8,11 @@ Implementation branch: `refactor/agent-workflows`, isolated checkout
 `baseline/agent-workflows-2026-09-29` at the starting commit below.
 The original source checkout remains at that baseline for linked consumers.
 
+Implementation status: M0–M5 delivered as an isolated infrastructure candidate.
+Executed tests, compatibility choices and pending product/pilot evidence are in
+[the implementation report](agent-workflows-implementation.md). M6 product
+comparison and live rollout are not claimed complete.
+
 Prepared: 2026-09-29. Scope: the shared `bc-ai-global` scaffold, its installed
 consumers, and the boundary with machine-local agent configuration.
 
