@@ -4,7 +4,7 @@ kind: action-skill
 id: hunk-review
 version: 1
 title: Hunk interactive diff review
-description: Drives a live Hunk interactive diff session from the CLI to walk the developer through a changeset, navigating files, hunks and lines, painting attention marks, and leaving inline review notes. Use whenever changes need to be shown or reviewed rather than pasted into chat.
+description: Publishes short German inline notes to a live Hunk diff session after substantial implementation or verifier findings, and guides interactive changeset reviews. Use proactively at implementation/review checkpoints, even when a clean change has no defects to report.
 inputs: [pr-diff, file-path]
 outputs: [review-narration, inline-notes]
 bc-version: [all]
@@ -25,8 +25,7 @@ The real instructions are installed alongside the Hunk binary, not stored in
 this repo. Resolve and read them first, every time:
 
 ```bash
-export PATH="$HOME/.hunk/bin:$PATH"
-hunk skill path
+"$HOME/.hunk/bin/hunk" skill path
 ```
 
 Read the file that command prints and follow it. Do not paraphrase it from
@@ -40,27 +39,63 @@ through `hunk session *`.
 
 ## Repo-specific notes
 
-### `hunk` is not on the agent's PATH
+### Do not depend on the interactive shell's PATH
 
-The installer appends the export to `~/.zshrc`, which covers the developer's
-interactive shell and nothing else. Agent shells here are non-interactive and do
-not source it, so a bare `hunk ...` fails with "command not found". Prefix every
-invocation:
+Use `"$HOME/.hunk/bin/hunk"` for every invocation. Non-interactive agent shells
+do not necessarily inherit fish, Bash, or zsh startup settings. Resolve the
+installed CLI this way rather than hardcoding a user's home directory.
 
-```bash
-export PATH="$HOME/.hunk/bin:$PATH" && hunk session list --json
-```
+### Publication belongs to the coordinator
 
-Use `$HOME/.hunk/bin`, not a hardcoded `/home/<user>/...` path, for the same
-reason the AL project path is discovered rather than hardcoded.
+Do not wait for an explicit request for Hunk comments. At the first stable
+implementation checkpoint, after verifier findings arrive, and before final
+handoff, the coordinator checks for a matching live session and publishes or
+refreshes useful notes. Subagents return file/line evidence and candidate
+explanations; they do not compete to navigate or reload the developer's TUI.
+
+Keep a small useful set: normally two to five notes for a substantial change,
+or one for a small non-obvious fix. This is a relevance target, not a quota.
+Explain intent, important behavior, a tradeoff, or what to verify, including on
+clean changes. Do not invent defects or annotate obvious renames just to fill
+the target. If there is nothing useful to add, report that briefly.
+
+### Publish and verify, do not stop at preparing notes
+
+1. Run `session list --json`, select the exact checkout, then inspect
+   `session review --include-notes --json`. Use the explicit session ID when
+   several sessions match. Never attach notes to another checkout just because
+   it is the only open session.
+2. Check the loaded diff against the reviewed revision and changed paths.
+   Reload a stale diff with the relevant pathspec before locating anchors.
+   Never assume a source line occurs in the loaded hunk; verify both path and
+   side. Removed code uses `oldLine`; additions and current code use `newLine`.
+3. Inspect existing notes, deduplicate by path/side/line/topic, and prepare one
+   JSON batch of new notes. Use a file under `/tmp/opencode/`, written with the
+   file-editing tool, to avoid shell quoting errors. Apply it using `comment
+   apply --stdin` with input redirection. For a walkthrough, navigate first
+   and use `--focus`; background publication should not move the viewport.
+4. Read back `comment list --type all --json` and confirm the expected notes
+   exist. A prepared payload or successful reload is not proof of publication.
+   Check `session context --json`: if `showAgentNotes` is false, tell the
+   developer to enable agent notes in Hunk. Do not claim the comments are
+   visible merely because they exist.
+5. After fixes/reloads, re-check anchors and update only this task's agent
+   notes. Remove or replace a resolved issue with a clearly marked explanation
+   if still useful. Preserve human notes and unrelated agent notes; never use
+   blanket `comment clear` to refresh a batch.
+6. Report the outcome once: published count, intentionally no useful notes,
+   or deferred with the reason. If the CLI is unavailable or no matching
+   session exists, ask once for the developer to open Hunk in that checkout,
+   keep the prepared batch under `/tmp/opencode/`, and continue the coding
+   work. Retry when a matching session becomes available. Hunk availability
+   is not a build or review gate.
 
 ### Selecting the session
 
-`--repo .` from the workspace root resolves the session in the normal case. This
-checkout is a **git worktree**, so sibling worktrees of the same repo are
-separate directories and each gets its own session and its own `repoRoot`. When
-`hunk session list` shows more than one, pass the explicit `<session-id>` instead
-of guessing which `--repo` you want.
+`--repo .` from the workspace root resolves the session in the normal case.
+Sibling worktrees are separate checkouts with their own `repoRoot`. Match the
+actual checkout, not just the repository name. When more than one session
+matches it, ask which to use and pass that explicit `<session-id>`.
 
 ### An empty session is not an error
 
@@ -68,16 +103,14 @@ of guessing which `--repo` you want.
 something failed. Load the changeset you actually want to discuss:
 
 ```bash
-hunk session reload --repo . -- show HEAD              # the last commit
-hunk session reload --repo . -- diff                   # uncommitted work
-hunk session reload --repo . -- diff main...HEAD -- "app/GAE/06 Projects"
+"$HOME/.hunk/bin/hunk" session reload --repo . -- show HEAD
+"$HOME/.hunk/bin/hunk" session reload --repo . -- diff -- "<changed app path>"
+"$HOME/.hunk/bin/hunk" session reload --repo . -- diff main...HEAD -- "<changed app path>"
 ```
 
 ### Scope the reload, do not load the whole branch
 
-A hotfix or feature branch here runs to hundreds of files and tens of thousands
-of inserted lines, most of it folder moves and renames. `diff main...HEAD` with
-no pathspec produces a review nobody can hold in their head. Narrow it to one
+A branch can contain hundreds of unrelated changes. Narrow the review to one
 commit, a short commit range, or a pathspec covering the objects under
 discussion, and say which slice you loaded.
 
@@ -93,19 +126,35 @@ line, a rule slug, and a
 citation. Do not flatten that into a chat list. Batch it into one
 `comment apply` so each finding lands on the line that triggered it:
 
-```bash
-printf '%s' '{"comments":[
-  {"filePath":"app/GAE/06 Projects/GOXGAEProjectMgt.Codeunit.al","newLine":214,
-   "summary":"Vor der FindSet-Schleife fehlt SetLoadFields.",
-   "rationale":"house:styleguide-12-setloadfields"}
-]}' | hunk session comment apply --repo . --stdin --focus
+Example payload, using the actual workspace-relative path and verified line:
+
+```json
+{"comments":[
+  {"filePath":"<app>/src/Process.Codeunit.al","newLine":214,
+   "summary":"Prüfen: Vor der FindSet-Schleife fehlt SetLoadFields.",
+   "rationale":"Die Schleife liest sonst alle Felder. house:styleguide-12-setloadfields; .opencode/skills/al-code-review/styleguide.md §12."}
+]}
 ```
 
-Put the rule slug and the BCQuality or style guide path in `rationale`, and
+Save the batch with the file-editing tool, then publish it:
+
+```bash
+"$HOME/.hunk/bin/hunk" session comment apply --repo . --stdin < /tmp/opencode/hunk-notes.json
+"$HOME/.hunk/bin/hunk" session comment list --repo . --type all --json
+```
+
+For findings, put the rule slug and the BCQuality or style guide path in `rationale`, and
 prefer one batch over many single `comment add` calls. Findings that are
 informational or pre-existing baseline noise (the app's baseline list in
 `APP_CONTEXT.md`) should say so in the note, so the developer is not sent
 chasing them.
+
+Explanatory notes do not need an invented rule citation. Distinguish them from
+defects: `Hinweis: Die Daten werden vor dem Senden gespeichert, damit ein
+Wiederholungsversuch dieselbe Nachricht nutzt.` An optional check can start
+with `Test:` and a resolved defect with `Behoben:`. State the reason or effect,
+not just what changed. A clean verifier result is no reason to omit useful
+explanations of the implementation.
 
 ### Write the notes in German, and keep them short
 
@@ -134,8 +183,8 @@ need to restate what the code already shows.
 
 ### Narrate, do not dump
 
-Navigate before you comment, so the developer is looking at the code you are
-describing. Use `highlight add --focus` to light up the exact expression while
+During a walkthrough, navigate before you comment so the developer is looking
+at the code you are describing. Use `highlight add --focus` to light up the exact expression while
 you explain it and `highlight clear` before moving on. Work in the order that
 tells the clearest story, not file order, and skip the hunks the developer would
 spot unaided: renames, moved folders, version bumps.

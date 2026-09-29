@@ -56,7 +56,7 @@ find . -maxdepth 3 -name app.json -not -path '*/node_modules/*' -not -path '*/.a
 In a multi-app workspace the `find` returns one line per app. Compile **once
 per app folder**, in dependency order (read `dependencies` in each `app.json`),
 and report per app. Never pass the repo root as the project folder: it has no
-`app.json` and the compile silently does nothing.
+`app.json`, so the script rejects it before compiler discovery.
 
 ## The command
 
@@ -79,8 +79,8 @@ compile means 0 errors, 0 warnings, and 0 infos.
 
 In a multi-app workspace, compile **once per app folder**, in dependency order
 (read `dependencies` in each `app.json`), and report per app. Never pass the
-repo root as the project folder: it has no `app.json` and the compile silently
-does nothing.
+repo root as the project folder: it has no `app.json`, so the script rejects it
+before compiler discovery.
 
 What the script does, for reference:
 
@@ -88,11 +88,30 @@ What the script does, for reference:
   PerTenantExtensionCop) first, then the seven ALCops DLLs, matching the
   workspace settings so output diffs stay stable. The script fails fast with a
   clear message if the compiler or any analyzer DLL is missing.
-- Ruleset: defaults to `.codeAnalysis/ADIGO.ruleset.json` one level above the
-  app folder (repo root). If a repo uses a different ruleset name, the script
-  falls back to the `al.ruleSetPath` value in a sibling `.code-workspace`
-  file. Compiling without a ruleset prints a note and is not a valid CI-parity
-  check.
+- Ruleset precedence: explicit second argument, app `.vscode/settings.json`
+  `al.ruleSetPath`, selected containing VS Code folder `.vscode/settings.json`,
+  applicable `.code-workspace` `settings.al.ruleSetPath`, then
+  `.codeAnalysis/ADIGO.ruleset.json` one level above the app. The Python 3
+  stdlib helper supports JSONC comments and trailing commas. Missing explicit,
+  configured, or fallback rulesets fail, rather than silently losing CI parity.
+  Explicit CLI relative paths resolve from the invocation directory. Bare relative
+  `al.ruleSetPath` values always resolve from the selected AL app/project root,
+  including inherited folder/workspace settings, as documented in
+  [Microsoft Learn](https://learn.microsoft.com/dynamics365/business-central/dev-itpro/developer/devenv-using-code-analysis-tool-with-rule-set#create-and-customize-a-ruleset).
+  Workspace `folders[].path` entries remain workspace-file-relative.
+  `${workspaceFolder}` means the selected VS Code folder, the most specific
+  listed folder containing the app, or the app when no workspace is identified.
+  Named variants
+  use the applicable workspace's folder names (or directory basenames).
+  Workspace files are searched in the app and its ancestors and apply only if
+  a listed folder contains the selected app. For a nested app without a workspace
+  file or local ruleset setting, a single ancestor `.vscode/settings.json` with
+  `al.ruleSetPath` supplies single-folder workspace settings and the variable root.
+  Multiple such ancestors fail explicitly rather than guessing the open folder.
+  Multiple applicable workspaces,
+  unknown/ambiguous names, and unsupported variables fail explicitly; pass an
+  explicit ruleset path to disambiguate. The app directory and manifest are
+  validated before compiler discovery.
 - `/packagecachepath` points at the app's own `.alpackages`. A stale package
   cache is the most common cause of phantom errors after a dependency changed;
   if errors reference missing symbols from a workspace sibling app, rebuild

@@ -1,7 +1,8 @@
 ---
 name: bc-webclient-runner
 mode: subagent
-model: anthropic/claude-sonnet-5
+model: openai/gpt-6-sol
+variant: high
 description: |
   Use this agent, only when the developer opts in, to drive a Business Central sandbox through a documented user flow in a real browser and report rendered-UI mismatches. It is optional and is not part of the mandatory verifier set.
 ---
@@ -20,9 +21,14 @@ You are the runtime adapter for the BCQuality web-client runner.
    `python3` when it is not executable, using complete task context kept in
    memory or a temporary path outside the workspace, with
    `requested-skill-id: al-bc-webclient-runner`, perform knowledge-index
-   preparation, then follow the exact target
+   preparation, with expected-target guard
    `.opencode/BCQuality-ADIGO/custom/skills/testing/al-bc-webclient-runner.md`.
-4. Follow that action skill plus `skills/read.md` and `skills/do.md`. Use the
+   Execute only on `outcome: routed`, using returned `dispatch[].skill.path`
+   relative to `.opencode/BCQuality-ADIGO/`, after matching the expected target.
+   On `no-match` or `failed`, return the dispatch record without a review-pass
+   claim or static fallback. On target mismatch, stop and report the record and
+   mismatch. Subsequent action instructions apply only after this guard passes.
+4. Follow the dispatched action skill plus `skills/read.md` and `skills/do.md`. Use the
    available Playwright browser tools as its execution surface. Do not invent a
    duplicate checklist, legacy JSON contract, or app-specific setup.
 5. Capture console messages and failed network-request details as required

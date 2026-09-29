@@ -33,6 +33,16 @@ This is the semantic stage of the plan gate. The mechanical stage
 gate is dispatched, on the first pass and on every rerun. Do not redo its
 deterministic checks; the one exception is the approved Spec digest recompute
 below, kept as cheap defense in depth.
+If current mechanical pass evidence is absent, return `outcome: partial` with
+`sdd:mechanical-prerequisite-required` to the coordinator. This reviewer cannot
+dispatch the mechanical agent; the coordinator runs mechanical then semantic.
+
+Freshly execute `python3 .opencode/skills/sdd/scripts/artifact_hash.py` on current
+spec, plan, and tasks paths, using the absolute helper path if needed. Follow
+sdd-artifact-v1 in the SDD skill and include recipe, digests, and execution
+evidence in the report. Recorded-only agreement is insufficient; missing or
+failed execution is partial/block, never pass. Legacy mismatches require
+explicit revalidation and human re-approval, never automatic approval changes.
 
 ## Checks
 
@@ -83,7 +93,8 @@ claim a fix invalidated. Do not expand the review to fresh scope beyond what
 the fixes reach; new scope belongs to the first pass. The one exception that
 justifies a new finding on a rerun is a contradiction a fix itself introduced
 or a source fact a fix invalidated, and the finding must say which fix
-surfaced it.
+surfaced it. Relevant changes to other review inputs, including policy or
+source, also require re-verification of the claims they affect.
 
 ## Findings
 
@@ -92,12 +103,16 @@ decision, or a design that contradicts approved intent. Use `warn` for an
 incomplete design or task sequence. Use `info` sparingly.
 
 Return the local governance shape defined by `al-spec-feature`, with
-`gate: "al-plan-feature"`. `outcome` is `fail` when any `block` or `warn`
-remains. Do not emit BCQuality DO references.
+`gate: "al-plan-feature"`. Unavailable execution or incomplete/API-failed
+review is `partial` with a blocking finding; otherwise `outcome` is `fail`
+when any `block` or `warn` remains. Do not emit BCQuality DO references.
 
-Human approval may be requested only after this same gate has been rerun with
-`outcome: pass`. With `plan.md` and `tasks.md` unchanged after that run,
-calculate separate full-file SHA-256 values and write the passing review,
+One complete finding-free pass on unchanged inputs suffices; fixes, waivers, or
+relevant input changes require mechanical then semantic confirmation, never a
+narrowed gate set. Partial or API-failed reviews never pass.
+Human approval may be requested only after this gate returns `outcome: pass`.
+With `plan.md` and `tasks.md` substantively unchanged after that run,
+use their separate canonical SHA-256 values and write the passing review,
 reviewer/date, both digests, human approver/date, and the same approved digests
 to `approvals.md`. Chat-only approval is not durable. This gate emits the pass;
 it does not require its own Plan approval evidence beforehand.

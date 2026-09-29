@@ -1,7 +1,8 @@
 ---
 name: al-test-writer
 mode: subagent
-model: anthropic/claude-sonnet-5
+model: openai/gpt-6-sol
+variant: high
 description: |
   Use this agent to generate Business Central AL tests only when automated tests are opted in for the feature or the user explicitly requests a regression or TDD test.
 ---
@@ -14,9 +15,14 @@ router/preparation contract in
 `.opencode/BCQuality-ADIGO/tools/route_entry.py` directly, or through `python3`
 when it is not executable, using complete task context kept in memory or a
 temporary path outside the workspace, with
-`requested-skill-id: al-test-writer`, perform index preparation, then follow
-the exact target
-`.opencode/BCQuality-ADIGO/custom/skills/testing/al-test-writer.md`. Follow that
-action skill plus `skills/read.md` and `skills/do.md`. Load local style guide
+`requested-skill-id: al-test-writer`, perform index preparation, with
+expected-target guard
+`.opencode/BCQuality-ADIGO/custom/skills/testing/al-test-writer.md`.
+Execute only on `outcome: routed`, using returned `dispatch[].skill.path`
+relative to `.opencode/BCQuality-ADIGO/`, after matching the expected target.
+On `no-match` or `failed`, return the dispatch record without a review-pass
+claim or static fallback. On target mismatch, stop and report the record and
+mismatch. Subsequent action instructions apply only after this guard passes.
+Follow that action skill plus `skills/read.md` and `skills/do.md`. Load local style guide
 sections 2, 3.2, 3.3, 4, 9, and 15 while generating test AL. Emit the action skill's DO
 output and any requested code artifact; do not modify production AL.

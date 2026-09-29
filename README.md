@@ -126,8 +126,8 @@ agent path discovery less reliable.
    The `/al-spec-feature`, `/al-plan-feature`, and `/al-implement-feature`
    commands are review-only gates invoked by those stages; they do not draft or
    implement the feature. The plan gate runs in two stages: a mechanical
-   review (`al-plan-mechanical`, Sonnet) before the semantic review
-   (`/al-plan-feature`, Opus). Resolve findings and rerun each gate to pass
+    review (`al-plan-mechanical`, GPT-6 Sol high) before the semantic review
+    (`/al-plan-feature`, GPT-6 Sol high). Resolve findings and rerun each gate to pass
    before the required human approval or Test entry.
 
 7. Keep this template clone as the update source. Symlinked runtime files are
@@ -181,7 +181,8 @@ your real paths, names, and object range.
 
    Check `specs/features/001-customer-reference/spec.md`. Create `approvals.md`
    from `specs/templates/feature-approvals.md`. Resolve findings and rerun the
-   Spec gate to pass. Without changing `spec.md`, run `sha256sum spec.md` and
+   Spec gate to pass. Without changing `spec.md`, run the canonical hash helper
+   on its path (recipe below) and
    record the review outcome, reviewer/date, and digest in `approvals.md`. Spec
    approval is a hard stop:
 
@@ -203,8 +204,7 @@ your real paths, names, and object range.
    BC is reused, and the task list matches the no-tests decision. The mechanical
    stage checks the deterministic parts first; resolve findings and rerun the
    Plan gate (mechanical, then semantic) to pass. Without changing either file,
-   run
-   `sha256sum plan.md tasks.md` and record the review, reviewers/dates, and the
+   run the canonical hash helper on both paths and record the review, reviewers/dates, and the
    two
    separate digests in `approvals.md`. Plan approval is the second hard stop:
 
@@ -214,7 +214,8 @@ your real paths, names, and object range.
 
    Record the human approver/date and repeat both exact digests in
    `approvals.md`. Recompute all approved digests before implementation. Any
-   later edit invalidates the affected review and approval evidence.
+   later substantive edit invalidates the affected review and approval evidence;
+   leading task checkbox-only progress outside fenced examples does not.
 
 5. Implement the approved tasks and run the pre-Test semantic review:
 
@@ -233,8 +234,12 @@ your real paths, names, and object range.
 
    Record the initial pre-Test semantic reviewer/date, outcome, and
    implementation revision in `validation.md`. For this no-tests example, run `al-code-quality-reviewer` and
-   `al-readability-checker` in parallel. Resolve their findings and run both
-   again. For an opted-in test feature, run `al-test-runner` immediately after
+   `al-readability-checker` in parallel. One complete finding-free pass on
+   unchanged review inputs suffices. Fixes, approved waivers, or relevant input
+   changes require confirmation by the exact applicable verifier set, adding
+   new triggers and never narrowing reruns. Partial or API-failed reviews never
+   pass. For an opted-in test feature, write tests before semantic implementation
+   review and compilation, then run `al-test-runner` immediately after
    compile and require every selected test to execute and pass before the test
    coverage and quality verifiers. The runtime runner may use AL MCP
    `al_run_tests`. `tests=no` means no runner; `tests=yes` with no runner is a
@@ -244,7 +249,8 @@ your real paths, names, and object range.
    `bc-webclient-runner`.
 
 7. Execute the selected manual or web-client verification and record a passing
-   result in `validation.md`. Complete both verifier runs and record post-Test-fix
+   result in `validation.md`. Record the initial verifier pass and required
+   confirmation runs, and record post-Test-fix
    semantic reruns separately from the initial gate
    after production fixes, update affected documentation, then move the roadmap
    item to `done` and review the AL diff before creating the app repository's
@@ -279,16 +285,52 @@ Each feature follows this sequence:
 2. **Plan:** validate the approved Spec digest, define the standard BC
    functionality to reuse, custom AL objects, object IDs, data model,
    integrations, risks, and test strategy, then bind Plan and tasks approval to
-   separate full-file SHA-256 values.
+   separate canonical SHA-256 values, raw plan and normalized task checkboxes.
 3. **Implement:** write AL only after the spec and plan have been reviewed and
-   approved.
+   approved, including opted-in test artifacts before semantic implementation
+   review and compilation.
 4. **Test:** build the app; run opted-in tests; run the exact applicable
-   verifier set twice; rerun semantic conformance after production fixes; and
+   verifier set once when complete, finding-free, and inputs remain unchanged,
+   with exact-set confirmation after fixes, waivers, or relevant input changes;
+   rerun semantic conformance after production fixes; and
    execute a passing manual or web-client check, all recorded in `validation.md`.
 5. **Document:** update feature documentation and the roadmap.
 6. **Merge:** review closeout and prepare the PR when requested.
 
 The complete workflow and agent contract are in [AGENTS.md](AGENTS.md).
+
+### Digest and verifier policy
+
+From the repository root, the only artifact digest recipe is **sdd-artifact-v1**:
+
+```bash
+python3 .opencode/skills/sdd/scripts/artifact_hash.py specs/features/<id>/spec.md
+python3 .opencode/skills/sdd/scripts/artifact_hash.py specs/features/<id>/plan.md specs/features/<id>/tasks.md
+```
+
+The helper uses Python's standard library and prints one SHA-256 per file.
+Spec and plan are raw bytes. For `tasks.md`, only Markdown task checkbox state
+after zero to three spaces, outside fenced examples, is normalized; indented
+code, inline literals, substantive
+content, and line endings are preserved. The exact grammar is documented in
+`.opencode/skills/sdd/SKILL.md`. Use a resolved absolute helper path when needed.
+Every digest reviewer freshly executes it against current files; missing or
+failed execution is partial/block, never a recorded-only pass. Legacy mismatches
+require explicit revalidation and human re-approval while retaining existing
+evidence, never automatic overwrite or reapproval.
+
+`/al-plan-feature` runs as the semantic reviewer. Without a current mechanical
+pass it returns `mechanical-prerequisite-required` to the coordinator, which
+runs mechanical then semantic. Human Spec and Plan approvals remain hard stops.
+
+Specialist triggers are independent: `al-integration-pattern-reviewer` for
+changed actual BC external flows; `azure-integration-validator` only for changed
+Azure integration artifacts; `al-event-subscriber-auditor` only for changed
+subscribers or affected publisher signatures. Retain the exact applicable set
+for required confirmation runs and add newly triggered reviewers. Pass paths,
+not contents; require Serena-first AL navigation, workspace-relative paths,
+and conversion of 0-based Serena locations to 1-based report lines in every
+verifier dispatch.
 
 ## Repository contents
 
@@ -320,6 +362,21 @@ OpenCode may also select the matching skill or verifier from a natural-language
 request. After an AL build, the post-build plugin reminds the agent to run the
 mandatory verifier set. Test agents run only when the feature's durable test
 decision is `yes`.
+
+### Inline Hunk notes
+
+The coordinator proactively publishes short German notes at stable implementation
+and review checkpoints, including useful explanations on clean changes. Notes
+explain intent, tradeoffs, verification steps, and actionable findings rather
+than repeating the diff. Implementers return review highlights; only the
+coordinator publishes to the matching live checkout.
+
+Open Hunk in the checkout being changed and enable agent notes in its TUI.
+The coordinator checks anchors, deduplicates, reads back published notes, and
+reports the published count or a deferral reason. A session in a different app
+is not reused. Missing Hunk does not block coding or validation. Details live in
+`.opencode/skills/hunk-review/SKILL.md`; CLI commands use
+`"$HOME/.hunk/bin/hunk"` so they do not depend on fish/Bash/zsh startup files.
 
 ## House rules and the AL style guide
 

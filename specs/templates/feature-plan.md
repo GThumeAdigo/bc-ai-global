@@ -53,5 +53,7 @@ Trade-offs taken, and anything the reviewer should scrutinise.
 ## Test strategy
 
 The test decision above must match `spec.md`. When it is `yes`, describe how each
-acceptance criterion becomes a test (AL test codeunit, Page Scripting, etc.). When
+acceptance criterion becomes a test (AL test codeunit, Page Scripting, etc.).
+Write those tests during Implement, before semantic implementation review and
+compilation; execute them after compile and before coverage/quality validation. When
 it is `no`, state that no automated test artifacts or test verifiers will be used.

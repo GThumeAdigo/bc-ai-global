@@ -1,7 +1,8 @@
 ---
 name: al-permission-set-auditor
 mode: subagent
-model: anthropic/claude-sonnet-5
+model: openai/gpt-6-sol
+variant: high
 description: |
   Use this agent to audit a Business Central AL extension's permission sets against the objects the extension actually defines. The most common cause of AppSource rejection and tenant install failures is a new table, page, codeunit, or report that the developer forgot to add to the permission set. This agent walks the object inventory, walks the permission set, and reports the gap.
 
@@ -29,10 +30,19 @@ router/preparation contract in
 `.opencode/BCQuality-ADIGO/tools/route_entry.py` directly, or through `python3`
 when it is not executable, using complete task context kept in memory or a
 temporary path outside the workspace, with
-`requested-skill-id: al-permission-set-auditor`, perform index preparation, then
-follow the exact target
+`requested-skill-id: al-permission-set-auditor`, perform index preparation, with
+expected-target guard
 `.opencode/BCQuality-ADIGO/custom/skills/review/al-permission-set-review.md`.
+Execute only on `outcome: routed`, using returned `dispatch[].skill.path`
+relative to `.opencode/BCQuality-ADIGO/`, after matching the expected target.
+On `no-match` or `failed`, return the dispatch record without a review-pass
+claim or static fallback. On target mismatch, stop and report the record and
+mismatch. Subsequent action instructions apply only after this guard passes.
 Follow that action skill plus `skills/read.md` and `skills/do.md`, and emit its
 DO report. Load `.opencode/skills/al-code-review/SKILL.md` and `styleguide.md`
 section 10 as the local overlay; put overlay-only findings in a separate
 `local-review` report, never in DO references. Do not modify files.
+
+Navigate AL with Serena first (symbols and references); use text search only
+when semantic navigation cannot answer. Use workspace-relative paths, including
+app-folder prefixes, and convert Serena's 0-based lines to 1-based report lines.

@@ -27,6 +27,10 @@ Resolve the repository and feature from the invocation. Read `APP_CONTEXT.md`,
 `tasks.md`, and it must not require its own not-yet-written review or approval
 metadata in `approvals.md`.
 
+Accept paths, not pasted contents. Navigate AL with Serena first, use
+workspace-relative paths, and convert 0-based Serena locations to 1-based
+report lines. These navigation rules apply to every local governance gate.
+
 ## Checks
 
 - The feature id and roadmap entry agree, and the roadmap status is `spec`.
@@ -64,7 +68,8 @@ claim a fix invalidated. Do not expand the review to fresh scope beyond what
 the fixes reach; new scope belongs to the first pass. The one exception that
 justifies a new finding on a rerun is a contradiction a fix itself introduced
 or a source fact a fix invalidated, and the finding must say which fix
-surfaced it.
+surfaced it. Relevant changes to other review inputs, including policy or
+source, also require re-verification of the claims they affect.
 
 ## Findings
 
@@ -78,7 +83,7 @@ Return only:
 ```json
 {
   "gate": "al-spec-feature",
-  "outcome": "pass | fail",
+  "outcome": "pass | fail | partial",
   "summary": "string",
   "findings": [
     {
@@ -91,12 +96,22 @@ Return only:
 }
 ```
 
-`outcome` is `fail` when any `block` or `warn` remains. Local governance
+`outcome` is `partial` when required execution or review coverage is unavailable
+or API-failed, with a blocking finding; it must never pass. Otherwise `outcome`
+is `fail` when any `block` or `warn` remains. Local governance
 findings do not carry BCQuality `references`; cite the governing scaffold file
 directly in `message` only when useful.
 
-Human approval may be requested only after this same gate has been rerun with
-`outcome: pass`. With `spec.md` unchanged after that run, calculate its full-file
-SHA-256 and write the passing review, reviewer/date, digest, human approver/date,
+One complete finding-free pass on unchanged inputs suffices. Fixes, waivers, or
+relevant input changes require confirmation by the same applicable gate set;
+do not repeat clean identical work. This rule also applies to the other local
+governance skills using this report shape.
+
+Human approval may be requested only after this gate returns `outcome: pass`.
+The reviewer freshly executes `python3 .opencode/skills/sdd/scripts/artifact_hash.py`
+on the current spec path and includes the digest, recipe version, and execution
+evidence in its report. Use the SDD skill's sdd-artifact-v1 recipe, never a
+recorded-only digest. Missing execution is partial/block, not pass.
+With `spec.md` unchanged after that run, record the passing review, reviewer/date, digest, human approver/date,
 and the same approved digest to `approvals.md`. Chat-only approval is not
 durable. This gate emits the pass; it does not require that evidence beforehand.

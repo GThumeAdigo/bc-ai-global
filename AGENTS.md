@@ -167,13 +167,32 @@ skill or spec artifacts. The path is:
 3. Compile with the `al-compile` skill and classify findings against the
    baseline.
 4. Run `al-code-quality-reviewer` and `al-readability-checker` in parallel on
-   the changed AL, resolve every finding or justify it explicitly, then rerun
-   the same reviewers with the findings and fixes listed to confirm
-   resolution. An acknowledged finding is neither resolved nor waived; do not
-   mark the work complete on the first pass.
+   the changed AL. One complete finding-free pass on unchanged review inputs
+   suffices. Resolve findings or record explicitly approved waivers with owner
+   and date. Fixes, waivers, or relevant input changes require confirmation by
+   the exact applicable reviewer set, adding new triggers and never narrowing
+   reruns opportunistically. Partial or API-failed reviews never pass; an
+   acknowledged finding is neither resolved nor waived. Independently add
+   `al-integration-pattern-reviewer` for changed actual BC external flows,
+   `azure-integration-validator` only for changed Azure integration artifacts,
+   and `al-event-subscriber-auditor` only for changed subscribers or affected
+   publisher signatures. Pass paths, not contents, and require Serena-first AL
+   navigation, workspace-relative paths, and conversion of 0-based Serena
+   locations to 1-based report lines in every verifier dispatch.
 5. If the change reveals that behavior an approved feature specified is wrong,
    that is not a quick fix: load the `sdd` skill and use its amendment
    procedure.
+
+## Hunk review notes
+
+The coordinator loads `.opencode/skills/hunk-review/SKILL.md` at a stable
+implementation checkpoint, after verifier findings arrive, and before final
+handoff, including quick fixes with non-obvious behavior. Publish short German
+notes proactively to the matching live checkout: actionable findings and useful
+intent, tradeoff, or verification explanations even on clean changes. Subagents
+return evidence; only the coordinator publishes and navigates. Follow the skill's
+deduplication, anchor, visibility, and read-back checks. Report published count
+or why publication was deferred; no live session does not block implementation.
 
 ## Shared and app-local scaffolding
 
@@ -243,6 +262,23 @@ section of `README.md`.
   summary**, not a second source of truth: this file and the house rules under
   `.opencode/skills/al-code-review/` remain authoritative, and when the two
   disagree, fix the memory.
+
+## Tool discipline
+
+Two rules earned by session failures, both cheap to follow:
+
+- **Never edit a governed artifact with a scripted string replace.** A
+  `python3` or `sed` replacement whose anchor does not match changes nothing
+  while the surrounding script still prints success, so the edit is reported
+  applied and the next reader, or the next gate, finds it missing. Use the
+  `edit` tool, which fails loudly when the target text is absent, and read the
+  changed region back before reporting the edit done. Governed artifacts are
+  the constitution, every file under `specs/`, `APP_CONTEXT.md`, and everything
+  under `.opencode/`.
+- **A subagent result that arrives after a single tool call, or with an API
+  error, is a failure and not a result.** Redispatch the same prompt once
+  before acting on it. Never read a truncated transcript as a finding-free run,
+  and never report its silence as a pass.
 
 ## Runtime reloads
 

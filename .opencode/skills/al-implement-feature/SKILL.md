@@ -25,7 +25,13 @@ Resolve the repository and feature from the invocation. Read `APP_CONTEXT.md`,
 `AGENTS.md`, the approved `spec.md`, `plan.md`, `tasks.md`, `approvals.md`, and every source file
 identified by the plan's object inventory and tasks. A diff is useful supporting
 evidence but is not a required hidden input and is not the full review scope.
-Recompute the full-file SHA-256 for `spec.md`, `plan.md`, and `tasks.md`.
+Freshly execute `python3 .opencode/skills/sdd/scripts/artifact_hash.py` on the
+current `spec.md`, `plan.md`, and `tasks.md` paths (absolute helper path if needed).
+Use sdd-artifact-v1 from the SDD skill: raw spec/plan, leading task checkbox
+normalization outside fences only. Include recipe, digests, and execution
+evidence in the report. Never trust recorded-only agreement. Missing or failed
+execution is partial/block, never pass. Legacy mismatches require explicit
+revalidation and human re-approval, never automatic approval changes.
 `approvals.md` must show passing Spec and Plan reviews, human approvals, and
 matching review/approval/current digests for all three files. Require roadmap
 status `in-progress`; otherwise implementation or Test entry is blocked.
@@ -53,7 +59,11 @@ for a material plan/task divergence that does not yet prove wrong behavior. Use
 `al-spec-feature`, with `gate: "al-implement-feature"`; do not emit BCQuality
 DO references.
 
-`outcome` must be `fail` while any `block` or `warn` remains. Resolve findings
+One complete finding-free pass on unchanged inputs suffices. Fixes, waivers, or
+relevant input changes require confirmation by the same applicable gate set.
+Partial or API-failed reviews never pass; report `partial` with a blocking
+finding when required execution or coverage is unavailable.
+Otherwise `outcome` must be `fail` while any `block` or `warn` remains. Resolve findings
 and rerun this same gate to `outcome: pass` before Test. If Test fixes production
 behavior, rerun this gate again against the resulting implementation before Test
 closes.

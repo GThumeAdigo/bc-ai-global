@@ -7,7 +7,7 @@
 ## Initial Pre-Test Semantic Gate
 
 - Reviewer/date:
-- Outcome: pass | fail
+- Outcome: pass | fail | partial
 - Implementation revision/hash:
 
 ## Compile and baseline
@@ -35,8 +35,12 @@ or any required test left unexecuted.
 ## Verifier run 1
 
 - Applicable mandatory set:
-- Conditional integration trio applicable: yes | no
+- Review input revision/evidence (source, artifacts, policy):
+- Integration-pattern reviewer: changed actual BC external flows, yes | no, paths/reason:
+- Azure validator: changed Azure integration artifacts, yes | no, paths/reason:
+- Subscriber auditor: changed subscribers or affected publisher signatures, yes | no, paths/reason:
 - Results and findings:
+- Complete and finding-free on unchanged inputs: yes | no
 
 ## Resolution and waivers
 
@@ -46,11 +50,18 @@ or any required test left unexecuted.
 Only a resolved finding or a durable waiver with explicit owner and approval
 date may proceed. An acknowledgement is not a waiver.
 
-## Verifier run 2
+## Required confirmation runs (or not required)
 
-- Exact rerun set:
+- Required because of fixes, waivers, or relevant input changes: <reason | not required: clean complete first pass, inputs unchanged>
+- Exact applicable rerun set (retain original set, add new triggers):
+- Review input revision/evidence:
 - Results:
 - Confirmation that first-run findings are resolved or waived:
+
+One complete finding-free pass on unchanged review inputs suffices. Do not
+repeat clean identical work. When confirmation is required, rerun the exact
+applicable set, never a narrowed subset. Repeat this section for every required
+run. Partial or API-failed reviews never count as passes.
 
 ## Post-Test-Fix Semantic Reruns
 
@@ -63,6 +74,14 @@ date may proceed. An acknowledgement is not a waiver.
 - Environment:
 - Steps or guide section:
 - Result and evidence:
+
+## Hunk review notes
+
+- Publication: <count and matching checkout | deferred with reason | no useful notes, reason>
+- Read-back and visibility: <confirmed | hidden, developer notified | not applicable>
+
+This records presentation status only. No matching live session does not block
+Test; follow `.opencode/skills/hunk-review/SKILL.md` for publication and refresh.
 
 ## Final Test decision
 

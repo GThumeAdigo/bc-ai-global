@@ -35,8 +35,17 @@ When sources conflict, project house rules win.
 
 The project's authoritative AL style guide lives beside this skill at
 [`styleguide.md`](styleguide.md). There is exactly one copy of it in the repo.
-Read it and apply every rule it defines, in addition to the house rules and core
-checks below.
+A comprehensive standalone review reads and enforces the entire guide. An
+explicitly scoped reviewer reads and enforces only its assigned numbered guide
+sections and the cross-references needed to interpret them. Those section numbers
+refer to `styleguide.md`, not the numbered house rules below. The common house
+overlay remains applicable to the reviewed code, including API verification,
+complexity, and telemetry rules; a section assignment does not discard it. Apply
+core checks within the assigned review remit, without expanding to a full audit.
+
+One complete finding-free pass suffices on unchanged review inputs. Fixes,
+approved waivers, or relevant input changes require confirmation by the applicable
+reviewers. Partial or failed reviews never pass.
 
 Precedence, highest first:
 

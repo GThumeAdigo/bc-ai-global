@@ -24,6 +24,12 @@ Resolve the repository root and read `APP_CONTEXT.md`, `AGENTS.md`,
 `specs/brief.md`, `specs/tech-design.md`, and `specs/roadmap.md`. Preserve valid
 existing decisions when reviewing an update and never invent app-specific facts.
 
+One complete finding-free pass on unchanged review inputs suffices. Fixes,
+waivers, or relevant input changes require confirmation by the same applicable
+gate set. Missing coverage or API-failed review is `outcome: partial` with a
+blocking finding, never pass. This constitution gate has no artifact digest
+approval prerequisite.
+
 ## Checks
 
 - `APP_CONTEXT.md` identifies the app, workspace dependencies, AL conventions,
