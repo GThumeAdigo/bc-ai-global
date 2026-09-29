@@ -1,0 +1,90 @@
+#!/usr/bin/env python3
+"""Exercise a committed release in temporary apps and an isolated host HOME."""
+import argparse
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tempfile
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def run(command, cwd=None, env=None):
+    # OpenCode 1.18.33 can truncate large debug output when stdout is a pipe.
+    # A regular temporary file preserves the full inventory without exposing it.
+    with tempfile.TemporaryFile(mode="w+") as output:
+        result = subprocess.run(command, cwd=cwd, env=env, stdout=output, stderr=subprocess.PIPE, text=True, timeout=60)
+        if result.returncode:
+            raise RuntimeError(f"command failed: {command[0]} (exit {result.returncode}): {result.stderr[-1000:]}")
+        output.seek(0)
+        return output.read()
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--revision", default="HEAD")
+    parser.add_argument("--host", action="store_true")
+    args = parser.parse_args()
+    host = shutil.which("opencode")
+    with tempfile.TemporaryDirectory(prefix="bc-ai-smoke-") as directory:
+        root = Path(directory)
+        repo = root / "repo"
+        repo.mkdir()
+        run(["git", "init", "-q", str(repo)])
+        apps = [repo / "one", repo / "two"]
+        for app in apps:
+            app.mkdir()
+            (app / "app.json").write_text('{}')
+        command = [sys.executable, str(ROOT / "scripts/install"), "--revision", args.revision, "--store", str(root / "data"), "--backup-root", str(root / "backups")]
+        run([*command, str(apps[0]), str(apps[1])])
+        config = json.loads((apps[0] / "opencode.json").read_text())
+        assert config["agent"]["al-change-reviewer"]["variant"] == "high"
+        assert not config["mcp"]["playwright"]["enabled"]
+        assert not (apps[0] / ".opencode").is_symlink()
+        selected = Path(json.loads((apps[0] / ".agent-state/install.json").read_text())["release"])
+        assert not (selected / "plans").exists()
+        assert not (apps[0] / ".opencode/plugins").exists()
+        original_two = (apps[1] / "opencode.json").read_bytes()
+        run([*command, str(apps[0]), "--profile", "browser"])
+        assert (apps[1] / "opencode.json").read_bytes() == original_two
+        run([*command, str(apps[0]), "--rollback"])
+        assert json.loads((apps[0] / "opencode.json").read_text()) == config
+        host_status = "not-requested"
+        if args.host:
+            if not host:
+                raise RuntimeError("opencode unavailable")
+            home = root / "home"
+            home.mkdir()
+            external = root / "excluded-home/.config/opencode"
+            external.mkdir(parents=True)
+            (external / "opencode.json").write_text(json.dumps({"agent": {"must-not-load-sentinel": {"description": "excluded global fixture"}}}))
+            sentinel = home / ".claude/skills/must-not-load-sentinel"
+            sentinel.mkdir(parents=True)
+            (sentinel / "SKILL.md").write_text("---\nname: must-not-load-sentinel\ndescription: External skill isolation sentinel.\n---\nNever part of the installed profile.\n")
+            env = {"PATH": os.environ["PATH"], "HOME": str(home), "XDG_CONFIG_HOME": str(home / ".config"), "XDG_DATA_HOME": str(home / ".local/share"), "XDG_CACHE_HOME": str(home / ".cache"), "XDG_STATE_HOME": str(home / ".local/state"), "OPENCODE_DISABLE_EXTERNAL_SKILLS": "1", "OPENCODE_DISABLE_CLAUDE_CODE_SKILLS": "1", "OPENCODE_CONFIG_CONTENT": json.dumps({"autoupdate": False}), "NO_COLOR": "1"}
+            output = run([host, "debug", "agent", "al-change-reviewer"], cwd=apps[0], env=env)
+            # Only inspect the requested agent, avoiding large resolved-config dumps.
+            data = json.loads(output)
+            assert "must-not-load-sentinel" not in output
+            assert "gpt-6-sol" in json.dumps(data.get("model"))
+            assert data.get("variant") == "high"
+            skills = run([host, "debug", "skill"], cwd=apps[0], env=env)
+            assert "must-not-load-sentinel" not in skills
+            try:
+                skill_names = [s["name"] for s in json.loads(skills)]
+            except ValueError:
+                raise RuntimeError(f"host skill inventory is truncated/unparseable ({len(skills)} characters)")
+            assert "sdd" in skill_names, skill_names
+            host_status = "agent-config-loaded"
+        print(json.dumps({"status": "pass", "revision": args.revision, "two_app_install_update_rollback": "pass", "release_excludes_maintainer_plans": "pass", "host": host_status, "model_execution": "untested", "live_consumers_changed": False}))
+        # Read-only release snapshots need owner write bits for fixture cleanup.
+        for path in (root / "data").rglob("*"):
+            if not path.is_symlink():
+                path.chmod(0o755 if path.is_dir() else 0o644)
+
+
+if __name__ == "__main__":
+    main()
