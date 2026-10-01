@@ -104,6 +104,16 @@ Fill relevant `APP_CONTEXT.md` fields and product decisions, then start OpenCode
 The app contract and SDD skill determine the path. Quit and restart OpenCode
 after updating its installed runtime; running sessions retain old configuration.
 
+`/sdd` coordinates in the current primary conversation (`build` or `plan`) and
+preserves its permissions. With no arguments it asks for the task. Feature IDs,
+descriptions and explicit stage requests such as `/sdd plan <id>` are accepted;
+a stage request is not permission to execute the entire workflow.
+
+Specialist agents remain subagents. Use a Task dispatch, an `@agent-name` request
+or a native review command targeting that subagent. A command's `agent:` field
+can invoke a child task; this differs from `opencode run --agent <subagent>`,
+which is not a reliable way to select a specialist as the CLI primary agent.
+
 ## Existing consumers and rollback
 
 Old apps linked to a mutable source directory stay on that directory. Changing

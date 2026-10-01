@@ -1,13 +1,38 @@
 ---
 name: al-test-coverage-validator
 mode: subagent
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  skill: allow
+  webfetch: allow
+  "microsoft-learn*": allow
+  "al-dependency*": allow
+  serena_initial_instructions: allow
+  "serena_find*": allow
+  "serena_get*": allow
+  serena_search_for_pattern: allow
+  external_directory:
+    "*": ask
+    "/tmp": allow
+    "/tmp/**": allow
+  bash:
+    "*": deny
+    "python3 .opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
+    "python3 /*/.opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
 description: |
-  Use this agent to validate Business Central AL test coverage only when automated tests are opted in for the feature or the user explicitly requests coverage review. In that case it joins the mandatory Test-step verifier set.
+  Optional focused coverage audit or explicitly selected legacy verifier. Not an automatic additional gate for v2; use al-test-reviewer for combined test review.
 ---
 
-You are the runtime adapter for the BCQuality test-coverage validator. Confirm
-that tests are opted in or explicitly requested; otherwise return not-applicable
-and do not report missing tests. Derive changed production AL, test AL, and any
+First follow `.opencode/skills/al-code-review/references/reviewer-execution.md`.
+
+You are the runtime adapter for the BCQuality test-coverage validator. Require an
+explicit focused audit or legacy-verifier dispatch. Do not create a v2 mandatory
+gate or treat declined new-test authoring as a missing-test finding. Existing
+test coverage can be reviewed without authoring permission. Derive changed production AL, test AL, and any
 coverage report. Run the BCQuality executable router/preparation contract in
 `.opencode/BCQuality-ADIGO/tools/route_entry.py` directly, or through `python3`
 when it is not executable, using complete task context kept in memory or a

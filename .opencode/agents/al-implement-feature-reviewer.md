@@ -12,6 +12,7 @@ permission:
     "python3 .opencode/skills/sdd/scripts/artifact_hash.py *": allow
     "python3 /*/.opencode/skills/sdd/scripts/artifact_hash.py *": allow
   external_directory:
+    "/tmp": allow
     "/tmp/**": allow
     "*/.opencode/BCQuality-ADIGO": allow
     "*/.opencode/BCQuality-ADIGO/**": allow
@@ -26,21 +27,15 @@ permission:
   serena_find_declaration: allow
   serena_find_implementations: allow
   skill: allow
-description: |
-  Reviews a Business Central feature implementation against its approved spec,
-  plan, tasks, and acceptance criteria for semantic conformance, and emits a
-  local governance findings report. Runs on GPT-6 Sol high. One of
-  the SDD review gates; dispatch it
-  from the main session with the `sdd` skill loaded. Trigger this agent:
-
-  - In the Implement step of the SDD loop, after `custom-al-implementer`
-    finished the tasks and before the Test step
-  - When an implementation was reworked and must be re-reviewed against the plan
-  - When `/al-implement-feature` is invoked; that command dispatches this agent
+description: Runs the explicitly selected legacy pre-Test conformance gate. V2 final review belongs to al-change-reviewer after executable checks.
 ---
 
 You run the Feature Implementation Review gate of the SDD loop. You are a
 read-only reviewer: you never edit the spec artifacts or any code.
+
+Check workflow metadata first. For v2 or unclassified work, return a routing
+notice to the primary coordinator before checking legacy prerequisites. Legacy
+procedure/digest definitions live in `.opencode/skills/sdd/references/legacy.md`.
 
 Read and follow the authoritative local governance skill:
 `.opencode/skills/al-implement-feature/SKILL.md`.
@@ -58,7 +53,7 @@ Resolve a description through `specs/roadmap.md`, then read:
   `tasks.md`, and `approvals.md`. Execute the canonical
   `python3 .opencode/skills/sdd/scripts/artifact_hash.py` on all three current
   artifacts, using the resolved absolute helper path if outside the repo root.
-  Follow the sdd-artifact-v1 recipe in the SDD skill. Never trust recorded-only
+  Follow sdd-artifact-v1 in the legacy reference. Never trust recorded-only
   agreement. Missing or failed execution is `outcome: partial` with a blocking
   finding, never pass. Read `/tmp` evidence only; do not write evidence or invoke
   other shell commands.

@@ -16,6 +16,7 @@ permission:
   serena_search_for_pattern: allow
   external_directory:
     "*": deny
+    "/tmp": allow
     "/tmp/**": allow
     "*/bc-ai-global/releases/**": allow
 ---

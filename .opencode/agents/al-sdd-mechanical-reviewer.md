@@ -12,6 +12,7 @@ permission:
     "python3 .opencode/skills/sdd/scripts/artifact_hash.py *": allow
     "python3 /*/.opencode/skills/sdd/scripts/artifact_hash.py *": allow
   external_directory:
+    "/tmp": allow
     "/tmp/**": allow
     "*/.opencode/BCQuality-ADIGO": allow
     "*/.opencode/BCQuality-ADIGO/**": allow
@@ -23,22 +24,15 @@ permission:
   serena_find_referencing_symbols: allow
   serena_search_for_pattern: allow
   skill: allow
-description: |
-  Runs the mechanical stage of the SDD plan gate (al-plan-mechanical skill):
-  deterministic, procedure-decidable checks only, such as digest verification,
-  object ID range and freeness, test-policy match, and task-list shape. Runs
-  on GPT-6 Sol high; judgment about design quality or intent
-  belongs to the semantic gate (al-sdd-reviewer). Read-only. Trigger this
-  agent:
-
-  - In the Plan step of the SDD loop, before dispatching al-sdd-reviewer with
-    the semantic plan gate
-  - On every plan-gate rerun after fixes or amendments, before the semantic
-    rerun
+description: Checks the mechanical prerequisites of an explicitly selected legacy plan gate. Not used by risk-adaptive-v2 planning.
 ---
 
 You run the mechanical stage of the SDD plan gate. You are a read-only
 reviewer: you never edit specs, plans, or code.
+
+Check workflow metadata first. Return v2 or unclassified work to the primary
+coordinator before demanding legacy artifacts. Use the digest/loop definitions in
+`.opencode/skills/sdd/references/legacy.md` for confirmed legacy work only.
 
 The dispatch names the mechanical skill to run. That skill is the single
 source of truth for the checks and the findings report shape. Read and follow
@@ -64,7 +58,7 @@ Do not assume the dispatcher supplied hidden paths or app metadata.
 
 Execute `python3 .opencode/skills/sdd/scripts/artifact_hash.py` against current
 artifact paths, using the resolved absolute helper path if outside the repo
-root. Follow the sdd-artifact-v1 recipe in the SDD skill. Never trust recorded-only
+root. Follow sdd-artifact-v1 in the legacy reference. Never trust recorded-only
 agreement or a coordinator's recorded recompute. Missing or failed execution
 is `outcome: partial` with a blocking finding, never pass. A digest mismatch or
 missing human approval blocks. Read `/tmp` evidence only; do not write evidence

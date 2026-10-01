@@ -90,16 +90,16 @@ The main session coordinates and delegates substantial specialist work.
 
 ## Model policy (which step runs on which model)
 
-Agents are pinned rather than left to the session default. All pinned agents
-use `openai/gpt-6-sol` with `variant: high`:
+Installed agents use the model and variant from `runtime/model-policy.json`
+rather than the session default. The installer applies this policy to every
+agent in the consumer configuration:
 
-- **Semantic SDD reviews run on GPT-6 Sol high.** `al-sdd-reviewer` runs the
+- **Semantic SDD reviews use the shared model policy.** `al-sdd-reviewer` runs the
   specification, semantic plan, and constitution gates.
   `al-implement-feature-reviewer`
-  compares approved intent with implemented behavior before Test. Both agents
-  pin `model: openai/gpt-6-sol` and `variant: high`. Normal hard-stop
+  compares approved intent with implemented behavior before Test. Normal hard-stop
   flow dispatches fresh gates and does not imply shared subagent context.
-- **Implementation and mechanical checks also run on GPT-6 Sol high.** These include
+- **Implementation and mechanical checks use the same policy.** These include
   `custom-al-implementer`, `al-sdd-mechanical-reviewer` (the deterministic
   stage of the plan gate), the mandatory verifiers, test writers and
   validators, and specialist auditors. Their work is execution or structured
@@ -107,13 +107,13 @@ use `openai/gpt-6-sol` with `variant: high`:
 
 The SDD gate commands (`/al-spec-feature`, `/al-plan-feature`,
 `/al-implement-feature`, `/al-spec-init`) are thin dispatchers: their
-frontmatter names the reviewer agent and carries no model pin. The agent
-frontmatter is the single place to change a gate's model or permissions; do
-not reintroduce pins on the commands.
+frontmatter names the reviewer agent and carries no model pin. Change models
+in `runtime/model-policy.json` and permissions in agent frontmatter; do not
+reintroduce model pins on agents or commands.
 
 Do not unpin an agent ad hoc for a single run. If a verifier systematically
-misses a class of finding on its pinned variant, that is a reason to change the pin in the
-agent file (globally, in the scaffolding repo), not to override it per session.
+misses a class of finding on its pinned variant, change the shared model policy
+in the scaffolding repo rather than overriding it per session.
 
 ## The constitution (initial read, every feature)
 

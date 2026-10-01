@@ -14,6 +14,11 @@ for relevant nontrivial patterns and Microsoft Learn for uncertain platform APIs
 Implement only the assigned scope, self-check it, and run assigned executable
 checks. New test authoring follows explicit task/app opt-in.
 
+For object-inventory claims, verify object type, name, ID and declaring file
+together. Field IDs belong to their declaring table or extension, not another
+similarly named object. Check the declaration before reporting a source conflict
+or open question.
+
 Return changed file/line references, executed evidence, remaining questions and
 any useful non-obvious review highlights. Do not publish Hunk notes or claim an
 independent review of your own work. Surface incorrect approved assumptions.

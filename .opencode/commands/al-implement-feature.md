@@ -1,9 +1,13 @@
 ---
-description: Review a feature implementation for semantic conformance with its approved spec, plan, tasks, and acceptance criteria before testing.
+description: Legacy pre-Test implementation gate. V2 final review uses al-change-reviewer.
 agent: al-implement-feature-reviewer
 ---
 
-Review the feature implementation for $ARGUMENTS. Resolve the repository root,
+Check the workflow declaration first. For v2, return a routing notice to the
+primary conversation to select its v2 final review; do not run this pre-Test gate
+or require legacy artifacts. Unknown format requires coordinator classification.
+
+Review the legacy feature implementation for $ARGUMENTS. Resolve the repository root,
 feature artifacts including `approvals.md`, planned object inventory, task list, and implemented source
 from the current checkout. Do not expect hidden dispatcher inputs or require a
 pre-supplied diff. Freshly execute the canonical

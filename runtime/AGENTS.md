@@ -14,6 +14,8 @@ Line count alone does not determine risk. Questions do not need feature artifact
 
 Main-session implementation is allowed. Delegate for bounded investigation,
 context isolation or independent review, not as a mandatory relay.
+When delegating, verify the actual agent identity using the SDD skill's dispatch
+rule. A CLI fallback to the default primary agent is not a subagent result.
 
 ## Discover the app and tools
 

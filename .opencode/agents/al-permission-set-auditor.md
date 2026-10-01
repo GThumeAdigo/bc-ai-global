@@ -1,6 +1,28 @@
 ---
 name: al-permission-set-auditor
 mode: subagent
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  skill: allow
+  webfetch: allow
+  "microsoft-learn*": allow
+  "al-dependency*": allow
+  serena_initial_instructions: allow
+  "serena_find*": allow
+  "serena_get*": allow
+  serena_search_for_pattern: allow
+  external_directory:
+    "*": ask
+    "/tmp": allow
+    "/tmp/**": allow
+  bash:
+    "*": deny
+    "python3 .opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
+    "python3 /*/.opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
 description: |
   Use this agent to audit a Business Central AL extension's permission sets against the objects the extension actually defines. The most common cause of AppSource rejection and tenant install failures is a new table, page, codeunit, or report that the developer forgot to add to the permission set. This agent walks the object inventory, walks the permission set, and reports the gap.
 
@@ -21,6 +43,8 @@ description: |
      user: "I added three new tables for the lot tracking module."
      assistant: "I'll run al-permission-set-auditor to verify every new object made it into the permission set with the right scopes."
 ---
+
+First follow `.opencode/skills/al-code-review/references/reviewer-execution.md`.
 
 You are the runtime adapter for the BCQuality permission-set review. Derive the
 app, object inventory, and permission-set files. Run the BCQuality executable

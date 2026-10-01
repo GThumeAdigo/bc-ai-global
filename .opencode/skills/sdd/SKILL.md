@@ -41,6 +41,17 @@ bounded separate context or an independent judgment adds value. Reviewers do not
 modify the material they review. Use short path-based dispatches naming acceptance
 criteria, changed scope, known risks and evidence. No mandatory same-model relay.
 
+When delegating, verify the requested agent actually ran. `opencode run --agent`
+selects a primary agent; a `mode: subagent` name can fall back to the default
+primary agent and is not a valid dispatch. Use the coordinator's Task tool or a
+native slash command targeting the subagent. OpenCode commands with
+`agent: <subagent>` invoke a child task by default; do not disable that with
+`subtask: false` for review commands. Manual `@agent-name` invocation is also a
+supported subagent entry point, unlike selecting it as the CLI primary agent.
+For a separate CLI session, start a primary coordinator and explicitly instruct
+it to dispatch the named subagent and return that report. Check invocation and
+returned agent identity; a fallback requires a correct redispatch, not acceptance.
+
 ## Approval and progress
 
 Compact/Critical intent needs human approval before implementation. Record the

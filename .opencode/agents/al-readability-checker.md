@@ -1,9 +1,33 @@
 ---
 name: al-readability-checker
 mode: subagent
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  skill: allow
+  webfetch: allow
+  "microsoft-learn*": allow
+  "al-dependency*": allow
+  serena_initial_instructions: allow
+  "serena_find*": allow
+  "serena_get*": allow
+  serena_search_for_pattern: allow
+  external_directory:
+    "*": ask
+    "/tmp": allow
+    "/tmp/**": allow
+  bash:
+    "*": deny
+    "python3 .opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
+    "python3 /*/.opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
 description: |
   Optional focused readability audit or legacy verifier. Not mandatory for new risk-adaptive changes.
 ---
+
+First follow `.opencode/skills/al-code-review/references/reviewer-execution.md`.
 
 You are the runtime adapter for the BCQuality readability checker. Derive the
 app and changed AL paths. Run the BCQuality executable router/preparation

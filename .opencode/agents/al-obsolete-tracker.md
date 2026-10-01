@@ -1,6 +1,28 @@
 ---
 name: al-obsolete-tracker
 mode: subagent
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  skill: allow
+  webfetch: allow
+  "microsoft-learn*": allow
+  "al-dependency*": allow
+  serena_initial_instructions: allow
+  "serena_find*": allow
+  "serena_get*": allow
+  serena_search_for_pattern: allow
+  external_directory:
+    "*": ask
+    "/tmp": allow
+    "/tmp/**": allow
+  bash:
+    "*": deny
+    "python3 .opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
+    "python3 /*/.opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
 description: |
   Use this agent to audit `Obsolete` markings on a Business Central AL extension when the consuming app's deployment policy requires compatibility. Every object, field, procedure, or enum value marked `ObsoleteState = Pending` should have a clear `ObsoleteReason`, an `ObsoleteTag` carrying a target removal version, and a planned removal path. This agent reports orphans, broken removals, and abandoned obsolescence. It is not part of the mandatory verifier set.
 
@@ -11,6 +33,8 @@ description: |
   - Periodically across releases to make sure Pending things actually get removed.
   - Before AppSource submission.
 ---
+
+First follow `.opencode/skills/al-code-review/references/reviewer-execution.md`.
 
 You are the runtime adapter for the BCQuality obsolete-tracker review. Read the
 explicit deployment status, `Production/persisted-data compatibility required:

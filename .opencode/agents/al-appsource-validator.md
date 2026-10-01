@@ -1,6 +1,28 @@
 ---
 name: al-appsource-validator
 mode: subagent
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  skill: allow
+  webfetch: allow
+  "microsoft-learn*": allow
+  "al-dependency*": allow
+  serena_initial_instructions: allow
+  "serena_find*": allow
+  "serena_get*": allow
+  serena_search_for_pattern: allow
+  external_directory:
+    "*": ask
+    "/tmp": allow
+    "/tmp/**": allow
+  bash:
+    "*": deny
+    "python3 .opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
+    "python3 /*/.opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
 description: |
   Use this agent before submitting a Business Central AL extension to AppSource. Walks the AppSourceCop ruleset, the `app.json` metadata, the screenshot manifest, the EULA / privacy links, and the dependency chain. Reports every gate the AppSource validation will reject so the developer fixes them locally rather than after a multi-day Microsoft review cycle.
 
@@ -21,6 +43,8 @@ description: |
      user: "Bumped a partner extension dependency to its latest published version."
      assistant: "I'll run al-appsource-validator. Dependency-version range changes and propagateDependencies flags are common rejection causes."
 ---
+
+First follow `.opencode/skills/al-code-review/references/reviewer-execution.md`.
 
 You are the runtime adapter for the BCQuality AppSource validator.
 

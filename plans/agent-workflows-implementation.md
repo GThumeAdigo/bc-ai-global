@@ -8,7 +8,8 @@ Owner approved option B and section 12 defaults on 2026-09-29.
 - Baseline ref: `baseline/agent-workflows-2026-09-29`.
 - Corpus: `dcc2f1fa8271f8fb70711d62a08fb33435e1ce36`.
 - Isolated branch: `refactor/agent-workflows`.
-- Original checkout and installed consumers are not migration targets.
+- During isolated implementation, the original checkout and installed consumers
+  were not migration targets. The subsequent requested checkout handover is below.
 - Observed tool versions: OpenCode 1.18.33, global ALTool 17.0.34.45391,
   extension 18.0.2732683 / ALTool 18.0.41.45789, Node 24.18.1, Python 3.13.15.
 - Baseline host-generated plugin dependency: `@opencode-ai/plugin` 1.18.23.
@@ -17,6 +18,26 @@ Owner approved option B and section 12 defaults on 2026-09-29.
 - No credentials or global authentication databases are copied.
 
 ## Progress
+
+### Requested checkout handover, 2026-09-29
+
+The owner explicitly requested switching the original repository to the new
+branch after editing files on `master`. The three modified tracked files and
+the untracked older plan were saved in stash commit
+`6aca6616bba554c6bb61ddc45517883942db7def` before switching. The stash is retained.
+
+The branch now resides in `/home/greg/Repos/AI/bc-ai-global`. The temporary
+worktree remains detached at `02cc0c6`. The owner's object-declaration check and
+real-subagent dispatch rule were ported into the new implementer/SDD files and
+`runtime/AGENTS.md`, preserving their consumer scope. These edits remain
+uncommitted. No old workflow file was restored over the refactored version.
+
+Existing app symlinks into the original checkout now resolve against the new
+branch. Their targets were not rewritten; this branch switch is not a completed
+consumer installation migration. Root `AGENTS.md` and `opencode.json` now describe
+scaffold maintenance, while consumer configuration lives under `runtime/`.
+
+### Implementation stages
 
 - M0: baseline ref and isolated worktree created; approval recorded.
 - M1: aggregate suites, dependency locks, reference/model/permission contracts,
@@ -113,3 +134,35 @@ test proves effective configuration, not execution by the selected model.
 Next owner inputs: an authorized pilot app/clone and task/base refs, plus a
 budget for the proposed paired comparisons. Until then this is a verified
 infrastructure candidate, not an empirically validated replacement for all apps.
+
+## Agent/command follow-up, 2026-09-29
+
+On owner request, corrected the remaining role/dispatch inconsistencies:
+
+- All 27 specialists remain subagents; `/sdd` coordinates in the current primary
+  conversation, preserves Plan permissions, asks for an empty request and respects
+  explicit stage scope. Native commands targeting subagents are valid child-task
+  entry points, unlike selecting a subagent as a CLI primary agent.
+- Old SDD gate descriptions and commands explicitly select legacy work and route
+  v2/unknown artifacts back before demanding legacy prerequisites.
+- Existing relevant test execution is independent of new-test authoring opt-in;
+  legacy `tests=no` remains a legacy-only execution skip. Old coverage/quality
+  agents are optional targeted audits, not an additional v2 mandatory set.
+- Fifteen retained read-only specialist adapters now deny tools by default and
+  allow reading, semantic lookup and exact router invocations. They consume a
+  prepared corpus index and stdin task context instead of needing file writes.
+  Test/browser runners deny direct source-edit tools but retain execution tools.
+  These are host tool permissions, not an OS sandbox or a claim that arbitrary
+  shell argument strings are safe.
+- `python3 scripts/verify-scaffold`: 39 infrastructure tests, 28 compile fixtures,
+  seven legacy hook tests and six legacy installer functions passed. This includes
+  real stdin routing for all 15 restricted adapters. Existing Node module-type
+  warning from the ignored local package file remains non-fatal.
+- Isolated OpenCode metadata check on current uncommitted files: all 27 modes,
+  current-agent `/sdd`, legacy command target, and a representative specialist's
+  resolved permissions loaded successfully. No model or tool-action execution
+  was claimed from this loader check.
+
+Changes are uncommitted alongside the preserved owner edits. A restart is needed
+to load changed agents/commands; installed immutable releases require an explicit
+update before their consumers receive these changes.

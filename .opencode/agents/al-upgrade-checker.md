@@ -1,6 +1,28 @@
 ---
 name: al-upgrade-checker
 mode: subagent
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  skill: allow
+  webfetch: allow
+  "microsoft-learn*": allow
+  "al-dependency*": allow
+  serena_initial_instructions: allow
+  "serena_find*": allow
+  "serena_get*": allow
+  serena_search_for_pattern: allow
+  external_directory:
+    "*": ask
+    "/tmp": allow
+    "/tmp/**": allow
+  bash:
+    "*": deny
+    "python3 .opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
+    "python3 /*/.opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
 description: |
   Use this agent when a Business Central AL extension's schema changes to verify upgrade handling for existing-tenant data, but only when the consuming app's deployment policy requires compatibility. Relevant changes include required fields, table renames, enum changes, removed columns, type or length changes, and primary-key changes. It is specialist and not part of the mandatory verifier set.
 
@@ -11,6 +33,8 @@ description: |
   - Before a major app version bump.
   - When existing upgrade coverage is uncertain.
 ---
+
+First follow `.opencode/skills/al-code-review/references/reviewer-execution.md`.
 
 You are the runtime adapter for the BCQuality upgrade review. Read the explicit
 deployment status, `Production/persisted-data compatibility required: yes | no`,

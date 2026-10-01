@@ -1,9 +1,14 @@
 ---
-description: Review a feature plan and task list against its approved spec, object ID range, and verifier expectations.
+description: Review a legacy plan after its mechanical gate. New work uses /sdd.
 agent: al-sdd-reviewer
 ---
 
-Run the semantic plan gate (the `al-plan-feature` skill) for $ARGUMENTS. The
+Check the workflow declaration before any prerequisite checks. For v2 work,
+return a routing notice to the primary conversation to use `/sdd`; do not demand
+legacy hashes, tasks or mechanical-gate evidence. Unknown format needs coordinator
+classification, not creation of legacy artifacts.
+
+Run the legacy semantic plan gate (the `al-plan-feature` skill) for $ARGUMENTS. The
 mechanical stage (`al-plan-mechanical`) must already have passed for the
 current revision; if there is no passing mechanical report, return
 `mechanical-prerequisite-required` with `outcome: partial` to the coordinator.

@@ -3,7 +3,7 @@
   "instructions": ["AGENTS.md"],
   "skills": { "paths": [".opencode/skills"] },
   "permission": {
-    "external_directory": { "*": "ask", "@RELEASE@/**": "allow", "/tmp/opencode/**": "allow" },
+    "external_directory": { "*": "ask", "@RELEASE@/**": "allow", "/tmp": "allow", "/tmp/**": "allow" },
     "edit": { "@RELEASE@/**": "deny" },
     "bash": {
       "*": "ask",

@@ -1,6 +1,28 @@
 ---
 name: al-performance-reviewer
 mode: subagent
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  skill: allow
+  webfetch: allow
+  "microsoft-learn*": allow
+  "al-dependency*": allow
+  serena_initial_instructions: allow
+  "serena_find*": allow
+  "serena_get*": allow
+  serena_search_for_pattern: allow
+  external_directory:
+    "*": ask
+    "/tmp": allow
+    "/tmp/**": allow
+  bash:
+    "*": deny
+    "python3 .opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
+    "python3 /*/.opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
 description: |
   Use this agent to find common performance anti-patterns in Business Central AL: N+1 query patterns, missing keys for filter combinations, FlowField overuse on list pages, lack of SetLoadFields, FindFirst on growing tables, and other patterns the AL compiler will not warn about but which compound badly under tenant data scale. It is specialist, not universally mandatory.
 
@@ -21,6 +43,8 @@ description: |
      user: "Wrote a job-queue codeunit that walks every approved request and writes to BC."
      assistant: "I'll run al-performance-reviewer on the codeunit for N+1 and per-row FlowField access."
 ---
+
+First follow `.opencode/skills/al-code-review/references/reviewer-execution.md`.
 
 You are the runtime adapter for the BCQuality performance reviewer. Derive the
 app and changed or reported hot path. Run the BCQuality executable

@@ -1,6 +1,28 @@
 ---
 name: azure-integration-validator
 mode: subagent
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  skill: allow
+  webfetch: allow
+  "microsoft-learn*": allow
+  "al-dependency*": allow
+  serena_initial_instructions: allow
+  "serena_find*": allow
+  "serena_get*": allow
+  serena_search_for_pattern: allow
+  external_directory:
+    "*": ask
+    "/tmp": allow
+    "/tmp/**": allow
+  bash:
+    "*": deny
+    "python3 .opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
+    "python3 /*/.opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
 description: |
   Use this agent to review Azure components and infrastructure that participate in a Business Central integration against the authoritative BCQuality Azure integration action skill.
 
@@ -12,6 +34,8 @@ description: |
   - When a tenant reports an integration silently stopped.
 
 ---
+
+First follow `.opencode/skills/al-code-review/references/reviewer-execution.md`.
 
 You are the runtime adapter for the BCQuality Azure integration review. Derive
 the changed cloud artifacts, BC contract, and deployment context. Run the

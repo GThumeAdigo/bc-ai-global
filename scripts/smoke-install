@@ -42,10 +42,12 @@ def main():
         run([*command, str(apps[0]), str(apps[1])])
         config = json.loads((apps[0] / "opencode.json").read_text())
         assert "@APP@" not in json.dumps(config) and "@RELEASE@" not in json.dumps(config)
-        assert config["agent"]["al-change-reviewer"]["variant"] == "high"
         assert not config["mcp"]["playwright"]["enabled"]
         assert not (apps[0] / ".opencode").is_symlink()
         selected = Path(json.loads((apps[0] / ".agent-state/install.json").read_text())["release"])
+        policy = json.loads((selected / "runtime/model-policy.json").read_text())
+        for agent in (selected / ".opencode/agents").glob("*.md"):
+            assert all(config["agent"][agent.stem][key] == value for key, value in policy.items())
         assert not (selected / "plans").exists()
         assert not (apps[0] / ".opencode/plugins").exists()
         original_two = (apps[1] / "opencode.json").read_bytes()
@@ -70,8 +72,9 @@ def main():
             # Only inspect the requested agent, avoiding large resolved-config dumps.
             data = json.loads(output)
             assert "must-not-load-sentinel" not in output
-            assert "gpt-6-sol" in json.dumps(data.get("model"))
-            assert data.get("variant") == "high"
+            provider_id, model_id = policy["model"].split("/", 1)
+            assert data.get("model") == {"providerID": provider_id, "modelID": model_id}
+            assert data.get("variant") == policy["variant"]
             skills = run([host, "debug", "skill"], cwd=apps[0], env=env)
             assert "must-not-load-sentinel" not in skills
             try:

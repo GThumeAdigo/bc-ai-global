@@ -1,6 +1,14 @@
 ---
 name: bc-webclient-runner
 mode: subagent
+permission:
+  edit: deny
+  task: deny
+  "serena_replace*": deny
+  "serena_insert*": deny
+  serena_rename_symbol: deny
+  serena_safe_delete_symbol: deny
+  alcops_apply_fix: deny
 description: |
   Use this agent, only when the developer opts in, to drive a Business Central sandbox through a documented user flow in a real browser and report rendered-UI mismatches. It is optional and is not part of the mandatory verifier set.
 ---

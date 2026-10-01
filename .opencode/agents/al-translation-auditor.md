@@ -1,6 +1,29 @@
 ---
 name: al-translation-auditor
 mode: subagent
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  skill: allow
+  webfetch: allow
+  "microsoft-learn*": allow
+  "al-dependency*": allow
+  "nab-al-tools_get*": allow
+  serena_initial_instructions: allow
+  "serena_find*": allow
+  "serena_get*": allow
+  serena_search_for_pattern: allow
+  external_directory:
+    "*": ask
+    "/tmp": allow
+    "/tmp/**": allow
+  bash:
+    "*": deny
+    "python3 .opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
+    "python3 /*/.opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
 description: |
   Use this agent to audit translation coverage on a Business Central AL extension. Compares every `Label`, `Caption`, `ToolTip`, `Comment`, and `Description` string in the AL source against the xliff files under `Translations/`, against the `supportedCountries` declared in `AppSourceCop.json`, and against the locales the customer actually deploys to.
 
@@ -21,6 +44,8 @@ description: |
      user: "Submitting to AppSource next week."
      assistant: "I'll run al-translation-auditor to identify XLIFF coverage gaps."
 ---
+
+First follow `.opencode/skills/al-code-review/references/reviewer-execution.md`.
 
 You are the runtime adapter for the BCQuality translation auditor. Derive the
 app, source, translation folder, supported-country context, deployed locales,

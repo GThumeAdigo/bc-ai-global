@@ -3,10 +3,13 @@
 Status: **approved by the repository owner on 2026-09-29**, including option B
 and the five defaults in section 12. Approval: “ich gebe den plan frei”.
 
-Implementation branch: `refactor/agent-workflows`, isolated checkout
-`/tmp/opencode/bc-ai-agent-workflows`. Baseline ref:
+Implementation branch: `refactor/agent-workflows`, initially built in the isolated
+checkout `/tmp/opencode/bc-ai-agent-workflows`. Baseline ref:
 `baseline/agent-workflows-2026-09-29` at the starting commit below.
-The original source checkout remains at that baseline for linked consumers.
+The original source checkout remained at that baseline during implementation.
+At the owner's explicit request on 2026-09-29, the branch was transferred to
+`/home/greg/Repos/AI/bc-ai-global`; the temporary worktree is detached at `02cc0c6`.
+See the implementation report for preservation of the owner's intervening edits.
 
 Implementation status: M0–M5 delivered as an isolated infrastructure candidate.
 Executed tests, compatibility choices and pending product/pilot evidence are in
