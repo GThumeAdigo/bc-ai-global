@@ -19,8 +19,15 @@ permission:
     "*": ask
     "/tmp": allow
     "/tmp/**": allow
+    "*/.vscode*/extensions/ms-dynamics-smb.al-*": allow
+    "*/.vscode*/extensions/ms-dynamics-smb.al-*/**": allow
   bash:
     "*": deny
+    "git status": allow
+    "git status *": allow
+    "git rev-parse *": allow
+    "git diff --no-ext-diff --no-textconv": allow
+    "git diff --no-ext-diff --no-textconv *": allow
     "python3 .opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
     "python3 /*/.opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
 description: |

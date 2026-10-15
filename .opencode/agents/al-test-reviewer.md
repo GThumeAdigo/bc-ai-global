@@ -18,6 +18,8 @@ permission:
     "*": deny
     "/tmp": allow
     "/tmp/**": allow
+    "*/.vscode*/extensions/ms-dynamics-smb.al-*": allow
+    "*/.vscode*/extensions/ms-dynamics-smb.al-*/**": allow
     "*/bc-ai-global/releases/**": allow
 ---
 

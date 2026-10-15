@@ -14,6 +14,8 @@ permission:
   external_directory:
     "/tmp": allow
     "/tmp/**": allow
+    "*/.vscode*/extensions/ms-dynamics-smb.al-*": allow
+    "*/.vscode*/extensions/ms-dynamics-smb.al-*/**": allow
     "*/.opencode/BCQuality-ADIGO": allow
     "*/.opencode/BCQuality-ADIGO/**": allow
     "*/.vscode": allow

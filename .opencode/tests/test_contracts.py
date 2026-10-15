@@ -87,6 +87,10 @@ class Contracts(unittest.TestCase):
                 continue
             self.assertEqual(permissions["bash"]["*"], "deny")
             self.assertEqual(permissions["bash"]["python3 .opencode/BCQuality-ADIGO/tools/route_entry.py *"], "allow")
+            for command in ("git status", "git status --short", "git rev-parse --show-toplevel", "git diff --no-ext-diff --no-textconv", "git diff --no-ext-diff --no-textconv baseline..HEAD -- src"):
+                self.assertEqual(tool_action(permissions["bash"], command), "allow", (path.name, command))
+            for command in ("git commit -m change", "git reset --hard", "git checkout -- src", "git clean -fd", "git diff --ext-diff", "python3 arbitrary.py"):
+                self.assertEqual(tool_action(permissions["bash"], command), "deny", (path.name, command))
             self.assertEqual(tool_action(permissions, "serena_find_symbol"), "allow")
             self.assertEqual(tool_action(permissions, "serena_search_for_pattern"), "allow")
 
@@ -97,10 +101,29 @@ class Contracts(unittest.TestCase):
             if "reviewer-execution.md" not in text:
                 continue
             skill_id = re.search(r"requested-skill-id: ([a-z0-9-]+)", text)[1]
-            context = {"requested-skill-id": skill_id, "inputs-available": ["pr-diff", "file-path", "repository", "object-list", "deployment-context"]}
+            target = re.search(r"expected-target guard\s+`\.opencode/BCQuality-ADIGO/([^`]+)`", text)[1]
+            declared_inputs = frontmatter(corpus / target)["inputs"]
+            context = {"requested-skill-id": skill_id, "inputs-available": [declared_inputs[0]]}
             result = subprocess.run([sys.executable, str(corpus / "tools/route_entry.py"), "--root", str(corpus), "--task-context", "/dev/stdin"], input=json.dumps(context), capture_output=True, text=True)
             self.assertEqual(result.returncode, 0, (path.name, result.stderr))
             self.assertEqual(json.loads(result.stdout)["outcome"], "routed", path.name)
+
+    def test_performance_router_requires_declared_source_input(self):
+        corpus = ROOT / ".opencode/BCQuality-ADIGO"
+        for identifier in ("repository", "file-path", "pr-diff"):
+            with self.subTest(identifier=identifier):
+                context = {"requested-skill-id": "al-performance-reviewer", "inputs-available": [identifier], "technologies": ["al"]}
+                result = subprocess.run([sys.executable, str(corpus / "tools/route_entry.py"), "--root", str(corpus), "--task-context", "/dev/stdin"], input=json.dumps(context), capture_output=True, text=True)
+                self.assertEqual(result.returncode, 0, result.stderr)
+                record = json.loads(result.stdout)
+                if identifier == "repository":
+                    self.assertEqual(record["outcome"], "no-match")
+                    self.assertEqual(record["dispatch"], [])
+                    self.assertEqual(record["skipped"][0]["reason"], "inputs-unsatisfied")
+                else:
+                    self.assertEqual(record["outcome"], "routed")
+                    self.assertEqual(record["dispatch"][0]["inputs"], [identifier])
+                    self.assertEqual(record["dispatch"][0]["skill"]["path"], "custom/skills/review/al-performance-reviewer.md")
 
 
 if __name__ == "__main__":

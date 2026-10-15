@@ -89,7 +89,9 @@ Optional profiles:
 
 Profiles `dependency` and `analyzer-fixes` expose the additional symbol-package
 and ALCops MCPs. They remain available without loading them into every session.
-The core profile enables AL MCP, Microsoft Learn and Serena. The AL MCP launcher
+The core profile enables AL MCP, Microsoft Learn, Serena and NAB AL Tools. The
+`translation` profile remains accepted for existing install commands; NAB AL Tools
+is already enabled by default. The AL MCP launcher
 takes explicit project paths, never an arbitrary first discovered app. Set
 `ALTOOL_PATH` to a selected executable or DLL to override the global `al` command.
 Use a pinned environment for reproducible comparisons.

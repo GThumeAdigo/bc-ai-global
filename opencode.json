@@ -3,9 +3,36 @@
   "instructions": ["AGENTS.md"],
   "skills": { "paths": [".opencode/skills"] },
   "permission": {
-    "external_directory": { "*": "ask", "/tmp": "allow", "/tmp/**": "allow" }
+    "external_directory": {
+      "*": "ask",
+      "/tmp": "allow",
+      "/tmp/**": "allow",
+      "*/.vscode*/extensions/ms-dynamics-smb.al-*": "allow",
+      "*/.vscode*/extensions/ms-dynamics-smb.al-*/**": "allow"
+    }
   },
   "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx", "-y", "@playwright/mcp@0.0.83",
+        "--browser", "chrome",
+        "--executable-path", "/home/greg/Repos/AI/bc-ai-global/scripts/ungoogled-chromium",
+        "--user-data-dir", ".agent-state/browser",
+        "--output-dir", ".agent-state/runs/browser",
+        "--viewport-size", "1920x1080",
+        "--console-level", "warning",
+        "--timeout-navigation", "120000"
+      ],
+      "cwd": ".",
+      "enabled": true
+    },
+    "nab-al-tools": {
+      "type": "local",
+      "command": ["npx", "-y", "@nabsolutions/nab-al-tools-mcp@1.48.0"],
+      "cwd": ".",
+      "enabled": true
+    },
     "serena": {
       "type": "local",
       "command": [

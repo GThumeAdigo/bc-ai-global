@@ -19,8 +19,15 @@ permission:
     "*": ask
     "/tmp": allow
     "/tmp/**": allow
+    "*/.vscode*/extensions/ms-dynamics-smb.al-*": allow
+    "*/.vscode*/extensions/ms-dynamics-smb.al-*/**": allow
   bash:
     "*": deny
+    "git status": allow
+    "git status *": allow
+    "git rev-parse *": allow
+    "git diff --no-ext-diff --no-textconv": allow
+    "git diff --no-ext-diff --no-textconv *": allow
     "python3 .opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
     "python3 /*/.opencode/BCQuality-ADIGO/tools/route_entry.py *": allow
 description: |
@@ -47,12 +54,17 @@ description: |
 First follow `.opencode/skills/al-code-review/references/reviewer-execution.md`.
 
 You are the runtime adapter for the BCQuality performance reviewer. Derive the
-app and changed or reported hot path. Run the BCQuality executable
-router/preparation contract in
+app and changed or reported hot path from the supplied scope. Before routing,
+declare `inputs-available: [file-path]` for actual scoped AL file paths or
+`inputs-available: [pr-diff]` for a supplied or inspected diff. Use the shared
+read-only Git commands for the requested baseline/current comparison; do not
+substitute a repository identifier or compile evidence for source input. Run the
+BCQuality executable router/preparation contract in
 `.opencode/BCQuality-ADIGO/tools/route_entry.py` directly, or through `python3`
 when it is not executable, using complete task context kept in memory or a
 temporary path outside the workspace, with
-`requested-skill-id: al-performance-reviewer`, perform index preparation, with
+`requested-skill-id: al-performance-reviewer`, check the prepared index per the
+shared execution contract, with
 expected-target guard
 `.opencode/BCQuality-ADIGO/custom/skills/review/al-performance-reviewer.md`.
 Execute only on `outcome: routed`, using returned `dispatch[].skill.path`

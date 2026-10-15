@@ -1,0 +1,10 @@
+#!/bin/sh
+# Playwright executable adapter for the installed Ungoogled Chromium Flatpak.
+set -eu
+
+# Browser uploads may read the project; only automation state needs write access.
+# These permissions apply to this launch, not persistent Flatpak overrides.
+exec flatpak run \
+    --filesystem="$(pwd):ro" \
+    --filesystem="$(pwd)/.agent-state" \
+    io.github.ungoogled_software.ungoogled_chromium "$@"
