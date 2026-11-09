@@ -59,6 +59,5 @@ builder inside an immutable release, invent a pass, or bypass tool restrictions.
 This execution boundary takes precedence over generic adapter wording about
 creating a temporary context file or performing index preparation.
 
-The SDD skill owns v2 review selection and confirmation. Existing legacy approval
-contracts remain legacy; being available as a specialist is not a mandatory v2
-trigger. A source-only review cannot substitute for required build/test evidence.
+The SDD skill owns review selection and stopping. Being available as a
+specialist is not a mandatory trigger. A source-only review cannot substitute for required build/test evidence.

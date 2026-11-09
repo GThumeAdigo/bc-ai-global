@@ -9,8 +9,6 @@ root = Path(__file__).resolve().parents[1]
 commands = [
     [sys.executable, "-m", "unittest", "discover", "-s", ".opencode/tests", "-p", "test_*.py"],
     [sys.executable, "-m", "unittest", "discover", "-s", ".opencode/skills/al-compile/tests", "-p", "test_*.py"],
-    ["node", "--experimental-strip-types", "--test", ".opencode/tests/post-build-verify.test.ts"],
-    ["bash", ".opencode/tests/init-linux.test.sh"],
 ]
 failed = []
 for command in commands:

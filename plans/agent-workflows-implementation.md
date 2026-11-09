@@ -191,3 +191,13 @@ Owner-requested after the first pilot period, to cut review loops and speed up t
   execution, different permissions and tiers).
 - Checks: `python3 scripts/verify-scaffold` and `scripts/smoke-install` on the
   committed revision. No model execution of the new chain was run.
+
+## 2026-11-09 legacy removal
+
+Owner decision: the retired five-file workflow is no longer needed productively;
+git history and ref `baseline/agent-workflows-2026-09-29` keep it. Removed
+`.opencode/legacy` (gate agents, commands, skills, post-build hook), the SDD
+`legacy.md` reference and `artifact_hash.py`, the legacy initializer
+`scripts/legacy/init-linux.sh` with its fixture test, and the five `feature-*.md`
+templates. `scripts/verify-scaffold` now runs the Python suites only. The installer's
+`--migrate-legacy` stays for apps still linked to this source directory.

@@ -24,15 +24,13 @@ path that addresses the actual risk. Read only the path reference you need.
    a file is long or its name includes Posting. A harmless local rename can be
    Direct even in a posting file; a one-line Commit change is Critical.
 
-## Legacy boundary
+## Earlier features
 
-New feature specs declare `workflow: risk-adaptive-v2`. A feature with old
-`approvals.md`/five-file artifacts and no v2 declaration remains legacy. Do not
-relabel it or weaken its approval requirements. `references/legacy.md` preserves
-the old contract as reference. Resume such work in its recorded baseline runtime,
-or obtain explicit migration approval and retain all prior artifacts/evidence.
-The old `/al-*` gate commands, their reviewers and skills are archived in
-`.opencode/legacy/` and not installed. They are not part of a v2 route.
+New feature specs declare `workflow: risk-adaptive-v2`. Features from the retired
+five-file workflow (spec, plan, tasks, approvals, validation; no v2 declaration)
+are history or background. Do not edit their approved artifacts or relabel them.
+Continue open work as a new v2 change that cites the old spec. The old contract
+and gate tooling remain in git ref `baseline/agent-workflows-2026-09-29`.
 
 ## Work ownership
 

@@ -28,7 +28,6 @@ implementation is allowed for small work.
 - `templates/`: blank app context, product specs and optional guide starter.
 - `.opencode/agents`, `.opencode/skills`, `.opencode/commands`: maintained native
   adapters and domain/workflow entry points.
-- `.opencode/legacy`: archived five-file gate agents, commands and skills; not installed.
 - `.opencode/BCQuality-ADIGO`: separately versioned corpus submodule.
 - `scripts/`: install/rollback, capability doctor and infrastructure verification.
 - `plans/`: maintainer decisions and redacted evidence, never copied into apps.
@@ -147,11 +146,9 @@ New excludes target managed files; they do not hide all PNG or XSD files. A
 legacy block may still contain such broad patterns. Remove it only after checking
 every old consumer it protects. Worktrees can share `.git/info/exclude`.
 
-Legacy features with old five-file approvals stay on their baseline workflow.
-New specs declare `workflow: risk-adaptive-v2`; no old approval is automatically
-relabelled. The `/al-*` gates are archived in `.opencode/legacy` and are no longer
-installed; the old templates remain for old features. Keep the baseline runtime
-(`baseline/agent-workflows-2026-09-29`) available to finish old features, or explicitly migrate their intent/evidence with the owner.
+Features from the retired five-file workflow are history or background; continue
+open work as a new v2 change. The old gates and templates exist only in git ref
+`baseline/agent-workflows-2026-09-29`.
 
 ## Verification
 
@@ -162,9 +159,8 @@ installed; the old templates remain for old features. Keep the baseline runtime
 python3 scripts/doctor --altool /path/to/altool.dll --probe-mcp
 ```
 
-The aggregate command runs hash/approval/installation/reference fixtures, compiler
-wrapper fixtures, and retained legacy-hook/installer tests. The old hook is under
-`.opencode/legacy`, not auto-loaded. These tests do not execute AL business logic.
+The aggregate command runs approval/installation/reference fixtures and compiler
+wrapper fixtures. These tests do not execute AL business logic.
 Schema validation reports a schema digest; pass `--schema <saved-json>` for an
 offline comparison. Model availability is checked separately from JSON validity.
 

@@ -9,9 +9,7 @@ New bounded behavior uses one file, `templates/compact-spec.md`: approved intent
 above the status marker, progress and evidence below it. Critical work adds
 `templates/critical-plan.md`. Declare `path: critical` in its spec. Direct changes
 need no feature directory. Older Compact features with a separate `validation.md`
-stay valid.
+stay valid. Archived or earlier features are background only.
 
-The old `feature-*.md` templates remain for legacy features only. Existing
-approvals retain the old contract until explicitly migrated. Private specs are
-not protected by product Git by default; keep deliberate backups. Approval
+Private specs are not protected by product Git by default; keep deliberate backups. Approval
 snapshots preserve intent even when working documents are later amended.

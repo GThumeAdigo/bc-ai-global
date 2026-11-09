@@ -64,11 +64,11 @@ class Contracts(unittest.TestCase):
             self.assertEqual(permissions.get("edit", "deny"), "deny")
             self.assertNotIn("serena_replace_symbol_body", permissions)
 
-    def test_legacy_gates_are_archived_not_active(self):
-        legacy = {"al-sdd-reviewer", "al-sdd-mechanical-reviewer", "al-implement-feature-reviewer", "al-code-quality-reviewer", "al-readability-checker", "al-test-validator", "al-test-coverage-validator", "al-test-coverage-enforcer"}
+    def test_retired_gate_workflow_is_gone(self):
+        retired = {"al-sdd-reviewer", "al-sdd-mechanical-reviewer", "al-implement-feature-reviewer", "al-code-quality-reviewer", "al-readability-checker", "al-test-validator", "al-test-coverage-validator", "al-test-coverage-enforcer", "al-userguide-test-writer"}
         active = {path.stem for path in (ROOT / ".opencode/agents").glob("*.md")}
-        self.assertFalse(legacy & active)
-        self.assertTrue(all((ROOT / ".opencode/legacy/agents" / (name + ".md")).is_file() for name in legacy))
+        self.assertFalse(retired & active)
+        self.assertFalse((ROOT / ".opencode/legacy").exists())
         self.assertEqual({path.stem for path in (ROOT / ".opencode/commands").glob("*.md")}, {"sdd"})
         for skill in ("al-spec-feature", "al-plan-feature", "al-plan-mechanical", "al-implement-feature", "al-spec-init"):
             self.assertFalse((ROOT / ".opencode/skills" / skill).exists(), skill)

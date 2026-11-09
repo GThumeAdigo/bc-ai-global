@@ -6,8 +6,7 @@ description: Default worker for implementing an approved Compact or Critical spe
 
 Read the named app context, the approved spec (and plan, when present) and the
 task scope. Follow the SDD router and the selected path, including the approval
-check for Compact/Critical. For legacy work, use the recorded baseline workflow
-rather than silently migrating approvals.
+check for Compact/Critical.
 
 Before writing any AL, read the style guide's section 0 Quick Rules and the
 sections your change touches, as listed in `.opencode/skills/al-code-review/SKILL.md`
