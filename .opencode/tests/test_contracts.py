@@ -42,7 +42,15 @@ class Contracts(unittest.TestCase):
 
     def test_model_policy_has_one_authority(self):
         policy = json.loads((ROOT / "runtime/model-policy.json").read_text())
-        self.assertEqual(set(policy), {"model", "variant"})
+        self.assertEqual(set(policy), {"default", "tiers", "agents"})
+        known = {"default", *policy["tiers"]}
+        for tier in (policy["default"], *policy["tiers"].values()):
+            self.assertLessEqual(set(tier), {"model", "variant"})
+            self.assertIn("model", tier)
+        self.assertLessEqual(set(policy["agents"].values()), known)
+        files = {path.stem for path in (ROOT / ".opencode/agents").glob("*.md")}
+        # Built-in OpenCode agents such as explore have no prompt file.
+        self.assertLessEqual({name for name in policy["agents"] if name not in {"explore"}}, files)
         for agent in (ROOT / ".opencode/agents").glob("*.md"):
             self.assertNotRegex(agent.read_text().split("---", 2)[1], r"(?m)^(model|variant):")
 

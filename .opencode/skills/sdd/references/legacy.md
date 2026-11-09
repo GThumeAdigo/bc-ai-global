@@ -92,18 +92,19 @@ The main session coordinates and delegates substantial specialist work.
 
 Installed agents use the model and variant from `runtime/model-policy.json`
 rather than the session default. The installer applies this policy to every
-agent in the consumer configuration:
+agent in the consumer configuration, by tier:
 
-- **Semantic SDD reviews use the shared model policy.** `al-sdd-reviewer` runs the
-  specification, semantic plan, and constitution gates.
-  `al-implement-feature-reviewer`
-  compares approved intent with implemented behavior before Test. Normal hard-stop
-  flow dispatches fresh gates and does not imply shared subagent context.
-- **Implementation and mechanical checks use the same policy.** These include
-  `custom-al-implementer`, `al-sdd-mechanical-reviewer` (the deterministic
-  stage of the plan gate), the mandatory verifiers, test writers and
-  validators, and specialist auditors. Their work is execution or structured
-  rule-checking rather than semantic intent reconciliation.
+- **`spec` tier (Opus 5.5 high).** `al-design-reviewer` and `al-sdd-reviewer`
+  (specification, semantic plan and constitution gates) prepare intent for the
+  workers. Normal hard-stop flow dispatches fresh gates and does not imply
+  shared subagent context.
+- **`mechanical` tier (Haiku 5.5).** `al-sdd-mechanical-reviewer` (the
+  deterministic stage of the plan gate), `al-test-runner`,
+  `al-test-coverage-enforcer`, `al-translation-auditor`, `al-obsolete-tracker`,
+  `al-permission-set-auditor` and the built-in `explore` agent.
+- **Default tier (Sonnet 5.5 high).** Everything else, including
+  `custom-al-implementer`, `al-change-reviewer`, `al-implement-feature-reviewer`,
+  test writers and the remaining specialist auditors.
 
 The SDD gate commands (`/al-spec-feature`, `/al-plan-feature`,
 `/al-implement-feature`, `/al-spec-init`) are thin dispatchers: their

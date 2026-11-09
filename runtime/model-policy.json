@@ -1,4 +1,18 @@
 {
-  "model": "openai/gpt-6.1-sol",
-  "variant": "high"
+  "default": { "model": "anthropic/claude-sonnet-5-5", "variant": "high" },
+  "tiers": {
+    "spec": { "model": "anthropic/claude-opus-5-5", "variant": "high" },
+    "mechanical": { "model": "anthropic/claude-haiku-5-5" }
+  },
+  "agents": {
+    "al-design-reviewer": "spec",
+    "al-sdd-reviewer": "spec",
+    "al-sdd-mechanical-reviewer": "mechanical",
+    "al-test-runner": "mechanical",
+    "al-test-coverage-enforcer": "mechanical",
+    "al-translation-auditor": "mechanical",
+    "al-obsolete-tracker": "mechanical",
+    "al-permission-set-auditor": "mechanical",
+    "explore": "mechanical"
+  }
 }

@@ -197,8 +197,10 @@ Use corpus-relative references for knowledge findings and separate house reports
 AL examples remain `*.al.txt` to avoid entering consumer compilations.
 
 Model IDs/variants for installed agents come from `runtime/model-policy.json`.
-Prompt frontmatter contains no model pins. The first candidate preserves the
-baseline agent model/variant; model changes are a separate experiment.
+Prompt frontmatter contains no model pins. The policy has a default tier
+(Sonnet 5.5 high), a `spec` tier (Opus 5.5 high, design and spec/plan gate
+reviewers) and a `mechanical` tier (Haiku 5.5, rule checks, test execution and
+the built-in `explore` agent). Primary agents keep the session model.
 
 Hunk notes are optional presentation at a useful stable checkpoint. They are not
 a completion gate. Browser verification remains explicit and uses app-local state.

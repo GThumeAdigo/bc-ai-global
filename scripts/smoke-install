@@ -46,8 +46,11 @@ def main():
         assert not (apps[0] / ".opencode").is_symlink()
         selected = Path(json.loads((apps[0] / ".agent-state/install.json").read_text())["release"])
         policy = json.loads((selected / "runtime/model-policy.json").read_text())
+        tiers = {"default": policy["default"], **policy["tiers"]}
         for agent in (selected / ".opencode/agents").glob("*.md"):
-            assert all(config["agent"][agent.stem][key] == value for key, value in policy.items())
+            assert config["agent"][agent.stem] == tiers[policy["agents"].get(agent.stem, "default")]
+        for agent, tier in policy["agents"].items():
+            assert config["agent"][agent] == tiers[tier]
         assert not (selected / "plans").exists()
         assert not (apps[0] / ".opencode/plugins").exists()
         original_two = (apps[1] / "opencode.json").read_bytes()
@@ -72,9 +75,10 @@ def main():
             # Only inspect the requested agent, avoiding large resolved-config dumps.
             data = json.loads(output)
             assert "must-not-load-sentinel" not in output
-            provider_id, model_id = policy["model"].split("/", 1)
+            expected = tiers[policy["agents"].get("al-change-reviewer", "default")]
+            provider_id, model_id = expected["model"].split("/", 1)
             assert data.get("model") == {"providerID": provider_id, "modelID": model_id}
-            assert data.get("variant") == policy["variant"]
+            assert data.get("variant") == expected.get("variant")
             skills = run([host, "debug", "skill"], cwd=apps[0], env=env)
             assert "must-not-load-sentinel" not in skills
             try:

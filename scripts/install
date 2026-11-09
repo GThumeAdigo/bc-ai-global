@@ -84,6 +84,16 @@ def render(value, replacements):
     return value
 
 
+def agent_models(policy, names):
+    """Resolve model and variant per agent: tier by name, else the default."""
+    tiers = {"default": policy["default"], **policy.get("tiers", {})}
+    assigned = policy.get("agents", {})
+    unknown = sorted(set(assigned.values()) - set(tiers))
+    if unknown:
+        raise ValueError(f"model policy references unknown tiers: {unknown}")
+    return {name: dict(tiers[assigned.get(name, "default")]) for name in sorted({*names, *assigned})}
+
+
 def unpack(root, revision, destination, paths=None):
     archive = git(root, "archive", revision, *(paths or []))
     with tarfile.open(fileobj=io.BytesIO(archive)) as tar:
@@ -193,10 +203,10 @@ def prepare(app, selected, args, exclude_updates):
             config = json.loads((selected / "runtime" / name).read_text())
             policy_path = selected / "runtime/model-policy.json"
             if policy_path.exists():
-                model_policy = json.loads(policy_path.read_text())
                 config.setdefault("agent", {})
-                for agent in (selected / ".opencode/agents").glob("*.md"):
-                    config["agent"].setdefault(agent.stem, {}).update(model_policy)
+                names = [agent.stem for agent in (selected / ".opencode/agents").glob("*.md")]
+                for agent, models in agent_models(json.loads(policy_path.read_text()), names).items():
+                    config["agent"].setdefault(agent, {}).update(models)
             # Tokens are rendered from this installation, never personal paths.
             config = render(config, {"@APP@": str(app), "@RELEASE@": str(selected)})
             optional = {"browser": "playwright", "translation": "nab-al-tools", "dependency": "al-dependency", "analyzer-fixes": "alcops"}
