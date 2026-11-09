@@ -1,7 +1,7 @@
 ---
 name: al-change-reviewer
 mode: subagent
-description: Independent final review of bounded AL behavior against acceptance criteria, affected callers and execution evidence. Default for Compact/Critical SDD, not Direct changes.
+description: Independent final review of bounded AL behavior against acceptance criteria, affected callers and execution evidence. Default final review for Critical SDD; Compact uses al-review-fixer, Direct uses none.
 permission:
   "*": deny
   read: allow

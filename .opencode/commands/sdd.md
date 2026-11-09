@@ -12,7 +12,8 @@ ask which change to work on; do not start the next roadmap item automatically.
 Identify the target AL app before creating artifacts. Respect an explicit stage
 such as `spec`, `plan` or `implement` as the requested scope, not permission to
 run the whole loop. In v2 Compact, an approach can live inside the spec; a `plan`
-request does not itself require a separate plan file.
+request does not itself require a separate plan file. A `spec` stage is drafted by
+`al-spec-writer`; stop after presenting it and its batched questions for approval.
 
 Inspect the feature's workflow declaration before resuming existing work. Legacy
 work stays on its recorded baseline or requires explicit migration. The skill

@@ -12,6 +12,15 @@ def sha(data):
     return hashlib.sha256(data).hexdigest()
 
 
+STATUS_MARKER = b"<!-- status: not part of the approved intent -->"
+
+
+def intent(path):
+    """Approved bytes: everything before the status marker, or the whole file."""
+    data = path.read_bytes()
+    return data.split(STATUS_MARKER, 1)[0]
+
+
 def record(target, artifacts, owner, approval_text):
     if not owner.strip() or not approval_text.strip():
         raise ValueError("owner and actual approval text are required")
@@ -19,7 +28,7 @@ def record(target, artifacts, owner, approval_text):
         raise ValueError("approval record already exists; preserve it and use a new record")
     items = []
     for artifact in artifacts:
-        data = artifact.read_bytes()
+        data = intent(artifact)
         items.append({"path": str(artifact.resolve()), "sha256": sha(data), "content": data.hex()})
     if not items:
         raise ValueError("no approved artifacts")
@@ -42,7 +51,7 @@ def check(target, artifacts):
     for item in evidence["artifacts"]:
         if sha(bytes.fromhex(item["content"])) != item["sha256"]:
             raise ValueError("approval snapshot integrity mismatch")
-        if sha(Path(item["path"]).read_bytes()) != item["sha256"]:
+        if sha(intent(Path(item["path"]))) != item["sha256"]:
             raise ValueError(f"stale approval: {item['path']}")
     return {"status": "pass", "artifacts": sorted(recorded), "owner": evidence["owner"]}
 

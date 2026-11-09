@@ -18,4 +18,4 @@ Companion to the approved-intent spec. Include relevant sections only.
 
 ## Decisions requiring owner approval
 
-Approval snapshot and progress live in validation, not this plan.
+Approval snapshot and progress live in the spec's status section, not this plan.

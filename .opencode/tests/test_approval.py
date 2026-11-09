@@ -47,6 +47,19 @@ class ApprovalTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "scope"):
             approval.check(self.record, [self.artifact, plan])
 
+    def test_status_section_below_marker_does_not_invalidate(self):
+        self.artifact.write_text("approved behavior\n" + approval.STATUS_MARKER.decode() + "\nstatus: pending")
+        self.approve()
+        self.artifact.write_text("approved behavior\n" + approval.STATUS_MARKER.decode() + "\nstatus: done, review clean")
+        self.assertEqual(approval.check(self.record, [self.artifact])["status"], "pass")
+
+    def test_intent_above_marker_still_invalidates(self):
+        self.artifact.write_text("approved behavior\n" + approval.STATUS_MARKER.decode() + "\nstatus: pending")
+        self.approve()
+        self.artifact.write_text("changed behavior\n" + approval.STATUS_MARKER.decode() + "\nstatus: pending")
+        with self.assertRaisesRegex(ValueError, "stale"):
+            approval.check(self.record, [self.artifact])
+
     def test_progress_outside_spec_does_not_invalidate(self):
         self.approve()
         (self.root / "validation.md").write_text("task complete")

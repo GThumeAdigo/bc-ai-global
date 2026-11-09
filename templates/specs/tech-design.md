@@ -2,8 +2,8 @@
 
 > Constitution document. The how, at the system level: which standard Business
 > Central modules to reuse, and where custom code is genuinely needed. Feature
-> plans (`plan.md`) inherit from this. Fill it in, then run `/al-spec-init` to
-> review it against the brief.
+> plans (`plan.md`) inherit from this. Fill in the relevant parts and keep it
+> consistent with the brief.
 
 ## Architecture overview
 

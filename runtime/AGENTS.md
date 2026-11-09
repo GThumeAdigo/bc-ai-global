@@ -12,8 +12,9 @@ authorization, company/tenant, released-data, public-contract or hot-path change
 need Critical SDD when their behavior is affected. Explain the selection once.
 Line count alone does not determine risk. Questions do not need feature artifacts.
 
-Main-session implementation is allowed. Delegate for bounded investigation,
-context isolation or independent review, not as a mandatory relay.
+Main-session implementation is allowed for small work. Compact and Critical use
+the SDD default chain: spec writer, implementer, then one review. Do not add
+review rounds beyond the SDD stop rules.
 When delegating, verify the actual agent identity using the SDD skill's dispatch
 rule. A CLI fallback to the default primary agent is not a subagent result.
 

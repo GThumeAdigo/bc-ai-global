@@ -10,12 +10,16 @@ product-task comparison and live pilot are completed.
 | Work | Path |
 |---|---|
 | Clear bounded fix to existing behavior, no affected critical invariant | Direct implementation and applicable checks |
-| Bounded new behavior in known architecture | Compact spec, one approval, checks and one independent change review |
-| Posting, transactions, effective permissions, company/tenant boundaries, released data, public contracts or broad performance impact | Critical intent/design and scoped independent risk review |
+| Bounded new behavior in known architecture | Compact spec (one file), one approval, implementer, checks and one review-and-fix pass |
+| Posting, transactions, effective permissions, company/tenant boundaries, released data, public contracts or broad performance impact | Critical spec and plan, design review, implementer and one independent read-only review |
 
 The authority is [the SDD skill](.opencode/skills/sdd/SKILL.md), including
-approval, test-authoring policy, review confirmations and stopping. Few changed
-lines do not imply low risk. Main-session implementation is allowed.
+approval, test-authoring policy and stopping. Few changed lines do not imply low
+risk. The review budget is one review pass and one repair pass per checkpoint.
+Default chain: `al-spec-writer` (Opus), `custom-al-implementer` (Sonnet, reads
+the style guide first), then `al-review-fixer` (Compact: fixes behavior-neutral
+defects itself) or `al-change-reviewer` (Critical: read-only). Main-session
+implementation is allowed for small work.
 
 ## Source versus installed content
 
@@ -24,6 +28,7 @@ lines do not imply low risk. Main-session implementation is allowed.
 - `templates/`: blank app context, product specs and optional guide starter.
 - `.opencode/agents`, `.opencode/skills`, `.opencode/commands`: maintained native
   adapters and domain/workflow entry points.
+- `.opencode/legacy`: archived five-file gate agents, commands and skills; not installed.
 - `.opencode/BCQuality-ADIGO`: separately versioned corpus submodule.
 - `scripts/`: install/rollback, capability doctor and infrastructure verification.
 - `plans/`: maintainer decisions and redacted evidence, never copied into apps.
@@ -144,9 +149,9 @@ every old consumer it protects. Worktrees can share `.git/info/exclude`.
 
 Legacy features with old five-file approvals stay on their baseline workflow.
 New specs declare `workflow: risk-adaptive-v2`; no old approval is automatically
-relabelled. The `/al-*` gate names and old templates remain compatibility surfaces,
-not the default entry path for new work. Keep the original runtime available to
-finish old features, or explicitly migrate their intent/evidence with the owner.
+relabelled. The `/al-*` gates are archived in `.opencode/legacy` and are no longer
+installed; the old templates remain for old features. Keep the baseline runtime
+(`baseline/agent-workflows-2026-09-29`) available to finish old features, or explicitly migrate their intent/evidence with the owner.
 
 ## Verification
 
@@ -198,9 +203,9 @@ AL examples remain `*.al.txt` to avoid entering consumer compilations.
 
 Model IDs/variants for installed agents come from `runtime/model-policy.json`.
 Prompt frontmatter contains no model pins. The policy has a default tier
-(Sonnet 5.5 high), a `spec` tier (Opus 5.5 high, design and spec/plan gate
-reviewers) and a `mechanical` tier (Haiku 5.5, rule checks, test execution and
-the built-in `explore` agent). Primary agents keep the session model.
+(Sonnet 5.5 high), a `spec` tier (Opus 5.5 high, `al-spec-writer` and
+`al-design-reviewer`) and a `mechanical` tier (Haiku 5.5, rule audits, test
+execution and the built-in `explore` agent). Primary agents keep the session model.
 
 Hunk notes are optional presentation at a useful stable checkpoint. They are not
 a completion gate. Browser verification remains explicit and uses app-local state.

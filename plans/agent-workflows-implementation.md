@@ -166,3 +166,28 @@ On owner request, corrected the remaining role/dispatch inconsistencies:
 Changes are uncommitted alongside the preserved owner edits. A restart is needed
 to load changed agents/commands; installed immutable releases require an explicit
 update before their consumers receive these changes.
+
+## 2026-11-09 workflow slimming
+
+Owner-requested after the first pilot period, to cut review loops and speed up tasks.
+
+- Models: tiered `runtime/model-policy.json` (Sonnet 5.5 high default, Opus 5.5
+  high for `al-spec-writer` and `al-design-reviewer`, Haiku 5.5 for rule audits,
+  test execution and built-in `explore`). Primary agents keep the session model.
+- Default chain: `al-spec-writer`, `custom-al-implementer` (reads style guide
+  section 0 and touched sections first), then `al-review-fixer` for Compact (fixes
+  behavior-neutral defects, rebuilds, escalates behavior findings) or read-only
+  `al-change-reviewer` for Critical.
+- Stop rules: one review pass and one repair pass per checkpoint, replacing initial
+  plus two confirmation cycles. Fixer edits are verified by rebuild, not re-reviewed.
+- Compact is one file: approved intent above a status marker, status and evidence
+  below. `approval.py` hashes only the part above the marker; files without a
+  marker and older `validation.md` features behave as before.
+- Eight legacy gate agents, four `/al-*` commands and five gate skills moved to
+  `.opencode/legacy` (not installed). `al-userguide-test-writer` merged into
+  `al-test-writer`. The five legacy `feature-*.md` templates stay for old features
+  and the legacy initializer. 27 agents became 20 (two new: `al-spec-writer`, `al-review-fixer`).
+- Not merged: `al-test-reviewer` and `al-test-runner` (read-only judgment versus
+  execution, different permissions and tiers).
+- Checks: `python3 scripts/verify-scaffold` and `scripts/smoke-install` on the
+  committed revision. No model execution of the new chain was run.

@@ -88,33 +88,10 @@ The main session coordinates and delegates substantial specialist work.
   them. The conversation history is resent on every turn, so a session that
   wanders pays for the wandering all feature long.
 
-## Model policy (which step runs on which model)
+## Model policy
 
-Installed agents use the model and variant from `runtime/model-policy.json`
-rather than the session default. The installer applies this policy to every
-agent in the consumer configuration, by tier:
-
-- **`spec` tier (Opus 5.5 high).** `al-design-reviewer` and `al-sdd-reviewer`
-  (specification, semantic plan and constitution gates) prepare intent for the
-  workers. Normal hard-stop flow dispatches fresh gates and does not imply
-  shared subagent context.
-- **`mechanical` tier (Haiku 5.5).** `al-sdd-mechanical-reviewer` (the
-  deterministic stage of the plan gate), `al-test-runner`,
-  `al-test-coverage-enforcer`, `al-translation-auditor`, `al-obsolete-tracker`,
-  `al-permission-set-auditor` and the built-in `explore` agent.
-- **Default tier (Sonnet 5.5 high).** Everything else, including
-  `custom-al-implementer`, `al-change-reviewer`, `al-implement-feature-reviewer`,
-  test writers and the remaining specialist auditors.
-
-The SDD gate commands (`/al-spec-feature`, `/al-plan-feature`,
-`/al-implement-feature`, `/al-spec-init`) are thin dispatchers: their
-frontmatter names the reviewer agent and carries no model pin. Change models
-in `runtime/model-policy.json` and permissions in agent frontmatter; do not
-reintroduce model pins on agents or commands.
-
-Do not unpin an agent ad hoc for a single run. If a verifier systematically
-misses a class of finding on its pinned variant, change the shared model policy
-in the scaffolding repo rather than overriding it per session.
+Models and variants come from `runtime/model-policy.json` (see the README); the
+legacy gate agents live in `.opencode/legacy/agents` and are not installed.
 
 ## The constitution (initial read, every feature)
 

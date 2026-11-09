@@ -64,6 +64,36 @@ class Contracts(unittest.TestCase):
             self.assertEqual(permissions.get("edit", "deny"), "deny")
             self.assertNotIn("serena_replace_symbol_body", permissions)
 
+    def test_legacy_gates_are_archived_not_active(self):
+        legacy = {"al-sdd-reviewer", "al-sdd-mechanical-reviewer", "al-implement-feature-reviewer", "al-code-quality-reviewer", "al-readability-checker", "al-test-validator", "al-test-coverage-validator", "al-test-coverage-enforcer"}
+        active = {path.stem for path in (ROOT / ".opencode/agents").glob("*.md")}
+        self.assertFalse(legacy & active)
+        self.assertTrue(all((ROOT / ".opencode/legacy/agents" / (name + ".md")).is_file() for name in legacy))
+        self.assertEqual({path.stem for path in (ROOT / ".opencode/commands").glob("*.md")}, {"sdd"})
+        for skill in ("al-spec-feature", "al-plan-feature", "al-plan-mechanical", "al-implement-feature", "al-spec-init"):
+            self.assertFalse((ROOT / ".opencode/skills" / skill).exists(), skill)
+
+    def test_review_fixer_edits_but_cannot_delegate_or_run_arbitrary_shell(self):
+        permissions = frontmatter(ROOT / ".opencode/agents/al-review-fixer.md")["permission"]
+        self.assertEqual(tool_action(permissions, "edit"), "allow")
+        self.assertEqual(tool_action(permissions, "task"), "deny")
+        self.assertEqual(permissions["bash"]["*"], "deny")
+        self.assertEqual(tool_action(permissions["bash"], "bash .opencode/skills/al-compile/scripts/compile.sh app"), "allow")
+        for command in ("git commit -m x", "git reset --hard", "python3 arbitrary.py", "rm -rf src"):
+            self.assertEqual(tool_action(permissions["bash"], command), "deny", command)
+
+    def test_spec_writer_edits_only_specs_and_cannot_build(self):
+        permissions = frontmatter(ROOT / ".opencode/agents/al-spec-writer.md")["permission"]
+        self.assertEqual(tool_action(permissions["edit"], "src/Codeunit.al"), "deny")
+        self.assertEqual(tool_action(permissions["edit"], "specs/features/x/spec.md"), "allow")
+        self.assertEqual(tool_action(permissions["bash"], "bash .opencode/skills/al-compile/scripts/compile.sh app"), "deny")
+        self.assertEqual(tool_action(permissions, "serena_replace_symbol_body"), "deny")
+
+    def test_stop_rules_allow_one_review_and_one_repair(self):
+        sdd = (ROOT / ".opencode/skills/sdd/SKILL.md").read_text()
+        self.assertIn("one review pass and one repair pass", sdd)
+        self.assertNotIn("two repair/confirmation cycles", sdd)
+
     def test_bootstrap_budget(self):
         for path, limit in (("runtime/AGENTS.md", 120), (".opencode/skills/sdd/SKILL.md", 150)):
             self.assertLessEqual(sum(bool(line.strip()) for line in (ROOT / path).read_text().splitlines()), limit)
@@ -81,7 +111,7 @@ class Contracts(unittest.TestCase):
             self.assertIn("legacy", data["description"].lower())
 
     def test_read_only_specialists_deny_mutating_tools_but_can_route(self):
-        writable_roles = {"custom-al-implementer", "al-test-writer", "al-userguide-test-writer", "al-table-refactorer", "al-test-runner", "bc-webclient-runner"}
+        writable_roles = {"custom-al-implementer", "al-test-writer", "al-review-fixer", "al-spec-writer", "al-table-refactorer", "al-test-runner", "bc-webclient-runner"}
         mutation_tools = ("edit", "serena_replace_content", "serena_replace_in_files", "serena_replace_symbol_body", "serena_insert_after_symbol", "serena_insert_before_symbol", "serena_rename_symbol", "serena_safe_delete_symbol", "alcops_apply_fix", "nab-al-tools_saveTranslatedTexts", "al-mcp_al_publish", "task")
         for path in (ROOT / ".opencode/agents").glob("*.md"):
             if path.stem in writable_roles:

@@ -5,9 +5,11 @@ and `roadmap.md` is the optional delivery index. Fill relevant product facts;
 do not duplicate manifest values or agent workflow policy here.
 
 The authoritative workflow is `.opencode/skills/sdd/SKILL.md`.
-New bounded behavior uses `templates/compact-spec.md` and
-`templates/change-validation.md`. Critical work adds `templates/critical-plan.md`.
-Declare `path: critical` in its spec. Direct changes need no feature directory.
+New bounded behavior uses one file, `templates/compact-spec.md`: approved intent
+above the status marker, progress and evidence below it. Critical work adds
+`templates/critical-plan.md`. Declare `path: critical` in its spec. Direct changes
+need no feature directory. Older Compact features with a separate `validation.md`
+stay valid.
 
 The old `feature-*.md` templates remain for legacy features only. Existing
 approvals retain the old contract until explicitly migrated. Private specs are

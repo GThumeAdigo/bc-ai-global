@@ -5,11 +5,9 @@
     "mechanical": { "model": "anthropic/claude-haiku-5-5" }
   },
   "agents": {
+    "al-spec-writer": "spec",
     "al-design-reviewer": "spec",
-    "al-sdd-reviewer": "spec",
-    "al-sdd-mechanical-reviewer": "mechanical",
     "al-test-runner": "mechanical",
-    "al-test-coverage-enforcer": "mechanical",
     "al-translation-auditor": "mechanical",
     "al-obsolete-tracker": "mechanical",
     "al-permission-set-auditor": "mechanical",

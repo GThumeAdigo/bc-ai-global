@@ -153,9 +153,8 @@ git stash pop
    were already there. Read app-specific known baseline findings from
    `APP_CONTEXT.md`; this shared skill carries no consumer-app warning list.
 
-`al-readability-checker` owns style guide section 14, documentation and
-comments. Run it on the touched files when the pass was large or the developer
-wants a second opinion. The full mandatory verifier set is not required for an
+Style guide section 14 owns documentation and comments. Re-read it for the
+touched files when the pass was large. No reviewer set is required for an
 editorial pass.
 
 ## Report

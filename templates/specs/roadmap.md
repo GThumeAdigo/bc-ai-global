@@ -1,7 +1,7 @@
 # Roadmap
 
-> Constitution document. The ordered feature list with status. `/al-spec-feature`
-> picks the next feature. The Docs step moves it to `done` after Test passes.
+> Constitution document. The ordered feature list with status. Optional delivery index; the next
+> feature is chosen by the owner. The Docs step moves it to `done` after Test passes.
 >
 > Status legend: `todo` | `spec` | `planned` | `in-progress` | `done` | `parked`.
 > Transitions are `todo -> spec` when the Spec draft is created, `spec -> planned`

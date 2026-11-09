@@ -2,8 +2,8 @@
 
 > Constitution document. The what and the why: high-level customer requirements
 > and business processes, in plain language. No AL, no object names. Every agent
-> reads this before doing anything. Fill it in, then run `/al-spec-init` to
-> review it for completeness. Companion files: `tech-design.md`, `roadmap.md`.
+> reads this before doing anything. Fill in the relevant parts.
+> Companion files: `tech-design.md`, `roadmap.md`.
 
 ## Customer / context
 

@@ -31,15 +31,19 @@ New feature specs declare `workflow: risk-adaptive-v2`. A feature with old
 relabel it or weaken its approval requirements. `references/legacy.md` preserves
 the old contract as reference. Resume such work in its recorded baseline runtime,
 or obtain explicit migration approval and retain all prior artifacts/evidence.
-Old `/al-*` gate commands remain available for legacy review and retain their
-old evidence checks. They are not part of a v2 Direct/Compact route.
+The old `/al-*` gate commands, their reviewers and skills are archived in
+`.opencode/legacy/` and not installed. They are not part of a v2 route.
 
 ## Work ownership
 
-The main agent may investigate, draft and implement. Delegate only where a
-bounded separate context or an independent judgment adds value. Reviewers do not
-modify the material they review. Use short path-based dispatches naming acceptance
-criteria, changed scope, known risks and evidence. No mandatory same-model relay.
+The default chain is `al-spec-writer` (Opus) writes the spec, `custom-al-implementer`
+(Sonnet) implements to the style guide, then one review. Compact review is
+`al-review-fixer`, which corrects behavior-neutral defects itself and escalates
+the rest. Critical review is the read-only `al-change-reviewer`. The main agent
+may investigate, draft and implement small work itself. Use short path-based
+dispatches naming acceptance criteria, changed scope, known risks and evidence.
+Only `al-change-reviewer`, `al-design-reviewer` and `al-test-reviewer` must not
+modify what they review.
 
 When delegating, verify the requested agent actually ran. `opencode run --agent`
 selects a primary agent; a `mode: subagent` name can fall back to the default
@@ -56,14 +60,16 @@ returned agent identity; a fallback requires a correct redispatch, not acceptanc
 
 Compact/Critical intent needs human approval before implementation. Record the
 owner's actual approval against an immutable snapshot of spec/plan using
-`scripts/approval.py record`; list the record path in `validation.md`. Check it
-before implementation and on resume using `scripts/approval.py check`.
+`scripts/approval.py record`; list the record path in the spec's status section.
+Check it before implementation and on resume using `scripts/approval.py check`.
 The helper detects changed content, not human authenticity. Never infer approval
 from a model report or invoke record before the user approves.
 
-Spec and plan hold current intent; validation holds status/results/approval
-references. Keep checkbox progress outside approved artifacts. Material changes
-to behavior, scope or compatibility reopen approval. Internal refactoring inside
+The spec file holds current intent above the line
+`<!-- status: not part of the approved intent -->` and status, results and
+approval references below it; the helper hashes only the part above. Older
+features with a separate `validation.md` stay valid. Material changes to
+behavior, scope or compatibility reopen approval. Internal refactoring inside
 approved constraints does not automatically require a new plan approval.
 
 ## Checks and review
@@ -79,9 +85,10 @@ approved constraints does not automatically require a new plan approval.
   Critical work without adequate executable proof needs an owner decision on
   an alternative. An explicit no never authorizes unsolicited test writing.
 - UI execution is required for rendered-UI acceptance, not every headless change.
-- Direct has no mandatory independent general reviewer. Compact uses one fresh
-  `al-change-reviewer`. Critical adds `al-design-reviewer` before implementation
-  and only distinct risk specialists. Complex new tests can use `al-test-reviewer`.
+- Direct has no reviewer. Compact uses one `al-review-fixer` pass. Critical adds
+  `al-design-reviewer` before implementation, one read-only `al-change-reviewer`
+  after it, and only distinct risk specialists. Complex new tests can use
+  `al-test-reviewer`.
 - Select specialists for actual risk: integration flow, subscriber contract,
   Azure artifacts, tenant/permission boundary, released compatibility or measured
   performance. Do not run umbrella and leaf reviewers over the same concerns.
@@ -89,19 +96,23 @@ approved constraints does not automatically require a new plan approval.
   acceptance/platform/app-rule basis. Preferences and speculative abstractions
   are advisory. Report late real defects, identifying new evidence; do not hide
   them because an earlier pass missed them.
+- Findings that only touch naming, structure, labels, comments or similar
+  behavior-neutral style are fixed in place by the reviewer-fixer, never
+  bounced back for another round. Behavior findings go to the implementer in
+  one batch.
 
 ## Stop rules
 
-One complete pass suffices on unchanged inputs. After a fix, rerun affected
-executable checks and confirm affected review responsibilities. Retain unrelated
-evidence with a short impact reason. If impact is unclear, rerun the whole
-applicable set. Newly affected risks add checks.
+Budget per checkpoint: **one review pass and one repair pass.** Compile errors
+are not review cycles; the implementer or fixer repairs them in place. After the
+repair, rerun the affected executable checks and stop. Re-review only when the
+repair changed behavior, and then only the changed responsibility, once. The
+fixer's own edits are verified by its rebuild, not by another review.
 
-Budget per checkpoint: initial review plus **two repair/confirmation cycles**,
-including mechanical repairs. A repeated infrastructure/API failure gets **one
-retry**, then blocked/partial. At exhaustion report unresolved evidence and ask
-for a decision. Never pass on timeout or reset the budget by renaming a stage.
-Only an explicit owner-approved scope/decision starts a new checkpoint.
+A repeated infrastructure/API failure gets **one retry**, then blocked/partial.
+At exhaustion report unresolved evidence and ask for a decision. Never pass on
+timeout or reset the budget by renaming a stage. Only an explicit owner-approved
+scope/decision starts a new checkpoint.
 
 ## Closeout
 
