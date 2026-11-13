@@ -201,3 +201,25 @@ git history and ref `baseline/agent-workflows-2026-09-29` keep it. Removed
 `scripts/legacy/init-linux.sh` with its fixture test, and the five `feature-*.md`
 templates. `scripts/verify-scaffold` now runs the Python suites only. The installer's
 `--migrate-legacy` stays for apps still linked to this source directory.
+
+## 2026-11-13 repository-root install and BCQuality v1.10
+
+- Installer: a target without `app.json` is a repository root. The runtime links,
+  `AGENTS.md`, `CLAUDE.md` and a rendered `opencode.json` go to the root, outside
+  every AL project; each app below it (depth 4, nested apps not split) gets private
+  `APP_CONTEXT.md`, `specs/`, `DOCS/`; the root gets `REPO_CONTEXT.md`. One AL MCP
+  server takes all app paths. `--replace-app-installs` supersedes app-level installs
+  (refuses edited managed files, keeps private files, rollback restores them).
+  Unmanaged root `AGENTS.md`/`opencode.json` still stop the install.
+- BCQuality: fork branch `adigo/upstream-v1.10` merges microsoft/BCQuality `d576b0f`
+  (v1.10). Upstream wholesale for `microsoft/` and `community/`; fork kept `custom/`,
+  `tools/route_entry.py`, `tools/build_knowledge_index.py` (now also emits
+  `sourceSha256`/`sourceSnapshot`), the evidence-finding contract in `skills/do.md` and
+  its validator rules, `deployment-context` input. The `.al.txt` renames are reverted;
+  samples keep `.al`. Corpus validator and `test_semantics.py` pass; the two
+  jsonschema-based knowledge-response tests were not run (module missing).
+- Installed: `BAU.ProjectConstruction` (replaced the GAEB app-level install, profile
+  translation) and `ADIGO-Apps`. Not installed: `ITS.IT-Services`, `PRM.ProjectManagement`
+  (PRM has an unmanaged root `AGENTS.md`/`opencode.json`).
+- Not verified: AL extension behavior with the corpus `.al` files outside app folders
+  (needs VS Code), NAB AL Tools MCP with several apps below its cwd, any model run.
