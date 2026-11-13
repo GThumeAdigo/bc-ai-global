@@ -57,6 +57,43 @@ python3 -m venv .venv
 No script installs credentials or modifies user-wide OpenCode/Claude settings.
 Compiler availability does not imply a functioning BC test environment.
 
+## Runbook: set up a repository yourself
+
+One-time, in this scaffold clone: `git submodule update --init`, then the venv
+commands above (only needed for the tests, not for installing).
+
+For each repository (a folder with several apps and no `app.json`, or a single app):
+
+1. **Check the target.** Commit or stash your own work first; the installer only
+   writes local files, but you want a clean `git status` to compare against.
+   If the root already has an `AGENTS.md`, `CLAUDE.md` or `opencode.json` of your
+   own, move its content into `REPO_CONTEXT.md` (after step 3) and rename or
+   remove the old files. The installer refuses to overwrite them.
+2. **Dry run**, then install. `--dry-run` also lists the apps it found:
+
+   ```bash
+   cd /path/to/bc-ai-global          # must be committed; HEAD is installed
+   python3 scripts/install /path/to/Repo --dry-run
+   python3 scripts/install /path/to/Repo --profile translation   # profiles optional
+   ```
+
+   If an app below the root already carries an older app-level install, add
+   `--replace-app-installs`. Back up specs outside Git first (`specs/` is local only).
+3. **Fill the context files.** `REPO_CONTEXT.md` at the root (apps, build order,
+   CI, shared rules) and `APP_CONTEXT.md` in each app you will work on. Leave the
+   other apps' templates blank until needed.
+4. **Verify.** `git status` in the repository must stay clean (all installed files
+   are locally excluded). Open the workspace in VS Code and check the Problems
+   panel for errors from `.opencode`. Start OpenCode at the repository root and run
+   `/sdd <request>`.
+5. **Update later.** Commit your scaffold change, run the same `install` command
+   again for each repository (one at a time), repeat the profiles you use, and
+   restart OpenCode. `--rollback` returns a repository to its previous install.
+
+Things that need your decision rather than the script: which profiles to enable,
+`ALTOOL_PATH` if the global `al` command is not the one you want, and whether a
+repository keeps its own `.serena/` project (it is excluded either way).
+
 ## Install into a repository or an app
 
 Preferred: install at a **repository root that holds several apps** and has no
