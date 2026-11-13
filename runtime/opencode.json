@@ -1,0 +1,68 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "instructions": ["AGENTS.md"],
+  "skills": { "paths": [".opencode/skills"] },
+  "permission": {
+    "external_directory": {
+      "*": "ask",
+      "@RELEASE@/**": "allow",
+      "/tmp": "allow",
+      "/tmp/**": "allow",
+      "*/.vscode*/extensions/ms-dynamics-smb.al-*": "allow",
+      "*/.vscode*/extensions/ms-dynamics-smb.al-*/**": "allow"
+    },
+    "edit": { "@RELEASE@/**": "deny" },
+    "bash": {
+      "*": "ask",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "git rev-parse*": "allow",
+      "bash .opencode/skills/al-compile/scripts/compile.sh*": "allow"
+    }
+  },
+  "mcp": {
+    "al-mcp": {
+      "type": "local",
+      "command": ["python3", "@RELEASE@/scripts/al-mcp", "@APP@"],
+      "cwd": "@APP@",
+      "enabled": true
+    },
+    "microsoft-learn": {
+      "type": "remote",
+      "url": "https://learn.microsoft.com/api/mcp",
+      "enabled": true
+    },
+    "alcops": {
+      "type": "local",
+      "command": ["alcops-mcp"],
+      "cwd": "@APP@",
+      "enabled": false
+    },
+    "al-dependency": {
+      "type": "local",
+      "command": ["npx", "-y", "al-mcp-server@2.5.0"],
+      "cwd": "@APP@",
+      "enabled": false
+    },
+    "nab-al-tools": {
+      "type": "local",
+      "command": ["npx", "-y", "@nabsolutions/nab-al-tools-mcp@1.48.0"],
+      "cwd": "@APP@",
+      "enabled": true
+    },
+    "serena": {
+      "type": "local",
+      "command": ["serena", "start-mcp-server", "--context", "ide", "--project-from-cwd"],
+      "environment": { "AL_EXTENSION_PATH": "@RELEASE@/.opencode/serena-al" },
+      "cwd": "@APP@",
+      "enabled": true
+    },
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "-y", "@playwright/mcp@0.0.83", "--browser", "chromium", "--user-data-dir", "@APP@/.agent-state/browser", "--output-dir", "@APP@/.agent-state/runs/browser"],
+      "cwd": "@APP@",
+      "enabled": false
+    }
+  }
+}

@@ -1,0 +1,24 @@
+#!/usr/bin/env python3
+"""Run the scaffold's executable checks, never AL product verification."""
+import os
+from pathlib import Path
+import subprocess
+import sys
+
+root = Path(__file__).resolve().parents[1]
+commands = [
+    [sys.executable, "-m", "unittest", "discover", "-s", ".opencode/tests", "-p", "test_*.py"],
+    [sys.executable, "-m", "unittest", "discover", "-s", ".opencode/skills/al-compile/tests", "-p", "test_*.py"],
+]
+failed = []
+for command in commands:
+    print("RUN:", " ".join(command), flush=True)
+    try:
+        result = subprocess.run(command, cwd=root, env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"})
+        if result.returncode:
+            failed.append(command)
+    except OSError as error:
+        print(type(error).__name__, file=sys.stderr)
+        failed.append(command)
+print(f"Suites: {len(commands)}; failed: {len(failed)}")
+sys.exit(bool(failed))

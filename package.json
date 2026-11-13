@@ -1,0 +1,8 @@
+{
+  "name": "bc-ai-global-scaffold",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": { "test": "python3 scripts/verify-scaffold" },
+  "devDependencies": { "@opencode-ai/plugin": "1.18.23" }
+}

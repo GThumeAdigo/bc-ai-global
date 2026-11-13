@@ -1,0 +1,16 @@
+{
+  "default": { "model": "anthropic/claude-sonnet-5-5", "variant": "high" },
+  "tiers": {
+    "spec": { "model": "anthropic/claude-opus-5-5", "variant": "high" },
+    "mechanical": { "model": "anthropic/claude-haiku-5-5" }
+  },
+  "agents": {
+    "al-spec-writer": "spec",
+    "al-design-reviewer": "spec",
+    "al-test-runner": "mechanical",
+    "al-translation-auditor": "mechanical",
+    "al-obsolete-tracker": "mechanical",
+    "al-permission-set-auditor": "mechanical",
+    "explore": "mechanical"
+  }
+}

@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Bridge Serena's legacy executable layout to the installed VS Code AL extension.
+shopt -s nullglob
+extensions=("$HOME"/.vscode/extensions/ms-dynamics-smb.al-*)
+if ((${#extensions[@]} == 0)); then
+    printf 'No VS Code AL extension found under %s/.vscode/extensions.\n' "$HOME" >&2
+    exit 1
+fi
+
+mapfile -t extensions < <(printf '%s\n' "${extensions[@]}" | sort -Vr)
+for extension in "${extensions[@]}"; do
+    host="$extension/bin/linux/Microsoft.Dynamics.Nav.EditorServices.Host"
+    if [[ -x "$host" ]]; then
+        exec "$host" "$@"
+    fi
+
+    host="$extension/bin/Microsoft.Dynamics.Nav.EditorServices.Host.dll"
+    if [[ -f "$host" ]]; then
+        exec dotnet "$host" "$@"
+    fi
+done
+
+printf 'No AL language-server executable or DLL found in installed extensions.\n' >&2
+exit 1

@@ -1,55 +1,35 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "instructions": [
-    "AGENTS.md"
-  ],
-  "skills": {
-    "paths": [".opencode/skills"]
+  "instructions": ["AGENTS.md"],
+  "skills": { "paths": [".opencode/skills"] },
+  "permission": {
+    "external_directory": {
+      "*": "ask",
+      "/tmp": "allow",
+      "/tmp/**": "allow",
+      "*/.vscode*/extensions/ms-dynamics-smb.al-*": "allow",
+      "*/.vscode*/extensions/ms-dynamics-smb.al-*/**": "allow"
+    }
   },
-  "plugin": [
-    ".opencode/plugins/post-build-verify.ts"
-  ],
   "mcp": {
-    "al-mcp": {
+    "playwright": {
       "type": "local",
       "command": [
-        "sh",
-        "-c",
-        "al launchmcpserver \"$(find . -maxdepth 2 -name app.json -not -path '*/node_modules/*' -not -path '*/.alpackages/*' -exec dirname {} \\; -quit)\" --transport stdio"
-      ],
-      "cwd": ".",
-      "enabled": true
-    },
-    "microsoft-learn": {
-      "type": "remote",
-      "url": "https://learn.microsoft.com/api/mcp",
-      "enabled": true
-    },
-    "alcops": {
-      "type": "local",
-      "command": [
-        "alcops-mcp"
-      ],
-      "cwd": ".",
-      "enabled": true
-    },
-    "al-dependency": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "al-mcp-server"
+        "npx", "-y", "@playwright/mcp@0.0.83",
+        "--browser", "chrome",
+        "--executable-path", "/home/greg/Repos/AI/bc-ai-global/scripts/ungoogled-chromium",
+        "--user-data-dir", ".agent-state/browser",
+        "--output-dir", ".agent-state/runs/browser",
+        "--viewport-size", "1920x1080",
+        "--console-level", "warning",
+        "--timeout-navigation", "120000"
       ],
       "cwd": ".",
       "enabled": true
     },
     "nab-al-tools": {
       "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "@nabsolutions/nab-al-tools-mcp"
-      ],
+      "command": ["npx", "-y", "@nabsolutions/nab-al-tools-mcp@1.48.0"],
       "cwd": ".",
       "enabled": true
     },
@@ -58,36 +38,13 @@
       "command": [
         "/home/greg/.local/bin/serena",
         "start-mcp-server",
-        "--context",
-        "ide",
-        "--project-from-cwd"
+        "--context", "ide",
+        "--project", "/home/greg/Repos/SCM.SupplyChainManagement/ADIGO.SCM.MasterData.DATANORM"
       ],
-      "cwd": ".",
-      "enabled": true
-    },
-    "playwright": {
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "@playwright/mcp@latest",
-        "--browser",
-        "chromium",
-        "--user-data-dir",
-        "/home/greg/.cache/opencode-bc-webclient/profile",
-        "--output-dir",
-        ".opencode/webclient-runs",
-        "--viewport-size",
-        "1920x1080",
-        "--console-level",
-        "warning",
-        "--timeout-navigation",
-        "120000",
-        "--timeout-settle",
-        "1500"
-      ],
-      "cwd": ".",
-      "enabled": true
+      "enabled": true,
+      "environment": {
+        "AL_EXTENSION_PATH": "/home/greg/.vscode-insiders/extensions/ms-dynamics-smb.al-17.0.2273547"
+      }
     }
   }
 }

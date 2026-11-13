@@ -6,14 +6,12 @@
 # Usage: compile.sh [app-folder] [ruleset-path]
 #   app-folder   folder containing app.json. Optional; discovered from the
 #                current directory. Fails if discovery is ambiguous.
-#   ruleset-path optional. Defaults to ../.codeAnalysis/ADIGO.ruleset.json
-#                relative to the app folder, then falls back to al.ruleSetPath
-#                in a sibling .code-workspace file.
+#   ruleset-path optional, relative to the current directory. Otherwise use
+#                app settings, applicable workspace settings, then ADIGO.
 
 set -u
 
 APP="${1:-}"
-RULESET="${2:-}"
 
 if [ -z "$APP" ]; then
     mapfile -t FOUND < <(find . -maxdepth 3 -name app.json -not -path '*/node_modules/*' -not -path '*/.alpackages/*' -exec dirname {} \;)
@@ -28,13 +26,29 @@ if [ -z "$APP" ]; then
     fi
     APP="${FOUND[0]}"
 fi
-APP=$(cd "$APP" && pwd)
+if [ ! -d "$APP" ] || [ ! -f "$APP/app.json" ]; then
+    echo "error: invalid app folder (requires app.json): $APP" >&2
+    exit 2
+fi
+APP=$(cd -- "$APP" && pwd) || exit 2
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd) || exit 2
+RULESET=$(python3 "$SCRIPT_DIR/resolve_ruleset.py" "$APP" "${@:2}") || exit 2
 
-ALEXT=$(ls -d ~/.vscode/extensions/ms-dynamics-smb.al-* | sort -V | tail -1)
+ALEXT="${AL_COMPILER_EXTENSION_PATH:-}"
+if [ -z "$ALEXT" ]; then
+    ALEXT=$(ls -d ~/.vscode/extensions/ms-dynamics-smb.al-* | sort -V | tail -1)
+fi
 ALC="$ALEXT/bin/linux/alc"
 ANALYZERS="$ALEXT/bin/Analyzers"
-if [ ! -x "$ALC" ]; then
-    echo "error: alc not found at $ALC" >&2
+if [ -x "$ALC" ]; then
+    COMPILER=("$ALC")
+    COMPILER_FILE="$ALC"
+elif [ -f "$ALEXT/bin/alc.dll" ] && command -v dotnet >/dev/null 2>&1; then
+    COMPILER=(dotnet "$ALEXT/bin/alc.dll")
+    COMPILER_FILE="$ALEXT/bin/alc.dll"
+    ANALYZERS="$ALEXT/bin"
+else
+    echo "error: no runnable AL compiler found under $ALEXT/bin" >&2
     exit 2
 fi
 
@@ -51,6 +65,12 @@ ANALYZER_DLLS=(
     ALCops.Common.dll
 )
 
+if [ -n "${AL_ANALYZER_PROFILE:-}" ]; then
+    PROFILE=$(python3 -c 'import json,sys; from pathlib import Path; x=json.load(open(sys.argv[1]))["analyzers"]; assert isinstance(x,list) and x and all(isinstance(n,str) and Path(n).name == n and n.endswith(".dll") for n in x); print("\n".join(x))' "$AL_ANALYZER_PROFILE") || exit 2
+    mapfile -t ANALYZER_DLLS <<< "$PROFILE"
+fi
+ANALYZER_PATHS=()
+
 ARGS=(
     /project:"$APP"
     /packagecachepath:"$APP/.alpackages"
@@ -61,30 +81,15 @@ for dll in "${ANALYZER_DLLS[@]}"; do
         exit 2
     fi
     ARGS+=("/analyzer:$ANALYZERS/$dll")
+    ANALYZER_PATHS+=("$ANALYZERS/$dll")
 done
 
-if [ -z "$RULESET" ]; then
-    DEFAULT_RULESET="$APP/../.codeAnalysis/ADIGO.ruleset.json"
-    if [ -f "$DEFAULT_RULESET" ]; then
-        RULESET="$DEFAULT_RULESET"
-    else
-        WORKSPACE=$(find "$APP/.." -maxdepth 1 -name '*.code-workspace' | head -1)
-        if [ -n "$WORKSPACE" ]; then
-            RULESET=$(grep -oE '"al\.ruleSetPath"\s*:\s*"[^"]+"' "$WORKSPACE" | head -1 | sed 's/.*:\s*"//; s/"$//')
-            [ -n "$RULESET" ] && RULESET=$(cd "$APP" && realpath -m "$RULESET")
-        fi
-    fi
-fi
-if [ -n "$RULESET" ] && [ -f "$RULESET" ]; then
-    ARGS+=("/ruleset:$RULESET")
-else
-    echo "note: no ruleset found, compiling without one" >&2
-fi
+ARGS+=("/ruleset:$RULESET")
 
 OUT=$(mktemp -d /tmp/alcompile.XXXXXX)
 APPFILE="$OUT/$(basename "$APP").app"
 
-"$ALC" "${ARGS[@]}" /out:"$APPFILE" > "$OUT/compile.log" 2>&1
+"${COMPILER[@]}" "${ARGS[@]}" /out:"$APPFILE" > "$OUT/compile.log" 2>&1
 COMPILE_EXIT=$?
 
 ERRORS=$(grep -cE ': error' "$OUT/compile.log" || true)
@@ -95,5 +100,11 @@ echo "app:    $APP"
 echo "log:    $OUT/compile.log"
 echo "output: $APPFILE"
 echo "exit=$COMPILE_EXIT errors=$ERRORS warnings=$WARNINGS infos=$INFOS"
+
+python3 "$SCRIPT_DIR/build_evidence.py" "$APP" "$OUT" "$COMPILER_FILE" "$RULESET" "$COMPILE_EXIT" "${ANALYZER_PATHS[@]}"
+EVIDENCE_EXIT=$?
+if [ "$COMPILE_EXIT" -eq 0 ] && [ "$EVIDENCE_EXIT" -ne 0 ]; then
+    exit "$EVIDENCE_EXIT"
+fi
 
 exit "$COMPILE_EXIT"

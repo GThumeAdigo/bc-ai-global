@@ -1,0 +1,8 @@
+[
+  {"case": "Correct a tooltip typo and existing translation", "expected_path": "direct", "reason": "No changed business invariant"},
+  {"case": "Rename a local variable in posting code with references proven unchanged", "expected_path": "direct", "reason": "File name alone does not establish risk"},
+  {"case": "Add bounded optional field and reopen behavior with known disposable data policy", "expected_path": "compact", "reason": "New bounded behavior needs approved intent"},
+  {"case": "Move one Commit in posting", "expected_path": "critical", "reason": "Transaction rollback changes despite a tiny diff"},
+  {"case": "Change an endpoint lookup that may cross company boundaries", "expected_path": "critical", "reason": "Authorization and company isolation"},
+  {"case": "Remove a field with unknown released-data usage", "expected_path": "investigate then critical unless impact is disproved", "reason": "Unknown compatibility is not disposable data"}
+]

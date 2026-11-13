@@ -1,0 +1,99 @@
+#!/usr/bin/env python3
+"""Report selected tools and prerequisites. MCP probes are explicit and non-publishing."""
+import argparse
+import asyncio
+import importlib.util
+import json
+import os
+from pathlib import Path
+import re
+import shutil
+import subprocess
+
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def command_for(tool):
+    resolved = shutil.which(tool) or (str(Path(tool).resolve()) if Path(tool).is_file() else None)
+    if not resolved:
+        return None
+    return ["dotnet", resolved] if resolved.endswith(".dll") else [resolved]
+
+
+def version(command):
+    if not command:
+        return {"status": "unavailable"}
+    try:
+        result = subprocess.run([*command, "--version"], capture_output=True, text=True, timeout=10)
+        match = re.search(r"\d+\.\d+(?:\.\d+){0,2}", result.stdout)
+        return {"status": "available" if result.returncode == 0 and match else "unverified", "version": match[0] if match else None}
+    except (OSError, subprocess.TimeoutExpired):
+        return {"status": "unavailable"}
+
+
+async def probe(command, projects):
+    process = await asyncio.create_subprocess_exec(*command, "launchmcpserver", *projects, "--transport", "stdio", "--disableTelemetry", stdin=asyncio.subprocess.PIPE, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.DEVNULL)
+    async def request(payload, identifier=None):
+        process.stdin.write((json.dumps(payload) + "\n").encode())
+        await process.stdin.drain()
+        if identifier is None:
+            return None
+        while True:
+            line = await process.stdout.readline()
+            if not line:
+                raise ValueError("server closed before capability response")
+            try:
+                result = json.loads(line)
+            except ValueError:
+                continue
+            if result.get("id") == identifier:
+                if "error" in result:
+                    raise ValueError("MCP returned a protocol error")
+                return result["result"]
+    try:
+        async with asyncio.timeout(20):
+            await request({"jsonrpc": "2.0", "id": 1, "method": "initialize", "params": {"protocolVersion": "2024-11-05", "capabilities": {}, "clientInfo": {"name": "bc-ai-doctor", "version": "1"}}}, 1)
+            await request({"jsonrpc": "2.0", "method": "notifications/initialized"})
+            result = await request({"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}}, 2)
+            return {"status": "available", "tools": sorted(t["name"] for t in result.get("tools", [])), "behavioral_execution": "untested"}
+    except (ValueError, TimeoutError, BrokenPipeError):
+        return {"status": "unavailable", "reason": "initialize/tools-list failed or timed out"}
+    finally:
+        process.stdin.close()
+        try:
+            await asyncio.wait_for(process.wait(), 3)
+        except TimeoutError:
+            process.kill()
+            await process.wait()
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--app", action="append", type=Path, default=[])
+    parser.add_argument("--altool", default=os.environ.get("ALTOOL_PATH", "al"))
+    parser.add_argument("--probe-mcp", action="store_true")
+    args = parser.parse_args()
+    selected = command_for(args.altool)
+    report = {"tools": {name: version(command_for(name)) for name in ("opencode", "node", "python3")}, "altool": version(selected), "mcp": {"status": "untested"}, "semantic_navigation": "untested", "apps": [], "host_isolation": "not-established"}
+    if selected:
+        report["altool"]["command"] = selected
+    spec = importlib.util.spec_from_file_location("rulesets", ROOT / ".opencode/skills/al-compile/scripts/resolve_ruleset.py")
+    rulesets = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(rulesets)
+    for path in args.app:
+        app = path.resolve()
+        item = {"path": str(app), "manifest": (app / "app.json").is_file(), "symbol_packages": len(list((app / ".alpackages").glob("*.app")))}
+        try:
+            item["ruleset"] = str(rulesets.resolve(app))
+        except (ValueError, OSError):
+            item["ruleset"] = "unavailable-or-ambiguous"
+        installed = app / ".agent-state/install.json"
+        item["release"] = json.loads(installed.read_text()).get("release") if installed.exists() else None
+        report["apps"].append(item)
+    if args.probe_mcp and selected:
+        report["mcp"] = asyncio.run(probe(selected, [str(p.resolve()) for p in args.app]))
+    print(json.dumps(report, indent=2))
+
+
+if __name__ == "__main__":
+    main()
