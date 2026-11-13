@@ -46,7 +46,8 @@ scope and its callers against the acceptance scenarios and the applicable style
 guide sections (`.opencode/skills/al-code-review/`, always section 0). Navigate AL
 semantically; report 1-based lines.
 
-Make one pass and finish it. Correct directly what is behavior-neutral and local:
+Check that knowledge pages named in the spec match the changed behavior and
+report a stale one as a finding. Make one pass and finish it. Correct directly what is behavior-neutral and local:
 naming, file and object organization, variable order, labels and placeholders,
 comments, documentation, `SetLoadFields`, explicit `RunTrigger`, formatting,
 dead code you can prove unreferenced. Keep each edit minimal and inside the

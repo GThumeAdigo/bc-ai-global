@@ -17,7 +17,8 @@ Observable success, failure and relevant edge cases.
 
 Affected code/callers, standard BC reuse and a short implementation sequence.
 State why impact is bounded and which risks were inspected. List the style
-guide sections the implementer should load.
+guide sections the implementer should load. List knowledge pages (`specs/kb/`)
+the change makes stale.
 
 ## Verification
 

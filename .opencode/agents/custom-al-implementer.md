@@ -15,7 +15,8 @@ nothing to correct. Inspect AL with semantic symbols and references first. Use
 BCQuality for relevant nontrivial patterns and Microsoft Learn for uncertain
 platform APIs. Reuse standard BC behavior and existing app patterns.
 
-Implement only the assigned scope. Compile with the al-compile wrapper after the
+Implement only the assigned scope. When the spec lists knowledge pages, update them
+in the same change (rewrite in place, rules checked against your source). Compile with the al-compile wrapper after the
 change and fix compiler errors and new diagnostics yourself. Run the assigned
 existing tests. New test authoring follows explicit task/app opt-in. Before
 returning, re-read your diff against section 0 and the acceptance scenarios and

@@ -1,8 +1,22 @@
 # Business Central development contract
 
-Read `APP_CONTEXT.md` for app policy and the relevant product decisions under
-`specs/`. Manifest, ruleset and source own machine facts; do not invent missing
-app identity, compatibility or environment details.
+## Where you are
+
+OpenCode starts either in an app folder (it contains `app.json`) or in a
+repository root that holds several apps and no `app.json`. In a repository root,
+read `REPO_CONTEXT.md` first, then identify the target app from the request. If
+it is ambiguous, ask once. Read that app's `APP_CONTEXT.md` and the relevant
+product decisions under its `specs/`. Specs, knowledge pages and handoff notes
+belong to one app and live in its folder. A change spanning several apps lives in
+the spec of the app that owns the main change and names the others. Never create
+`specs/` or `APP_CONTEXT.md` at the repository root.
+
+Manifest, ruleset and source own machine facts; do not invent missing app
+identity, compatibility or environment details. If `specs/kb/index.md` exists in
+the target app, read it and then only the pages the task touches; it describes
+current behavior and rules. Search `specs/archive/` only when changing the area
+it covers. When a change alters behavior a knowledge page describes, update that
+page in the same change.
 
 ## Choose the work path
 
@@ -61,10 +75,14 @@ when existing data or public consumers must be preserved.
 ## Installation and state
 
 `.agent-state/install.json` records the selected release and rollback journal.
-`.opencode/` is app-local; its managed content links into an immutable release.
-Do not edit through those links. Change the scaffold in its own checkout, test,
-then explicitly update this consumer. Private context/specs/docs are app-owned.
-Runtime results go under `.agent-state/runs/`, not the shared source.
+`.opencode/` sits in the folder where OpenCode starts, an app folder or a
+repository root; its managed content links into an immutable release. In a
+repository root it stays outside every AL project on purpose, because the corpus
+ships `.al` sample code. Never link or copy it into an app folder. Do not edit
+through those links. Change the scaffold in its own checkout, test, then
+explicitly update this consumer. Private context/specs/docs are app-owned.
+Runtime results go under `.agent-state/runs/`, not the shared source. Never
+search the repository root for AL source; search inside the target app folders.
 
 Configuration is startup-loaded. Quit and restart OpenCode after an installed
 runtime update. Global config/skills can still affect a session; an isolated

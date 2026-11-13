@@ -36,7 +36,8 @@ permission:
     "*/bc-ai-global/releases/**": allow
 ---
 
-Read `APP_CONTEXT.md`, the relevant product decisions under `specs/` and
+Read `APP_CONTEXT.md`, `specs/kb/index.md` with the pages it points to (when the
+app has a knowledge base), the relevant product decisions under `specs/` and
 `.opencode/skills/sdd/SKILL.md` with the reference for the selected path. Inspect
 the actual affected code, callers and platform contracts before writing. Prefer
 standard BC reuse and existing app patterns; verify uncertain platform behavior

@@ -57,9 +57,31 @@ python3 -m venv .venv
 No script installs credentials or modifies user-wide OpenCode/Claude settings.
 Compiler availability does not imply a functioning BC test environment.
 
-## Install into an app
+## Install into a repository or an app
 
-Use an AL app folder containing `app.json`, including for multi-app repositories:
+Preferred: install at a **repository root that holds several apps** and has no
+`app.json` itself (for example `ADIGO-Apps`, `ITS.IT-Services`). The runtime
+(`.opencode/`, `AGENTS.md`, `opencode.json`, the knowledge corpus) then lies
+outside every AL project, so the AL extension never compiles the corpus' `.al`
+samples. OpenCode is started at the repository root; the agent picks the target
+app per task. Apps are found below the root (depth 4, nested apps are not split);
+each gets its own `APP_CONTEXT.md`, `specs/` and `DOCS/` (private, locally
+excluded), the root gets `REPO_CONTEXT.md`. One AL MCP server covers all apps,
+Serena runs once on the root.
+
+```bash
+python3 scripts/install /path/to/ITS.IT-Services --revision <scaffold-commit> --dry-run
+python3 scripts/install /path/to/ITS.IT-Services --revision <scaffold-commit>
+```
+
+An earlier app-level install below the root is superseded only with
+`--replace-app-installs`; it refuses if a managed file was edited, keeps
+`APP_CONTEXT.md`, `specs/` and `DOCS/`, and rollback restores the old install.
+Existing unmanaged `AGENTS.md`, `CLAUDE.md` or `opencode.json` at the root stop
+the install: move their content into `REPO_CONTEXT.md` first.
+
+App mode (an AL app folder containing `app.json`) remains available. Never put the
+runtime inside an app folder if the corpus keeps `.al` samples:
 
 ```bash
 .venv/bin/python scripts/install /path/to/repository/MyApp \
@@ -105,8 +127,8 @@ The source must be at the repo root. JSONC is accepted, settings are preserved,
 and a stable app-path hash avoids basename collisions. Unmanaged or edited output
 is not overwritten. Without this flag no workspace file is generated.
 
-Fill relevant `APP_CONTEXT.md` fields and product decisions, then start OpenCode
-**from the installed app folder**. Run `/sdd <request>` or describe the change.
+Fill relevant `APP_CONTEXT.md` fields and product decisions (and `REPO_CONTEXT.md`
+in repository mode), then start OpenCode **from the folder you installed into**. Run `/sdd <request>` or describe the change.
 The app contract and SDD skill determine the path. Quit and restart OpenCode
 after updating its installed runtime; running sessions retain old configuration.
 
@@ -195,7 +217,7 @@ the fork. Update there, then bump the scaffold submodule. Never edit installed
 or vendored guidance in place. Exact entry routing selects an action; it does
 not execute its review. The corpus owns READ/DO output and index generation.
 Use corpus-relative references for knowledge findings and separate house reports.
-AL examples remain `*.al.txt` to avoid entering consumer compilations.
+AL samples keep the upstream `.al` extension. Install the runtime outside AL project folders (repository root mode).
 
 Model IDs/variants for installed agents come from `runtime/model-policy.json`.
 Prompt frontmatter contains no model pins. The policy has a default tier

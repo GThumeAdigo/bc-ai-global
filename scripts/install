@@ -47,6 +47,8 @@ def put(path, state):
     if state["kind"] == "absent":
         if path.is_symlink() or path.is_file():
             path.unlink()
+        elif path.is_dir():
+            path.rmdir()
         return
     if state["kind"] == "directory":
         if path.is_symlink():
@@ -142,18 +144,45 @@ def release_checksums(root):
     return {p.relative_to(root).as_posix(): digest(p.read_bytes()) for p in sorted(root.rglob("*")) if p.is_file() and p != root / "checksums.json"}
 
 
-def exclusions(original, app, repository):
-    if original.count(START) != original.count(END) or original.count(START) > 1:
-        raise ValueError("malformed legacy exclusion block")
+def block_markers(app):
     key = digest(str(app).encode())[:16]
-    start, end = f"# BEGIN bc-ai-global {key}", f"# END bc-ai-global {key}"
-    if original.count(start) != original.count(end) or original.count(start) > 1:
-        raise ValueError("malformed managed exclusion block")
-    relative = app.relative_to(repository).as_posix()
+    return f"# BEGIN bc-ai-global {key}", f"# END bc-ai-global {key}"
+
+
+def escaped_prefix(path, repository):
+    relative = path.relative_to(repository).as_posix()
     prefix = "" if relative == "." else relative + "/"
     # Escape Git ignore metacharacters in real directory names.
-    prefix = "".join("\\" + c if c in "\\*?[]#! " else c for c in prefix)
-    lines = ["/" + prefix + p for p in ("AGENTS.md", "CLAUDE.md", "opencode.json", "APP_CONTEXT.md", "specs/", "DOCS/", ".opencode/", ".agent-state/")]
+    return "".join("\\" + c if c in "\\*?[]#! " else c for c in prefix)
+
+
+def drop_block(original, app):
+    start, end = block_markers(app)
+    if original.count(start) != original.count(end) or original.count(start) > 1:
+        raise ValueError("malformed managed exclusion block")
+    if start not in original:
+        return original
+    before, rest = original.split(start)
+    _, after = rest.split(end)
+    return (before + after).replace("\n\n\n", "\n\n")
+
+
+def exclusions(original, app, repository, apps=None):
+    """Managed local excludes for an app, or for a repository root holding apps."""
+    if original.count(START) != original.count(END) or original.count(START) > 1:
+        raise ValueError("malformed legacy exclusion block")
+    start, end = block_markers(app)
+    if original.count(start) != original.count(end) or original.count(start) > 1:
+        raise ValueError("malformed managed exclusion block")
+    prefix = escaped_prefix(app, repository)
+    if apps is None:
+        names = ("AGENTS.md", "CLAUDE.md", "opencode.json", "APP_CONTEXT.md", "specs/", "DOCS/", ".opencode/", ".agent-state/")
+        lines = ["/" + prefix + p for p in names]
+    else:
+        names = ("AGENTS.md", "CLAUDE.md", "opencode.json", "REPO_CONTEXT.md", ".opencode/", ".agent-state/")
+        lines = ["/" + prefix + p for p in names]
+        for member in apps:
+            lines += ["/" + escaped_prefix(member, repository) + p for p in ("APP_CONTEXT.md", "specs/", "DOCS/")]
     block = start + "\n" + "\n".join(lines) + "\n" + end
     if start in original:
         before, rest = original.split(start)
@@ -163,11 +192,67 @@ def exclusions(original, app, repository):
     return original + ("\n" if original and not original.endswith("\n") else "") + block + "\n"
 
 
+APP_SKIP = {".git", ".alpackages", ".altestrunner", ".snapshots", ".opencode", ".agent-state", ".serena", ".vscode", ".github", ".AL-Go", ".codeAnalysis", "node_modules", "specs", "DOCS", "docs"}
+
+
+def find_apps(root, depth=4):
+    """Folders below root holding an app.json, nearest first, never nested apps."""
+    apps = []
+    for current, names, files in os.walk(root):
+        here = Path(current)
+        if here != root and "app.json" in files:
+            apps.append(here)
+            names[:] = []
+            continue
+        if len(here.relative_to(root).parts) >= depth:
+            names[:] = []
+        else:
+            names[:] = sorted(n for n in names if n not in APP_SKIP)
+    return sorted(apps)
+
+
+def app_install_removal(app, args, actions):
+    """Plan removal of an earlier app-level installation superseded by a repository install."""
+    manifest = app / ".agent-state/install.json"
+    old = json.loads(manifest.read_text())
+    if not args.replace_app_installs:
+        raise ValueError(f"app-level installation exists: {app}; repeat with --replace-app-installs to supersede it")
+    removed = set()
+    for name, state in old["managed"].items():
+        if capture(Path(name)) != state:
+            raise ValueError(f"managed path was edited, refusing to replace the installation: {name}")
+        actions.append({"path": name, "before": state, "after": {"kind": "absent"}})
+        removed.add(Path(name))
+    runtime = app / ".opencode"
+    leftovers = {p for p in runtime.iterdir()} - removed if runtime.is_dir() and not runtime.is_symlink() else set()
+    if leftovers:
+        raise ValueError(f"unmanaged content in {runtime}: {sorted(p.name for p in leftovers)}")
+    if runtime.is_dir() and not runtime.is_symlink():
+        actions.append({"path": str(runtime), "before": {"kind": "directory"}, "after": {"kind": "absent"}})
+    actions.append({"path": str(manifest), "before": capture(manifest), "after": {"kind": "absent"}})
+
+
 def prepare(app, selected, args, exclude_updates):
-    if not (app / "app.json").is_file():
-        raise ValueError(f"app.json missing: {app}")
-    rulesets.read_jsonc(app / "app.json")
+    """Plan an installation into an app folder, or into a repository root holding apps."""
     repository = Path(git(app, "rev-parse", "--show-toplevel").decode().strip())
+    members = None
+    if (app / "app.json").is_file():
+        rulesets.read_jsonc(app / "app.json")
+    else:
+        # Repository mode keeps the runtime outside every AL project, so the AL
+        # extension never compiles sample code shipped with the knowledge corpus.
+        members = find_apps(app)
+        if not members:
+            raise ValueError(f"neither app.json nor any app below it: {app}")
+        for parent in app.parents:
+            if (parent / "app.json").is_file():
+                raise ValueError(f"install into the app folder {parent}, not below it: {app}")
+            if parent == repository:
+                break
+        if args.workspace:
+            raise ValueError("--workspace applies to app installs only")
+        for member in members:
+            rulesets.read_jsonc(member / "app.json")
     state = app / ".agent-state"
     if state.is_symlink():
         raise ValueError(f"runtime state must not be a symlink: {state}")
@@ -180,10 +265,17 @@ def prepare(app, selected, args, exclude_updates):
     old_managed = (old or {}).get("managed", {})
     runtime = app / ".opencode"
     legacy = runtime.is_symlink()
+    if legacy and members is not None:
+        raise ValueError("whole-directory legacy link at a repository root is not supported")
     if legacy:
         if not args.migrate_legacy:
             raise ValueError("whole-directory legacy link requires --migrate-legacy")
         actions.append({"path": str(runtime), "before": capture(runtime), "after": {"kind": "directory"}})
+    removed_apps = []
+    for member in members or []:
+        if (member / ".agent-state/install.json").exists():
+            app_install_removal(member, args, actions)
+            removed_apps.append(member)
     desired = {name: {"kind": "link", "target": str(selected / ".opencode" / name)} for name in ("agents", "skills", "commands", "BCQuality-ADIGO", "serena-al")}
     for name, after in desired.items():
         path = runtime / name
@@ -209,6 +301,9 @@ def prepare(app, selected, args, exclude_updates):
                     config["agent"].setdefault(agent, {}).update(models)
             # Tokens are rendered from this installation, never personal paths.
             config = render(config, {"@APP@": str(app), "@RELEASE@": str(selected)})
+            if members is not None and "al-mcp" in config.get("mcp", {}):
+                # One AL MCP server over every app; it never guesses a first match.
+                config["mcp"]["al-mcp"]["command"] = ["python3", str(selected / "scripts/al-mcp"), *map(str, members)]
             optional = {"browser": "playwright", "translation": "nab-al-tools", "dependency": "al-dependency", "analyzer-fixes": "alcops"}
             for profile, server in optional.items():
                 if server in config.get("mcp", {}):
@@ -218,7 +313,7 @@ def prepare(app, selected, args, exclude_updates):
             after = {"kind": "link", "target": str(selected / "runtime" / name)}
         actions.append({"path": str(path), "before": before, "after": after})
         managed[str(path)] = after
-    if args.workspace:
+    if args.workspace and members is None:
         source = Path(args.workspace).resolve()
         workspace = rulesets.read_jsonc(source)
         for folder in workspace.get("folders", []):
@@ -238,23 +333,27 @@ def prepare(app, selected, args, exclude_updates):
     managed = {**old_managed, **managed}
     exclude = Path(git(app, "rev-parse", "--path-format=absolute", "--git-path", "info/exclude").decode().strip())
     original = exclude_updates.get(exclude, exclude.read_text() if exclude.exists() else "")
-    exclude_updates[exclude] = exclusions(original, app, repository)
+    for member in removed_apps:
+        original = drop_block(original, member)
+    exclude_updates[exclude] = exclusions(original, app, repository, members)
     if args.workspace:
         workspace_rule = "/" + target.name
         if workspace_rule not in exclude_updates[exclude].splitlines():
             exclude_updates[exclude] += workspace_rule + "\n"
     copies = []
-    for source in (selected / "templates").rglob("*"):
-        if not source.is_file():
-            continue
-        target = app / source.relative_to(selected / "templates")
-        if any(p.is_symlink() for p in (target, *target.parents) if p != app and app in p.parents):
+    private = members or [app]
+    sources = [(base, source, source.relative_to(selected / "templates")) for base in private for source in (selected / "templates").rglob("*") if source.is_file()]
+    if members is not None:
+        sources.append((app, selected / "runtime/REPO_CONTEXT.md", Path("REPO_CONTEXT.md")))
+    for base, source, relative in sources:
+        target = base / relative
+        if any(p.is_symlink() for p in (target, *target.parents) if p != base and base in p.parents):
             raise ValueError(f"app-local template path follows a symlink: {target}")
         if target.exists() and not target.is_file():
             raise ValueError(f"template target is not a file: {target}")
         if not target.exists():
             copies.append((source, target))
-    return {"app": app, "manifest": manifest, "old": old, "actions": actions, "managed": managed, "copies": copies}
+    return {"app": app, "apps": members, "private": private, "manifest": manifest, "old": old, "actions": actions, "managed": managed, "copies": copies}
 
 
 def restore_actions(actions):
@@ -296,6 +395,7 @@ def main():
     parser.add_argument("--workspace")
     parser.add_argument("--dry-run", action="store_true")
     parser.add_argument("--migrate-legacy", action="store_true")
+    parser.add_argument("--replace-app-installs", action="store_true", help="supersede app-level installs found below a repository root")
     parser.add_argument("--rollback", action="store_true")
     args = parser.parse_args()
     apps = list(dict.fromkeys(Path(p).resolve() for p in args.apps))
@@ -307,7 +407,7 @@ def main():
     selected = release(args.source.resolve(), args.revision, args.store.resolve())
     excludes = {}
     plans = [prepare(app, selected, args, excludes) for app in apps]
-    print(json.dumps({"release": str(selected), "apps": [str(p["app"]) for p in plans], "dry_run": args.dry_run}))
+    print(json.dumps({"release": str(selected), "apps": [str(p["app"]) for p in plans], "members": {str(p["app"]): [str(m) for m in p["apps"]] for p in plans if p["apps"] is not None}, "dry_run": args.dry_run}))
     if args.dry_run:
         return
     # A shared exclusion file is written once. A whole batch has a common journal
@@ -327,12 +427,15 @@ def main():
             app = plan["app"]
             backup = args.backup_root.resolve() / digest(str(app).encode())[:16] / str(time.time_ns())
             backup.mkdir(parents=True)
-            for name in ("APP_CONTEXT.md", "specs", "DOCS"):
-                origin = app / name
-                if origin.is_file():
-                    shutil.copy2(origin, backup / name)
-                elif origin.is_dir():
-                    shutil.copytree(origin, backup / name, symlinks=True)
+            for base in plan["private"]:
+                destination = backup if base == app else backup / base.relative_to(app)
+                for name in ("APP_CONTEXT.md", "specs", "DOCS"):
+                    origin = base / name
+                    if origin.is_file():
+                        destination.mkdir(parents=True, exist_ok=True)
+                        shutil.copy2(origin, destination / name)
+                    elif origin.is_dir():
+                        shutil.copytree(origin, destination / name, symlinks=True)
             # Shared excludes are retained on single-app rollback of a batch.
             actions = plan["actions"] + (exclude_actions if len(plans) == 1 else [])
             journal = backup / "journal.json"
@@ -346,6 +449,8 @@ def main():
                     output.write(source.read_bytes())
                 applied.append({"path": str(target), "before": {"kind": "absent"}, "after": capture(target)})
             manifest = {"version": 1, "app": str(app), "release": str(selected), "managed": plan["managed"], "journal": str(journal)}
+            if plan["apps"] is not None:
+                manifest["apps"] = [str(member) for member in plan["apps"]]
             put(plan["manifest"], text_state(json.dumps(manifest, indent=2) + "\n"))
             manifests.append(plan)
     except Exception:

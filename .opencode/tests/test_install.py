@@ -31,12 +31,13 @@ class InstallTests(unittest.TestCase):
         (self.selected / "runtime").mkdir(parents=True)
         for name in ("AGENTS.md", "CLAUDE.md"):
             (self.selected / "runtime" / name).write_text(name)
-        (self.selected / "runtime/opencode.json").write_text(json.dumps({"path": "@APP@", "mcp": {"playwright": {"enabled": False}}}))
+        (self.selected / "runtime/opencode.json").write_text(json.dumps({"path": "@APP@", "mcp": {"playwright": {"enabled": False}, "al-mcp": {"command": ["python3", "@RELEASE@/scripts/al-mcp", "@APP@"]}}}))
         for name in ("agents", "skills", "commands", "BCQuality-ADIGO", "serena-al"):
             (self.selected / ".opencode" / name).mkdir(parents=True)
         (self.selected / "templates/specs").mkdir(parents=True)
         (self.selected / "templates/specs/brief.md").write_text("template")
         (self.selected / "templates/APP_CONTEXT.md").write_text("context")
+        (self.selected / "runtime/REPO_CONTEXT.md").write_text("repo context")
 
     def run_install(self, *options, apps=None):
         args = ["install", *(str(p) for p in (apps or [self.app])), "--backup-root", str(self.root / "backup"), *options]
@@ -98,6 +99,114 @@ class InstallTests(unittest.TestCase):
         output = list(self.repo.glob("SDD-*.code-workspace"))
         self.assertEqual(len(output), 1)
         self.assertEqual(json.loads(output[0].read_text())["settings"], {"x": 1})
+
+    def make_repository(self, names=("ADIGO.A", "group/ADIGO.B")):
+        repository = self.root / "multi"
+        repository.mkdir()
+        subprocess.run(["git", "init", "-q", str(repository)], check=True)
+        apps = []
+        for name in names:
+            app = repository / name
+            app.mkdir(parents=True)
+            (app / "app.json").write_text("{}")
+            apps.append(app)
+        (repository / ".alpackages/pkg").mkdir(parents=True)
+        (repository / ".alpackages/pkg/app.json").write_text("{}")
+        return repository, apps
+
+    def test_repository_install_keeps_runtime_out_of_every_app(self):
+        repository, apps = self.make_repository()
+        self.run_install(apps=[repository])
+        self.assertTrue((repository / ".opencode/skills").is_symlink())
+        for app in apps:
+            self.assertFalse((app / ".opencode").exists())
+            self.assertFalse((app / "opencode.json").exists())
+            self.assertEqual((app / "APP_CONTEXT.md").read_text(), "context")
+            self.assertEqual((app / "specs/brief.md").read_text(), "template")
+        self.assertEqual((repository / "REPO_CONTEXT.md").read_text(), "repo context")
+        config = json.loads((repository / "opencode.json").read_text())
+        self.assertEqual(config["path"], str(repository))
+        self.assertEqual(config["mcp"]["al-mcp"]["command"][2:], [str(app) for app in apps])
+        manifest = json.loads((repository / ".agent-state/install.json").read_text())
+        self.assertEqual(manifest["apps"], [str(app) for app in apps])
+
+    def test_repository_install_excludes_private_files_per_app(self):
+        repository, apps = self.make_repository()
+        self.run_install(apps=[repository])
+        for path in ("AGENTS.md", ".opencode/skills", "opencode.json", "REPO_CONTEXT.md", "group/ADIGO.B/specs/brief.md", "ADIGO.A/APP_CONTEXT.md", "ADIGO.A/DOCS/USER_GUIDE.md"):
+            ignored = subprocess.run(["git", "-C", str(repository), "check-ignore", "-q", path])
+            self.assertEqual(ignored.returncode, 0, path)
+
+    def test_repository_install_rollback(self):
+        repository, apps = self.make_repository()
+        self.run_install(apps=[repository])
+        self.run_install("--rollback", apps=[repository])
+        self.assertFalse((repository / ".opencode/skills").exists())
+        self.assertFalse((repository / "opencode.json").exists())
+        self.assertEqual((apps[0] / "APP_CONTEXT.md").read_text(), "context")
+
+    def test_repository_install_refuses_unmanaged_entry_point(self):
+        repository, apps = self.make_repository()
+        (repository / "AGENTS.md").write_text("owner notes")
+        with self.assertRaisesRegex(ValueError, "unmanaged"):
+            self.run_install(apps=[repository])
+        self.assertFalse((repository / ".opencode").exists())
+        self.assertEqual((repository / "AGENTS.md").read_text(), "owner notes")
+
+    def test_install_below_an_app_is_refused(self):
+        _, apps = self.make_repository()
+        inner = apps[0] / "tools"
+        inner.mkdir()
+        (inner / "nested" ).mkdir()
+        (inner / "nested/app.json").write_text("{}")
+        with self.assertRaisesRegex(ValueError, "not below"):
+            self.run_install(apps=[inner])
+
+    def test_repository_without_apps_is_refused(self):
+        repository = self.root / "empty"
+        repository.mkdir()
+        subprocess.run(["git", "init", "-q", str(repository)], check=True)
+        with self.assertRaisesRegex(ValueError, "neither app.json"):
+            self.run_install(apps=[repository])
+
+    def test_app_installs_are_replaced_only_on_request_and_are_restorable(self):
+        repository, apps = self.make_repository()
+        self.run_install(apps=[apps[0]])
+        (apps[0] / "specs/brief.md").write_text("owner decision")
+        with self.assertRaisesRegex(ValueError, "replace-app-installs"):
+            self.run_install(apps=[repository])
+        self.run_install("--replace-app-installs", apps=[repository])
+        self.assertFalse((apps[0] / ".opencode").exists())
+        self.assertFalse((apps[0] / ".agent-state/install.json").exists())
+        self.assertEqual((apps[0] / "specs/brief.md").read_text(), "owner decision")
+        self.assertTrue((repository / ".opencode/agents").is_symlink())
+        exclude = (repository / ".git/info/exclude").read_text()
+        self.assertEqual(exclude.count("# BEGIN bc-ai-global"), 1)
+        self.run_install("--rollback", apps=[repository])
+        self.assertTrue((apps[0] / ".opencode/skills").is_symlink())
+        self.assertTrue((apps[0] / ".agent-state/install.json").exists())
+        self.assertFalse((repository / ".opencode/skills").exists())
+
+    def test_app_install_with_edited_managed_file_blocks_replacement(self):
+        repository, apps = self.make_repository()
+        self.run_install(apps=[apps[0]])
+        (apps[0] / "opencode.json").write_text("{}")
+        with self.assertRaisesRegex(ValueError, "edited"):
+            self.run_install("--replace-app-installs", apps=[repository])
+        self.assertTrue((apps[0] / ".opencode/skills").is_symlink())
+
+    def test_workspace_option_is_app_only(self):
+        repository, _ = self.make_repository()
+        workspace = repository / "all.code-workspace"
+        workspace.write_text("{}")
+        with self.assertRaisesRegex(ValueError, "app installs only"):
+            self.run_install("--workspace", str(workspace), apps=[repository])
+
+    def test_nested_apps_are_not_split_and_skipped_folders_ignored(self):
+        repository, apps = self.make_repository()
+        (apps[0] / "test").mkdir()
+        (apps[0] / "test/app.json").write_text("{}")
+        self.assertEqual(installer.find_apps(repository), sorted(apps))
 
     def test_template_symlink_refused(self):
         (self.app / "specs").symlink_to(self.root, target_is_directory=True)
