@@ -133,7 +133,7 @@ class InstallTests(unittest.TestCase):
     def test_repository_install_excludes_private_files_per_app(self):
         repository, apps = self.make_repository()
         self.run_install(apps=[repository])
-        for path in ("AGENTS.md", ".opencode/skills", "opencode.json", "REPO_CONTEXT.md", "group/ADIGO.B/specs/brief.md", "ADIGO.A/APP_CONTEXT.md", "ADIGO.A/DOCS/USER_GUIDE.md"):
+        for path in ("AGENTS.md", ".opencode/skills", "opencode.json", "REPO_CONTEXT.md", "group/ADIGO.B/specs/brief.md", "ADIGO.A/APP_CONTEXT.md", "ADIGO.A/DOCS/USER_GUIDE.md", ".serena/project.yml"):
             ignored = subprocess.run(["git", "-C", str(repository), "check-ignore", "-q", path])
             self.assertEqual(ignored.returncode, 0, path)
 

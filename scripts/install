@@ -176,10 +176,10 @@ def exclusions(original, app, repository, apps=None):
         raise ValueError("malformed managed exclusion block")
     prefix = escaped_prefix(app, repository)
     if apps is None:
-        names = ("AGENTS.md", "CLAUDE.md", "opencode.json", "APP_CONTEXT.md", "specs/", "DOCS/", ".opencode/", ".agent-state/")
+        names = ("AGENTS.md", "CLAUDE.md", "opencode.json", "APP_CONTEXT.md", "specs/", "DOCS/", ".opencode/", ".agent-state/", ".serena/")
         lines = ["/" + prefix + p for p in names]
     else:
-        names = ("AGENTS.md", "CLAUDE.md", "opencode.json", "REPO_CONTEXT.md", ".opencode/", ".agent-state/")
+        names = ("AGENTS.md", "CLAUDE.md", "opencode.json", "REPO_CONTEXT.md", ".opencode/", ".agent-state/", ".serena/")
         lines = ["/" + prefix + p for p in names]
         for member in apps:
             lines += ["/" + escaped_prefix(member, repository) + p for p in ("APP_CONTEXT.md", "specs/", "DOCS/")]
