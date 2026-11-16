@@ -208,6 +208,40 @@ class InstallTests(unittest.TestCase):
         (apps[0] / "test/app.json").write_text("{}")
         self.assertEqual(installer.find_apps(repository), sorted(apps))
 
+    def test_local_mcp_servers_are_merged_and_cannot_replace_managed_ones(self):
+        repository, _ = self.make_repository()
+        local = repository / "opencode.local.json"
+        local.write_text(json.dumps({"mcp": {"docs": {"type": "remote", "url": "https://example.test/mcp", "enabled": True}}}))
+        self.run_install(apps=[repository])
+        config = json.loads((repository / "opencode.json").read_text())
+        self.assertEqual(config["mcp"]["docs"]["url"], "https://example.test/mcp")
+        self.assertIn("al-mcp", config["mcp"])
+        local.write_text(json.dumps({"mcp": {"al-mcp": {"type": "remote", "url": "x"}}}))
+        with self.assertRaisesRegex(ValueError, "managed MCP"):
+            self.run_install(apps=[repository])
+        local.write_text(json.dumps({"permission": {}}))
+        with self.assertRaisesRegex(ValueError, "supports only"):
+            self.run_install(apps=[repository])
+        ignored = subprocess.run(["git", "-C", str(repository), "check-ignore", "-q", "opencode.local.json"])
+        self.assertEqual(ignored.returncode, 0)
+
+    def test_legacy_links_inside_member_apps_are_removed_only_on_request(self):
+        repository, apps = self.make_repository()
+        legacy = self.root / "legacy-source"
+        (legacy / ".opencode").mkdir(parents=True)
+        for name in ("AGENTS.md", "CLAUDE.md", "opencode.json"):
+            (legacy / name).write_text("old")
+            (apps[0] / name).symlink_to(legacy / name)
+        (apps[0] / ".opencode").symlink_to(legacy / ".opencode")
+        with self.assertRaisesRegex(ValueError, "migrate-legacy"):
+            self.run_install(apps=[repository])
+        self.run_install("--migrate-legacy", apps=[repository])
+        for name in (".opencode", "AGENTS.md", "CLAUDE.md", "opencode.json"):
+            self.assertFalse((apps[0] / name).is_symlink(), name)
+        self.assertTrue((legacy / "AGENTS.md").is_file())
+        self.run_install("--rollback", apps=[repository])
+        self.assertTrue((apps[0] / ".opencode").is_symlink())
+
     def test_template_symlink_refused(self):
         (self.app / "specs").symlink_to(self.root, target_is_directory=True)
         with self.assertRaisesRegex(ValueError, "symlink"):
