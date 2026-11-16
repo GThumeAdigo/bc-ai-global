@@ -276,6 +276,14 @@ def prepare(app, selected, args, exclude_updates):
         if (member / ".agent-state/install.json").exists():
             app_install_removal(member, args, actions)
             removed_apps.append(member)
+        elif (member / ".opencode").is_symlink():
+            # An old whole-directory link would put the corpus' .al samples into the AL project.
+            if not args.migrate_legacy:
+                raise ValueError(f"legacy .opencode link inside an app: {member}; repeat with --migrate-legacy to remove it")
+            for name in (".opencode", "AGENTS.md", "CLAUDE.md", "opencode.json"):
+                path = member / name
+                if path.is_symlink():
+                    actions.append({"path": str(path), "before": capture(path), "after": {"kind": "absent"}})
     desired = {name: {"kind": "link", "target": str(selected / ".opencode" / name)} for name in ("agents", "skills", "commands", "BCQuality-ADIGO", "serena-al")}
     for name, after in desired.items():
         path = runtime / name
