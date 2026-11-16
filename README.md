@@ -116,6 +116,10 @@ An earlier app-level install below the root is superseded only with
 `APP_CONTEXT.md`, `specs/` and `DOCS/`, and rollback restores the old install.
 Existing unmanaged `AGENTS.md`, `CLAUDE.md` or `opencode.json` at the root stop
 the install: move their content into `REPO_CONTEXT.md` first.
+Repository-specific MCP servers (for example a vendor documentation server) go into
+`opencode.local.json` next to the root `opencode.json`: `{"mcp": {"<name>": {...}}}`.
+The installer merges them into the rendered config on every install and update,
+refuses names that collide with managed servers, and excludes the file locally.
 
 App mode (an AL app folder containing `app.json`) remains available. Never put the
 runtime inside an app folder if the corpus keeps `.al` samples:
